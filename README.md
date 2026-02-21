@@ -10,6 +10,7 @@ A pragmatic, adopter-first landing zone that makes the TRQP ecosystem feel like 
 - [Quickstart](QUICKSTART.md)
 - [Operating model](#the-operating-model)
 - [Combined assurance workflow](docs/guides/combined-assurance.md)
+- [Evidence artifacts and expectations](docs/guides/evidence-artifacts.md)
 - [Error states](docs/guides/error-states.md)
 - [Compatibility policy and matrix](docs/policies/compatibility.md)
 - [Issue routing](docs/policies/issue-routing.md)
@@ -77,6 +78,9 @@ flowchart TB
 
 For machine-readable provenance across both runs, see the schema at:
 - `schemas/combined-assurance-manifest.schema.json`
+
+For what artifacts are expected at each assurance level (AL1–AL4), see:
+- [Evidence artifacts and expectations](docs/guides/evidence-artifacts.md)
 
 ## How the repos integrate (without merging)
 
