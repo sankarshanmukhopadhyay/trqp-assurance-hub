@@ -2,8 +2,8 @@
 
 This repository is an onboarding + coordination layer. Most code/test contributions will land in:
 
-- https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite
-- https://github.com/sankarshanmukhopadhyay/TRQP-TSPP
+- <https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite>
+- <https://github.com/sankarshanmukhopadhyay/TRQP-TSPP>
 
 ## Good contributions here
 

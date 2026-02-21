@@ -13,7 +13,7 @@ Use when the issue is about:
 - Profiles that live inside the conformance suite repo
 - CI failures, test discovery, report generation
 
-Repo: https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite
+Repo: <https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite>
 
 ### File in `TRQP-TSPP`
 
@@ -23,7 +23,7 @@ Use when the issue is about:
 - Posture checks, hardening recommendations
 - TSPP schemas, OpenAPI contract, or its pytest harness
 
-Repo: https://github.com/sankarshanmukhopadhyay/TRQP-TSPP
+Repo: <https://github.com/sankarshanmukhopadhyay/TRQP-TSPP>
 
 ### File in this repo (`trqp-assurance-hub`)
 

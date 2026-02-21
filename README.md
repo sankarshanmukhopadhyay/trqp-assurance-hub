@@ -7,9 +7,9 @@ A pragmatic, adopter-first landing zone that makes the TRQP ecosystem feel like 
 This repository is the **front door** for TRQP implementation and assurance work:
 
 - **Core conformance runner & profiles**: `trqp-conformance-suite`  
-  https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite
+  <https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite>
 - **Security & privacy profile overlay (TSPP)**: `TRQP-TSPP`  
-  https://github.com/sankarshanmukhopadhyay/TRQP-TSPP
+  <https://github.com/sankarshanmukhopadhyay/TRQP-TSPP>
 
 It provides:
 
@@ -105,7 +105,7 @@ See: [`docs/policies/issue-routing.md`](docs/policies/issue-routing.md)
 
 This work is intended as an extension of the Trust over IP TRQP workstream:
 
-- Upstream: https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main
+- Upstream: <https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main>
 
 ## License
 
