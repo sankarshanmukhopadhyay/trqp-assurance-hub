@@ -7,10 +7,13 @@ A pragmatic, adopter-first landing zone that makes the TRQP ecosystem feel like 
 
 ## Quick links
 
+- [Quickstart](QUICKSTART.md)
 - [Operating model](#the-operating-model)
 - [Combined assurance workflow](docs/guides/combined-assurance.md)
+- [Error states](docs/guides/error-states.md)
 - [Compatibility policy + matrix](docs/policies/compatibility.md)
 - [Issue routing](docs/policies/issue-routing.md)
+- [Glossary](docs/glossary.md)
 
 ## What this is
 
@@ -57,6 +60,21 @@ flowchart LR
   C --> E["Evidence Bundle"];
   D --> E;
   E --> F["Verification / Audit / Procurement"];
+```
+
+
+## Evidence artifact flow
+
+```mermaid
+flowchart TB
+  A["TRQP Registry (target)"] --> B["Conformance Suite run"]
+  A --> C["TSPP run"]
+  B --> D["Conformance evidence bundle"]
+  C --> E["TSPP evidence bundle"]
+  D --> F["Combined Assurance Manifest"]
+  E --> F
+  F --> G["Auditors / Authorities / Procurement"]
+  F --> H["Automated gating in CI/CD"]
 ```
 
 ## How the repos integrate (without merging)

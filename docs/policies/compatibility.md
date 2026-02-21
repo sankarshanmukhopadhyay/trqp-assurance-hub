@@ -55,3 +55,9 @@ Breaking changes MUST:
 - Increment MAJOR version
 - Include a migration note
 - Update the known-good matrix
+
+## Machine-readable index
+
+For automation, this repo also publishes a machine-readable compatibility index:
+
+- `docs/policies/compatibility.json`

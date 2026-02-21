@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/blob/main/schemas/combined-assurance-manifest.schema.json",
+  "$id": "https://raw.githubusercontent.com/sankarshanmukhopadhyay/trqp-assurance-hub/main/schemas/combined-assurance-manifest.schema.json",
   "title": "TRQP Combined Assurance Manifest",
   "description": "A minimal, tool-agnostic manifest that binds protocol conformance results and security/privacy posture results to a single build identifier and evidence set.",
   "type": "object",
@@ -14,7 +14,8 @@
   "properties": {
     "manifest_version": {
       "type": "string",
-      "pattern": "^0\\.1\\.\\d+$"
+      "pattern": "^0\\.1\\.\\d+$",
+      "description": "Manifest schema version (SemVer-like, currently 0.1.x)."
     },
     "build": {
       "type": "object",
@@ -40,13 +41,15 @@
         },
         "ci_run_url": {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "description": "CI run URL for traceability."
         }
       }
     },
     "generated_at": {
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "RFC3339 UTC timestamp of manifest generation."
     },
     "tools": {
       "type": "object",
@@ -81,14 +84,16 @@
                 "AL2",
                 "AL3",
                 "AL4"
-              ]
+              ],
+              "description": "Assurance level (AL1/AL2 currently used; AL3/AL4 reserved for future expansion unless defined by TRQP-TSPP)."
             },
             "run_id": {
               "type": "string"
             }
           }
         }
-      }
+      },
+      "description": "Tool versions and run identifiers for each participating tool."
     },
     "artifacts": {
       "type": "array",
@@ -132,9 +137,14 @@
           },
           "notes": {
             "type": "string"
+          },
+          "format": {
+            "type": "string",
+            "description": "Optional artifact format/version identifier (e.g., evidence-bundle-v1)."
           }
         }
-      }
+      },
+      "description": "List of produced artifacts referenced by relative paths."
     },
     "summary": {
       "type": "object",
@@ -170,7 +180,30 @@
         "notes": {
           "type": "string"
         }
-      }
+      },
+      "description": "Optional roll-up statuses for human consumption."
+    },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional self-identification for the tool/script that generated this manifest.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Generator name (e.g., trqp-assurance-hub generate-manifest)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Generator version (SemVer or git SHA)."
+        },
+        "uri": {
+          "type": "string",
+          "description": "Optional URI for generator source or docs."
+        }
+      },
+      "required": [
+        "name"
+      ]
     }
   }
 }

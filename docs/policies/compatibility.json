@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.1.0",
+  "updated_at": "2026-02-21T15:15:52Z",
+  "sets": [
+    {
+      "hub": "v0.1.0",
+      "conformance_suite": "0.4.0",
+      "tspp": "v0.2",
+      "status": "supported",
+      "supported_until": "2026-06-30",
+      "notes": "First tagged integration set; intended for adopters starting new deployments."
+    }
+  ]
+}

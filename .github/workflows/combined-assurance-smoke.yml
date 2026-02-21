@@ -2,6 +2,27 @@ name: combined-assurance-smoke
 
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: "Target TRQP registry base URL (e.g., https://registry.example.org)"
+        required: true
+        default: "https://registry.example.org"
+      conformance_profile:
+        description: "Conformance Suite profile ID"
+        required: true
+        default: "smoke"
+      tspp_assurance_level:
+        description: "TSPP assurance level"
+        required: true
+        default: "AL1"
+      conformance_ref:
+        description: "Conformance Suite git ref (tag/branch/SHA)"
+        required: true
+        default: "main"
+      tspp_ref:
+        description: "TSPP git ref (tag/branch/SHA)"
+        required: true
+        default: "main"
   push:
     branches: [ main ]
 
@@ -16,14 +37,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: sankarshanmukhopadhyay/trqp-conformance-suite
-          ref: main
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.conformance_ref || 'main' }}
           path: external/trqp-conformance-suite
 
       - name: Checkout TRQP-TSPP
         uses: actions/checkout@v4
         with:
           repository: sankarshanmukhopadhyay/TRQP-TSPP
-          ref: main
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tspp_ref || 'main' }}
           path: external/TRQP-TSPP
 
       - name: Basic repo sanity checks
@@ -44,70 +65,40 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install jsonschema
+
           mkdir -p artifacts
 
           HUB_SHA="${GITHUB_SHA}"
           CS_SHA="$(git -C external/trqp-conformance-suite rev-parse HEAD)"
           TSPP_SHA="$(git -C external/TRQP-TSPP rev-parse HEAD)"
 
-          cat > artifacts/combined-assurance-manifest.json <<JSON
-          {
-            "manifest_version": "0.1",
-            "build": {
-              "build_id": "${HUB_SHA}",
-              "target": "https://registry.example.org",
-              "environment": "ci",
-              "ci_run_url": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-            },
-            "runs": {
-              "conformance_suite": {
-                "tool": "trqp-conformance-suite",
-                "repo": "https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite",
-                "ref": "main",
-                "commit": "${CS_SHA}",
-                "profile": "smoke",
-                "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-                "evidence": {
-                  "uri": "external/trqp-conformance-suite"
-                }
-              },
-              "tspp": {
-                "tool": "TRQP-TSPP",
-                "repo": "https://github.com/sankarshanmukhopadhyay/TRQP-TSPP",
-                "ref": "main",
-                "commit": "${TSPP_SHA}",
-                "profile": "AL1-smoke",
-                "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-                "evidence": {
-                  "uri": "external/TRQP-TSPP"
-                }
-              }
-            }
-          }
-          JSON
+          # Lightweight evidence placeholders so adopters can inspect artifacts even in a smoke run.
+          cat > artifacts/conformance-suite-checkout.txt <<EOF
+          repo=https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite
+          ref=${{ github.event_name == 'workflow_dispatch' && inputs.conformance_ref || 'main' }}
+          commit=${CS_SHA}
+          profile=${{ github.event_name == 'workflow_dispatch' && inputs.conformance_profile || 'smoke' }}
+          EOF
 
-      - name: Validate manifest against schema
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m pip install --upgrade pip
-          python -m pip install jsonschema
-          python - <<'PY'
-          import json
-          from jsonschema import Draft202012Validator
+          cat > artifacts/tspp-checkout.txt <<EOF
+          repo=https://github.com/sankarshanmukhopadhyay/TRQP-TSPP
+          ref=${{ github.event_name == 'workflow_dispatch' && inputs.tspp_ref || 'main' }}
+          commit=${TSPP_SHA}
+          assurance_level=${{ github.event_name == 'workflow_dispatch' && inputs.tspp_assurance_level || 'AL1' }}
+          EOF
 
-          with open('schemas/combined-assurance-manifest.schema.json', 'r', encoding='utf-8') as f:
-            schema = json.load(f)
-
-          with open('artifacts/combined-assurance-manifest.json', 'r', encoding='utf-8') as f:
-            doc = json.load(f)
-
-          Draft202012Validator(schema).validate(doc)
-          print('Manifest is valid.')
-          PY
+          python tools/generate-manifest.py             --build-id "${HUB_SHA}"             --target "${{ github.event_name == 'workflow_dispatch' && inputs.target || 'https://registry.example.org' }}"             --hub-commit "${HUB_SHA}"             --ci-run-url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"             --cs-version "${{ github.event_name == 'workflow_dispatch' && inputs.conformance_ref || 'main' }}"             --cs-profile-id "${{ github.event_name == 'workflow_dispatch' && inputs.conformance_profile || 'smoke' }}"             --cs-run-id "cts-${GITHUB_RUN_ID}"             --tspp-version "${{ github.event_name == 'workflow_dispatch' && inputs.tspp_ref || 'main' }}"             --tspp-assurance-level "${{ github.event_name == 'workflow_dispatch' && inputs.tspp_assurance_level || 'AL1' }}"             --tspp-run-id "tspp-${GITHUB_RUN_ID}"             --artifact "log:artifacts/conformance-suite-checkout.txt:trqp_conformance_suite:text/plain:smoke-v0:checkout metadata"             --artifact "log:artifacts/tspp-checkout.txt:trqp_tspp:text/plain:smoke-v0:checkout metadata"             --out artifacts/combined-assurance-manifest.json             --schema schemas/combined-assurance-manifest.schema.json
 
       - name: Upload manifest artifact
         uses: actions/upload-artifact@v4
         with:
           name: combined-assurance-manifest
           path: artifacts/combined-assurance-manifest.json
+
+      - name: Upload smoke artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: combined-assurance-smoke-artifacts
+          path: artifacts/*.txt
