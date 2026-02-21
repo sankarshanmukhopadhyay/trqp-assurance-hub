@@ -1,0 +1,25 @@
+name: quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  markdown_lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Markdown lint
+        uses: avto-dev/markdown-lint@v1
+        with:
+          args: '**/*.md'
+
+  link_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Link check
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --verbose --no-progress '**/*.md'

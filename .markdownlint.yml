@@ -1,0 +1,4 @@
+# Keep linting pragmatic for standards-style docs
+MD013: false   # line-length
+MD033: false   # inline HTML
+MD041: false   # first line in file should be a top-level heading
