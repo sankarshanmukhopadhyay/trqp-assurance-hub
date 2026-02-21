@@ -44,7 +44,8 @@
           "format": "uri",
           "description": "CI run URL for traceability."
         }
-      }
+      },
+      "description": "Build provenance and execution context for this assurance run."
     },
     "generated_at": {
       "type": "string",
@@ -60,22 +61,27 @@
           "additionalProperties": false,
           "properties": {
             "version": {
-              "type": "string"
+              "type": "string",
+              "description": "Tool release/version identifier (e.g., SemVer tag)."
             },
             "profile_id": {
-              "type": "string"
+              "type": "string",
+              "description": "Conformance profile identifier applied during the run."
             },
             "run_id": {
-              "type": "string"
+              "type": "string",
+              "description": "Tool-specific run identifier (CI job id, invocation id, or report id)."
             }
-          }
+          },
+          "description": "Metadata for the TRQP Conformance Suite execution that produced/validated artifacts."
         },
         "trqp_tspp": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
             "version": {
-              "type": "string"
+              "type": "string",
+              "description": "Tool release/version identifier (e.g., SemVer tag)."
             },
             "assurance_level": {
               "type": "string",
@@ -88,9 +94,11 @@
               "description": "Assurance level (AL1/AL2 currently used; AL3/AL4 reserved for future expansion unless defined by TRQP-TSPP)."
             },
             "run_id": {
-              "type": "string"
+              "type": "string",
+              "description": "Tool-specific run identifier (CI job id, invocation id, or report id)."
             }
-          }
+          },
+          "description": "Metadata for the TRQP-TSPP execution (trust service provider profile evaluation)."
         }
       },
       "description": "Tool versions and run identifiers for each participating tool."
@@ -114,18 +122,22 @@
               "log",
               "sbom",
               "attestation"
-            ]
+            ],
+            "description": "Artifact classification (e.g., manifest, report, evidence bundle, log, policy bundle)."
           },
           "path": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "description": "Repository-relative path to the artifact file."
           },
           "sha256": {
             "type": "string",
-            "pattern": "^[A-Fa-f0-9]{64}$"
+            "pattern": "^[A-Fa-f0-9]{64}$",
+            "description": "SHA-256 digest of the artifact file (hex) for integrity verification."
           },
           "media_type": {
-            "type": "string"
+            "type": "string",
+            "description": "IANA media type for the artifact (e.g., application/json, text/markdown)."
           },
           "produced_by": {
             "type": "string",
@@ -133,10 +145,12 @@
               "trqp_conformance_suite",
               "trqp_tspp",
               "other"
-            ]
+            ],
+            "description": "Identifier of the tool/component that produced this artifact."
           },
           "notes": {
-            "type": "string"
+            "type": "string",
+            "description": "Human-readable notes about the artifact, including how to interpret or use it."
           },
           "format": {
             "type": "string",
@@ -157,7 +171,8 @@
             "fail",
             "partial",
             "unknown"
-          ]
+          ],
+          "description": "Overall outcome of the combined assurance run."
         },
         "conformance_status": {
           "type": "string",
@@ -166,7 +181,8 @@
             "fail",
             "partial",
             "unknown"
-          ]
+          ],
+          "description": "Outcome of the TRQP Conformance Suite checks against the target."
         },
         "tspp_status": {
           "type": "string",
@@ -175,10 +191,12 @@
             "fail",
             "partial",
             "unknown"
-          ]
+          ],
+          "description": "Outcome of the TRQP-TSPP checks against the target."
         },
         "notes": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable notes summarizing key findings, deviations, or remediation hints."
         }
       },
       "description": "Optional roll-up statuses for human consumption."
