@@ -25,6 +25,7 @@ A combined assurance run is considered **supported** when:
 This matrix records combinations of tool versions that have been validated together.
 
 ### Legend
+
 - **Test level:** Smoke = install + basic invocation; Partial = key profiles; Full = suite + TSPP AL checks + evidence bundle
 - **Evidence:** link to CI run / artifact bundle / release tag notes
 
