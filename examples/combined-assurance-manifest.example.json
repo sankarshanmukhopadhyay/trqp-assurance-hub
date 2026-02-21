@@ -1,0 +1,45 @@
+{
+  "manifest_version": "0.1.0",
+  "build": {
+    "build_id": "2026-02-21T1300Z-main-abc1234",
+    "target": "https://registry.example.org",
+    "commit": "abc1234def5678",
+    "ci_run_url": "https://github.com/org/repo/actions/runs/1234567890"
+  },
+  "generated_at": "2026-02-21T13:05:12Z",
+  "tools": {
+    "trqp_conformance_suite": {
+      "version": "0.3.0",
+      "profile_id": "baseline",
+      "run_id": "cts-001"
+    },
+    "trqp_tspp": {
+      "version": "0.2.0",
+      "assurance_level": "AL1",
+      "run_id": "tspp-042"
+    }
+  },
+  "artifacts": [
+    {
+      "kind": "evidence_bundle",
+      "path": "evidence/cts/evidence-bundle.json",
+      "produced_by": "trqp_conformance_suite"
+    },
+    {
+      "kind": "evidence_bundle",
+      "path": "evidence/tspp/evidence-bundle.json",
+      "produced_by": "trqp_tspp"
+    },
+    {
+      "kind": "test_report",
+      "path": "reports/combined-summary.md",
+      "produced_by": "other"
+    }
+  ],
+  "summary": {
+    "overall_status": "partial",
+    "conformance_status": "pass",
+    "tspp_status": "partial",
+    "notes": "TSPP has 2 warnings pending remediation."
+  }
+}

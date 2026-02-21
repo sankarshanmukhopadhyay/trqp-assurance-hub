@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/blob/main/schemas/combined-assurance-manifest.schema.json",
+  "title": "TRQP Combined Assurance Manifest",
+  "description": "A minimal, tool-agnostic manifest that binds protocol conformance results and security/privacy posture results to a single build identifier and evidence set.",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "build",
+    "generated_at",
+    "artifacts"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "manifest_version": {
+      "type": "string",
+      "pattern": "^0\\.1\\.\\d+$"
+    },
+    "build": {
+      "type": "object",
+      "required": [
+        "build_id",
+        "target"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "build_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A stable identifier that ties together CI run/build/package."
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1,
+          "description": "System under test identifier (e.g., registry base URL, deployment name)."
+        },
+        "commit": {
+          "type": "string",
+          "description": "Git commit SHA or build provenance pointer."
+        },
+        "ci_run_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "tools": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "trqp_conformance_suite": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "profile_id": {
+              "type": "string"
+            },
+            "run_id": {
+              "type": "string"
+            }
+          }
+        },
+        "trqp_tspp": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "assurance_level": {
+              "type": "string",
+              "enum": [
+                "AL1",
+                "AL2",
+                "AL3",
+                "AL4"
+              ]
+            },
+            "run_id": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "path"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "evidence_bundle",
+              "test_report",
+              "log",
+              "sbom",
+              "attestation"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[A-Fa-f0-9]{64}$"
+          },
+          "media_type": {
+            "type": "string"
+          },
+          "produced_by": {
+            "type": "string",
+            "enum": [
+              "trqp_conformance_suite",
+              "trqp_tspp",
+              "other"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "overall_status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "partial",
+            "unknown"
+          ]
+        },
+        "conformance_status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "partial",
+            "unknown"
+          ]
+        },
+        "tspp_status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "partial",
+            "unknown"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

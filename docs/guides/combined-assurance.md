@@ -64,3 +64,11 @@ Your combined manifest should be dead simple:
 - High-level summary fields (counts, pass/fail totals)
 
 This hub repo will eventually host a small JSON schema for `combined-manifest.json` once both underlying bundle formats are stable.
+## Combined Assurance Manifest (optional but recommended)
+
+To make combined runs portable across CI systems and audits, this Hub defines a minimal machine-readable manifest:
+
+- Schema: `schemas/combined-assurance-manifest.schema.json`
+- Example: `examples/combined-assurance-manifest.example.json`
+
+The manifest’s job is boring but critical: bind **one build identifier** to **both tool runs** and the **evidence artifacts** they produced, so downstream verification and procurement teams can reason about provenance without guesswork.

@@ -41,12 +41,12 @@ Think in layers:
 
 ```mermaid
 flowchart LR
-  A[TRQP Implementer] --> B[Assurance Hub (this repo)]
-  B --> C[Conformance Suite (runner + profiles)]
-  B --> D[TSPP (security/privacy profile pack)]
-  C --> E[Evidence Bundle]
-  D --> E
-  E --> F[Verification / Audit / Procurement]
+  A["TRQP Implementer"] --> B["Assurance Hub<br/>this repo"];
+  B --> C["Conformance Suite<br/>runner + profiles"];
+  B --> D["TSPP<br/>security/privacy profile pack"];
+  C --> E["Evidence Bundle"];
+  D --> E;
+  E --> F["Verification / Audit / Procurement"];
 ```
 
 ## How the repos integrate (without merging)
@@ -90,6 +90,8 @@ See: [`docs/policies/compatibility.md`](docs/policies/compatibility.md)
 3. Merge evidence bundles under a single build identifier
 
 See: [`docs/guides/combined-assurance.md`](docs/guides/combined-assurance.md)
+
+For machine-readable provenance across both runs, use the **Combined Assurance Manifest** schema: `schemas/combined-assurance-manifest.schema.json`.
 
 ## Issue routing (reduce contributor thrash)
 
