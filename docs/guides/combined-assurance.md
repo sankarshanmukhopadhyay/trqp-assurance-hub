@@ -63,7 +63,7 @@ Your combined manifest should be dead simple:
 - References (paths/URIs) to each bundle
 - High-level summary fields (counts, pass/fail totals)
 
-This hub repo will eventually host a small JSON schema for `combined-manifest.json` once both underlying bundle formats are stable.
+This hub repo hosts a small JSON schema for `combined-manifest.json` so downstream verification and procurement teams can reason about provenance without guesswork.
 
 ## Combined Assurance Manifest (optional but recommended)
 
@@ -73,3 +73,11 @@ To make combined runs portable across CI systems and audits, this Hub defines a 
 - Example: `examples/combined-assurance-manifest.example.json`
 
 The manifest’s job is boring but critical: bind **one build identifier** to **both tool runs** and the **evidence artifacts** they produced, so downstream verification and procurement teams can reason about provenance without guesswork.
+
+## CI “golden path” (smoke)
+
+This Hub provides a minimal, repeatable GitHub Actions workflow that checks out both repos, performs lightweight sanity checks, and emits a combined manifest as an artifact:
+
+- Workflow: [combined-assurance-smoke](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/combined-assurance-smoke.yml)
+
+Treat this as a gate, not a benchmark: it’s designed to keep the integration surface from silently drifting.

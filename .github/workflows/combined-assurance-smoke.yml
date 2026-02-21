@@ -1,0 +1,113 @@
+name: combined-assurance-smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout hub
+        uses: actions/checkout@v4
+
+      - name: Checkout trqp-conformance-suite
+        uses: actions/checkout@v4
+        with:
+          repository: sankarshanmukhopadhyay/trqp-conformance-suite
+          ref: main
+          path: external/trqp-conformance-suite
+
+      - name: Checkout TRQP-TSPP
+        uses: actions/checkout@v4
+        with:
+          repository: sankarshanmukhopadhyay/TRQP-TSPP
+          ref: main
+          path: external/TRQP-TSPP
+
+      - name: Basic repo sanity checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f external/trqp-conformance-suite/README.md
+          test -f external/TRQP-TSPP/README.md
+          echo "Conformance suite HEAD: $(git -C external/trqp-conformance-suite rev-parse --short HEAD)"
+          echo "TSPP HEAD: $(git -C external/TRQP-TSPP rev-parse --short HEAD)"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build Combined Assurance Manifest artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+
+          HUB_SHA="${GITHUB_SHA}"
+          CS_SHA="$(git -C external/trqp-conformance-suite rev-parse HEAD)"
+          TSPP_SHA="$(git -C external/TRQP-TSPP rev-parse HEAD)"
+
+          cat > artifacts/combined-assurance-manifest.json <<JSON
+          {
+            "manifest_version": "0.1",
+            "build": {
+              "build_id": "${HUB_SHA}",
+              "target": "https://registry.example.org",
+              "environment": "ci",
+              "ci_run_url": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            },
+            "runs": {
+              "conformance_suite": {
+                "tool": "trqp-conformance-suite",
+                "repo": "https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite",
+                "ref": "main",
+                "commit": "${CS_SHA}",
+                "profile": "smoke",
+                "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+                "evidence": {
+                  "uri": "external/trqp-conformance-suite"
+                }
+              },
+              "tspp": {
+                "tool": "TRQP-TSPP",
+                "repo": "https://github.com/sankarshanmukhopadhyay/TRQP-TSPP",
+                "ref": "main",
+                "commit": "${TSPP_SHA}",
+                "profile": "AL1-smoke",
+                "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+                "evidence": {
+                  "uri": "external/TRQP-TSPP"
+                }
+              }
+            }
+          }
+JSON
+
+      - name: Validate manifest against schema
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install jsonschema
+          python - <<'PY'
+          import json
+          from jsonschema import Draft202012Validator
+
+          with open('schemas/combined-assurance-manifest.schema.json', 'r', encoding='utf-8') as f:
+            schema = json.load(f)
+
+          with open('artifacts/combined-assurance-manifest.json', 'r', encoding='utf-8') as f:
+            doc = json.load(f)
+
+          Draft202012Validator(schema).validate(doc)
+          print('Manifest is valid.')
+          PY
+
+      - name: Upload manifest artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: combined-assurance-manifest
+          path: artifacts/combined-assurance-manifest.json

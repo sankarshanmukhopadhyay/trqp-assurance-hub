@@ -26,12 +26,12 @@ This matrix records combinations of tool versions that have been validated toget
 
 ### Legend
 
-- **Test level:** Smoke = install + basic invocation; Partial = key profiles; Full = suite + TSPP AL checks + evidence bundle
+- **Test level:** Smoke = checkout + installability checks + minimal invocation; Partial = key profiles; Full = suite + TSPP AL checks + evidence bundle
 - **Evidence:** link to CI run / artifact bundle / release tag notes
 
 | Date (UTC) | Hub | Conformance Suite | TSPP | Test level | Environment | Evidence | Notes |
 |---|---|---|---|---|---|---|---|
-| 2026-02-21 | main@<commit> | main@<commit> | main@<commit> | Smoke | ubuntu-latest, py3.11 | <link-to-actions-run> | Initial alignment check |
+| 2026-02-21 | main | main | main | Smoke | ubuntu-latest, py3.11 | [combined-assurance-smoke workflow](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/combined-assurance-smoke.yml) | Initial alignment gate |
 
 ## Shared contracts
 
