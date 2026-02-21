@@ -41,12 +41,12 @@ Think in layers:
 
 ```mermaid
 flowchart LR
-  A[TRQP Implementer] --> B[Assurance Hub (this repo)]
-  B --> C[Conformance Suite (runner + profiles)]
-  B --> D[TSPP (security/privacy profile pack)]
-  C --> E[Evidence Bundle]
-  D --> E
-  E --> F[Verification / Audit / Procurement]
+  A["TRQP Implementer"] --> B["Assurance Hub<br/>this repo"];
+  B --> C["Conformance Suite<br/>runner + profiles"];
+  B --> D["TSPP<br/>security/privacy profile pack"];
+  C --> E["Evidence Bundle"];
+  D --> E;
+  E --> F["Verification / Audit / Procurement"];
 ```
 
 ## How the repos integrate (without merging)
