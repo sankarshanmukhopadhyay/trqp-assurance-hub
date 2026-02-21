@@ -64,6 +64,7 @@ Your combined manifest should be dead simple:
 - High-level summary fields (counts, pass/fail totals)
 
 This hub repo will eventually host a small JSON schema for `combined-manifest.json` once both underlying bundle formats are stable.
+
 ## Combined Assurance Manifest (optional but recommended)
 
 To make combined runs portable across CI systems and audits, this Hub defines a minimal machine-readable manifest:
