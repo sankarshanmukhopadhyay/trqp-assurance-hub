@@ -84,7 +84,7 @@ jobs:
               }
             }
           }
-JSON
+          JSON
 
       - name: Validate manifest against schema
         shell: bash
