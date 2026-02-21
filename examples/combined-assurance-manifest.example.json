@@ -15,7 +15,7 @@
     },
     "trqp_tspp": {
       "version": "0.2.0",
-      "assurance_level": "AL1",
+      "assurance_level": "AL3",
       "run_id": "tspp-042"
     }
   },
@@ -40,6 +40,6 @@
     "overall_status": "partial",
     "conformance_status": "pass",
     "tspp_status": "partial",
-    "notes": "TSPP has 2 warnings pending remediation."
+    "notes": "TSPP has 2 warnings pending remediation.\nExample updated to demonstrate AL3/AL4-ready manifest semantics."
   }
 }

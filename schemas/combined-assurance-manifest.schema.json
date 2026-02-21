@@ -91,7 +91,7 @@
                 "AL3",
                 "AL4"
               ],
-              "description": "Assurance level (AL1/AL2 currently used; AL3/AL4 reserved for future expansion unless defined by TRQP-TSPP)."
+              "description": "Assurance level as defined by TRQP\u2011TSPP (AL1\u2013AL4)."
             },
             "run_id": {
               "type": "string",

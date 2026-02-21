@@ -61,3 +61,10 @@ Breaking changes MUST:
 For automation, this repo also publishes a machine-readable compatibility index:
 
 - `docs/policies/compatibility.json`
+
+
+## Assurance Level dimension
+
+Known-good sets may be **assurance-level specific**. Higher assurance levels (AL3/AL4) introduce additional
+evidence expectations (e.g., binding meta, transparency URIs, key custody evidence), so implementers should
+treat the matrix as a (Conformance Suite, TSPP, Hub, AL) compatibility signal.

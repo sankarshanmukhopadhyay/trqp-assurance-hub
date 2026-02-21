@@ -1,14 +1,22 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-02-21T15:15:52Z",
+  "updated_at": "2026-02-21T15:38:38Z",
   "sets": [
     {
       "hub": "v0.1.0",
       "conformance_suite": "0.4.0",
-      "tspp": "v0.2",
+      "tspp": "v0.2.0",
       "status": "supported",
       "supported_until": "2026-06-30",
       "notes": "First tagged integration set; intended for adopters starting new deployments."
+    },
+    {
+      "hub": "v0.2.0",
+      "conformance_suite": "v0.4.1",
+      "tspp": "v0.2.0",
+      "status": "supported",
+      "supported_until": "2026-09-30",
+      "notes": "Adds AL3/AL4 semantics (default signing + binding meta + transparency + key custody/monitoring claims)."
     }
   ]
 }
