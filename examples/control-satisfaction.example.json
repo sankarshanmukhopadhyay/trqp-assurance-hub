@@ -1,0 +1,40 @@
+{
+  "declaration_version": "0.1.0",
+  "declaration_id": "example-control-satisfaction-2026-02",
+  "declared_at": "2026-02-22T00:00:00Z",
+  "profile_id": "example-registry-assurance-profile",
+  "build_id": "example-build",
+  "evaluator": {
+    "name": "Example Audit Firm",
+    "type": "auditor",
+    "contact": "audit@example.com"
+  },
+  "satisfied_controls": [
+    {
+      "control_id": "TRQPAH-EVD-01",
+      "status": "satisfied",
+      "evidence": [
+        "artifact://manifests/combined-assurance-manifest.json"
+      ]
+    },
+    {
+      "control_id": "TRQPAH-REC-01",
+      "status": "satisfied",
+      "evidence": [
+        "artifact://recognition/example-recognition-assertion-2026-02.json"
+      ]
+    },
+    {
+      "control_id": "TRQPAH-LFC-01",
+      "status": "partial",
+      "notes": "Lifecycle assertion published; deprecation/termination playbook pending",
+      "evidence": [
+        "artifact://lifecycle/example-lifecycle-assertion-2026-02.json"
+      ]
+    }
+  ],
+  "signature": {
+    "type": "external-detached",
+    "value": "artifact://signatures/example-control-satisfaction-2026-02.sig"
+  }
+}

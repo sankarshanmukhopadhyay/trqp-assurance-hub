@@ -58,6 +58,22 @@
       },
       "additionalProperties": false
     },
+    "controls": {
+      "type": "object",
+      "description": "Optional control objectives declared in-scope for this profile.",
+      "properties": {
+        "in_scope": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Control IDs (e.g., TRQPAH-EVD-01)."
+        },
+        "control_catalog_url": {
+          "type": "string",
+          "description": "Pointer to the control catalog used (defaults to this repo's catalog)."
+        }
+      },
+      "additionalProperties": false
+    },
     "evidence_expectations": {
       "type": "array",
       "minItems": 1,
@@ -124,6 +140,27 @@
             },
             "additionalProperties": false
           }
+        },
+        "assertion_refs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Optional pointers to standalone Recognition Assertion artifacts."
+        }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "description": "Optional lifecycle state pointers and expectations.",
+      "properties": {
+        "lifecycle_policy_url": { "type": "string" },
+        "current_state": {
+          "type": "string",
+          "enum": ["planned", "active", "suspended", "deprecated", "terminated"]
+        },
+        "assertion_ref": {
+          "type": "string",
+          "description": "Optional pointer to a standalone Lifecycle Assertion artifact."
         }
       },
       "additionalProperties": false

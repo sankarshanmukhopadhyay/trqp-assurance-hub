@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trqp_assurance_hub/lifecycle-assertion.schema.json",
+  "title": "Lifecycle Assertion (Candidate)",
+  "type": "object",
+  "required": [
+    "assertion_version",
+    "assertion_id",
+    "asserted_at",
+    "subject",
+    "lifecycle"
+  ],
+  "properties": {
+    "assertion_version": {
+      "type": "string",
+      "description": "Version of this lifecycle assertion format."
+    },
+    "assertion_id": {
+      "type": "string",
+      "description": "Stable identifier for this lifecycle assertion (publisher-defined)."
+    },
+    "asserted_at": {
+      "type": "string",
+      "description": "ISO-8601 timestamp when this assertion was issued."
+    },
+    "subject": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "registry_base_url": { "type": "string" },
+        "operator": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": ["state", "effective_at"],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": ["planned", "active", "suspended", "deprecated", "terminated"],
+          "description": "Current lifecycle state."
+        },
+        "previous_state": {
+          "type": "string",
+          "enum": ["planned", "active", "suspended", "deprecated", "terminated"],
+          "description": "Optional prior state."
+        },
+        "effective_at": {
+          "type": "string",
+          "description": "ISO-8601 timestamp when this state is effective."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Human-readable reason for the state or transition."
+        },
+        "review_at": {
+          "type": "string",
+          "description": "Optional ISO-8601 timestamp for next planned review (recommended for suspended)."
+        },
+        "replacement": {
+          "type": "object",
+          "description": "Optional replacement pointers (recommended for deprecated).",
+          "properties": {
+            "replacement_registry_base_url": { "type": "string" },
+            "migration_policy_url": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "retention": {
+          "type": "object",
+          "description": "Optional retention pointers (recommended for terminated).",
+          "properties": {
+            "retention_policy_url": { "type": "string" },
+            "minimum_days": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Evidence pointers supporting this lifecycle assertion."
+        }
+      },
+      "additionalProperties": false
+    },
+    "signature": {
+      "type": "object",
+      "description": "Optional signature envelope metadata (format-agnostic).",
+      "properties": {
+        "type": { "type": "string" },
+        "value": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

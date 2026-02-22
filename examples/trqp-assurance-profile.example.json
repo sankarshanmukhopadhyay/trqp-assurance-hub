@@ -14,6 +14,15 @@
     "assurance_level": "AL2",
     "profile_family": "Standard"
   },
+  "controls": {
+    "in_scope": [
+      "TRQPAH-GOV-01",
+      "TRQPAH-GOV-02",
+      "TRQPAH-EVD-01",
+      "TRQPAH-EVD-02"
+    ],
+    "control_catalog_url": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/blob/main/docs/guides/control-objectives.md"
+  },
   "evidence_expectations": [
     {
       "artifact": "conformance evidence bundle",
@@ -60,7 +69,15 @@
           "artifact://audit-report/2025"
         ]
       }
+    ],
+    "assertion_refs": [
+      "artifact://recognition/example-recognition-assertion-2026-02.json"
     ]
+  },
+  "lifecycle": {
+    "lifecycle_policy_url": "https://example.org/policies/lifecycle",
+    "current_state": "active",
+    "assertion_ref": "artifact://lifecycle/example-lifecycle-assertion-2026-02.json"
   },
   "discovery": {
     "metadata_url": "https://registry.example.org/.well-known/trqp-metadata",

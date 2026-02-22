@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trqp_assurance_hub/recognition-assertion.schema.json",
+  "title": "Recognition Assertion (Candidate)",
+  "type": "object",
+  "required": [
+    "assertion_version",
+    "assertion_id",
+    "asserted_at",
+    "issuer",
+    "subject",
+    "recognition"
+  ],
+  "properties": {
+    "assertion_version": {
+      "type": "string",
+      "description": "Version of this recognition assertion format."
+    },
+    "assertion_id": {
+      "type": "string",
+      "description": "Stable identifier for this assertion (publisher-defined)."
+    },
+    "asserted_at": {
+      "type": "string",
+      "description": "ISO-8601 timestamp when this assertion was issued."
+    },
+    "issuer": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "registry_base_url": { "type": "string" },
+        "contact": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "subject": {
+      "type": "object",
+      "required": ["type", "name"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "What is being recognized (e.g., registry, operator, auditor, framework)."
+        },
+        "name": { "type": "string" },
+        "identifier": {
+          "type": "string",
+          "description": "Optional external identifier (URL, DID, URN, etc.)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "recognition": {
+      "type": "object",
+      "required": ["type", "basis"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Publisher-defined recognition type (e.g., recognizes-auditor, recognizes-framework)."
+        },
+        "basis": {
+          "type": "string",
+          "description": "Reason and scope of recognition (policy, audit, trust framework, etc.)."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Optional scope constraint (jurisdiction, domain, capability, etc.)."
+        },
+        "effective_from": {
+          "type": "string",
+          "description": "Optional ISO-8601 timestamp when recognition becomes effective."
+        },
+        "expires_at": {
+          "type": "string",
+          "description": "Optional ISO-8601 timestamp when recognition expires."
+        },
+        "supersedes": {
+          "type": "string",
+          "description": "Optional assertion_id of an assertion this one supersedes."
+        },
+        "revocation": {
+          "type": "object",
+          "description": "Optional revocation hooks and expectations.",
+          "properties": {
+            "revocation_policy_url": { "type": "string" },
+            "revocation_evidence": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Evidence pointers (artifact://, https://, urn:, etc.)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "signature": {
+      "type": "object",
+      "description": "Optional signature envelope metadata (format-agnostic).",
+      "properties": {
+        "type": { "type": "string", "description": "e.g., JWS, COSE, external-detached" },
+        "value": { "type": "string", "description": "Signature value or pointer (if detached)." }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

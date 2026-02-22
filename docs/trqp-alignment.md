@@ -143,6 +143,7 @@ What remains upstream:
 
 These are “high leverage, low drama” additions that strengthen alignment without dragging the repo into transport-layer bikeshedding:
 
-1. **Recognition Assertion artifact schema** (signable, evidence-linked).
-2. **Lifecycle state model** (minimal state machine + evidence hooks) expressed as profile metadata.
-3. **Mapping profile extension** for VC ecosystem integration (optional, external-facing).
+1. **Recognition Assertion artifact schema** (signable, evidence-linked). See [`docs/guides/recognition-assertion.md`](guides/recognition-assertion.md).
+2. **Lifecycle state model** (minimal state machine + evidence hooks) expressed as profile metadata. See [`docs/guides/lifecycle-state.md`](guides/lifecycle-state.md).
+3. **Control objectives + control satisfaction** to make profile claims machine-checkable at control granularity. See [`docs/guides/control-objectives.md`](guides/control-objectives.md).
+4. **Mapping profile extension** for VC ecosystem integration (optional, external-facing).

@@ -1,0 +1,24 @@
+{
+  "assertion_version": "0.1.0",
+  "assertion_id": "example-lifecycle-assertion-2026-02",
+  "asserted_at": "2026-02-22T00:00:00Z",
+  "subject": {
+    "name": "Example TRQP Registry",
+    "registry_base_url": "https://registry.example.org",
+    "operator": "Example Operator"
+  },
+  "lifecycle": {
+    "state": "active",
+    "previous_state": "planned",
+    "effective_at": "2026-02-01T00:00:00Z",
+    "reason": "Initial production go-live",
+    "evidence": [
+      "artifact://change-ticket/12345",
+      "https://example.org/status"
+    ]
+  },
+  "signature": {
+    "type": "external-detached",
+    "value": "artifact://signatures/example-lifecycle-assertion-2026-02.sig"
+  }
+}

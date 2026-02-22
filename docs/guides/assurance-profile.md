@@ -54,3 +54,16 @@ The profile intentionally supports optional sections that are frequently debated
 
 These are declared as publishable metadata and evidence hooks.
 They do not replace upstream protocol semantics.
+
+## Control objectives (making claims checkable)
+
+For AL3/AL4, profiles should stop being purely narrative.
+This repo supports a lightweight control layer:
+
+- declare which **control objectives** are in-scope via `controls.in_scope`
+- evaluate satisfaction via a standalone **Control Satisfaction Declaration** artifact
+
+See:
+
+- [`docs/guides/control-objectives.md`](control-objectives.md)
+- [`schemas/control-satisfaction.schema.json`](../../schemas/control-satisfaction.schema.json)

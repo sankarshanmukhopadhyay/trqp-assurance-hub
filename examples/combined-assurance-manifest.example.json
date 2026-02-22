@@ -26,6 +26,24 @@
       "level": "AL1",
       "required": false,
       "path": "artifacts/combined-assurance-manifest.json"
+    },
+    {
+      "kind": "recognition_assertion",
+      "level": "AL3",
+      "required": false,
+      "path": "artifacts/recognition/example-recognition-assertion-2026-02.json"
+    },
+    {
+      "kind": "lifecycle_assertion",
+      "level": "AL3",
+      "required": false,
+      "path": "artifacts/lifecycle/example-lifecycle-assertion-2026-02.json"
+    },
+    {
+      "kind": "control_satisfaction_declaration",
+      "level": "AL4",
+      "required": false,
+      "path": "artifacts/control-satisfaction/example-control-satisfaction-2026-02.json"
     }
   ]
 }

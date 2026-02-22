@@ -17,6 +17,9 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 - [Issue routing](docs/policies/issue-routing.md)
 - [Upstream TRQP RFE alignment](docs/trqp-alignment.md)
 - [Assurance profile (candidate, machine-readable)](docs/guides/assurance-profile.md)
+- [Recognition assertion artifact](docs/guides/recognition-assertion.md)
+- [Lifecycle state model](docs/guides/lifecycle-state.md)
+- [Control objectives](docs/guides/control-objectives.md)
 - [Glossary](docs/glossary.md)
 
 ## What this is

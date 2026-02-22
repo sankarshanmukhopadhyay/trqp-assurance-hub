@@ -22,3 +22,6 @@ Legend:
 | Redaction report | Optional | Recommended | Required | Required | What was removed and why |
 | Operator declaration | Optional | Optional | Recommended | Required | Authority context for high consequence |
 | Retention policy pointer | Optional | Recommended | Required | Required | Evidence retention/access policy |
+| Recognition assertion | Optional | Recommended | Required | Required | Signable, evidence-linked recognition claims |
+| Lifecycle assertion | Optional | Recommended | Required | Required | Minimal state model + transition evidence hooks |
+| Control satisfaction declaration | Optional | Optional | Recommended | Required | Control-by-control evaluation bound to a build |
