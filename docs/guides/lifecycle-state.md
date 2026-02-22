@@ -1,44 +1,46 @@
 # Lifecycle state model
 
-TRQP deployments are living systems. They change owners, rotate keys, migrate infrastructure, and sometimes get shut down.
+This repository introduces a minimal lifecycle model to make registry posture and assurance declarations **operationally legible**.
 
-This repository provides a **minimal lifecycle state model** that can be:
+The lifecycle model is intentionally small to avoid protocol-level bikeshedding.
+It exists to help implementers and verifiers align on:
 
-- declared in an Assurance Profile,
-- evidenced via a standalone Lifecycle Assertion artifact, and
-- bound into a Combined Assurance Manifest.
-
-This is **not** protocol query semantics. This is governance and assurance metadata meant to reduce ambiguity.
+- what state a registry (or profile) is in,
+- what that implies for caching and reliance,
+- when recognition should be re-evaluated or revoked.
 
 ## States
 
-The state space is intentionally small:
+The following states are defined for the assurance layer:
 
-- `planned` — announced / preparing, not yet operational
-- `active` — operational and expected to answer queries
-- `suspended` — temporarily non-operational (planned or unplanned)
-- `deprecated` — still operational, but scheduled for sunset (replacement path SHOULD be published)
-- `terminated` — no longer operational (historical evidence SHOULD remain accessible)
+- `draft` — not yet intended for reliance.
+- `active` — intended for reliance within the declared scope.
+- `suspended` — temporarily not intended for reliance.
+- `deprecated` — intended for a limited transition window.
+- `revoked` — explicitly not intended for reliance (trust-impacting).
+- `retired` — end-of-life.
 
-## Transition expectations
+## Lifecycle Assertion
 
-These are guidance-level expectations that become stricter at higher assurance levels:
+Lifecycle state is expressed via a standalone artifact:
 
-- `active -> suspended`: MUST publish a reason and an expected review date (AL3+)
-- `active -> deprecated`: SHOULD publish replacement pointers (AL2+)
-- `deprecated -> terminated`: MUST publish a termination notice and retention pointer (AL3+)
+- Schema: [`schemas/lifecycle-assertion.schema.json`](../../schemas/lifecycle-assertion.schema.json)
+- Example: [`examples/lifecycle-assertion.example.json`](../../examples/lifecycle-assertion.example.json)
 
-## Artifact format
+## How this relates to TRQP RFEs
 
-Schema:
+Upstream discussions around lifecycle and revocation semantics often drift into transport mechanics.
+This repo stays at the assurance layer:
 
-- [`schemas/lifecycle-assertion.schema.json`](../../schemas/lifecycle-assertion.schema.json)
+- lifecycle state is **publishable metadata**,
+- transitions are **evidence-linked**,
+- revocation is **explicit** and can be propagated through recognition relationships.
 
-Example:
+## Practical expectations
 
-- [`examples/lifecycle-assertion.example.json`](../../examples/lifecycle-assertion.example.json)
+At higher assurance levels, lifecycle transitions should be supported by stronger evidence, for example:
 
-## Linking to other artifacts
-
-- Assurance Profile: include lifecycle policy pointers and (optionally) a current-state assertion reference.
-- Recognition Assertion: include lifecycle references when recognition is time-bound or contingent.
+- control satisfaction declarations,
+- incident reports,
+- audit results,
+- revocation reason codes.

@@ -1,48 +1,41 @@
-# Recognition Assertion artifact
+# Recognition Assertion
 
-This repository treats **recognition** as something you can *publish, sign, and audit* — not a purely social relationship.
+The **Recognition Assertion** is a standalone artifact used to express registry-to-registry (or operator-to-operator) recognition in a **signable** and **evidence-linked** way.
 
-A **Recognition Assertion** is a machine-readable artifact that expresses:
+This repo treats recognition as a governance claim that must be **falsifiable**:
 
-- who is recognizing what/who
-- why (basis / policy / trust framework / audit)
-- what evidence backs the claim
-- when the assertion becomes effective and when it expires (optional)
-- how the assertion can be revoked / superseded (optional)
+- it has an issuer and a subject,
+- it is bounded by scope,
+- it can be revoked or expire,
+- it can point to evidence bundles (audit reports, conformance results, manifests).
 
-This is intentionally *not* a full recognition graph model. It is the smallest useful object that can be:
+## Artifact
 
-- published as a registry artifact,
-- referenced from an Assurance Profile,
-- linked into a Combined Assurance Manifest, and
-- checked by independent verifiers.
+- Schema: [`schemas/recognition-assertion.schema.json`](../../schemas/recognition-assertion.schema.json)
+- Example: [`examples/recognition-assertion.example.json`](../../examples/recognition-assertion.example.json)
 
-## When to use
+## Intended usage
 
-Use this artifact when you need to operationalize upstream TRQP RFEs around **recognition relationship modeling and proofs**.
+Use a Recognition Assertion when you need to publish statements like:
 
-Typical uses:
+- “Registry A recognizes Registry B for domain X in jurisdiction Y.”
+- “Registry A recognizes Registry B **with conditions** (controls, audits, lifecycle expectations).”
+- “Registry A revokes recognition of Registry B due to a trust-impacting event.”
 
-- a registry operator recognizes an auditor or assessment body
-- a registry operator recognizes a governance framework
-- a registry operator recognizes another registry (or its operator) for specific purposes
+## Evidence linking
 
-## Artifact format
+Recognition assertions should reference evidence artifacts, for example:
 
-Schema:
+- combined assurance manifests,
+- conformance evidence bundles,
+- security posture evidence bundles,
+- control satisfaction declarations.
 
-- [`schemas/recognition-assertion.schema.json`](../../schemas/recognition-assertion.schema.json)
+This keeps recognition from becoming a vibes-based relationship and turns it into an operational, reviewable surface.
 
-Example:
+## Signing
 
-- [`examples/recognition-assertion.example.json`](../../examples/recognition-assertion.example.json)
+The schema includes an optional `signature` block.
 
-## Evidence linkage
-
-Evidence references are strings. For early implementations, treat them as pointers:
-
-- `artifact://…` for local build artifacts (recommended)
-- `https://…` for stable public URLs
-- `urn:…` or other identifiers, if your ecosystem supports them
-
-For AL3/AL4, treat recognition assertions as **signable artifacts** (for example JWS/JWT, COSE, or an external signature envelope) and include integrity checksums in your Combined Assurance Manifest.
+This repository does not mandate a signing envelope.
+Publishers may use JOSE/JWS, Data Integrity proofs, or a detached signature scheme consistent with their trust framework.

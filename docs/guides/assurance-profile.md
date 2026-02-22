@@ -55,15 +55,20 @@ The profile intentionally supports optional sections that are frequently debated
 These are declared as publishable metadata and evidence hooks.
 They do not replace upstream protocol semantics.
 
-## Control objectives (making claims checkable)
+## Control binding
 
-For AL3/AL4, profiles should stop being purely narrative.
-This repo supports a lightweight control layer:
+To make assurance levels operational, the profile can optionally bind to a control catalog and reference a control satisfaction declaration.
 
-- declare which **control objectives** are in-scope via `controls.in_scope`
-- evaluate satisfaction via a standalone **Control Satisfaction Declaration** artifact
+- Control objectives: [`docs/guides/control-objectives.md`](control-objectives.md)
 
-See:
+## Standalone artifacts
 
-- [`docs/guides/control-objectives.md`](control-objectives.md)
-- [`schemas/control-satisfaction.schema.json`](../../schemas/control-satisfaction.schema.json)
+For stronger auditability, this repo introduces standalone, signable artifacts that the profile can reference:
+
+- Recognition Assertion: [`docs/guides/recognition-assertion.md`](recognition-assertion.md)
+- Lifecycle state and Lifecycle Assertion: [`docs/guides/lifecycle-state.md`](lifecycle-state.md)
+
+For ecosystem reasoning:
+
+- Recognition graph semantics: [`docs/guides/recognition-graph.md`](recognition-graph.md)
+- Assurance-layer revocation semantics: [`docs/guides/revocation-semantics.md`](revocation-semantics.md)

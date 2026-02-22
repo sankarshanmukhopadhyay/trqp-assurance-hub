@@ -1,40 +1,37 @@
 {
-  "declaration_version": "0.1.0",
-  "declaration_id": "example-control-satisfaction-2026-02",
-  "declared_at": "2026-02-22T00:00:00Z",
-  "profile_id": "example-registry-assurance-profile",
-  "build_id": "example-build",
-  "evaluator": {
-    "name": "Example Audit Firm",
-    "type": "auditor",
-    "contact": "audit@example.com"
+  "type": "TRQPControlSatisfactionDeclaration",
+  "id": "urn:trqp:controls:satisfaction:example-registry:2026-02",
+  "subject": {
+    "id": "did:web:registry.example.org",
+    "name": "Example TRQP Registry"
   },
-  "satisfied_controls": [
+  "catalog_ref": "tools/control-catalog.json",
+  "controls": [
     {
-      "control_id": "TRQPAH-EVD-01",
+      "control_id": "TRQP-CTRL-01",
       "status": "satisfied",
       "evidence": [
-        "artifact://manifests/combined-assurance-manifest.json"
-      ]
+        {"kind": "policy", "ref": "https://example.org/policies/versioning"}
+      ],
+      "notes": "Version tuple policy published and enforced in release process."
     },
     {
-      "control_id": "TRQPAH-REC-01",
+      "control_id": "TRQP-CTRL-02",
       "status": "satisfied",
       "evidence": [
-        "artifact://recognition/example-recognition-assertion-2026-02.json"
-      ]
+        {"kind": "runbook", "ref": "artifact://runbook/incident-response"}
+      ],
+      "notes": "Operational incident response documented and exercised."
     },
     {
-      "control_id": "TRQPAH-LFC-01",
-      "status": "partial",
-      "notes": "Lifecycle assertion published; deprecation/termination playbook pending",
+      "control_id": "TRQP-CTRL-03",
+      "status": "partially_satisfied",
       "evidence": [
-        "artifact://lifecycle/example-lifecycle-assertion-2026-02.json"
-      ]
+        {"kind": "audit-report", "ref": "artifact://audit-report/2025"}
+      ],
+      "notes": "External audit performed annually; continuous monitoring rollout in progress."
     }
   ],
-  "signature": {
-    "type": "external-detached",
-    "value": "artifact://signatures/example-control-satisfaction-2026-02.sig"
-  }
+  "issued_at": "2026-02-22T00:00:00Z",
+  "expires_at": "2026-08-22T00:00:00Z"
 }

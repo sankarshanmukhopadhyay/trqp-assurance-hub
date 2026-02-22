@@ -63,6 +63,4 @@ Your combined manifest should be dead simple:
 - References (paths/URIs) to each bundle
 - High-level summary fields (counts, pass/fail totals)
 
-This hub repo hosts a small JSON schema for the Combined Assurance Manifest:
-
-- [`schemas/combined-assurance-manifest.schema.json`](../../schemas/combined-assurance-manifest.schema.json)
+This hub repo will eventually host a small JSON schema for `combined-manifest.json` once both underlying bundle formats are stable.

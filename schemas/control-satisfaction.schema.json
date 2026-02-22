@@ -1,82 +1,57 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/trqp_assurance_hub/control-satisfaction.schema.json",
-  "title": "Control Satisfaction Declaration (Candidate)",
+  "$id": "https://example.org/trqp_assurance_hub/schemas/control-satisfaction.schema.json",
+  "title": "TRQP Control Satisfaction Declaration",
   "type": "object",
-  "required": [
-    "declaration_version",
-    "declaration_id",
-    "declared_at",
-    "profile_id",
-    "build_id",
-    "satisfied_controls"
-  ],
+  "required": ["type", "id", "subject", "controls", "issued_at"],
+  "additionalProperties": false,
   "properties": {
-    "declaration_version": {
-      "type": "string",
-      "description": "Version of this declaration format."
-    },
-    "declaration_id": {
-      "type": "string",
-      "description": "Stable identifier for this declaration (publisher-defined)."
-    },
-    "declared_at": {
-      "type": "string",
-      "description": "ISO-8601 timestamp when this declaration was issued."
-    },
-    "profile_id": {
-      "type": "string",
-      "description": "The Assurance Profile this declaration is evaluating."
-    },
-    "build_id": {
-      "type": "string",
-      "description": "Build identifier that this declaration is bound to (typically via Combined Assurance Manifest)."
-    },
-    "evaluator": {
+    "type": {"const": "TRQPControlSatisfactionDeclaration"},
+    "id": {"type": "string", "minLength": 1},
+    "subject": {
       "type": "object",
-      "description": "Who evaluated these controls (self, auditor, third party).",
+      "required": ["id"],
+      "additionalProperties": false,
       "properties": {
-        "name": { "type": "string" },
-        "type": { "type": "string", "description": "e.g., self, auditor, assessor" },
-        "contact": { "type": "string" }
-      },
-      "additionalProperties": false
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string"}
+      }
     },
-    "satisfied_controls": {
+    "catalog_ref": {
+      "type": "string",
+      "description": "Reference to the control catalog used (file path or URL)."
+    },
+    "controls": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
         "required": ["control_id", "status"],
+        "additionalProperties": false,
         "properties": {
-          "control_id": {
-            "type": "string",
-            "description": "Control identifier (e.g., TRQPAH-EVD-01)."
-          },
+          "control_id": {"type": "string", "minLength": 1},
           "status": {
             "type": "string",
-            "enum": ["satisfied", "partial", "not_satisfied"],
-            "description": "Evaluation status."
+            "enum": ["satisfied", "partially_satisfied", "not_satisfied", "not_applicable"]
           },
-          "notes": { "type": "string" },
           "evidence": {
             "type": "array",
-            "items": { "type": "string" },
-            "description": "Pointers to supporting evidence (artifact://, paths, https://, etc.)."
-          }
-        },
-        "additionalProperties": false
+            "items": {
+              "type": "object",
+              "required": ["kind", "ref"],
+              "additionalProperties": false,
+              "properties": {
+                "kind": {"type": "string"},
+                "ref": {"type": "string"}
+              }
+            }
+          },
+          "notes": {"type": "string"}
+        }
       }
     },
-    "signature": {
-      "type": "object",
-      "description": "Optional signature envelope metadata (format-agnostic).",
-      "properties": {
-        "type": { "type": "string" },
-        "value": { "type": "string" }
-      },
-      "additionalProperties": false
-    }
-  },
-  "additionalProperties": false
+    "issued_at": {"type": "string"},
+    "expires_at": {"type": "string"},
+    "signature": {"type": "object", "additionalProperties": true}
+  }
 }

@@ -22,6 +22,8 @@ Legend:
 | Redaction report | Optional | Recommended | Required | Required | What was removed and why |
 | Operator declaration | Optional | Optional | Recommended | Required | Authority context for high consequence |
 | Retention policy pointer | Optional | Recommended | Required | Required | Evidence retention/access policy |
-| Recognition assertion | Optional | Recommended | Required | Required | Signable, evidence-linked recognition claims |
-| Lifecycle assertion | Optional | Recommended | Required | Required | Minimal state model + transition evidence hooks |
-| Control satisfaction declaration | Optional | Optional | Recommended | Required | Control-by-control evaluation bound to a build |
+| Control catalog reference | Optional | Recommended | Required | Required | Stable control IDs enable auditability |
+| Control Satisfaction Declaration | Optional | Recommended | Required | Required | Machine-readable control coverage and evidence links |
+| Lifecycle Assertion | Optional | Recommended | Required | Required | Declares lifecycle state and transition evidence |
+| Recognition Assertion | Optional | Optional | Recommended | Required | Signable recognition edges with scope + evidence |
+| Revocation bulletin / notice | Optional | Optional | Recommended | Required | Structured notice for trust-impacting revocations |

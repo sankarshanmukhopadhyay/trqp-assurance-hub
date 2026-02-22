@@ -1,30 +1,35 @@
 {
-  "assertion_version": "0.1.0",
-  "assertion_id": "example-recognition-assertion-2026-02",
-  "asserted_at": "2026-02-22T00:00:00Z",
+  "type": "TRQPRecognitionAssertion",
+  "id": "urn:trqp:recognition:example:2026-02",
   "issuer": {
-    "name": "Example TRQP Registry Operator",
-    "registry_base_url": "https://registry.example.org",
+    "id": "did:web:registry.example.org",
+    "name": "Example TRQP Registry",
     "contact": "security@example.org"
   },
   "subject": {
-    "type": "auditor",
-    "name": "Example Audit Firm",
-    "identifier": "https://auditor.example.com"
+    "id": "did:web:registry.partner.example",
+    "name": "Partner Registry"
   },
   "recognition": {
-    "type": "recognizes-auditor",
-    "basis": "Annual audit against published control objectives for high-consequence deployments",
-    "scope": "Applies to AL3/AL4 assurance claims",
-    "effective_from": "2026-01-01T00:00:00Z",
-    "expires_at": "2027-01-01T00:00:00Z",
+    "relationship": "recognizes_with_conditions",
+    "scope": {
+      "domain": "Example Trust Framework v1",
+      "jurisdictions": ["IN"],
+      "credential_types": ["VerifiableCredential"],
+      "policy_refs": [
+        "https://example.org/policies/recognition"
+      ]
+    },
+    "conditions": [
+      "Partner Registry MUST publish an Assurance Profile and Control Satisfaction Declaration.",
+      "Partner Registry MUST provide revocation endpoints consistent with its declared lifecycle policy."
+    ],
     "evidence": [
-      "artifact://audit-report/2025",
-      "https://example.org/policies/audit-scope"
-    ]
+      {"kind": "audit-report", "ref": "artifact://audit-report/partner/2025"},
+      {"kind": "assurance-profile", "ref": "https://registry.partner.example/.well-known/trqp-assurance-profile"}
+    ],
+    "lifecycle_assertion_ref": "examples/lifecycle-assertion.example.json"
   },
-  "signature": {
-    "type": "external-detached",
-    "value": "artifact://signatures/example-recognition-assertion-2026-02.sig"
-  }
+  "issued_at": "2026-02-22T00:00:00Z",
+  "expires_at": "2027-02-22T00:00:00Z"
 }

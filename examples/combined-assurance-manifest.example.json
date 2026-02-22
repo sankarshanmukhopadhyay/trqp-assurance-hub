@@ -28,22 +28,28 @@
       "path": "artifacts/combined-assurance-manifest.json"
     },
     {
-      "kind": "recognition_assertion",
-      "level": "AL3",
-      "required": false,
-      "path": "artifacts/recognition/example-recognition-assertion-2026-02.json"
-    },
-    {
-      "kind": "lifecycle_assertion",
-      "level": "AL3",
-      "required": false,
-      "path": "artifacts/lifecycle/example-lifecycle-assertion-2026-02.json"
+      "kind": "assurance_profile",
+      "level": "AL2",
+      "required": true,
+      "path": "examples/trqp-assurance-profile.example.json"
     },
     {
       "kind": "control_satisfaction_declaration",
-      "level": "AL4",
+      "level": "AL2",
       "required": false,
-      "path": "artifacts/control-satisfaction/example-control-satisfaction-2026-02.json"
+      "path": "examples/control-satisfaction.example.json"
+    },
+    {
+      "kind": "lifecycle_assertion",
+      "level": "AL2",
+      "required": false,
+      "path": "examples/lifecycle-assertion.example.json"
+    },
+    {
+      "kind": "recognition_assertion",
+      "level": "AL3",
+      "required": false,
+      "path": "examples/recognition-assertion.example.json"
     }
   ]
 }

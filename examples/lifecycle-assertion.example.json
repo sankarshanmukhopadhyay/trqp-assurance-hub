@@ -1,24 +1,24 @@
 {
-  "assertion_version": "0.1.0",
-  "assertion_id": "example-lifecycle-assertion-2026-02",
-  "asserted_at": "2026-02-22T00:00:00Z",
+  "type": "TRQPLifecycleAssertion",
+  "id": "urn:trqp:lifecycle:example-registry:2026-02",
   "subject": {
-    "name": "Example TRQP Registry",
-    "registry_base_url": "https://registry.example.org",
-    "operator": "Example Operator"
+    "id": "did:web:registry.example.org",
+    "name": "Example TRQP Registry"
   },
-  "lifecycle": {
-    "state": "active",
-    "previous_state": "planned",
-    "effective_at": "2026-02-01T00:00:00Z",
-    "reason": "Initial production go-live",
-    "evidence": [
-      "artifact://change-ticket/12345",
-      "https://example.org/status"
+  "state": "active",
+  "scope": {
+    "domain": "Example Trust Framework v1",
+    "jurisdictions": ["IN"],
+    "policy_refs": [
+      "https://example.org/policies/lifecycle",
+      "https://example.org/policies/revocation"
     ]
   },
-  "signature": {
-    "type": "external-detached",
-    "value": "artifact://signatures/example-lifecycle-assertion-2026-02.sig"
-  }
+  "effective_from": "2026-02-01T00:00:00Z",
+  "reason": "Operational readiness met; controls satisfied at AL2.",
+  "evidence": [
+    {"kind": "control-satisfaction", "ref": "examples/control-satisfaction.example.json"},
+    {"kind": "combined-assurance-manifest", "ref": "examples/combined-assurance-manifest.example.json"}
+  ],
+  "issued_at": "2026-02-22T00:00:00Z"
 }

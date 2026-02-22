@@ -17,9 +17,11 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 - [Issue routing](docs/policies/issue-routing.md)
 - [Upstream TRQP RFE alignment](docs/trqp-alignment.md)
 - [Assurance profile (candidate, machine-readable)](docs/guides/assurance-profile.md)
-- [Recognition assertion artifact](docs/guides/recognition-assertion.md)
-- [Lifecycle state model](docs/guides/lifecycle-state.md)
 - [Control objectives](docs/guides/control-objectives.md)
+- [Recognition Assertion](docs/guides/recognition-assertion.md)
+- [Lifecycle state model](docs/guides/lifecycle-state.md)
+- [Recognition graph semantics](docs/guides/recognition-graph.md)
+- [Revocation semantics](docs/guides/revocation-semantics.md)
 - [Glossary](docs/glossary.md)
 
 ## What this is
@@ -37,6 +39,8 @@ It provides:
 - A lightweight governance and issue routing model
 - Minimal schemas to bind conformance and posture evidence together
 - A candidate assurance profile format for publishing posture and governance expectations
+
+To keep the repo trustworthy, CI validates that JSON examples match their JSON Schemas.
 
 ## Choose your path
 

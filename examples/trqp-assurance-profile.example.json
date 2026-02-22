@@ -1,5 +1,5 @@
 {
-  "profile_version": "0.1.0",
+  "profile_version": "0.3.0",
   "profile_id": "example-registry-assurance-profile",
   "published_at": "2026-02-22T00:00:00Z",
   "subject": {
@@ -13,15 +13,6 @@
   "assurance": {
     "assurance_level": "AL2",
     "profile_family": "Standard"
-  },
-  "controls": {
-    "in_scope": [
-      "TRQPAH-GOV-01",
-      "TRQPAH-GOV-02",
-      "TRQPAH-EVD-01",
-      "TRQPAH-EVD-02"
-    ],
-    "control_catalog_url": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/blob/main/docs/guides/control-objectives.md"
   },
   "evidence_expectations": [
     {
@@ -59,7 +50,23 @@
       "policy_url": "https://example.org/policies/redaction"
     }
   },
+  "controls": {
+    "catalog_ref": "tools/control-catalog.json",
+    "control_ids": [
+      "TRQP-CTRL-01",
+      "TRQP-CTRL-02",
+      "TRQP-CTRL-03"
+    ],
+    "satisfaction_declaration_ref": "examples/control-satisfaction.example.json"
+  },
+  "lifecycle": {
+    "current_state": "active",
+    "lifecycle_assertion_ref": "examples/lifecycle-assertion.example.json"
+  },
   "recognition": {
+    "assertion_refs": [
+      "examples/recognition-assertion.example.json"
+    ],
     "assertions": [
       {
         "type": "recognizes-auditor",
@@ -69,15 +76,7 @@
           "artifact://audit-report/2025"
         ]
       }
-    ],
-    "assertion_refs": [
-      "artifact://recognition/example-recognition-assertion-2026-02.json"
     ]
-  },
-  "lifecycle": {
-    "lifecycle_policy_url": "https://example.org/policies/lifecycle",
-    "current_state": "active",
-    "assertion_ref": "artifact://lifecycle/example-lifecycle-assertion-2026-02.json"
   },
   "discovery": {
     "metadata_url": "https://registry.example.org/.well-known/trqp-metadata",

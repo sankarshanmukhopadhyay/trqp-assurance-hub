@@ -1,0 +1,21 @@
+{
+  "catalog_version": "0.1.0",
+  "catalog_id": "trqp-assurance-hub-candidate-controls",
+  "controls": [
+    {
+      "id": "TRQP-CTRL-01",
+      "name": "Release & version tuple discipline",
+      "objective": "Published artifacts MUST be traceable to an immutable version tuple (tag or commit)."
+    },
+    {
+      "id": "TRQP-CTRL-02",
+      "name": "Operational incident readiness",
+      "objective": "Operator MUST maintain and exercise an incident response process for trust-impacting events."
+    },
+    {
+      "id": "TRQP-CTRL-03",
+      "name": "Independent assurance evidence",
+      "objective": "Operator SHOULD provide independent assurance evidence appropriate to the declared assurance level."
+    }
+  ]
+}

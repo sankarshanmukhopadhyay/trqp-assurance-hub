@@ -49,17 +49,18 @@ Operational effect:
 
 ### 2) Clarify Recognition Relationship Modeling and Proofs
 
-**Coverage:** Partial (governance hardening + evidence model).
+**Coverage:** Strong (artifact schema + semantics at assurance layer).
 
 How this repo helps:
 
-- Provides a place to define and publish **recognition assertions** as auditable artifacts (candidate structure in the assurance profile).
-- Provides the cross-run binding mechanism (Combined Assurance Manifest) so recognition claims can point to evidence.
+- Provides a standalone **Recognition Assertion** artifact (signable, scope-bound, evidence-linked).
+- Provides a lightweight **recognition graph semantics** guide (non-transport) for ecosystem reasoning.
+- Uses the Combined Assurance Manifest so recognition claims can point to evidence bundles.
 
-Gap (deliberate):
+See:
 
-- This repo does not yet define a full recognition graph model.
-  The intended next increment is a lightweight **Recognition Assertion** artifact schema that can be signed and evidence-linked.
+- [`docs/guides/recognition-assertion.md`](guides/recognition-assertion.md)
+- [`docs/guides/recognition-graph.md`](guides/recognition-graph.md)
 
 ### 3) Define Baseline and High-Assurance Governance Metadata Profiles
 
@@ -128,22 +129,36 @@ What remains upstream:
 
 ### 8) Define Lifecycle Metadata and Revocation Query Semantics
 
-**Coverage:** Partial (lifecycle metadata via evidence and governance).
+**Coverage:** Strong at the assurance layer (state model + revocation expectations).
 
 How this repo helps:
 
-- Encourages implementers to produce lifecycle and revocation-related evidence artifacts.
-- Provides a place to publish lifecycle policy pointers and operational commitments.
+- Defines a minimal **lifecycle state model** and a standalone **Lifecycle Assertion** artifact.
+- Defines assurance-layer **revocation semantics** for recognition, lifecycle, and control satisfaction.
+- Encourages evidence-linked transitions for higher assurance tiers.
 
 What remains upstream:
 
 - Protocol-level query semantics.
 
+See:
+
+- [`docs/guides/lifecycle-state.md`](guides/lifecycle-state.md)
+- [`docs/guides/revocation-semantics.md`](guides/revocation-semantics.md)
+
 ## Recommended next increments (to increase upstream usefulness)
 
 These are “high leverage, low drama” additions that strengthen alignment without dragging the repo into transport-layer bikeshedding:
 
-1. **Recognition Assertion artifact schema** (signable, evidence-linked). See [`docs/guides/recognition-assertion.md`](guides/recognition-assertion.md).
-2. **Lifecycle state model** (minimal state machine + evidence hooks) expressed as profile metadata. See [`docs/guides/lifecycle-state.md`](guides/lifecycle-state.md).
-3. **Control objectives + control satisfaction** to make profile claims machine-checkable at control granularity. See [`docs/guides/control-objectives.md`](guides/control-objectives.md).
-4. **Mapping profile extension** for VC ecosystem integration (optional, external-facing).
+Implemented in this repo:
+
+1. **Recognition Assertion artifact schema** (signable, evidence-linked).
+2. **Recognition graph semantics** (scope, propagation expectations; non-transport).
+3. **Lifecycle state model** + Lifecycle Assertion artifact.
+4. **Control catalog binding** + Control Satisfaction Declaration artifact.
+5. **Schema validation in CI** (examples are validated against schemas).
+
+Next candidates:
+
+1. **Mapping profile extension** for VC ecosystem integration (optional, external-facing).
+2. Optional **signing envelope guidance** (JOSE vs Data Integrity) as non-normative profiles.
