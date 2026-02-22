@@ -33,3 +33,5 @@ Use when the issue is about:
 - Compatibility matrix updates
 - Combined workflow guidance
 - Terminology / user journey / adoption packaging
+- Candidate assurance profile format, schemas, and examples
+- Upstream RFE alignment documentation

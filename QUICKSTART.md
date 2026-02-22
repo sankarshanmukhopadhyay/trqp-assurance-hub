@@ -12,7 +12,9 @@ This repo is the front door for running **combined assurance** in the TRQP ecosy
 2. Read the operating docs:
    - Combined assurance workflow: `docs/guides/combined-assurance.md`
    - Evidence artifacts and expectations: `docs/guides/evidence-artifacts.md`
+   - Assurance profile (candidate): `docs/guides/assurance-profile.md`
    - Compatibility policy and matrix: `docs/policies/compatibility.md`
+   - Upstream TRQP RFE alignment: `docs/trqp-alignment.md`
 
 ## Repository links
 

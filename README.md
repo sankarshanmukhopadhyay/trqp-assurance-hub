@@ -5,6 +5,8 @@
 
 A pragmatic, adopter-first landing zone that makes the TRQP ecosystem feel like **one product** while keeping core components decoupled for independent iteration.
 
+Positioning: this repository is a **candidate Assurance Profile and Governance Hardening Layer** that helps operationalize open TRQP RFEs by turning “should” discussions into **profiles, artifacts, and machine-checkable evidence**.
+
 ## Quick links
 
 - [Quickstart](QUICKSTART.md)
@@ -13,6 +15,8 @@ A pragmatic, adopter-first landing zone that makes the TRQP ecosystem feel like 
 - [Error states](docs/guides/error-states.md)
 - [Compatibility policy and matrix](docs/policies/compatibility.md)
 - [Issue routing](docs/policies/issue-routing.md)
+- [Upstream TRQP RFE alignment](docs/trqp-alignment.md)
+- [Assurance profile (candidate, machine-readable)](docs/guides/assurance-profile.md)
 - [Glossary](docs/glossary.md)
 
 ## What this is
@@ -29,6 +33,7 @@ It provides:
 - Cross-repo compatibility expectations
 - A lightweight governance and issue routing model
 - Minimal schemas to bind conformance and posture evidence together
+- A candidate assurance profile format for publishing posture and governance expectations
 
 ## Choose your path
 
@@ -136,6 +141,10 @@ See:
 This work is intended as an extension of the Trust over IP TRQP workstream:
 
 - [ToIP TRQP upstream repository](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
+
+For how this repo maps to current upstream RFEs (and what it explicitly does *not* try to solve), see:
+
+- [Upstream TRQP RFE alignment](docs/trqp-alignment.md)
 
 ## License
 
