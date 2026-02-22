@@ -20,18 +20,13 @@ A combined assurance run is considered **supported** when:
 - Each repo MUST publish releases using SemVer.
 - Each repo SHOULD publish a short compatibility note in its release notes that references the other repo.
 
-## Compatibility matrix (known-good)
+## Known-good matrix
 
-This matrix records combinations of tool versions that have been validated together.
+Maintain this table over time.
 
-### Legend
-
-- **Test level:** Smoke = checkout + installability checks + minimal invocation; Partial = key profiles; Full = suite + TSPP AL checks + evidence bundle
-- **Evidence:** link to CI run / artifact bundle / release tag notes
-
-| Date (UTC) | Hub | Conformance Suite | TSPP | Test level | Environment | Evidence | Notes |
-|---|---|---|---|---|---|---|---|
-| 2026-02-21 | main | main | main | Smoke | ubuntu-latest, py3.11 | [combined-assurance-smoke workflow](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/combined-assurance-smoke.yml) | Initial alignment gate |
+| Conformance Suite version | TRQP-TSPP version | Status | Notes |
+|---:|---:|---|---|
+| (fill) | (fill) | Planned | Initial pairing |
 
 ## Shared contracts
 

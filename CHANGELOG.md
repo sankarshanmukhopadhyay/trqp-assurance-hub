@@ -1,14 +1,15 @@
 # Changelog
 
-This repo follows SemVer. The **compatibility matrix** is updated per hub release.
+All notable changes to this repository will be documented in this file.
 
 ## Unreleased
 
 ### Added
-- Combined Assurance Manifest generator script (`tools/generate-manifest.py`)
-- Machine-readable compatibility index (`docs/policies/compatibility.json`)
-- Quickstart and glossary docs
+
+- Combined assurance smoke workflow that emits a manifest and an artifact checklist.
+- Combined Assurance Manifest schema and example.
+- Evidence artifacts and expectations guide (includes AL1–AL4 matrix).
 
 ### Fixed
-- Smoke workflow manifest output now conforms to the authoritative JSON Schema
-- CI actions pinned to commit SHAs for supply-chain hygiene
+
+- Documentation formatting and markdownlint compliance for headings, lists, and links.

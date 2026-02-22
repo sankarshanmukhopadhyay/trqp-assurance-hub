@@ -1,23 +1,19 @@
 # Error states
 
-This guide documents error categories that are relevant for combined assurance.
+This guide documents common error and failure modes across the TRQP assurance toolchain.
 
-The goal is determinism: if an error can influence verification or policy outcomes now or later (via caching/storage),
-it should be treated as machine-consumed and handled consistently.
+## Categories
 
-## Suggested categories
+- **Configuration errors**: missing environment variables, incorrect base URLs, invalid profile selection
+- **Connectivity errors**: DNS failures, TLS issues, timeouts, rate limiting
+- **Authorization errors**: missing or invalid credentials, access denied
+- **Protocol errors**: malformed responses, invalid schemas, unexpected status codes
+- **Posture errors**: missing required headers, weak policies, integrity/signing expectations unmet
 
-- **AuthN/AuthZ failures**: missing/invalid credentials, denied access
-- **Rate limits**: explicit throttling signals
-- **Not found / invalid inputs**: structured client errors
-- **Policy denials**: explicit refusal due to policy
-- **Transient failures**: upstream outages, timeouts
+## Reporting guidance
 
-## Evidence expectations
-
-When an error response is machine-consumed (affects verifier behavior), evidence should capture:
-
-- endpoint + request context (redacted as needed)
-- status code and structured error payload
-- timestamp
-- rationale (why this is expected or acceptable)
+For machine-consumed output, prefer structured errors with:
+- a stable error code
+- a human-readable message
+- a remediation hint
+- a correlation/run identifier where available

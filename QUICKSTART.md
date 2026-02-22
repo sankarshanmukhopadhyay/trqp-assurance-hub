@@ -1,24 +1,20 @@
 # Quickstart
 
-This hub is the front door for combined TRQP assurance.
+This repo is the front door for running **combined assurance** in the TRQP ecosystem.
 
-## Pick your starting point
+## What you should do first
 
-- Protocol correctness → use the **TRQP Conformance Suite**
-- Security and privacy posture → use **TRQP‑TSPP**
-- Production and procurement → use **both** and bind outputs with a Combined Assurance Manifest
+1. Pick your goal:
+   - Protocol behavior assurance → use the Conformance Suite
+   - Security and privacy posture assurance → use TRQP-TSPP
+   - Production readiness → run both and bind evidence together
 
-## Use the CI “golden path”
+2. Read the operating docs:
+   - Combined assurance workflow: `docs/guides/combined-assurance.md`
+   - Evidence artifacts and expectations: `docs/guides/evidence-artifacts.md`
+   - Compatibility policy and matrix: `docs/policies/compatibility.md`
 
-This repo includes a minimal workflow that checks out the companion repos and emits:
+## Repository links
 
-- a Combined Assurance Manifest
-- an artifact checklist aligned to the evidence artifacts matrix
-
-Workflow:
-
-- `.github/workflows/combined-assurance-smoke.yml`
-
-Artifacts are uploaded under the name:
-
-- `combined-assurance-smoke-artifacts`
+- Conformance Suite: <https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite>
+- TRQP-TSPP: <https://github.com/sankarshanmukhopadhyay/TRQP-TSPP>
