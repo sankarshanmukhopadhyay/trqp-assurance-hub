@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/sankarshanmukhopadhyay/trqp-assurance-hub/main/schemas/combined-assurance-manifest.schema.json",
+  "$id": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/blob/main/schemas/combined-assurance-manifest.schema.json",
   "title": "TRQP Combined Assurance Manifest",
   "description": "A minimal, tool-agnostic manifest that binds protocol conformance results and security/privacy posture results to a single build identifier and evidence set.",
   "type": "object",
@@ -14,8 +14,7 @@
   "properties": {
     "manifest_version": {
       "type": "string",
-      "pattern": "^0\\.1\\.\\d+$",
-      "description": "Manifest schema version (SemVer-like, currently 0.1.x)."
+      "pattern": "^0\\.1\\.\\d+$"
     },
     "build": {
       "type": "object",
@@ -41,16 +40,13 @@
         },
         "ci_run_url": {
           "type": "string",
-          "format": "uri",
-          "description": "CI run URL for traceability."
+          "format": "uri"
         }
-      },
-      "description": "Build provenance and execution context for this assurance run."
+      }
     },
     "generated_at": {
       "type": "string",
-      "format": "date-time",
-      "description": "RFC3339 UTC timestamp of manifest generation."
+      "format": "date-time"
     },
     "tools": {
       "type": "object",
@@ -61,27 +57,22 @@
           "additionalProperties": false,
           "properties": {
             "version": {
-              "type": "string",
-              "description": "Tool release/version identifier (e.g., SemVer tag)."
+              "type": "string"
             },
             "profile_id": {
-              "type": "string",
-              "description": "Conformance profile identifier applied during the run."
+              "type": "string"
             },
             "run_id": {
-              "type": "string",
-              "description": "Tool-specific run identifier (CI job id, invocation id, or report id)."
+              "type": "string"
             }
-          },
-          "description": "Metadata for the TRQP Conformance Suite execution that produced/validated artifacts."
+          }
         },
         "trqp_tspp": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
             "version": {
-              "type": "string",
-              "description": "Tool release/version identifier (e.g., SemVer tag)."
+              "type": "string"
             },
             "assurance_level": {
               "type": "string",
@@ -90,18 +81,14 @@
                 "AL2",
                 "AL3",
                 "AL4"
-              ],
-              "description": "Assurance level (AL1/AL2 currently used; AL3/AL4 reserved for future expansion unless defined by TRQP-TSPP)."
+              ]
             },
             "run_id": {
-              "type": "string",
-              "description": "Tool-specific run identifier (CI job id, invocation id, or report id)."
+              "type": "string"
             }
-          },
-          "description": "Metadata for the TRQP-TSPP execution (trust service provider profile evaluation)."
+          }
         }
-      },
-      "description": "Tool versions and run identifiers for each participating tool."
+      }
     },
     "artifacts": {
       "type": "array",
@@ -122,22 +109,18 @@
               "log",
               "sbom",
               "attestation"
-            ],
-            "description": "Artifact classification (e.g., manifest, report, evidence bundle, log, policy bundle)."
+            ]
           },
           "path": {
             "type": "string",
-            "minLength": 1,
-            "description": "Repository-relative path to the artifact file."
+            "minLength": 1
           },
           "sha256": {
             "type": "string",
-            "pattern": "^[A-Fa-f0-9]{64}$",
-            "description": "SHA-256 digest of the artifact file (hex) for integrity verification."
+            "pattern": "^[A-Fa-f0-9]{64}$"
           },
           "media_type": {
-            "type": "string",
-            "description": "IANA media type for the artifact (e.g., application/json, text/markdown)."
+            "type": "string"
           },
           "produced_by": {
             "type": "string",
@@ -145,20 +128,13 @@
               "trqp_conformance_suite",
               "trqp_tspp",
               "other"
-            ],
-            "description": "Identifier of the tool/component that produced this artifact."
+            ]
           },
           "notes": {
-            "type": "string",
-            "description": "Human-readable notes about the artifact, including how to interpret or use it."
-          },
-          "format": {
-            "type": "string",
-            "description": "Optional artifact format/version identifier (e.g., evidence-bundle-v1)."
+            "type": "string"
           }
         }
-      },
-      "description": "List of produced artifacts referenced by relative paths."
+      }
     },
     "summary": {
       "type": "object",
@@ -171,8 +147,7 @@
             "fail",
             "partial",
             "unknown"
-          ],
-          "description": "Overall outcome of the combined assurance run."
+          ]
         },
         "conformance_status": {
           "type": "string",
@@ -181,8 +156,7 @@
             "fail",
             "partial",
             "unknown"
-          ],
-          "description": "Outcome of the TRQP Conformance Suite checks against the target."
+          ]
         },
         "tspp_status": {
           "type": "string",
@@ -191,37 +165,12 @@
             "fail",
             "partial",
             "unknown"
-          ],
-          "description": "Outcome of the TRQP-TSPP checks against the target."
+          ]
         },
         "notes": {
-          "type": "string",
-          "description": "Human-readable notes summarizing key findings, deviations, or remediation hints."
+          "type": "string"
         }
-      },
-      "description": "Optional roll-up statuses for human consumption."
-    },
-    "generator": {
-      "type": "object",
-      "additionalProperties": false,
-      "description": "Optional self-identification for the tool/script that generated this manifest.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Generator name (e.g., trqp-assurance-hub generate-manifest)."
-        },
-        "version": {
-          "type": "string",
-          "description": "Generator version (SemVer or git SHA)."
-        },
-        "uri": {
-          "type": "string",
-          "description": "Optional URI for generator source or docs."
-        }
-      },
-      "required": [
-        "name"
-      ]
+      }
     }
   }
 }

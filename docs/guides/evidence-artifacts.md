@@ -14,7 +14,9 @@ The goal is pragmatic: enable implementers and auditors to agree on **what gets 
 ## Core artifact types
 
 ### Conformance evidence bundle
+
 Produced by the TRQP Conformance Suite runner/profile. Should include:
+
 - tool + version + profile identifier
 - target identifier (endpoint base URL or registry identifier)
 - requirement IDs → test results (pass/fail/skip) + rationale
@@ -22,28 +24,32 @@ Produced by the TRQP Conformance Suite runner/profile. Should include:
 - optional logs and diagnostics (redacted where needed)
 
 ### TSPP posture evidence bundle
+
 Produced by TRQP-TSPP for a given AL profile. Should include:
+
 - tool + version + AL profile (AL1/AL2/etc.)
 - target identifier + environment metadata
 - control IDs → checks → outcomes + rationale
 - timestamps + run identifier
-- optional security-relevant signals (rate limiting presence, header policies, signing expectations, etc.)
+- optional security-relevant signals
 
 ### Combined Assurance Manifest
-A small JSON document that binds multiple evidence bundles to the same build/run identity:
-- build_id, target, timestamp
-- tool runs (name/version/profile/run_id)
-- pointers to evidence artifacts (paths/URIs/checksums if available)
+
+A small JSON document that binds multiple evidence bundles (e.g., Conformance Suite + TRQP‑TSPP) to a single
+**build_id** and **target**, with tool/version provenance.
 
 Schema:
+
 - `schemas/combined-assurance-manifest.schema.json`
 
 Example:
+
 - `examples/combined-assurance-manifest.example.json`
 
 ## Artifact expectations matrix (AL1–AL4)
 
 Legend:
+
 - **Required**: MUST be produced for a compliant run at this level
 - **Recommended**: SHOULD be produced; acceptable to omit with rationale
 - **Optional**: MAY be produced
@@ -60,15 +66,14 @@ Legend:
 | Operator declaration (who ran it, under what authority) | Optional | Optional | Recommended | Required | For high consequence contexts |
 | Retention policy pointer | Optional | Recommended | Required | Required | Links to evidence retention and access policy |
 
-## Practical guidance for implementers
+## Practical guidance
 
-- Start with AL1 + AL2 and ensure you can reliably produce:
-  - both evidence bundles
-  - a Combined Assurance Manifest (at least from AL2)
-- Treat AL3/AL4 rows as forward-looking expectations until TSPP publishes normative definitions.
+- Start with AL1 + AL2 and ensure you can reliably produce both evidence bundles.
+- Treat AL3/AL4 rows as forward-looking expectations until TRQP‑TSPP publishes normative definitions.
 
 ## Change control
 
 If an artifact becomes “Required” at a given AL, that is a compatibility-sensitive change and should be:
+
 - called out in release notes
 - reflected in the hub compatibility matrix

@@ -74,10 +74,16 @@ To make combined runs portable across CI systems and audits, this Hub defines a 
 
 The manifest’s job is boring but critical: bind **one build identifier** to **both tool runs** and the **evidence artifacts** they produced, so downstream verification and procurement teams can reason about provenance without guesswork.
 
+For what artifacts are expected at each assurance level, see:
+
+- [Evidence artifacts and expectations](evidence-artifacts.md)
+
 ## CI “golden path” (smoke)
 
 This Hub provides a minimal, repeatable GitHub Actions workflow that checks out both repos, performs lightweight sanity checks, and emits a combined manifest as an artifact:
 
 - Workflow: [combined-assurance-smoke](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/combined-assurance-smoke.yml)
+
+It also emits an artifact checklist aligned to the evidence artifacts matrix.
 
 Treat this as a gate, not a benchmark: it’s designed to keep the integration surface from silently drifting.

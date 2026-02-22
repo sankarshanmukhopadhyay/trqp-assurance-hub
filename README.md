@@ -12,38 +12,39 @@ A pragmatic, adopter-first landing zone that makes the TRQP ecosystem feel like 
 - [Combined assurance workflow](docs/guides/combined-assurance.md)
 - [Evidence artifacts and expectations](docs/guides/evidence-artifacts.md)
 - [Error states](docs/guides/error-states.md)
-- [Compatibility policy and matrix](docs/policies/compatibility.md)
+- [Compatibility policy + matrix](docs/policies/compatibility.md)
 - [Issue routing](docs/policies/issue-routing.md)
 - [Glossary](docs/glossary.md)
 
 ## What this is
 
-This repository is the **front door** for TRQP implementation and assurance work across:
+This repository is the **front door** for TRQP implementation and assurance work:
 
-- **Core conformance runner and profiles:** [`trqp-conformance-suite`](https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite)
-- **Security and privacy profile overlay:** [`TRQP-TSPP`](https://github.com/sankarshanmukhopadhyay/TRQP-TSPP)
+- **Core conformance runner & profiles**: `trqp-conformance-suite`  
+  <https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite>
+- **Security & privacy profile overlay (TSPP)**: `TRQP-TSPP`  
+  <https://github.com/sankarshanmukhopadhyay/TRQP-TSPP>
 
 It provides:
 
 - A single onboarding narrative (choose-your-path)
 - A shared terminology map (runner vs profile packs)
 - Cross-repo compatibility expectations
-- A lightweight governance and issue routing model
-- Minimal schemas to bind conformance and posture evidence together
+- A lightweight governance + issue routing model
 
-## Choose your path
+## Choose your path (start in 60 seconds)
 
 | You are trying to… | Start here | Outcome |
 |---|---|---|
 | Implement TRQP endpoints and prove protocol conformance | **Conformance Suite** | Test results + evidence bundles |
-| Add security and privacy posture checks (AL1/AL2) | **TRQP-TSPP** | AL checks + posture evidence |
+| Add security & privacy posture checks (AL1/AL2) | **TRQP-TSPP** | AL1/AL2 checks + posture evidence |
 | Ship a production registry with both | **Both** | Protocol + posture assurance |
 
-### Decision guide
+### Quick decision tree
 
 - If you need **“Does my TRQP implementation behave correctly?”** → Conformance Suite
-- If you need **“Is my deployment secure enough for the threat model?”** → TRQP-TSPP
-- If you need **“Can I show auditors both behavior and posture?”** → Use both
+- If you need **“Is my deployment secure enough for the threat model?”** → TSPP
+- If you need **“Can I show auditors both behavior + posture?”** → Use both
 
 ## The operating model
 
@@ -62,39 +63,18 @@ flowchart LR
   E --> F["Verification / Audit / Procurement"];
 ```
 
-## Evidence flow
-
-```mermaid
-flowchart TB
-  A["TRQP Registry (target)"] --> B["Conformance Suite run"];
-  A --> C["TSPP run"];
-  B --> D["Conformance evidence bundle"];
-  C --> E["TSPP evidence bundle"];
-  D --> F["Combined Assurance Manifest"];
-  E --> F;
-  F --> G["Auditors / Authorities / Procurement"];
-  F --> H["Automated gating in CI/CD"];
-```
-
-For machine-readable provenance across both runs, see the schema at:
-- `schemas/combined-assurance-manifest.schema.json`
-
-For what artifacts are expected at each assurance level (AL1–AL4), see:
-- [Evidence artifacts and expectations](docs/guides/evidence-artifacts.md)
-
 ## How the repos integrate (without merging)
 
-### Integration contract
+### Integration contract (what must stay aligned)
 
-We treat these as shared contracts between repos:
+We treat these as the **shared contracts** between repos:
 
 1. **Requirement identifiers** (stable IDs)
-2. **Evidence bundle shape** (what an implementer produces)
-3. **Result semantics** (pass/fail/skip + severity + rationale)
-4. **Version compatibility declaration** (known-good combinations)
+2. **Evidence bundle format** (what an implementer produces)
+3. **Result semantics** (pass/fail/skip, severity, rationale)
+4. **Version compatibility declaration** (what versions of each tool are known-good together)
 
-See:
-- [Compatibility policy and matrix](docs/policies/compatibility.md)
+See: [`docs/policies/compatibility.md`](docs/policies/compatibility.md)
 
 ### What stays independent
 
@@ -103,46 +83,46 @@ See:
 - Issue trackers
 - Packaging choices
 
-## Golden path workflows
+## Recommended “golden path” workflows
 
 ### Workflow A: Protocol conformance only
 
 1. Install and run the Conformance Suite
-2. Pick a profile (Baseline / Enterprise / High-Assurance)
-3. Produce an evidence bundle for your build artifacts
+2. Pick a profile (Baseline/Enterprise/High-Assurance)
+3. Produce evidence bundle for your build artefacts
 
-### Workflow B: Security and privacy posture only
+### Workflow B: Security & privacy posture only
 
 1. Install and run TRQP-TSPP
 2. Choose AL1 or AL2
-3. Produce posture evidence artifacts
+3. Produce posture evidence bundle
 
-### Workflow C: Combined assurance (recommended)
+### Workflow C: Combined assurance (recommended for production)
 
-1. Run a Conformance Suite profile
-2. Run a TSPP profile
-3. Bind both runs under a single build identifier using a Combined Assurance Manifest
+1. Run Conformance Suite profile
+2. Run TSPP profile
+3. Merge evidence bundles under a single build identifier
 
-See:
-- [Combined assurance workflow](docs/guides/combined-assurance.md)
+See: [`docs/guides/combined-assurance.md`](docs/guides/combined-assurance.md)
 
-## Issue routing
+For machine-readable provenance across both runs, use the **Combined Assurance Manifest** schema: `schemas/combined-assurance-manifest.schema.json`.
+
+## Issue routing (reduce contributor thrash)
 
 - If the issue is about **test runner behavior, evidence output, CI, profiles in-suite** → file in `trqp-conformance-suite`
-- If the issue is about **security/privacy requirements, AL levels, posture checks** → file in `TRQP-TSPP`
+- If the issue is about **security/privacy requirements, AL1/AL2, posture checks** → file in `TRQP-TSPP`
 - If the issue is about **cross-repo compatibility, documentation, onboarding** → file here
 
-See:
-- [Issue routing policy](docs/policies/issue-routing.md)
+See: [`docs/policies/issue-routing.md`](docs/policies/issue-routing.md)
 
 ## Alignment with upstream TRQP
 
 This work is intended as an extension of the Trust over IP TRQP workstream:
 
-- [ToIP TRQP upstream repository](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
+- Upstream: <https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main>
 
 ## License
 
-Documentation and original content in this repo are licensed under **CC BY-SA 4.0**.
+- Documentation and original content in this repo: **CC BY-SA 4.0**
 
-See: [LICENSE](LICENSE)
+See [`LICENSE`](LICENSE).
