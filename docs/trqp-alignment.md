@@ -1,5 +1,19 @@
 # Upstream TRQP RFE alignment
 
+
+
+
+## Certification baseline layer (CTR-ACB)
+
+This repository also includes a **Candidate Trust Registry Assurance & Certification Baseline** (`docs/certification-baseline/`).
+
+CTR-ACB is a transport-neutral, implementation-neutral baseline that defines:
+- certifiable control requirements and evidence expectations
+- an evaluation procedure model
+- a machine-readable **Certification Attestation** artifact
+
+It is intended to help ecosystems operationalize TRQP RFEs into auditable, machine-checkable certification programs without changing TRQP transport.
+
 This repository is positioned as a **candidate Assurance Profile and Governance Hardening Layer** for the Trust over IP Trust Registry Query Protocol (TRQP).
 
 The intent is not to redefine TRQP transport or endpoint semantics.

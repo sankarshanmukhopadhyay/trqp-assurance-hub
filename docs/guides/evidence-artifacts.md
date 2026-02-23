@@ -26,4 +26,5 @@ Legend:
 | Control Satisfaction Declaration | Optional | Recommended | Required | Required | Machine-readable control coverage and evidence links |
 | Lifecycle Assertion | Optional | Recommended | Required | Required | Declares lifecycle state and transition evidence |
 | Recognition Assertion | Optional | Optional | Recommended | Required | Signable recognition edges with scope + evidence |
+| Certification Attestation | Optional | Optional | Recommended | Required | Machine-readable certification result binding assessor, scope, validity, and evidence |
 | Revocation bulletin / notice | Optional | Optional | Recommended | Required | Structured notice for trust-impacting revocations |

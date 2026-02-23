@@ -6,6 +6,22 @@ All notable changes to this repository will be documented in this file.
 
 - (nothing yet)
 
+
+## v0.4.0
+
+### Added
+
+- Candidate Trust Registry Assurance & Certification Baseline documentation pack (`docs/certification-baseline/`).
+- Certification Attestation artifact (schema + example) to bind assessor identity, scope, validity, and evidence references.
+- Normative control framework fields in the control catalog (requirements, evidence, evaluation method, severity, tier applicability).
+
+### Changed
+
+- Evidence artifacts matrix updated to include Certification Attestation.
+- CI example cross-checks extended to cover certification attestation evidence references.
+- README and TRQP alignment documentation updated to clarify the certification-baseline positioning.
+
+
 ## v0.3.0
 
 ### Added

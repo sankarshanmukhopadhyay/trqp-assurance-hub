@@ -22,6 +22,7 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 - [Lifecycle state model](docs/guides/lifecycle-state.md)
 - [Recognition graph semantics](docs/guides/recognition-graph.md)
 - [Revocation semantics](docs/guides/revocation-semantics.md)
+- [Candidate certification baseline (CTR-ACB)](docs/certification-baseline/README.md)
 - [Glossary](docs/glossary.md)
 
 ## What this is
@@ -41,6 +42,10 @@ It provides:
 - A candidate assurance profile format for publishing posture and governance expectations
 
 To keep the repo trustworthy, CI validates that JSON examples match their JSON Schemas.
+
+## Certification baseline
+
+This repo includes a **Candidate Trust Registry Assurance & Certification Baseline (CTR-ACB)**: a transport-neutral, implementation-neutral baseline for certifiable controls, evaluation procedures, and machine-readable certification attestations. See `docs/certification-baseline/`.
 
 ## Choose your path
 

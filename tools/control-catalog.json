@@ -1,21 +1,141 @@
 {
-  "catalog_version": "0.1.0",
+  "catalog_version": "0.4.0",
   "catalog_id": "trqp-assurance-hub-candidate-controls",
   "controls": [
     {
       "id": "TRQP-CTRL-01",
       "name": "Release & version tuple discipline",
-      "objective": "Published artifacts MUST be traceable to an immutable version tuple (tag or commit)."
+      "objective": "Published artifacts MUST be traceable to an immutable version tuple (tag or commit).",
+      "requirement": "The operator SHALL publish evidence artifacts that are traceable to an immutable version tuple (a Git tag or commit SHA).",
+      "evidence": [
+        "docs/guides/evidence-artifacts.md#artifact-expectations-matrix-al1al4",
+        "examples/combined-assurance-manifest.example.json"
+      ],
+      "evaluation": "Verify that published manifests and referenced bundles include a tag or commit SHA and that the referenced repository state is retrievable.",
+      "severity": "major",
+      "tiers": [
+        "AL1",
+        "AL2",
+        "AL3",
+        "AL4"
+      ]
     },
     {
       "id": "TRQP-CTRL-02",
-      "name": "Operational incident readiness",
-      "objective": "Operator MUST maintain and exercise an incident response process for trust-impacting events."
+      "name": "Machine-readable assurance profile published",
+      "objective": "Relying parties can fetch a machine-readable assurance posture declaration.",
+      "requirement": "The operator SHALL publish a TRQP Assurance Profile artifact conforming to the repository schema.",
+      "evidence": [
+        "examples/trqp-assurance-profile.example.json",
+        "schemas/trqp-assurance-profile.schema.json"
+      ],
+      "evaluation": "Validate the published profile against the schema and confirm required references exist for the target tier.",
+      "severity": "major",
+      "tiers": [
+        "AL1",
+        "AL2",
+        "AL3",
+        "AL4"
+      ]
     },
     {
       "id": "TRQP-CTRL-03",
-      "name": "Independent assurance evidence",
-      "objective": "Operator SHOULD provide independent assurance evidence appropriate to the declared assurance level."
+      "name": "Control satisfaction evidence bound to controls",
+      "objective": "Control claims are bound to objective evidence rather than prose.",
+      "requirement": "For AL2 and above, the operator SHOULD publish a Control Satisfaction Declaration that enumerates in-scope controls and links evidence references.",
+      "evidence": [
+        "examples/control-satisfaction.example.json",
+        "schemas/control-satisfaction.schema.json"
+      ],
+      "evaluation": "Validate the declaration schema; confirm control IDs exist in the control catalog; spot-check evidence references for accessibility.",
+      "severity": "major",
+      "tiers": [
+        "AL2",
+        "AL3",
+        "AL4"
+      ]
+    },
+    {
+      "id": "TRQP-CTRL-04",
+      "name": "Lifecycle state is asserted and maintained",
+      "objective": "Lifecycle posture is explicit and updates are evidence-backed.",
+      "requirement": "For AL2 and above, the operator SHOULD publish a Lifecycle Assertion describing current lifecycle state and supporting evidence for state transitions.",
+      "evidence": [
+        "examples/lifecycle-assertion.example.json",
+        "schemas/lifecycle-assertion.schema.json"
+      ],
+      "evaluation": "Validate lifecycle assertion schema; confirm referenced evidence exists; confirm state aligns with operational posture.",
+      "severity": "minor",
+      "tiers": [
+        "AL2",
+        "AL3",
+        "AL4"
+      ]
+    },
+    {
+      "id": "TRQP-CTRL-05",
+      "name": "Recognition edges are scoped and evidence-linked",
+      "objective": "Recognition is expressed as signable, scoped assertions.",
+      "requirement": "Where registry recognition is claimed, the operator SHOULD publish Recognition Assertion artifacts with explicit scope and evidence references.",
+      "evidence": [
+        "examples/recognition-assertion.example.json",
+        "schemas/recognition-assertion.schema.json"
+      ],
+      "evaluation": "Validate recognition assertions and verify scope fields are present; confirm evidence references are resolvable.",
+      "severity": "minor",
+      "tiers": [
+        "AL3",
+        "AL4"
+      ]
+    },
+    {
+      "id": "TRQP-CTRL-06",
+      "name": "Revocation signals are discoverable and actionable",
+      "objective": "Trust-impacting changes can be communicated to relying parties.",
+      "requirement": "For AL4, the operator SHALL support certification revocation signaling and publish a revocation pointer from certification attestations.",
+      "evidence": [
+        "docs/guides/revocation-semantics.md",
+        "docs/certification-baseline/revocation-renewal.md"
+      ],
+      "evaluation": "Confirm existence of a revocation URI or bulletin and that it includes reason/effective time; verify consumers can discover it.",
+      "severity": "critical",
+      "tiers": [
+        "AL4"
+      ]
+    },
+    {
+      "id": "TRQP-CTRL-07",
+      "name": "Certification attestation is issued with assessor identity",
+      "objective": "Certification results can be consumed programmatically with accountability.",
+      "requirement": "When claiming certification, the issuer SHALL publish a Certification Attestation including assessor identity, scope, validity, and evidence references.",
+      "evidence": [
+        "examples/certification-attestation.example.json",
+        "schemas/certification-attestation.schema.json"
+      ],
+      "evaluation": "Validate attestation schema; confirm referenced control satisfaction declarations exist; check validity window fields are present.",
+      "severity": "major",
+      "tiers": [
+        "AL3",
+        "AL4"
+      ]
+    },
+    {
+      "id": "TRQP-CTRL-08",
+      "name": "Example artifacts remain schema-valid in CI",
+      "objective": "Repo artifacts are trustworthy and do not drift from schemas.",
+      "requirement": "The repository SHALL validate JSON examples against schemas in CI and fail builds on drift.",
+      "evidence": [
+        ".github/workflows/quality.yml",
+        "tools/validate_examples.py"
+      ],
+      "evaluation": "Run CI workflow or execute tools/validate_examples.py locally; confirm failure on invalid example.",
+      "severity": "minor",
+      "tiers": [
+        "AL1",
+        "AL2",
+        "AL3",
+        "AL4"
+      ]
     }
   ]
 }

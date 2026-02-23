@@ -97,6 +97,30 @@ def cross_checks() -> None:
             raise RuntimeError(f"Assurance profile references missing lifecycle assertion: {lac_ref}")
 
 
+
+    # Certification attestation cross-checks (CTR-ACB baseline)
+    cert_path = EXAMPLES_DIR / "certification-attestation.example.json"
+    if cert_path.exists():
+        cert = load_json(cert_path)
+
+        # Ensure control IDs exist
+        in_scope = cert.get("in_scope_controls") or []
+        missing2 = [cid for cid in in_scope if cid not in control_ids]
+        if missing2:
+            raise RuntimeError(
+                "Certification attestation references unknown control IDs: " + ", ".join(missing2)
+            )
+
+        # Ensure referenced artifacts exist when they look like repo-relative paths
+        for ev in cert.get("evidence_refs") or []:
+            ref = ev.get("ref")
+            if not ref or ref.startswith("http://") or ref.startswith("https://"):
+                continue
+            ref_path = ROOT / ref
+            if not ref_path.exists():
+                raise RuntimeError(f"Certification attestation references missing evidence artifact: {ref}")
+
+
 def main() -> int:
     examples = sorted(EXAMPLES_DIR.glob("*.example.json"))
     if not examples:
