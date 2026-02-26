@@ -53,8 +53,9 @@
   "controls": {
     "catalog_ref": "tools/control-catalog.json",
     "control_ids": [
-      "GOV-001",
-      "EVD-001"
+      "TRQP-CTRL-01",
+      "TRQP-CTRL-02",
+      "TRQP-CTRL-03"
     ],
     "satisfaction_declaration_ref": "examples/control-satisfaction.example.json"
   },

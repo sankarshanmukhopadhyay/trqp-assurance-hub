@@ -2,18 +2,16 @@
 
 CTR-ACB aligns certification tiers to the repository’s assurance levels (AL1–AL4).
 
-The intent is to preserve a single mental model: **higher AL = more stringent evidence requirements + more stringent evaluation behaviors**.
-
-Canonical definitions for AL1–AL4 live in: `docs/guides/assurance-levels.md`.
+The intent is to preserve a single mental model: **higher AL = stronger evidence + stronger evaluation**.
 
 ## Tier summary
 
-| Tier | Evaluation posture | Typical assessor | Evidence requirements (summary) |
+| Tier | Evaluation posture | Typical assessor | Evidence strength |
 |---|---|---|---|
-| AL1 | Self-declared posture | Operator | Minimal, structured artifacts suitable for basic claims |
-| AL2 | Self-attested with evidence | Operator (peer review optional) | Evidence bundle + manifest; limited spot checks |
-| AL3 | Independently reviewed | Independent assessor | Audit-style evidence: control satisfaction + lifecycle assertions + remediation closure |
-| AL4 | High consequence / regulated | Accredited assessor / multi-party | Operational assurance: AL3 + continuous monitoring evidence + operationalized revocation/renewal |
+| AL1 | Self-declared posture | Operator | Low (structured, but minimal) |
+| AL2 | Self-attested with evidence | Operator + peer review optional | Medium (evidence bundles + manifests) |
+| AL3 | Independently reviewed | Independent assessor | High (control satisfaction + lifecycle + integrity) |
+| AL4 | High consequence / regulated | Accredited assessor / multi-party | Highest (strong provenance + revocation discipline) |
 
 ## Tier gates (what changes as you move up)
 

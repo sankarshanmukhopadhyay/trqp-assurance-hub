@@ -1,71 +1,37 @@
 {
-  "type": "TRQPControlSatisfactionDeclaration",
-  "id": "csd:example:al4:001",
-  "subject": {
-    "id": "operator:example:acme",
-    "name": "ACME Trust Registry Operator"
-  },
-  "catalog_ref": "tools/control-catalog.json",
-  "controls": [
+  "control_catalog": "tools/control-catalog.json",
+  "assurance_level": "AL4",
+  "satisfied_controls": [
     {
       "control_id": "GOV-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "policy", "ref": "../al3-evidence-bundle/governance-policy.md"}
+      "evidence_refs": [
+        "operator-declaration.md"
       ]
     },
     {
       "control_id": "EVD-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "manifest", "ref": "combined-assurance-manifest.json"},
-        {"kind": "version_tuple", "ref": "version-tuple.json"}
-      ]
-    },
-    {
-      "control_id": "LFC-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "lifecycle_assertion", "ref": "lifecycle-assertion.json"}
-      ]
-    },
-    {
-      "control_id": "RMD-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "remediation_closure", "ref": "../al3-evidence-bundle/remediation-closure.json"}
+      "evidence_refs": [
+        "combined-assurance-manifest.json",
+        "version-tuple.json"
       ]
     },
     {
       "control_id": "MON-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "monitoring_summary", "ref": "monitoring-evidence/monitoring-summary.json"},
-        {"kind": "monitoring_logs", "ref": "monitoring-evidence/monitoring-logs.ndjson"}
+      "evidence_refs": [
+        "monitoring-evidence/monitoring-summary.json"
       ]
     },
     {
-      "control_id": "IR-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "incident_metrics", "ref": "incident-metrics.csv"}
-      ]
-    },
-    {
-      "control_id": "CHG-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "change_log", "ref": "change-log.md"}
-      ]
-    },
-    {
-      "control_id": "KEY-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "key_rotation_proof", "ref": "key-rotation-proof.md"}
+      "control_id": "REV-001",
+      "evidence_refs": [
+        "revocation-notice.json",
+        "renewal-plan.md"
       ]
     }
   ],
-  "issued_at": "2026-02-27T00:00:00Z",
-  "expires_at": "2026-08-27T00:00:00Z"
+  "assessor": {
+    "id": "assessor:example:accredited-body",
+    "role": "accredited-assessor",
+    "method": "audit+sampling+telemetry-review"
+  }
 }

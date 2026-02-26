@@ -14,10 +14,11 @@
     "method": "Evidence review + schema validation; sampling of operational logs for selected controls."
   },
   "in_scope_controls": [
-    "GOV-001",
-    "EVD-001",
-    "LFC-001",
-    "RMD-001"
+    "TRQP-CTRL-01",
+    "TRQP-CTRL-02",
+    "TRQP-CTRL-03",
+    "TRQP-CTRL-04",
+    "TRQP-CTRL-07"
   ],
   "scope": {
     "registry_endpoints": [

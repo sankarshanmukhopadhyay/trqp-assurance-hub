@@ -9,6 +9,7 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 
 ## Quick links
 
+- [Documentation index (role-based)](docs/index.md)
 - [Quickstart](QUICKSTART.md)
 - [Operating model](#the-operating-model)
 - [Combined assurance workflow](docs/guides/combined-assurance.md)
@@ -17,9 +18,6 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 - [Issue routing](docs/policies/issue-routing.md)
 - [Upstream TRQP RFE alignment](docs/trqp-alignment.md)
 - [Assurance profile (candidate, machine-readable)](docs/guides/assurance-profile.md)
-- [Assurance levels (AL1–AL4, canonical)](docs/guides/assurance-levels.md)
-- [Evidence artifact expectations matrix](docs/guides/evidence-artifacts.md)
-- [Worked evidence bundles (AL3/AL4)](examples/)
 - [Control objectives](docs/guides/control-objectives.md)
 - [Recognition Assertion](docs/guides/recognition-assertion.md)
 - [Lifecycle state model](docs/guides/lifecycle-state.md)

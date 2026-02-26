@@ -1,42 +1,29 @@
 {
-  "type": "TRQPControlSatisfactionDeclaration",
-  "id": "csd:example:al3:001",
-  "subject": {
-    "id": "operator:example:acme",
-    "name": "ACME Trust Registry Operator"
-  },
-  "catalog_ref": "tools/control-catalog.json",
-  "controls": [
+  "control_catalog": "tools/control-catalog.json",
+  "assurance_level": "AL3",
+  "satisfied_controls": [
     {
       "control_id": "GOV-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "policy", "ref": "governance-policy.md"}
+      "evidence_refs": [
+        "operator-declaration.md"
       ]
     },
     {
       "control_id": "EVD-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "manifest", "ref": "combined-assurance-manifest.json"},
-        {"kind": "version_tuple", "ref": "version-tuple.json"}
+      "evidence_refs": [
+        "combined-assurance-manifest.json",
+        "version-tuple.json"
       ]
     },
     {
       "control_id": "LFC-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "lifecycle_assertion", "ref": "lifecycle-assertion.json"}
+      "evidence_refs": [
+        "lifecycle-assertion.json"
       ]
-    },
-    {
-      "control_id": "RMD-001",
-      "status": "satisfied",
-      "evidence": [
-        {"kind": "remediation_closure", "ref": "remediation-closure.json"}
-      ],
-      "notes": "All identified non-conformities in scope were remediated and closed within the declared window."
     }
   ],
-  "issued_at": "2026-02-27T00:00:00Z"
+  "assessor": {
+    "id": "assessor:example:alice",
+    "role": "independent-reviewer"
+  }
 }
