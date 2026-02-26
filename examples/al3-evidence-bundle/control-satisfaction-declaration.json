@@ -1,0 +1,29 @@
+{
+  "control_catalog": "tools/control-catalog.json",
+  "assurance_level": "AL3",
+  "satisfied_controls": [
+    {
+      "control_id": "GOV-001",
+      "evidence_refs": [
+        "operator-declaration.md"
+      ]
+    },
+    {
+      "control_id": "EVD-001",
+      "evidence_refs": [
+        "combined-assurance-manifest.json",
+        "version-tuple.json"
+      ]
+    },
+    {
+      "control_id": "LFC-001",
+      "evidence_refs": [
+        "lifecycle-assertion.json"
+      ]
+    }
+  ],
+  "assessor": {
+    "id": "assessor:example:alice",
+    "role": "independent-reviewer"
+  }
+}

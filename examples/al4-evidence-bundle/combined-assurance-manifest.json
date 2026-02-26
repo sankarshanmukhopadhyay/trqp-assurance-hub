@@ -1,0 +1,28 @@
+{
+  "schema": "examples/combined-assurance-manifest.example.json",
+  "target": {
+    "id": "prod-eu-1",
+    "type": "trust-registry"
+  },
+  "scope": {
+    "assurance_level": "AL4",
+    "profile": "CTR-ACB"
+  },
+  "evidence_bundles": [
+    {
+      "type": "conformance",
+      "ref": "evidence/conformance-bundle.json",
+      "checksum": "sha256:..."
+    },
+    {
+      "type": "posture",
+      "ref": "evidence/posture-bundle.json",
+      "checksum": "sha256:..."
+    },
+    {
+      "type": "monitoring",
+      "ref": "monitoring-evidence/monitoring-summary.json",
+      "checksum": "sha256:..."
+    }
+  ]
+}

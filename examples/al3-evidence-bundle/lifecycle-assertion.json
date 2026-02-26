@@ -1,0 +1,15 @@
+{
+  "assurance_level": "AL3",
+  "lifecycle_state": "operational",
+  "effective_at": "2026-02-27T00:00:00Z",
+  "transition_evidence": [
+    {
+      "type": "change_request",
+      "ref": "tickets/CR-001"
+    },
+    {
+      "type": "deployment_record",
+      "ref": "ci://example/run/1234"
+    }
+  ]
+}

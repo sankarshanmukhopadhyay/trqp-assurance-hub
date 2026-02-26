@@ -1,0 +1,28 @@
+{
+  "period": {
+    "from": "2026-02-20",
+    "to": "2026-02-27"
+  },
+  "signals": {
+    "availability_slo": {
+      "target": 99.9,
+      "observed": 99.97
+    },
+    "integrity_alerts": {
+      "count": 0
+    },
+    "revocation_events": {
+      "count": 1
+    }
+  },
+  "dashboards": [
+    "dash://example/trqp/availability",
+    "dash://example/trqp/security"
+  ],
+  "logs": [
+    {
+      "type": "audit-log",
+      "ref": "log://example/audit/2026-02"
+    }
+  ]
+}

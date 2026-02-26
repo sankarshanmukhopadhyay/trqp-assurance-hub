@@ -79,7 +79,10 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 
 This is the current best guess of the most leverage-positive sequence (subject to change):
 
-1. **Lock AL3/AL4 artifact expectations** (vocabulary + matrix + examples).
+1. ✅ **Lock AL3/AL4 artifact expectations** (vocabulary + matrix + examples).
+   - Canonical definitions: `docs/guides/assurance-levels.md`
+   - Matrix: `docs/guides/evidence-artifacts.md`
+   - Examples: `examples/al3-evidence-bundle/`, `examples/al4-evidence-bundle/`
 2. **Make combined-assurance workflow deterministic** (manifest + checklist emission).
 3. **Ship schema examples and validation docs** (reduce implementer confusion).
 4. **Improve docs navigation** (role-based index, fewer dead ends).

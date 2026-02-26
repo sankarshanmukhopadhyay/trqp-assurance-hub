@@ -1,0 +1,13 @@
+{
+  "hub": "trqp-assurance-hub@main",
+  "conformance_suite": "trqp-conformance-suite@v0.0.0",
+  "tspp_profiles": "trqp-tspp@v0.0.0",
+  "build": {
+    "source": "ci://example/run/2001",
+    "commit": "1234567"
+  },
+  "monitoring": {
+    "collector": "otel@v1",
+    "dashboard": "dash://example/trqp"
+  }
+}
