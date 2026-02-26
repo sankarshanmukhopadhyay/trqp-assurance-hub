@@ -11,16 +11,18 @@ A control is *certifiable* when it is:
 
 ## Control template
 
-Each control in `tools/control-catalog.json` SHOULD follow this template:
+Each control in `tools/control-catalog.json` MUST include the minimum fields below (additional fields MAY be added as the catalog evolves):
 
-- `id`: stable identifier (e.g., `TR-CTRL-01`)
-- `title`: short name
-- `requirement`: normative statement
-- `evidence`: required/recommended evidence artifacts (with pointers)
-- `evaluation`: how an evaluator verifies the control (automatable where possible)
-- `severity`: impact if not satisfied (`minor` / `major` / `critical`)
+- `id`: stable identifier (e.g., `GOV-001`)
+- `name`: short name
+- `objective`: normative statement of the control intent
 - `tiers`: which assurance tiers the control applies to (`AL1`–`AL4`)
+- `severity`: impact if not satisfied (`minor` / `major` / `critical`)
 
+Optional (recommended for certification-grade catalogs):
+
+- `evidence`: expected evidence artifact kinds and pointers
+- `evaluation`: how an evaluator verifies the control (automatable where possible)
 ## Evidence binding model
 
 Controls are *not* satisfied by prose. They are satisfied by artifacts.

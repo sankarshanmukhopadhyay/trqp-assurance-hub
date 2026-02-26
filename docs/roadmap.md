@@ -83,9 +83,12 @@ This is the current best guess of the most leverage-positive sequence (subject t
    - Canonical definitions: `docs/guides/assurance-levels.md`
    - Matrix: `docs/guides/evidence-artifacts.md`
    - Examples: `examples/al3-evidence-bundle/`, `examples/al4-evidence-bundle/`
-2. **Make combined-assurance workflow deterministic** (manifest + checklist emission).
-3. **Ship schema examples and validation docs** (reduce implementer confusion).
-4. **Improve docs navigation** (role-based index, fewer dead ends).
+2. ✅ **Assurance level consistency audit** (AL3/AL4 cross-repo alignment).
+   - Normalized AL3/AL4 references across README, docs, examples, and tools.
+   - Fixed `tools/control-catalog.json` to be valid JSON for validation tooling.
+3. **Make combined-assurance workflow deterministic** (manifest + checklist emission).
+4. **Ship schema examples and validation docs** (reduce implementer confusion).
+5. **Improve docs navigation** (role-based index, fewer dead ends).
 
 ## How we will track progress
 

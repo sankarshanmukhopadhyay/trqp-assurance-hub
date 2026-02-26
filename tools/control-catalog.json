@@ -1,30 +1,64 @@
-# Assurance tier model
-
-CTR-ACB aligns certification tiers to the repository’s assurance levels (AL1–AL4). Canonical definitions: `docs/guides/assurance-levels.md`.
-
-The intent is to preserve a single mental model: **higher AL = stronger evidence + stronger evaluation**.
-
-## Tier summary
-
-| Tier | Evaluation posture | Typical assessor | Evidence strength |
-|---|---|---|---|
-| AL1 | Self-declared posture | Operator | Low (structured, but minimal) |
-| AL2 | Self-attested with evidence | Operator + peer review optional | Medium (evidence bundles + manifests) |
-| AL3 | Independently reviewed | Independent assessor | High (control satisfaction + lifecycle + integrity) |
-| AL4 | High consequence / regulated | Accredited assessor / multi-party | Highest (strong provenance + revocation discipline) |
-
-## Tier gates (what changes as you move up)
-
-Across tiers, the baseline tightens:
-
-- **Controls**: from “declare” → “demonstrate” → “verify”
-- **Evidence**: from “available” → “bound” → “tamper-evident”
-- **Lifecycle**: from “stated” → “asserted” → “revocation-aware”
-- **Recognition**: from “optional” → “scoped” → “propagated”
-
-## Recommended assessor expectations
-
-CTR-ACB intentionally does not define accreditation. It does define *minimum behaviors*:
-
-- AL3: assessor identity MUST be recorded in the Certification Attestation
-- AL4: assessor identity + method MUST be recorded; revocation and renewal MUST be operationalized
+{
+  "schema_version": "0.1.0",
+  "title": "TRQP Assurance Hub — Candidate Control Catalog",
+  "description": "A minimal candidate control catalog used by examples and validation tooling. Controls are stable identifiers with audit-oriented objectives.",
+  "canonical_definitions_ref": "docs/guides/assurance-levels.md",
+  "controls": [
+    {
+      "id": "GOV-001",
+      "name": "Governance policy published",
+      "objective": "The operator MUST publish a governance policy describing scope, roles, decision rights, and escalation paths.",
+      "tiers": ["AL1", "AL2", "AL3", "AL4"],
+      "severity": "major"
+    },
+    {
+      "id": "EVD-001",
+      "name": "Evidence bundle + manifest provided",
+      "objective": "The operator MUST provide an evidence bundle with a manifest that enumerates artifacts and their integrity bindings.",
+      "tiers": ["AL2", "AL3", "AL4"],
+      "severity": "major"
+    },
+    {
+      "id": "LFC-001",
+      "name": "Lifecycle assertions recorded",
+      "objective": "The operator MUST provide lifecycle assertions covering issuance, updates, and deprecation/retirement for in-scope artifacts.",
+      "tiers": ["AL3", "AL4"],
+      "severity": "major"
+    },
+    {
+      "id": "RMD-001",
+      "name": "Remediation closure evidenced",
+      "objective": "The operator MUST provide remediation closure evidence for identified non-conformities within the declared scope.",
+      "tiers": ["AL3", "AL4"],
+      "severity": "critical"
+    },
+    {
+      "id": "MON-001",
+      "name": "Continuous monitoring evidence",
+      "objective": "The operator MUST provide operational monitoring evidence demonstrating ongoing control performance (e.g., telemetry, alerts, and review cadence).",
+      "tiers": ["AL4"],
+      "severity": "critical"
+    },
+    {
+      "id": "IR-001",
+      "name": "Incident metrics exported",
+      "objective": "The operator MUST provide an incident metrics export covering the defined reporting window (e.g., counts, severity, time-to-detect, time-to-recover).",
+      "tiers": ["AL4"],
+      "severity": "major"
+    },
+    {
+      "id": "CHG-001",
+      "name": "Change log maintained",
+      "objective": "The operator MUST maintain a change log for in-scope components and artifacts, including approvals and effective dates.",
+      "tiers": ["AL4"],
+      "severity": "major"
+    },
+    {
+      "id": "KEY-001",
+      "name": "Key rotation proof recorded",
+      "objective": "The operator MUST provide evidence of key rotation and key lifecycle discipline for signing/verification material.",
+      "tiers": ["AL4"],
+      "severity": "critical"
+    }
+  ]
+}
