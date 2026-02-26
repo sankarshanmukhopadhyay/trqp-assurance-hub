@@ -48,3 +48,17 @@ Legend:
 The example bundles include realistic supporting artifacts (e.g., governance policy, trust list snapshot, signed conformance declaration, independent assessment report, and AL4 operational monitoring/change evidence) that an operator can adapt for their submission.
 
 These examples are intentionally minimal and meant to be adapted to your environment.
+
+
+## Producer repos (reference implementations)
+
+These repositories act as *evidence producers* for the artifact rows above:
+
+| Evidence artifact row | Primary producer | Canonical files |
+|---|---|---|
+| Conformance evidence bundle | TRQP Conformance Suite (CTS) | `bundle_descriptor.json`, `checksums.json`, `bundle.zip` |
+| TSPP posture evidence bundle | TRQP-TSPP | `bundle_descriptor.json`, `checksums.json`, `bundle.zip`, `tspp_posture_report.json` |
+
+Crosswalks:
+- CTS ↔ Hub: https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/blob/main/docs/hub-crosswalk.md
+- TSPP ↔ Hub: https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/blob/main/docs/hub-crosswalk.md

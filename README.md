@@ -26,6 +26,9 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 - [Candidate certification baseline (CTR-ACB)](docs/certification-baseline/README.md)
 - [Glossary](docs/glossary.md)
 
+- Producer repos:
+  - Conformance Suite (CTS): https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite (crosswalk: `docs/hub-crosswalk.md`)
+  - TRQP-TSPP: https://github.com/sankarshanmukhopadhyay/TRQP-TSPP (crosswalk: `docs/hub-crosswalk.md`)
 ## What this is
 
 This repository is the **front door** for TRQP implementation and assurance work across:

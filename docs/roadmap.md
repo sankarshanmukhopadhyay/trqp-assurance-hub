@@ -98,3 +98,12 @@ This is the current best guess of the most leverage-positive sequence (subject t
 - Redefining TRQP protocol semantics (handled upstream).
 - Creating a general-purpose governance framework unrelated to TRQP assurance.
 - Overfitting to a single ecosystem’s tooling or CI platform.
+
+
+## Recently completed
+
+- Cross-repo evidence bundle normalization:
+  - CTS emits `bundle_descriptor.json` + `checksums.json` and publishes portable bundles via CI
+  - TSPP packages posture evidence bundles (`bundle_descriptor.json` + `checksums.json` + `bundle.zip`) and publishes via CI
+- Combined-assurance producer interface documentation:
+  - Hub guide updated with concrete producer expectations and crosswalk links
