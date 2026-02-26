@@ -1,28 +1,21 @@
 {
-  "period": {
-    "from": "2026-02-20",
-    "to": "2026-02-27"
-  },
+  "window_start": "2026-02-01T00:00:00Z",
+  "window_end": "2026-02-27T23:59:59Z",
   "signals": {
-    "availability_slo": {
-      "target": 99.9,
-      "observed": 99.97
+    "trust_list_publication": {
+      "publish_events": 54,
+      "failed_publishes": 0,
+      "signature_verification_failures": 0
     },
-    "integrity_alerts": {
-      "count": 0
+    "availability": {
+      "uptime_slo": "99.9%",
+      "observed_uptime": "99.97%"
     },
-    "revocation_events": {
-      "count": 1
+    "security": {
+      "key_rotations": 1,
+      "unauthorized_change_attempts": 0
     }
   },
-  "dashboards": [
-    "dash://example/trqp/availability",
-    "dash://example/trqp/security"
-  ],
-  "logs": [
-    {
-      "type": "audit-log",
-      "ref": "log://example/audit/2026-02"
-    }
-  ]
+  "retention_policy_ref": "GOV-POL-001",
+  "redaction_policy": "Operational logs may be redacted for PII; redaction rules MUST be documented."
 }

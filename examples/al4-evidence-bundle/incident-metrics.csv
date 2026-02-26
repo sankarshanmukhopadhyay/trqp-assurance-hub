@@ -1,0 +1,5 @@
+metric,window,value
+integrity_incidents,2026-02,0
+availability_incidents,2026-02,1
+mean_time_to_detect_minutes,2026-02,12
+mean_time_to_recover_minutes,2026-02,37

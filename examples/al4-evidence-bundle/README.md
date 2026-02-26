@@ -18,7 +18,11 @@ At AL4, AL3 expectations are extended with:
 - `combined-assurance-manifest.json`
 - `control-satisfaction-declaration.json`
 - `lifecycle-assertion.json`
-- `monitoring-evidence/` — example operational evidence artifacts
+- `monitoring-evidence/` — example operational evidence artifacts (summary + logs)
+- `incident-metrics.csv` — operational incident metrics export
+- `change-log.md` — change management evidence
+- `key-rotation-proof.md` — key rotation evidence
+- `operational-attestation-statement.md` — operator operational attestation statement
 - `revocation-notice.json` — structured revocation bulletin / notice
 - `renewal-plan.md` — cadence and procedure for renewal
 - `certification-attestation.json` — required at AL4

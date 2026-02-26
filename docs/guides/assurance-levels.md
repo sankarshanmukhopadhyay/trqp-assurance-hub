@@ -60,5 +60,6 @@ Minimum expectations (in addition to AL3):
 ## Related documents
 
 - Evidence artifacts and expectations: `docs/guides/evidence-artifacts.md`
+- Worked evidence bundles: `examples/al3-evidence-bundle/` and `examples/al4-evidence-bundle/`
 - Certification tier model: `docs/certification-baseline/assurance-tier-model.md`
 - Glossary: `docs/glossary.md`

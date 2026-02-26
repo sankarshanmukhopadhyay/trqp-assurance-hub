@@ -1,0 +1,25 @@
+{
+  "snapshot_id": "tls-2026-02-27T000000Z",
+  "publisher": {
+    "name": "Example Trust Registry Operator",
+    "identifier": "did:web:example.org"
+  },
+  "published_at": "2026-02-27T00:00:00Z",
+  "entries": [
+    {
+      "subject": "did:web:issuer.example.org",
+      "status": "active",
+      "roles": ["issuer"],
+      "assurance_level_claimed": "AL3",
+      "metadata": {
+        "jurisdiction": "Example",
+        "policy_ref": "GOV-POL-001"
+      }
+    }
+  ],
+  "integrity": {
+    "hash_alg": "sha256",
+    "hash": "REPLACE_WITH_REAL_HASH",
+    "signature": "REPLACE_WITH_REAL_SIGNATURE"
+  }
+}

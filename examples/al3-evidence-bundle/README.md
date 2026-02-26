@@ -14,6 +14,11 @@ At AL3, an operator MUST provide evidence that can be independently reviewed, in
 
 ## Example contents
 
+- `governance-policy.md` — example governance policy covering roles, controls, and retention
+- `trust-list-snapshot.json` — example published trust list snapshot with integrity fields
+- `conformance-declaration-signed.md` — signed operator conformance declaration bound to evidence
+- `independent-assessment-report.md` — assessor review report (worked example)
+
 - `operator-declaration.md` — authority and scope statement
 - `version-tuple.json` — version declarations for hub/runner/profile artifacts
 - `combined-assurance-manifest.json` — links conformance + posture bundles
