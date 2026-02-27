@@ -112,3 +112,11 @@ This is the current best guess of the most leverage-positive sequence (subject t
 ## Completed
 
 - ✅ AL1–AL4 canonical lock and cross-repo contract (`docs/guides/assurance-levels.md`, `al-contract.json`).
+
+
+## Release readiness (v0.4.1)
+
+- ✅ Findings addressed: AL contract pinning, template hygiene, and code intent documentation.
+- ✅ Release artifacts: VERSION file, changelog entries, and release template updated.
+
+_Last updated: 2026-02-27_

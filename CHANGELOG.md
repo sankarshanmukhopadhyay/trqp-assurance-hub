@@ -7,6 +7,16 @@ All notable changes to this repository will be documented in this file.
 - (nothing yet)
 
 
+
+## v0.4.1
+
+### Added
+- `al-contract.json` to provide a machine-readable contract for canonical AL1–AL4 semantics (includes SHA-256 of the normative AL doc).
+
+### Changed
+- Clarified normative status of `docs/guides/assurance-levels.md` for cross-repo consumption and audit stability.
+
+
 ## v0.4.0
 
 ### Added
