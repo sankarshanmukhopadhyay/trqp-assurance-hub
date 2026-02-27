@@ -3,11 +3,18 @@
 ← [Back to Docs Index](../index.md)
 
 
+**Normative status:** This is the **canonical definition** of Assurance Levels **AL1–AL4** for the TRQP ecosystem.
+
+- Downstream repositories **MUST** reference this document (and/or `al-contract.json`) for AL semantics.
+- Downstream repositories **MUST NOT** redefine AL1–AL4 meanings locally.
+- Downstream repositories **SHOULD** pin to a specific Assurance Hub release/tag for audit stability.
+
+
 This repository treats assurance levels as **operational claims** that MUST be backed by evidence artifacts. Higher levels require stronger evidence, stronger evaluation posture, and tighter lifecycle discipline.
 
 > **Design principle:** *A higher AL is not “more paperwork”; it is a stronger, more falsifiable claim about system behavior and governance.*
 
-This guide is the canonical vocabulary for AL3 and AL4 within the Assurance Hub. If upstream definitions (e.g., TRQP-TSPP) evolve, this hub SHOULD update via a versioned change with explicit migration notes.
+This guide is the canonical vocabulary for AL1–AL4 within the Assurance Hub. If upstream definitions (e.g., TRQP-TSPP) evolve, this hub SHOULD update via a versioned change with explicit migration notes.
 
 ## Normative keywords
 

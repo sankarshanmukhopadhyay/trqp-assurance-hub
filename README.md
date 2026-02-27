@@ -18,6 +18,8 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 - [Issue routing](docs/policies/issue-routing.md)
 - [Upstream TRQP RFE alignment](docs/trqp-alignment.md)
 - [Assurance profile (candidate, machine-readable)](docs/guides/assurance-profile.md)
+- [Assurance Levels (AL1–AL4, canonical)](docs/guides/assurance-levels.md)
+- [AL contract (machine-readable)](al-contract.json)
 - [Control objectives](docs/guides/control-objectives.md)
 - [Recognition Assertion](docs/guides/recognition-assertion.md)
 - [Lifecycle state model](docs/guides/lifecycle-state.md)
@@ -25,6 +27,15 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 - [Revocation semantics](docs/guides/revocation-semantics.md)
 - [Candidate certification baseline (CTR-ACB)](docs/certification-baseline/README.md)
 - [Glossary](docs/glossary.md)
+
+## Assurance Levels
+
+This repo is the **canonical source of truth** for TRQP Assurance Level definitions **AL1–AL4**.
+
+- Canonical definitions: `docs/guides/assurance-levels.md`
+- Machine-readable contract: `al-contract.json` (includes a SHA-256 hash of the canonical AL doc for pinning)
+
+Downstream repositories (e.g., TSPP, Conformance Suite) **MUST** reference these definitions and **MUST NOT** redefine AL semantics locally.
 
 - Producer repos:
   - Conformance Suite (CTS): https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite (crosswalk: `docs/hub-crosswalk.md`)

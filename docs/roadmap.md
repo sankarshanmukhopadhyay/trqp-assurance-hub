@@ -107,3 +107,8 @@ This is the current best guess of the most leverage-positive sequence (subject t
   - TSPP packages posture evidence bundles (`bundle_descriptor.json` + `checksums.json` + `bundle.zip`) and publishes via CI
 - Combined-assurance producer interface documentation:
   - Hub guide updated with concrete producer expectations and crosswalk links
+
+
+## Completed
+
+- ✅ AL1–AL4 canonical lock and cross-repo contract (`docs/guides/assurance-levels.md`, `al-contract.json`).

@@ -1,0 +1,41 @@
+{
+  "contract_version": "0.1.0",
+  "generated_at": "2026-02-27T23:30:53Z",
+  "canonical_repo": "trqp-assurance-hub",
+  "canonical_doc": "docs/guides/assurance-levels.md",
+  "canonical_doc_sha256": "61c599c5fa06e0c9110f40ff71c0174db5502105b97f1391dbd9ae8548115f71",
+  "assurance_levels": [
+    {
+      "id": "AL1",
+      "label": "Baseline evidence",
+      "summary": "Basic publication and discoverability of claims; minimal evidence artifacts."
+    },
+    {
+      "id": "AL2",
+      "label": "Operationally testable",
+      "summary": "Testable protocol behavior with integrity and freshness expectations; evidence is reproducible."
+    },
+    {
+      "id": "AL3",
+      "label": "Independently assessable",
+      "summary": "Independent assessment posture, stronger lifecycle discipline, and evidence bundles suitable for external review."
+    },
+    {
+      "id": "AL4",
+      "label": "High assurance / mission critical",
+      "summary": "Strong governance, adversarial resilience, and audit-ready evidence with rollback/immutability expectations."
+    }
+  ],
+  "downstream_contract": {
+    "must_reference": [
+      "docs/guides/assurance-levels.md",
+      "al-contract.json"
+    ],
+    "must_not": [
+      "redefine_assurance_level_semantics"
+    ],
+    "should": [
+      "pin_to_release_tag_or_commit_for_audit_stability"
+    ]
+  }
+}
