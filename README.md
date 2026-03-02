@@ -13,6 +13,7 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 ## Quick links
 
 - [Documentation index (role-based)](docs/index.md)
+- [TSAM (Trust Systems Assurance Method)](docs/tsam/README.md)
 - [Quickstart](QUICKSTART.md)
 - [Operating model](#the-operating-model)
 - [Combined assurance workflow](docs/guides/combined-assurance.md)
@@ -30,6 +31,14 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 - [Revocation semantics](docs/guides/revocation-semantics.md)
 - [Candidate certification baseline (CTR-ACB)](docs/certification-baseline/README.md)
 - [Glossary](docs/glossary.md)
+
+## Methodological Context
+
+This repository implements components of the **Trust Systems Assurance Method (TSAM)** — a structured, **registry-agnostic** methodology for assurance and conformance in trust-bearing distributed systems.
+
+TSAM binds governance semantics, assurance levels, conformance verification, runtime integrity controls, and evidence production into a coherent architecture.
+
+See: [`docs/tsam/`](docs/tsam/README.md)
 
 ## Assurance Levels
 

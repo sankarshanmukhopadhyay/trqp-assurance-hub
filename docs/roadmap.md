@@ -74,6 +74,13 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
   - mature adopter repo,
   - audit-ready AL3/AL4 bundle.
 - Include “expected outputs” for each example (manifest, validation report, checklist result).
+### 6) TSAM consolidation (method layer)
+
+- Treat TSAM as the **registry-agnostic** method layer that frames this repository and linked work (CTS, TSPP).
+- Maintain TSAM documents under `docs/tsam/` as a stable reference:
+  - definition, principles, layers, and repo mapping.
+- Ensure AL definitions and evidence requirements remain consistent with TSAM principles.
+- Add cross-repo pointers where TSAM concepts are implemented (informative).
 
 ## Near-term focus
 
