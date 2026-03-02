@@ -8,6 +8,16 @@ All notable changes to this repository will be documented in this file.
 
 
 
+## v0.4.3 (2026-03-02)
+
+### Fixed
+- CI: markdown lint now uses a repo-level `.markdownlint.yml` configuration to reduce false negatives for spec-style docs.
+- Combined assurance smoke: aligned manifest schema with generator output so validation passes consistently.
+
+### Added
+- Schema/manifest contract hardening to support deterministic automation in downstream tooling.
+
+
 ## v0.4.2
 
 ### Added

@@ -6,10 +6,10 @@
   "required": [
     "manifest_version",
     "generated_at",
-    "build_id",
-    "target",
-    "version_tuple",
-    "artifacts"
+    "build",
+    "tools",
+    "artifacts",
+    "generator"
   ],
   "properties": {
     "manifest_version": {
@@ -18,28 +18,74 @@
     "generated_at": {
       "type": "string"
     },
-    "build_id": {
-      "type": "string"
-    },
-    "target": {
-      "type": "string"
-    },
-    "version_tuple": {
+    "build": {
       "type": "object",
       "required": [
-        "hub",
-        "conformance_suite",
-        "tspp"
+        "build_id",
+        "target"
       ],
       "properties": {
-        "hub": {
+        "build_id": {
           "type": "string"
         },
-        "conformance_suite": {
+        "target": {
           "type": "string"
         },
-        "tspp": {
+        "commit": {
           "type": "string"
+        },
+        "ci_run_url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "tools": {
+      "type": "object",
+      "required": [
+        "trqp_conformance_suite",
+        "trqp_tspp"
+      ],
+      "properties": {
+        "trqp_conformance_suite": {
+          "type": "object",
+          "required": [
+            "version",
+            "profile_id",
+            "run_id"
+          ],
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "profile_id": {
+              "type": "string"
+            },
+            "run_id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "trqp_tspp": {
+          "type": "object",
+          "required": [
+            "version",
+            "assurance_level",
+            "run_id"
+          ],
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "assurance_level": {
+              "type": "string"
+            },
+            "run_id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
@@ -51,21 +97,30 @@
         "type": "object",
         "required": [
           "kind",
-          "level",
-          "required",
-          "path"
+          "path",
+          "produced_by",
+          "media_type",
+          "format",
+          "notes",
+          "sha256"
         ],
         "properties": {
           "kind": {
             "type": "string"
           },
-          "level": {
+          "path": {
             "type": "string"
           },
-          "required": {
-            "type": "boolean"
+          "produced_by": {
+            "type": "string"
           },
-          "path": {
+          "media_type": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string"
+          },
+          "notes": {
             "type": "string"
           },
           "sha256": {
@@ -74,6 +129,22 @@
         },
         "additionalProperties": false
       }
+    },
+    "generator": {
+      "type": "object",
+      "required": [
+        "name",
+        "uri"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false

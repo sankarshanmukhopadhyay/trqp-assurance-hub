@@ -1,0 +1,46 @@
+{
+  "manifest_version": "0.1.0",
+  "build": {
+    "build_id": "abc",
+    "target": "https://registry.example.org",
+    "commit": "abc",
+    "ci_run_url": "http://ci"
+  },
+  "generated_at": "2026-03-02T00:36:41Z",
+  "tools": {
+    "trqp_conformance_suite": {
+      "version": "main",
+      "profile_id": "smoke",
+      "run_id": "cts-1"
+    },
+    "trqp_tspp": {
+      "version": "main",
+      "assurance_level": "AL1",
+      "run_id": "tspp-1"
+    }
+  },
+  "artifacts": [
+    {
+      "kind": "log",
+      "path": "artifacts_test/conformance-suite-checkout.txt",
+      "produced_by": "trqp_conformance_suite",
+      "media_type": "text/plain",
+      "format": "smoke-v0",
+      "notes": "checkout metadata",
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881"
+    },
+    {
+      "kind": "log",
+      "path": "artifacts_test/tspp-checkout.txt",
+      "produced_by": "trqp_tspp",
+      "media_type": "text/plain",
+      "format": "smoke-v0",
+      "notes": "checkout metadata",
+      "sha256": "a1fce4363854ff888cff4b8e7875d600c2682390412a8cf79b37d0b11148b0fa"
+    }
+  ],
+  "generator": {
+    "name": "trqp-assurance-hub:generate-manifest",
+    "uri": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub"
+  }
+}
