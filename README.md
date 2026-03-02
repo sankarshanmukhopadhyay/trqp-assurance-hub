@@ -191,3 +191,16 @@ For how this repo maps to current upstream RFEs (and what it explicitly does *no
 Documentation and original content in this repo are licensed under **CC BY-SA 4.0**.
 
 See: [LICENSE](LICENSE)
+
+## GRID readiness
+
+This repository includes a minimal **GRID readiness kernel** to demonstrate how TRQP can be extended to support multiple trust registry/directory implementations.
+
+- Profile: `profiles/grid-profile.md`
+- Schemas: `schemas/registrar.schema.json`, `schemas/grid-status-feed.schema.json`
+- Verifier workflow: `docs/how-to-verify-grid.md`
+- Crosswalk: `docs/grid-gtr-crosswalk.md`
+
+External references:
+- UN/CEFACT GTR / GRID: https://un.opensource.unicc.org/unece/uncefact/gtr/
+- EBSI Trusted Issuers Registry / Trusted Entity Registry APIs: https://hub.ebsi.eu/apis/pilot/trusted-issuers-registry

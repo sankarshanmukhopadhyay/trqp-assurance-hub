@@ -1,36 +1,28 @@
-# GRID ↔ GTR Crosswalk
+# GRID ↔ GTR crosswalk
 
-This repo adds **TRQP assurance metadata** to support GRID-style directory operations, while remaining compatible with the **GTR registrar schema** (`schemas/registrar-v1.json` in the GTR repository).
+This repository treats GRID as an implementation pattern that can be aligned with the UN/CEFACT Global Trust Registry (GTR) work.
 
-## Field mapping
+## Why this crosswalk exists
 
-| GTR registrar-v1.json field | TRQP Assurance Hub registrar.schema.json field | Notes |
+- TRQP provides a query protocol for authoritative data from trust registries.
+- GRID/GTR describe a **global directory** model for authoritative registrars.
+
+This crosswalk highlights field and lifecycle correspondences.
+
+## References
+
+- UN/CEFACT GTR / GRID repository: https://un.opensource.unicc.org/unece/uncefact/gtr/
+- GTR issue discussing GRID: https://opensource.unicc.org/un/unece/uncefact/gtr/-/issues/1
+- TRQP specification: https://trustoverip.github.io/tswg-trust-registry-protocol/
+- EBSI Trusted Issuers Registry / Trusted Entity Registry APIs: https://hub.ebsi.eu/apis/pilot/trusted-issuers-registry
+
+## High-level correspondences
+
+| Concept | GRID artifact | TRQP Assurance Hub artifact |
 |---|---|---|
-| `country_code` | `country_code` | Same semantics |
-| `registrar_name` | `registrar_name` | Same semantics |
-| `register_name` | `register_name` | Same semantics |
-| `register_type` | `register_type` | Same semantics |
-| `legal_basis` | `legal_basis` | Same semantics |
-| `authoritative_body` | `authoritative_body` | Same semantics |
-| `register_id` | `register_id` | Same semantics |
-| `registered_id_pattern` | `registered_id_pattern` | Same semantics |
-| `query_endpoint` | `query_endpoint` | Optional |
-| `resolver_endpoint` | `resolver_endpoint` | Optional |
-| `did` | `did` | Same semantics |
-| `grid_reference` | `grid_reference` | Optional |
+| Registrar identity | Registrar listing | `registrar.schema.json` |
+| Listing status | Status feed entry | `grid-status-feed.schema.json` |
+| Eligibility rules | Directory policy | `grid-assurance-mapping.md` |
+| Auditability | Evidence bundle references | `assurance` object in registrar listing |
 
-## TRQP extensions (not present in GTR schema)
-
-| TRQP extension | Purpose |
-|---|---|
-| `assurance_level` | Directory eligibility class (AL1–AL4) |
-| `status` / `status_effective_at` / `status_reason` | Lifecycle management |
-| `trqp.governance_policy` | Policy pointer + hash for audit integrity |
-| `trqp.evidence[]` | Evidence references for verifier-first validation |
-| `trqp.quorum` | Optional listing governance semantics |
-| `trqp.last_audit_at` | Currency / recency signal |
-
-## Compatibility guidance
-
-- A GTR-conformant record can be made TRQP/GRID-ready by adding the TRQP extensions and tightening required fields.
-- Directory operators **SHOULD** maintain backward compatibility with GTR fields to reduce ecosystem fragmentation.
+This is informative guidance; deployments MUST define their own policies and cryptographic proof formats.

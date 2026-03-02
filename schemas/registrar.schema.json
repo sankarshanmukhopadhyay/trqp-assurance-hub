@@ -1,178 +1,62 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "TRQP Registrar Listing (GRID-aligned)",
-  "description": "Registrar listing record used by TRQP Assurance Hub to support a GRID-style directory. Compatible with GTR registrar-v1.json fields, plus TRQP assurance and governance extensions.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trqp/schemas/registrar.schema.json",
+  "title": "Registrar Listing",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "register_id",
-    "registrar_name",
-    "register_name",
-    "register_type",
-    "country_code",
-    "authoritative_body",
-    "legal_basis",
-    "registered_id_pattern",
-    "did",
-    "assurance_level",
-    "status"
-  ],
   "properties": {
-    "country_code": {
+    "id": {
       "type": "string",
-      "minLength": 2,
-      "maxLength": 2,
-      "description": "ISO 3166-1 alpha-2 country code (GTR)."
+      "description": "Stable registrar identifier (DID or other URI)."
     },
-    "registrar_name": {
+    "name": {
+      "type": "string"
+    },
+    "jurisdiction": {
       "type": "string",
-      "minLength": 1,
-      "description": "Name of the registrar operator (GTR)."
+      "description": "Jurisdiction / authority scope (e.g., ISO 3166 country code or formal designation)."
     },
-    "register_name": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Human-readable name of the register (GTR)."
-    },
-    "register_type": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Register type/category (GTR)."
-    },
-    "legal_basis": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Legal basis / mandate (GTR)."
-    },
-    "authoritative_body": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Authority responsible for the register (GTR)."
-    },
-    "register_id": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Stable identifier for the register/registrar listing (GTR)."
-    },
-    "registered_id_pattern": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Pattern/format for IDs issued by the register (GTR)."
-    },
-    "query_endpoint": {
-      "type": "string",
-      "format": "uri",
-      "description": "Query endpoint for register lookups (GTR)."
-    },
-    "resolver_endpoint": {
-      "type": "string",
-      "format": "uri",
-      "description": "Resolver endpoint for identifiers (GTR)."
-    },
-    "did": {
-      "type": "string",
-      "minLength": 3,
-      "description": "Registrar DID or other globally unique decentralized identifier (GTR)."
-    },
-    "grid_reference": {
-      "type": "string",
-      "description": "Optional external GRID reference id (GTR)."
-    },
-    "trqp": {
+    "governance_policy": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "governance_policy",
-        "evidence",
-        "last_audit_at"
-      ],
       "properties": {
-        "governance_policy": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": [
-            "uri",
-            "sha256"
-          ],
-          "properties": {
-            "uri": {
-              "type": "string",
-              "format": "uri"
-            },
-            "sha256": {
-              "type": "string",
-              "pattern": "^[a-f0-9]{64}$"
-            }
-          },
-          "description": "Pointer + hash for the registrar governance policy artifact."
+        "policy_uri": {
+          "type": "string"
         },
-        "evidence": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "kind",
-              "uri"
-            ],
-            "properties": {
-              "kind": {
-                "type": "string",
-                "enum": [
-                  "evidence_bundle",
-                  "audit_report",
-                  "attestation",
-                  "other"
-                ]
-              },
-              "uri": {
-                "type": "string",
-                "format": "uri"
-              },
-              "sha256": {
-                "type": "string",
-                "pattern": "^[a-f0-9]{64}$"
-              }
-            }
-          },
-          "description": "Evidence references supporting the listing and the asserted assurance level."
+        "policy_hash": {
+          "type": "string",
+          "description": "Hash of the policy artifact (e.g., SHA-256)."
+        }
+      },
+      "required": [
+        "policy_uri",
+        "policy_hash"
+      ]
+    },
+    "assurance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assurance_level": {
+          "type": "string",
+          "enum": [
+            "AL1",
+            "AL2",
+            "AL3",
+            "AL4"
+          ]
         },
-        "quorum": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "rule": {
-              "type": "string",
-              "description": "Human-readable quorum rule (e.g., 2-of-3; role-based)."
-            },
-            "signers": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "description": "Optional listing governance quorum metadata."
+        "evidence_bundle_uri": {
+          "type": "string"
         },
-        "last_audit_at": {
+        "last_audit": {
           "type": "string",
           "format": "date-time"
-        },
-        "notes": {
-          "type": "string"
         }
-      }
-    },
-    "assurance_level": {
-      "type": "string",
-      "enum": [
-        "AL1",
-        "AL2",
-        "AL3",
-        "AL4"
-      ],
-      "description": "Assurance Level achieved for directory eligibility."
+      },
+      "required": [
+        "assurance_level"
+      ]
     },
     "status": {
       "type": "string",
@@ -184,15 +68,18 @@
         "suspended",
         "revoked",
         "archived"
-      ],
-      "description": "Directory lifecycle status."
+      ]
     },
-    "status_effective_at": {
+    "updated_at": {
       "type": "string",
       "format": "date-time"
-    },
-    "status_reason": {
-      "type": "string"
     }
-  }
+  },
+  "required": [
+    "id",
+    "name",
+    "jurisdiction",
+    "status",
+    "updated_at"
+  ]
 }

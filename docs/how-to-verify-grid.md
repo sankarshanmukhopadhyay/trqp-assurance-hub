@@ -1,42 +1,36 @@
-# How to Verify a GRID Listing (Verifier-First)
+# How to verify a GRID listing (verifier-first)
 
-This is a practical, minimal workflow for an independent verifier consuming a GRID-style directory.
+This is a practical, minimal workflow for verifying a registrar listing in a GRID-style directory.
 
 ## Inputs
 
-- Registrar listing record (`registrar.json`)
-- Signed status feed (`grid-status-feed.json`)
-- Governance policy artifact (URI + hash)
-- Evidence artifacts (URIs + optional hashes)
+- A registrar listing (JSON)
+- A signed status feed (JSON)
+- The directory operator policy (and its hash)
 
 ## Steps
 
-1. **Validate schema**
-   - Validate `registrar.json` against `schemas/registrar.schema.json`
-   - Validate the status feed against `schemas/grid-status-feed.schema.json`
+1. **Validate shapes**
+   - Validate listing against `schemas/registrar.schema.json`
+   - Validate feed against `schemas/grid-status-feed.schema.json`
 
-2. **Check lifecycle status**
-   - Confirm the registrar appears in the signed status feed
-   - Confirm `status` is acceptable for your use case (typically `active`)
-   - Confirm `effective_at` / `status_effective_at` are within your freshness window
+2. **Verify issuer identity**
+   - Confirm the status feed `issuer` is the trusted directory operator for your policy.
 
-3. **Verify feed signature**
-   - Verify that the status feed signature(s) are valid for the stated `issuer`
-   - Reject unsigned or unverifiable feeds
+3. **Verify cryptographic proof**
+   - Verify the feed’s `proof` using your accepted proof suite (e.g., JWS or Data Integrity).
+   - Reject unsigned feeds in operational modes.
 
-4. **Verify governance policy integrity**
-   - Fetch the policy at `trqp.governance_policy.uri`
-   - Hash the content and compare to `trqp.governance_policy.sha256`
+4. **Check freshness**
+   - Use the latest feed by `issued_at`.
+   - Reject replayed/older feeds when a newer feed exists.
 
-5. **Evaluate evidence**
-   - Fetch evidence artifacts referenced in `trqp.evidence[]`
-   - Where hashes are provided, verify integrity
-   - Confirm evidence sufficiency for the asserted `assurance_level` (see `docs/grid-assurance-mapping.md`)
+5. **Confirm registrar status**
+   - Find the entry for the registrar’s `id`.
+   - Ensure status is acceptable for your use (e.g., `active`).
 
-## Output
+6. **Apply assurance eligibility**
+   - Map `assurance.assurance_level` using `docs/grid-assurance-mapping.md`.
+   - Apply any additional sector-specific rules.
 
-A verifier should be able to produce a decision record:
-
-- Accept / reject the registrar as authoritative
-- The reason (status, insufficient evidence, signature failure, stale audit, etc.)
-- The input artifact hashes used for the decision
+This workflow is deliberately implementation-agnostic about the proof format; deployments MUST specify accepted proof suites and key discovery rules.

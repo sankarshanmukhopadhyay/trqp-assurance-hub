@@ -1,28 +1,33 @@
 {
   "profile_id": "grid",
-  "title": "GRID Profile",
-  "version": "0.1",
-  "required_artifacts": [
+  "title": "Global Registrar Information Directory (GRID) Profile",
+  "version": "0.1.0",
+  "artifacts": [
     {
       "id": "registrar_listing",
-      "path_hint": "registrar.json",
-      "schema": "schemas/registrar.schema.json"
+      "schema": "schemas/registrar.schema.json",
+      "example": "examples/registrar.example.json"
     },
     {
-      "id": "grid_status_feed",
-      "path_hint": "grid-status-feed.json",
-      "schema": "schemas/grid-status-feed.schema.json"
+      "id": "status_feed",
+      "schema": "schemas/grid-status-feed.schema.json",
+      "example": "examples/grid-status-feed.example.json"
     }
   ],
-  "lifecycle_states": [
-    "proposed",
-    "under_review",
-    "approved",
-    "active",
-    "suspended",
-    "revoked",
-    "archived"
+  "docs": [
+    "docs/grid-assurance-mapping.md",
+    "docs/grid-gtr-crosswalk.md",
+    "docs/grid-threat-annex.md",
+    "docs/how-to-verify-grid.md"
   ],
-  "assurance_mapping_doc": "docs/grid-assurance-mapping.md",
-  "gtr_crosswalk_doc": "docs/grid-gtr-crosswalk.md"
+  "references": [
+    {
+      "title": "UN/CEFACT Global Trust Registry (GTR) / GRID",
+      "url": "https://un.opensource.unicc.org/unece/uncefact/gtr/"
+    },
+    {
+      "title": "EBSI Trusted Issuers Registry / Trusted Entity Registry APIs",
+      "url": "https://hub.ebsi.eu/apis/pilot/trusted-issuers-registry"
+    }
+  ]
 }

@@ -1,37 +1,40 @@
-# GRID Profile (TRQP Assurance Hub)
+# GRID Profile (Global Registrar Information Directory)
 
-This profile defines the **minimum, verifier-oriented requirements** for operating a **Global Registrar Information Directory (GRID)** using TRQP-style assurance artifacts.
+This profile defines the minimum publishable artifacts for a **GRID-listed registrar**.
 
-It is intentionally small: it specifies *what must be true* for a registrar to be listed, verified, and lifecycle-managed.
+GRID is treated here as an *implementation pattern* for trust registries/directory ecosystems that can be queried via TRQP.
 
 ## Scope
 
-- Entity type: **Registrar** (operator of an authoritative register)
-- Surface: **Directory listing + status feed**
-- Objective: allow independent verifiers to determine whether a registrar listing is **legitimate, current, and sufficiently assured**.
+- Entity class: **Registrar**
+- Output surface: **Directory listing + status feed**
+- Assurance: bound to TRQP Assurance Levels (AL1–AL4)
+- Verification model: **verifier-first** (hash + signature + policy binding)
 
 ## Required artifacts
 
-A registrar listing **MUST** publish:
+1. **Registrar listing** (machine-readable)
+   - Conforms to: `schemas/registrar.schema.json`
+   - Example: `examples/registrar.example.json`
 
-1. **Registrar listing record** (`registrar.json`) conforming to `schemas/registrar.schema.json`
-2. **Governance policy pointer + hash** (`trqp.governance_policy`)
-3. **Evidence references** appropriate to the claimed assurance level
-4. **Lifecycle status** (`status`, `status_effective_at`) and reason where relevant
-5. Inclusion in a **signed status feed** conforming to `schemas/grid-status-feed.schema.json`
+2. **Status feed** (machine-readable)
+   - Conforms to: `schemas/grid-status-feed.schema.json`
+   - Example: `examples/grid-status-feed.example.json`
 
-## Lifecycle states
+3. **Assurance mapping**
+   - See: `docs/grid-assurance-mapping.md`
 
-`proposed → under_review → approved → active → suspended|revoked → archived`
+4. **Threat annex**
+   - See: `docs/grid-threat-annex.md`
 
-Each status transition **SHOULD** be reflected in the signed status feed within the directory operator’s stated SLA.
+5. **Verification workflow**
+   - See: `docs/how-to-verify-grid.md`
 
-## Assurance binding
+## External references
 
-See: `docs/grid-assurance-mapping.md`
+GRID is used here to demonstrate how TRQP can be extended to support **different trust registry implementations**, including:
 
-## Interop with GTR
+- UN/CEFACT Global Trust Registry (GTR) / GRID workstream: https://un.opensource.unicc.org/unece/uncefact/gtr/
+- EBSI Trusted Issuers Registry / Trusted Entity Registry APIs: https://hub.ebsi.eu/apis/pilot/trusted-issuers-registry
 
-This schema is designed to be compatible with the GTR `registrar-v1.json` fields and extends it with TRQP assurance metadata.
-
-See: `docs/grid-gtr-crosswalk.md`
+See also: `docs/grid-gtr-crosswalk.md`.

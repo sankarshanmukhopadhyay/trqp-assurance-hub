@@ -1,37 +1,16 @@
 {
-  "country_code": "IN",
-  "registrar_name": "Example Registrar Authority",
-  "register_name": "Example Business Register",
-  "register_type": "business_registry",
-  "legal_basis": "Example Act 2020, Section 12",
-  "authoritative_body": "Ministry of Example Affairs",
-  "register_id": "IN-EXAMPLE-BR-001",
-  "registered_id_pattern": "^EX-[0-9]{8}$",
-  "query_endpoint": "https://example.gov.in/register/query",
-  "resolver_endpoint": "https://example.gov.in/register/resolve",
-  "did": "did:web:example.gov.in:registrar",
-  "assurance_level": "AL3",
+  "id": "did:example:registrar:india:001",
+  "name": "Example National Registrar",
+  "jurisdiction": "IN",
+  "governance_policy": {
+    "policy_uri": "https://example.org/policies/registrar-policy.md",
+    "policy_hash": "sha256:EXAMPLE"
+  },
+  "assurance": {
+    "assurance_level": "AL3",
+    "evidence_bundle_uri": "https://example.org/evidence/al3-bundle.zip",
+    "last_audit": "2026-03-02T00:00:00Z"
+  },
   "status": "active",
-  "status_effective_at": "2026-02-15T00:00:00Z",
-  "trqp": {
-    "governance_policy": {
-      "uri": "https://example.gov.in/registrar/policy.md",
-      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
-    },
-    "evidence": [
-      {
-        "kind": "evidence_bundle",
-        "uri": "https://example.gov.in/registrar/evidence/al3-bundle.json",
-        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
-      }
-    ],
-    "last_audit_at": "2026-02-01T00:00:00Z",
-    "quorum": {
-      "rule": "2-of-3 (core+external)",
-      "signers": [
-        "did:web:example.gov.in#key-1",
-        "did:web:auditor.example#key-7"
-      ]
-    }
-  }
+  "updated_at": "2026-03-02T00:00:00Z"
 }

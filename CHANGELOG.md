@@ -2,21 +2,22 @@
 
 All notable changes to this repository will be documented in this file.
 
-
-## v0.5.0 — GRID readiness kernel (2026-03-02)
-
-- Added GRID profile (docs + machine-readable profile descriptor)
-- Added registrar listing schema compatible with GTR registrar-v1 fields plus TRQP assurance extensions
-- Added signed status feed schema + examples
-- Added verifier-first workflow doc and minimal threat annex
-
 ## Unreleased
 
 - (nothing yet)
 
 
-
 ## v0.5.0
+
+### Added
+- GRID readiness kernel: profile + schemas + verifier workflow + threat annex
+- Registrar listing schema and GRID status feed schema (+ examples)
+- Crosswalk references to UN/CEFACT GTR/GRID and EBSI registry implementations
+
+### Fixed
+- Made `tools/control-catalog.json` valid JSON to keep validation trustworthy
+
+## v0.4.1
 
 ### Added
 - `al-contract.json` to provide a machine-readable contract for canonical AL1–AL4 semantics (includes SHA-256 of the normative AL doc).

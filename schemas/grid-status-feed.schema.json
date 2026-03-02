@@ -1,54 +1,33 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "GRID Status Feed (Signed)",
-  "description": "Pull-based status feed for registrar listings. Intended to be verifiable by third parties.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trqp/schemas/grid-status-feed.schema.json",
+  "title": "GRID Status Feed",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "feed_id",
-    "generated_at",
-    "issuer",
-    "entries"
-  ],
   "properties": {
     "feed_id": {
-      "type": "string",
-      "minLength": 1
+      "type": "string"
     },
-    "generated_at": {
+    "issued_at": {
       "type": "string",
       "format": "date-time"
     },
     "issuer": {
       "type": "string",
-      "minLength": 1,
-      "description": "DID or identifier of the feed issuer."
+      "description": "Identifier of the directory operator / feed issuer."
     },
     "entries": {
       "type": "array",
-      "minItems": 1,
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "register_id",
-          "did",
-          "status",
-          "effective_at"
-        ],
         "properties": {
-          "register_id": {
-            "type": "string"
-          },
-          "did": {
+          "registrar_id": {
             "type": "string"
           },
           "status": {
             "type": "string",
             "enum": [
-              "proposed",
-              "under_review",
-              "approved",
               "active",
               "suspended",
               "revoked",
@@ -61,56 +40,24 @@
           },
           "reason": {
             "type": "string"
-          },
-          "evidence": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": [
-                "uri"
-              ],
-              "properties": {
-                "uri": {
-                  "type": "string",
-                  "format": "uri"
-                },
-                "sha256": {
-                  "type": "string",
-                  "pattern": "^[a-f0-9]{64}$"
-                }
-              }
-            }
           }
-        }
+        },
+        "required": [
+          "registrar_id",
+          "status",
+          "effective_at"
+        ]
       }
     },
-    "signatures": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "kid",
-          "alg",
-          "sig"
-        ],
-        "properties": {
-          "kid": {
-            "type": "string",
-            "description": "Key identifier."
-          },
-          "alg": {
-            "type": "string",
-            "description": "Signature algorithm identifier."
-          },
-          "sig": {
-            "type": "string",
-            "description": "Signature over canonicalized feed payload."
-          }
-        }
-      }
+    "proof": {
+      "type": "object",
+      "description": "Cryptographic proof object (format is implementation-specific)."
     }
-  }
+  },
+  "required": [
+    "feed_id",
+    "issued_at",
+    "issuer",
+    "entries"
+  ]
 }

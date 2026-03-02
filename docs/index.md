@@ -48,11 +48,8 @@ You are translating governance intent into implementable and auditable artifacts
 - [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
 - [Combined assurance workflow](guides/combined-assurance.md)
 
+### GRID implementers (directory operators)
 
-## GRID (Global Registrar Information Directory)
-
-- [GRID Profile](../profiles/grid-profile.md)
-- [GRID Assurance Mapping](grid-assurance-mapping.md)
-- [GRID ↔ GTR Crosswalk](grid-gtr-crosswalk.md)
-- [GRID Threat Annex](grid-threat-annex.md)
-- [How to Verify a GRID Listing](how-to-verify-grid.md)
+- Profile: `../profiles/grid-profile.md`
+- Verifier workflow: `how-to-verify-grid.md`
+- Crosswalk to GTR: `grid-gtr-crosswalk.md`

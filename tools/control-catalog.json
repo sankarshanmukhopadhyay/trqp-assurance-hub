@@ -1,33 +1,30 @@
 {
-  "catalog_id": "trqp-control-catalog",
-  "version": "0.1",
-  "generated_at": "2026-03-02T00:00:00Z",
+  "version": "0.1.0",
   "controls": [
     {
       "id": "TRQP-CTRL-01",
-      "title": "Identity binding for issuer and subject",
+      "title": "Policy and governance publication",
       "category": "Governance"
     },
     {
       "id": "TRQP-CTRL-02",
-      "title": "Evidence integrity and immutability",
+      "title": "Evidence bundle integrity",
       "category": "Assurance"
     },
     {
       "id": "TRQP-CTRL-03",
-      "title": "Lifecycle status management and revocation",
-      "category": "Assurance"
+      "title": "Directory status lifecycle and revocation",
+      "category": "Operational"
     },
     {
       "id": "TRQP-CTRL-04",
-      "title": "Policy change management",
+      "title": "Registry operator identity assurance",
       "category": "Assurance"
     },
     {
       "id": "TRQP-CTRL-07",
-      "title": "Independent assessment and audit trail",
+      "title": "Incident response and disclosure",
       "category": "Assurance"
     }
-  ],
-  "notes": "Minimal placeholder catalog to support example validation. See tools/control-catalog.md for narrative material."
+  ]
 }
