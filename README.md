@@ -39,6 +39,7 @@ This repository implements components of the **Trust Systems Assurance Method (T
 TSAM binds governance semantics, assurance levels, conformance verification, runtime integrity controls, and evidence production into a coherent architecture.
 
 See: [`docs/tsam/`](docs/tsam/README.md)
+See also: [`docs/strategy/TRACE-TSAM-relationship.md`](docs/strategy/TRACE-TSAM-relationship.md)
 
 ## Assurance Levels
 

@@ -1,0 +1,113 @@
+spec: TRACE-TSAM-Compliance-Matrix
+version: 0.1.0
+normative_language: RFC2119+RFC8174
+trace_axes:
+- id: TRACE-RC
+  name: Risk Concentration
+  description: Concentration of impact, authority, or blast radius.
+- id: TRACE-DA
+  name: Delegation & Agency
+  description: Delegation boundaries, autonomy, overrideability.
+- id: TRACE-LG
+  name: Legitimacy
+  description: Authority, mandate, scope, and institutional grounding.
+- id: TRACE-RD
+  name: Redress
+  description: Appeal, remediation, rollback, and accountability pathways.
+- id: TRACE-SE
+  name: Systemic Externality
+  description: Cross-system dependencies, spillovers, and cascading risk.
+tsam_layers:
+- id: TSAM-GS
+  name: Governance Semantics
+- id: TSAM-AL
+  name: Assurance Levels
+- id: TSAM-CV
+  name: Conformance Verification
+- id: TSAM-RI
+  name: Runtime Integrity Controls
+- id: TSAM-EO
+  name: Evidence & Observability
+bindings:
+- trace_axis: TRACE-RC
+  layer: TSAM-GS
+  requirement: MUST define affected roles and impact domains.
+- trace_axis: TRACE-RC
+  layer: TSAM-AL
+  requirement: MUST reflect elevated tier where concentration exceeds threshold.
+- trace_axis: TRACE-RC
+  layer: TSAM-CV
+  requirement: MUST include tests validating role separation and control enforcement.
+- trace_axis: TRACE-RC
+  layer: TSAM-RI
+  requirement: MUST implement isolation and least-privilege mechanisms.
+- trace_axis: TRACE-RC
+  layer: TSAM-EO
+  requirement: MUST log access and decision boundaries.
+- trace_axis: TRACE-DA
+  layer: TSAM-GS
+  requirement: MUST define delegation boundaries and authority limits.
+- trace_axis: TRACE-DA
+  layer: TSAM-AL
+  requirement: MUST escalate tier where automated delegation expands.
+- trace_axis: TRACE-DA
+  layer: TSAM-CV
+  requirement: MUST test override, appeal, and human-in-loop workflows.
+- trace_axis: TRACE-DA
+  layer: TSAM-RI
+  requirement: MUST enforce decision traceability and authority validation.
+- trace_axis: TRACE-DA
+  layer: TSAM-EO
+  requirement: MUST produce decision lineage artifacts.
+- trace_axis: TRACE-LG
+  layer: TSAM-GS
+  requirement: MUST define institutional authority and scope.
+- trace_axis: TRACE-LG
+  layer: TSAM-AL
+  requirement: MUST align tier with public impact exposure.
+- trace_axis: TRACE-LG
+  layer: TSAM-CV
+  requirement: MUST validate policy enforcement consistency.
+- trace_axis: TRACE-LG
+  layer: TSAM-RI
+  requirement: SHOULD implement policy integrity protections.
+- trace_axis: TRACE-LG
+  layer: TSAM-EO
+  requirement: MUST retain auditable policy change records.
+- trace_axis: TRACE-RD
+  layer: TSAM-GS
+  requirement: MUST define appeal and remediation pathways.
+- trace_axis: TRACE-RD
+  layer: TSAM-AL
+  requirement: MUST require redress workflows at defined tiers.
+- trace_axis: TRACE-RD
+  layer: TSAM-CV
+  requirement: MUST test appeal execution and rollback mechanisms.
+- trace_axis: TRACE-RD
+  layer: TSAM-RI
+  requirement: MUST protect audit logs from tampering.
+- trace_axis: TRACE-RD
+  layer: TSAM-EO
+  requirement: MUST preserve redress outcome artifacts.
+- trace_axis: TRACE-SE
+  layer: TSAM-GS
+  requirement: MUST define cross-system dependency assumptions.
+- trace_axis: TRACE-SE
+  layer: TSAM-AL
+  requirement: SHOULD elevate tier for systemic risk exposure.
+- trace_axis: TRACE-SE
+  layer: TSAM-CV
+  requirement: SHOULD validate interoperability and failure containment.
+- trace_axis: TRACE-SE
+  layer: TSAM-RI
+  requirement: MUST implement resilience and containment controls.
+- trace_axis: TRACE-SE
+  layer: TSAM-EO
+  requirement: MUST capture cross-system interaction telemetry.
+compliance_rules:
+- id: RULE-1
+  statement: A system SHALL NOT claim full TRACE+TSAM alignment unless every TRACE
+    axis has bindings instantiated across all TSAM layers.
+- id: RULE-2
+  statement: Any missing binding MUST be documented with justification and compensating
+    controls.
