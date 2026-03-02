@@ -1,3 +1,8 @@
+---
+layout: default
+title: TRQP Assurance Hub
+---
+
 # Documentation Index
 
 This hub is designed to be *role-first*: you should be able to find what you need without reading every file.
