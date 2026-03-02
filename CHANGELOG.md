@@ -8,6 +8,17 @@ All notable changes to this repository will be documented in this file.
 
 
 
+## v0.4.2
+
+### Added
+- Program playbook (`docs/PLAYBOOK.md`) and operator runbook (`docs/OPERATOR_RUNBOOK.md`) to make adoption and combined assurance flows legible for non-technical stakeholders.
+
+### Changed
+- Updated documentation index and README to point to the playbook and runbook.
+- Updated compatibility matrix with supported version pairings for this release line.
+
+
+
 ## v0.4.1
 
 ### Added

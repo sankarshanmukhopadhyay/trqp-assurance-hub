@@ -17,6 +17,8 @@ A combined assurance run is considered **supported** when:
 
 ## Versioning expectations
 
+- Assurance Hub version primarily governs **program documentation** and cross-repo guidance. Tool compatibility is driven by the CTS↔TSPP pairing and shared contracts.
+
 - Each repo MUST publish releases using SemVer.
 - Each repo SHOULD publish a short compatibility note in its release notes that references the other repo.
 
@@ -24,9 +26,10 @@ A combined assurance run is considered **supported** when:
 
 Maintain this table over time.
 
-| Conformance Suite version | TRQP-TSPP version | Status | Notes |
-|---:|---:|---|---|
-| (fill) | (fill) | Planned | Initial pairing |
+| Assurance Hub version | Conformance Suite version | TRQP-TSPP version | Status | Notes |
+|---:|---:|---:|---|---|
+| 0.4.2 | 0.4.2 | 0.2.2 | Supported | Increment 1: playbook + operator runbook aligned across repos. |
+| 0.4.1 | 0.4.1 | 0.2.1 | Supported | Prior release line; compatible by contract. |
 
 ## Shared contracts
 

@@ -1,6 +1,6 @@
 # TRQP Assurance Hub
 
-**Current version:** v0.4.1
+**Current version:** v0.4.2
 
 
 [![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)
@@ -10,9 +10,17 @@ A pragmatic, adopter-first landing zone that makes the TRQP ecosystem feel like 
 
 Positioning: this repository is a **candidate Assurance Profile and Governance Hardening Layer** that helps operationalize open TRQP RFEs by turning “should” discussions into **profiles, artifacts, and machine-checkable evidence**.
 
+
+## Start here
+
+- [TRQP Assurance Program Playbook](docs/PLAYBOOK.md)
+- [Operator runbook (combined assurance)](docs/OPERATOR_RUNBOOK.md)
+
 ## Quick links
 
 - [Documentation index (role-based)](docs/index.md)
+- [TRQP Assurance Program Playbook](docs/PLAYBOOK.md)
+- [Operator runbook (combined assurance)](docs/OPERATOR_RUNBOOK.md)
 - [Quickstart](QUICKSTART.md)
 - [Operating model](#the-operating-model)
 - [Combined assurance workflow](docs/guides/combined-assurance.md)

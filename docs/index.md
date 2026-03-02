@@ -2,6 +2,12 @@
 
 This hub is designed to be *role-first*: you should be able to find what you need without reading every file.
 
+
+## Program overview
+
+- Start with: [TRQP Assurance Program Playbook](PLAYBOOK.md)
+- Then: [Operator runbook (combined assurance)](OPERATOR_RUNBOOK.md)
+
 ## Choose your path
 
 ### Operators (registry / trust list operators)
