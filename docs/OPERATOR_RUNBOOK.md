@@ -34,6 +34,29 @@ assurance-run/
 You MUST record tool versions used for the run (from each repo’s `VERSION` file or release tag).
 
 ## Step 1: Run CTS and generate conformance evidence
+### Recommended command shape (stable outputs)
+
+CTS supports a predictable output layout (see CTS: `docs/OUTPUT_CONTRACT.md`).
+
+Example:
+
+```bash
+# In the CTS repo
+python cts/run.py \
+  --profile profiles/smoke.yaml \
+  --sut sut.example.yaml \
+  --out ../assurance-run/cts/smoke \
+  --deterministic \
+  --nonce-mode derived
+```
+
+Expected outputs:
+- `assurance-run/cts/smoke/run.json`
+- `assurance-run/cts/smoke/verdicts.json`
+- `assurance-run/cts/smoke/manifest.json`
+- `assurance-run/cts/smoke/bundle_descriptor.json`
+- `assurance-run/cts/smoke/bundle.zip` (if enabled by profile)
+
 
 Follow the CTS README and `docs/START_HERE.md` in the Conformance Suite repository.
 
