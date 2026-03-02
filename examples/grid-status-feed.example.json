@@ -1,0 +1,26 @@
+{
+  "feed_id": "grid-status-feed-example",
+  "generated_at": "2026-03-01T00:00:00Z",
+  "issuer": "did:web:grid.example.org",
+  "entries": [
+    {
+      "register_id": "IN-EXAMPLE-BR-001",
+      "did": "did:web:example.gov.in:registrar",
+      "status": "active",
+      "effective_at": "2026-02-15T00:00:00Z",
+      "evidence": [
+        {
+          "uri": "https://example.gov.in/registrar/evidence/al3-bundle.json",
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      ]
+    }
+  ],
+  "signatures": [
+    {
+      "kid": "did:web:grid.example.org#key-1",
+      "alg": "ed25519",
+      "sig": "BASE64URL_SIGNATURE_PLACEHOLDER"
+    }
+  ]
+}

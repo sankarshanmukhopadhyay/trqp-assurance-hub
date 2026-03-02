@@ -47,3 +47,12 @@ You are translating governance intent into implementable and auditable artifacts
 - [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
 - [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
 - [Combined assurance workflow](guides/combined-assurance.md)
+
+
+## GRID (Global Registrar Information Directory)
+
+- [GRID Profile](../profiles/grid-profile.md)
+- [GRID Assurance Mapping](grid-assurance-mapping.md)
+- [GRID ↔ GTR Crosswalk](grid-gtr-crosswalk.md)
+- [GRID Threat Annex](grid-threat-annex.md)
+- [How to Verify a GRID Listing](how-to-verify-grid.md)

@@ -116,12 +116,21 @@ This is the current best guess of the most leverage-positive sequence (subject t
   - Hub guide updated with concrete producer expectations and crosswalk links
 
 
+
+- ✅ **GRID readiness kernel** (v0.5.0)
+  - Profile: `profiles/grid-profile.md`
+  - Registrar listing schema: `schemas/registrar.schema.json`
+  - Signed status feed schema: `schemas/grid-status-feed.schema.json`
+  - Verifier workflow: `docs/how-to-verify-grid.md`
+  - Threat annex: `docs/grid-threat-annex.md`
+  - GTR crosswalk: `docs/grid-gtr-crosswalk.md`
+
 ## Completed
 
 - ✅ AL1–AL4 canonical lock and cross-repo contract (`docs/guides/assurance-levels.md`, `al-contract.json`).
 
 
-## Release readiness (v0.4.1)
+## Release readiness (v0.5.0)
 
 - ✅ Findings addressed: AL contract pinning, template hygiene, and code intent documentation.
 - ✅ Release artifacts: VERSION file, changelog entries, and release template updated.

@@ -1,0 +1,28 @@
+{
+  "profile_id": "grid",
+  "title": "GRID Profile",
+  "version": "0.1",
+  "required_artifacts": [
+    {
+      "id": "registrar_listing",
+      "path_hint": "registrar.json",
+      "schema": "schemas/registrar.schema.json"
+    },
+    {
+      "id": "grid_status_feed",
+      "path_hint": "grid-status-feed.json",
+      "schema": "schemas/grid-status-feed.schema.json"
+    }
+  ],
+  "lifecycle_states": [
+    "proposed",
+    "under_review",
+    "approved",
+    "active",
+    "suspended",
+    "revoked",
+    "archived"
+  ],
+  "assurance_mapping_doc": "docs/grid-assurance-mapping.md",
+  "gtr_crosswalk_doc": "docs/grid-gtr-crosswalk.md"
+}

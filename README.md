@@ -1,6 +1,6 @@
 # TRQP Assurance Hub
 
-**Current version:** v0.4.1
+**Current version:** v0.5.0
 
 
 [![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)

@@ -1,0 +1,37 @@
+{
+  "country_code": "IN",
+  "registrar_name": "Example Registrar Authority",
+  "register_name": "Example Business Register",
+  "register_type": "business_registry",
+  "legal_basis": "Example Act 2020, Section 12",
+  "authoritative_body": "Ministry of Example Affairs",
+  "register_id": "IN-EXAMPLE-BR-001",
+  "registered_id_pattern": "^EX-[0-9]{8}$",
+  "query_endpoint": "https://example.gov.in/register/query",
+  "resolver_endpoint": "https://example.gov.in/register/resolve",
+  "did": "did:web:example.gov.in:registrar",
+  "assurance_level": "AL3",
+  "status": "active",
+  "status_effective_at": "2026-02-15T00:00:00Z",
+  "trqp": {
+    "governance_policy": {
+      "uri": "https://example.gov.in/registrar/policy.md",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "evidence": [
+      {
+        "kind": "evidence_bundle",
+        "uri": "https://example.gov.in/registrar/evidence/al3-bundle.json",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    ],
+    "last_audit_at": "2026-02-01T00:00:00Z",
+    "quorum": {
+      "rule": "2-of-3 (core+external)",
+      "signers": [
+        "did:web:example.gov.in#key-1",
+        "did:web:auditor.example#key-7"
+      ]
+    }
+  }
+}
