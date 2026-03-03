@@ -32,3 +32,13 @@ SAD-1 provides a minimum common denominator so evaluations remain comparable acr
 - GRID: an instance profile aligned to UN/CEFACT patterns
 
 Profiles let the ecosystem adapt without hardcoding assumptions about a single directory model.
+
+## Identity anchoring (DIA / IDR)
+
+Authoritative directories are often coupled to an identity anchoring mechanism that allows directory subjects and issuers to be verified independently of the directory operator. When UNTP Digital Identity Anchor (DIA) and Identity Resolver (IDR) patterns are used, evaluations MUST treat the directory as a **composite trust system**:
+
+- directory governance and oversight
+- publication integrity and update lifecycle
+- identity anchoring integrity and resolver readiness
+
+This repository wires DIA into SAD-1 via the `identity_anchor` field in `schemas/authoritative-directory-entry.schema.json` and vendors the DIA JSON-LD context for offline validation.

@@ -26,3 +26,7 @@ This crosswalk highlights field and lifecycle correspondences.
 | Auditability | Evidence bundle references | `assurance` object in registrar listing |
 
 This is informative guidance; deployments MUST define their own policies and cryptographic proof formats.
+
+## UNTP DIA considerations
+
+If GRID implementations use UNTP Digital Identity Anchor (DIA) and Identity Resolver (IDR) patterns, assessments MUST treat GRID as a composite trust system (directory governance + publication integrity + identity anchoring). SAD-1 supports this via the `identity_anchor` extension and vendored DIA JSON-LD context.

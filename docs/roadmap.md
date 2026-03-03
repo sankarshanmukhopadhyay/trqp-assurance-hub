@@ -147,3 +147,7 @@ Status: **Done**
 - Add an end-to-end directory assurance workflow guide
 - Add a strategy note framing TRQP as meta-assurance for authoritative directories
 - Mark GRID as an instance profile implementing SAD-1
+
+## UNTP DIA considerations
+
+If GRID implementations use UNTP Digital Identity Anchor (DIA) and Identity Resolver (IDR) patterns, assessments MUST treat GRID as a composite trust system (directory governance + publication integrity + identity anchoring). SAD-1 supports this via the `identity_anchor` extension and vendored DIA JSON-LD context.

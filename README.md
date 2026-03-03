@@ -207,3 +207,7 @@ This repository includes a minimal **GRID readiness kernel** to demonstrate how 
 External references:
 - UN/CEFACT GTR / GRID: https://un.opensource.unicc.org/unece/uncefact/gtr/
 - EBSI Trusted Issuers Registry / Trusted Entity Registry APIs: https://hub.ebsi.eu/apis/pilot/trusted-issuers-registry
+
+## UNTP Digital Identity Anchor (DIA)
+
+Some authoritative directories use UNTP DIA (and Identity Resolver patterns) to anchor issuer identities. This repo supports DIA-aware directory assurance via the SAD-1 `identity_anchor` extension and vendors the DIA JSON-LD context for reproducible checks. See `docs/reference/untp-digital-identity-anchor.md`.

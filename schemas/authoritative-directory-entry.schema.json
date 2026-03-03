@@ -88,6 +88,106 @@
     "metadata": {
       "type": "object",
       "additionalProperties": true
+    },
+    "identity_anchor": {
+      "title": "Identity Anchor",
+      "type": "object",
+      "description": "Optional identity anchoring information for the subject, e.g., UNTP Digital Identity Anchor (DIA) credentials.",
+      "required": [
+        "anchor_type"
+      ],
+      "properties": {
+        "anchor_type": {
+          "type": "string",
+          "description": "Anchor mechanism identifier. Profiles SHOULD define allowed values.",
+          "examples": [
+            "UNTP_DIA_0.6.1"
+          ]
+        },
+        "context_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "JSON-LD context URL for the anchor credential (normative reference).",
+          "examples": [
+            "https://test.uncefact.org/vocabulary/untp/dia/0.6.1/context/"
+          ]
+        },
+        "context_vendored_path": {
+          "type": "string",
+          "description": "Optional relative path to a vendored context file in this repo.",
+          "examples": [
+            "schemas/contexts/untp/dia/0.6.1/context.jsonld"
+          ]
+        },
+        "credential_schema_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional JSON Schema URL for the anchor credential.",
+          "examples": [
+            "https://test.uncefact.org/vocabulary/untp/dia/untp-dia-schema-0.6.1.json"
+          ]
+        },
+        "dia_credential": {
+          "description": "A UNTP DIA verifiable credential instance (embedded) or a reference to it.",
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "issuer_did": {
+          "type": "string",
+          "description": "Issuer DID used by the anchor credential (when known)."
+        },
+        "identity_resolver": {
+          "type": "object",
+          "description": "Optional identity resolver (IDR) metadata when a resolver is used to dereference or resolve identifiers.",
+          "properties": {
+            "spec_url": {
+              "type": "string",
+              "format": "uri",
+              "examples": [
+                "https://untp.unece.org/docs/specification/IdentityResolver/"
+              ]
+            },
+            "resolver_endpoint": {
+              "type": "string",
+              "format": "uri"
+            },
+            "resolution_method": {
+              "type": "string",
+              "examples": [
+                "did",
+                "registry",
+                "hybrid"
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        "status": {
+          "type": "object",
+          "description": "Optional status / revocation pointers for the anchor.",
+          "properties": {
+            "status_list_url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "status_feed_entry": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
     }
   },
   "additionalProperties": false

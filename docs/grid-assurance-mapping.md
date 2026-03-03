@@ -12,3 +12,7 @@ This document binds TRQP Assurance Levels (AL) to **directory eligibility** deci
 ## Policy note
 
 Directory operators SHOULD publish their eligibility policy (including exceptional cases) and MUST publish the evidence expectations for AL3/AL4 listings.
+
+## UNTP DIA considerations
+
+If GRID implementations use UNTP Digital Identity Anchor (DIA) and Identity Resolver (IDR) patterns, assessments MUST treat GRID as a composite trust system (directory governance + publication integrity + identity anchoring). SAD-1 supports this via the `identity_anchor` extension and vendored DIA JSON-LD context.

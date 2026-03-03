@@ -95,3 +95,13 @@ Use the Hub report template:
 ## Notes
 
 This workflow supports evaluation with partial evidence. The report MUST state limitations and should mark any higher-AL claims as **not evaluable** without additional artifacts.
+
+## Step 4A: Validate identity anchoring (DIA)
+
+If the evaluated directory binds subjects to an identity anchoring mechanism (for example UNTP DIA), the assessor should:
+
+- verify that any published DIA credentials are syntactically valid JSON-LD and reference the correct context
+- verify that issuer identifiers (for example DIDs) are resolvable via the declared method or resolver
+- verify that revocation/status mechanisms are published and operational (if applicable)
+
+Evidence outputs should be captured in the evidence bundle as identity anchor artifacts and verification notes.

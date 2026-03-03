@@ -67,3 +67,8 @@ SAD-1 is the **registry-agnostic profile** that lets the TRQP ecosystem evaluate
 - Profile: `../profiles/sad-1-profile.md`
 - End-to-end workflow: `guides/directory-assurance-workflow.md`
 - Strategy note: `strategy/authoritative-directories.md`
+
+
+## Reference
+
+- [UNTP Digital Identity Anchor (DIA)](reference/untp-digital-identity-anchor.md)
