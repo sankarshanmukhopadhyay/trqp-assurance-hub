@@ -10,6 +10,8 @@
 
 ## Unreleased
 
+- Add OpenSSF-aligned supply chain integrity evidence guidance (TSPP-SCI) and documentation cross-links.
+
 - (nothing yet)
 - Add UNTP DIA / IDR references and wire SAD-1 identity anchoring extension (vendored DIA JSON-LD context).
 ## v0.5.0

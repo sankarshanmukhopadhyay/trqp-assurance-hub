@@ -62,3 +62,15 @@ These repositories act as *evidence producers* for the artifact rows above:
 Crosswalks:
 - CTS ↔ Hub: https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/blob/main/docs/hub-crosswalk.md
 - TSPP ↔ Hub: https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/blob/main/docs/hub-crosswalk.md
+
+## Supply chain integrity (TSPP-SCI)
+
+For AL3+ evaluations, the Hub recommends collecting supply chain integrity evidence for the implementation:
+
+| Artifact kind | Example artifact | Rationale |
+|---|---|---|
+| `software_sbom` | SPDX/CycloneDX SBOM | Dependency transparency for deployed artifacts |
+| `build_provenance` | build attestation | Verifiable build chain and provenance |
+| `openssf_scorecard_report` | Scorecard output | Automated checks on repo security practices |
+
+Reference: `docs/reference/openssf-supply-chain.md`.

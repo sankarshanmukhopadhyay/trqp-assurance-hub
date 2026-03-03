@@ -72,3 +72,7 @@ SAD-1 is the **registry-agnostic profile** that lets the TRQP ecosystem evaluate
 ## Reference
 
 - [UNTP Digital Identity Anchor (DIA)](reference/untp-digital-identity-anchor.md)
+
+## Supply chain integrity
+
+- OpenSSF-aligned reference: `docs/reference/openssf-supply-chain.md`

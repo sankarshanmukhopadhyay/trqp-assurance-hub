@@ -105,3 +105,13 @@ If the evaluated directory binds subjects to an identity anchoring mechanism (fo
 - verify that revocation/status mechanisms are published and operational (if applicable)
 
 Evidence outputs should be captured in the evidence bundle as identity anchor artifacts and verification notes.
+
+### Step 6A — Supply chain integrity evidence (recommended for AL3+)
+
+Collect and validate implementation supply chain integrity evidence aligned to **TSPP-SCI**:
+
+- SBOM for deployed artifacts (`software_sbom`)
+- Build provenance / attestation (`build_provenance`)
+- Scorecard output or equivalent posture evidence (`openssf_scorecard_report`)
+
+This step treats the directory as a **composite trust system**: governance + publication + anchoring + software integrity.
