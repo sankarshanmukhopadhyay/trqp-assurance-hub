@@ -1,0 +1,33 @@
+{
+  "profile_id": "sad-1",
+  "title": "Sovereign Authoritative Directory",
+  "version": "1.0.0",
+  "artifacts": [
+    {
+      "id": "directory_entry",
+      "schema": "schemas/authoritative-directory-entry.schema.json",
+      "example": "examples/authoritative-directory-entry.example.json"
+    },
+    {
+      "id": "publication_manifest",
+      "schema": "schemas/directory-publication-manifest.schema.json",
+      "example": "examples/directory-publication-manifest.example.json"
+    },
+    {
+      "id": "status_feed",
+      "schema": "schemas/directory-status-feed.schema.json",
+      "example": "examples/directory-status-feed.example.json"
+    }
+  ],
+  "docs": [
+    "docs/guides/directory-assurance-workflow.md",
+    "docs/guides/assurance-levels.md",
+    "docs/revocation-semantics.md"
+  ],
+  "references": [
+    {
+      "title": "UN/CEFACT GTR / GRID workstream",
+      "url": "https://un.opensource.unicc.org/unece/uncefact/gtr/"
+    }
+  ]
+}

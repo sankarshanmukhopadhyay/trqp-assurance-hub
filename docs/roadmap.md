@@ -126,7 +126,7 @@ This is the current best guess of the most leverage-positive sequence (subject t
 - ✅ Findings addressed: AL contract pinning, template hygiene, and code intent documentation.
 - ✅ Release artifacts: VERSION file, changelog entries, and release template updated.
 
-_Last updated: 2026-02-27_
+_Last updated: 2026-03-03_
 
 ## GRID readiness kernel
 
@@ -136,3 +136,14 @@ Status: **Done**
 - Add registrar listing and status feed schemas + examples
 - Add assurance mapping, threat annex, verifier-first workflow
 - Add crosswalk references to UN/CEFACT GTR/GRID and EBSI registry implementations
+
+
+## SAD-1 readiness kernel (authoritative directories)
+
+Status: **Done**
+
+- Add SAD-1 profile (md + machine-readable json)
+- Add generic directory entry, publication manifest, and status feed schemas + examples
+- Add an end-to-end directory assurance workflow guide
+- Add a strategy note framing TRQP as meta-assurance for authoritative directories
+- Mark GRID as an instance profile implementing SAD-1

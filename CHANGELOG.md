@@ -1,6 +1,12 @@
 # Changelog
 
-All notable changes to this repository will be documented in this file.
+
+## v0.6.0 (2026-03-03)
+
+- Add SAD-1 (Sovereign Authoritative Directory) profile (md + json) to make directory evaluations portable across sovereign and non-sovereign implementations.
+- Add SAD-1 schemas and examples for directory entry, publication manifest, and status feed.
+- Add end-to-end directory assurance workflow guide and strategy note framing TRQP as meta-assurance for authoritative directories.
+- Clarify GRID as an instance profile implementing SAD-1.
 
 ## Unreleased
 

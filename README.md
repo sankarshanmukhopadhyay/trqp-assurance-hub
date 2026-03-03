@@ -3,7 +3,7 @@
 📘 **Documentation site (GitHub Pages):** https://<OWNER>.github.io/trqp-assurance-hub/
 
 
-**Current version:** v0.5.0
+**Current version:** v0.6.0
 
 
 [![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)

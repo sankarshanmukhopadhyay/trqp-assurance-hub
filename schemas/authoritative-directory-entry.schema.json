@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "authoritative-directory-entry.schema.json",
+  "title": "Authoritative Directory Entry",
+  "type": "object",
+  "required": [
+    "entry_id",
+    "subject_id",
+    "role",
+    "scope",
+    "status",
+    "issued_at"
+  ],
+  "properties": {
+    "entry_id": {
+      "type": "string",
+      "description": "Stable entry identifier within the directory."
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "Identifier for the listed subject (e.g., DID, URI, legal identifier)."
+    },
+    "role": {
+      "type": "string",
+      "description": "Directory role, such as registrar, authority, assessor, operator."
+    },
+    "scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Jurisdiction, domain, or semantic scope of authority."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "suspended",
+        "revoked",
+        "removed"
+      ]
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "ref"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "properties": {
+        "policy_ref": {
+          "type": "string"
+        },
+        "decision_ref": {
+          "type": "string"
+        },
+        "approver": {
+          "type": "string"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

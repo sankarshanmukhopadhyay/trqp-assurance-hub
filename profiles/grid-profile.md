@@ -2,6 +2,8 @@
 
 This profile defines the minimum publishable artifacts for a **GRID-listed registrar**.
 
+This is an *instance profile* that implements **SAD-1 (Sovereign Authoritative Directory)**: `profiles/sad-1-profile.md`.
+
 GRID is treated here as an *implementation pattern* for trust registries/directory ecosystems that can be queried via TRQP.
 
 ## Scope

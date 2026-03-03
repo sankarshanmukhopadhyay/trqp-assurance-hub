@@ -58,3 +58,12 @@ You are translating governance intent into implementable and auditable artifacts
 - Profile: `../profiles/grid-profile.md`
 - Verifier workflow: `how-to-verify-grid.md`
 - Crosswalk to GTR: `grid-gtr-crosswalk.md`
+
+
+### Authoritative directories (SAD-1)
+
+SAD-1 is the **registry-agnostic profile** that lets the TRQP ecosystem evaluate authoritative directories, including sovereign registries.
+
+- Profile: `../profiles/sad-1-profile.md`
+- End-to-end workflow: `guides/directory-assurance-workflow.md`
+- Strategy note: `strategy/authoritative-directories.md`
