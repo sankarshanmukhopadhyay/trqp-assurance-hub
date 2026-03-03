@@ -3,7 +3,7 @@
 📘 **Documentation site (GitHub Pages):** https://<OWNER>.github.io/trqp-assurance-hub/
 
 
-**Current version:** v0.6.0
+**Current version:** v0.7.0
 
 
 [![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)
@@ -211,3 +211,13 @@ External references:
 ## UNTP Digital Identity Anchor (DIA)
 
 Some authoritative directories use UNTP DIA (and Identity Resolver patterns) to anchor issuer identities. This repo supports DIA-aware directory assurance via the SAD-1 `identity_anchor` extension and vendors the DIA JSON-LD context for reproducible checks. See `docs/reference/untp-digital-identity-anchor.md`.
+
+## Experimental profiles
+
+- **DeDi (Decentralized Directory Protocol)**: `profiles/dedi-experimental-profile.*` (experimental mapping for decentralized directories)
+
+### DeDi experimental spine
+
+- Mapping matrix: `docs/reference/dedi-mapping-matrix.md`
+- Machine-readable matrix: `docs/reference/dedi-mapping-matrix.yaml`
+

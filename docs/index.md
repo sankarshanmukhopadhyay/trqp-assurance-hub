@@ -76,3 +76,11 @@ SAD-1 is the **registry-agnostic profile** that lets the TRQP ecosystem evaluate
 ## Supply chain integrity
 
 - OpenSSF-aligned reference: `docs/reference/openssf-supply-chain.md`
+
+## Experimental support
+
+TRQP Assurance Hub includes an **experimental DeDi profile** to map decentralized directory artifacts into the Hub’s assurance workflow.
+
+- Profile: `profiles/dedi-experimental-profile.md`
+- Upstream: https://github.com/LF-Decentralized-Trust-labs/decentralized-directory-protocol
+

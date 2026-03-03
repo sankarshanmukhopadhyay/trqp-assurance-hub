@@ -1,0 +1,13 @@
+{
+  "subscriber_id": "sub-001",
+  "subscriber_url": "https://api.example.org",
+  "type": "BPP",
+  "domain": "mobility",
+  "city": "std:080",
+  "country": "IND",
+  "signing_public_key": "-----BEGIN PUBLIC KEY-----\\n...\\n-----END PUBLIC KEY-----",
+  "encryption_public_key": "-----BEGIN PUBLIC KEY-----\\n...\\n-----END PUBLIC KEY-----",
+  "status": "SUBSCRIBED",
+  "created": "2026-01-01T00:00:00Z",
+  "updated": "2026-02-01T00:00:00Z"
+}

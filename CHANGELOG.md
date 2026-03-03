@@ -1,7 +1,14 @@
 # Changelog
 
 
-## v0.6.0 (2026-03-03)
+## v0.7.0 (2026-03-03)
+
+- Add **DeDi experimental profile** (md + json) to support decentralized directory artifacts under the Hub assurance model.
+- Vendor DeDi JSON Schemas (non-normative snapshot) under `schemas/dedi/` and add example artifacts under `examples/dedi/`.
+- Update public docs to explain DeDi mapping and experimental stability posture.
+
+
+## v0.7.0 (2026-03-03)
 
 - Add SAD-1 (Sovereign Authoritative Directory) profile (md + json) to make directory evaluations portable across sovereign and non-sovereign implementations.
 - Add SAD-1 schemas and examples for directory entry, publication manifest, and status feed.

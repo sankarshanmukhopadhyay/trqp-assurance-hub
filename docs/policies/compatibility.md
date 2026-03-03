@@ -26,7 +26,8 @@ Maintain this table over time.
 
 | Conformance Suite version | TRQP-TSPP version | Status | Notes |
 |---:|---:|---|---|
-| 0.4.3 | 0.2.3 | Supported | Deterministic bundles + verifier-first workflow; recommended pairing |
+| 0.7.0 | 0.4.0 | Supported | Adds DeDi experimental profile alignment; recommended pairing |
+| 0.5.0 | 0.3.0 | Supported | Prior stable pairing before DeDi experimental |
 | 0.4.2 | 0.2.2 | Supported | Documentation alignment increment |
 | 0.4.1 | 0.2.1 | Supported | Baseline pairing prior to determinism hardening |
 
@@ -52,3 +53,12 @@ Breaking changes MUST:
 - Increment MAJOR version
 - Include a migration note
 - Update the known-good matrix
+
+## Experimental profiles
+
+The following profiles are **experimental** and may evolve independently of the core compatibility matrix:
+
+- **DeDi (Decentralized Directory Protocol)**: `profiles/dedi-experimental-profile.*` (snapshot 2026-03-03)
+
+Experimental profiles do not change the **known-good CTS ↔ TSPP pairing** rules, but may require additional profile-specific checks.
+

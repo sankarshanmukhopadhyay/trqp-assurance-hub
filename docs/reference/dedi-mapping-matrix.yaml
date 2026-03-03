@@ -1,0 +1,44 @@
+id: dedi-mapping-matrix
+status: experimental
+snapshot_date: '2026-03-03'
+upstream: https://github.com/LF-Decentralized-Trust-labs/decentralized-directory-protocol
+rows:
+- dedi_artifact: public_key
+  hub_control_objective: 'Key management & authenticity: publish current key material
+    + rotation metadata to enable verifier-grade signature validation.'
+  cts_check_id: dedi_public_key_schema
+  expected_evidence:
+  - Published public_key document
+  - Key rotation procedure
+  - Rotation drill evidence (AL3/AL4), e.g., rotation proof and compromise response
+    runbook
+  cts_schema_path: schemas/dedi/public_key.schema.json
+- dedi_artifact: revoke
+  hub_control_objective: 'Revocation semantics: invalidate identifiers/records with
+    timestamps and reason codes; supports downstream safety and dispute handling.'
+  cts_check_id: dedi_revoke_schema
+  expected_evidence:
+  - Published revoke document(s)
+  - Revocation policy
+  - Incident ticket references (AL3/AL4)
+  - Renewal/reinstatement policy if applicable
+  cts_schema_path: schemas/dedi/revoke.schema.json
+- dedi_artifact: membership
+  hub_control_objective: 'Directory entry correctness: membership assertions are structured,
+    scoped, time-bounded, and reviewable (subject, role, status).'
+  cts_check_id: dedi_membership_schema
+  expected_evidence:
+  - Published membership record(s)
+  - Governance policy describing issuance and update authority
+  - Audit trail or change-log expectations (AL3/AL4)
+  cts_schema_path: schemas/dedi/membership.schema.json
+- dedi_artifact: Beckn_subscriber
+  hub_control_objective: 'Ecosystem-specific directory integrity: subscriber metadata
+    is well-formed and publishable under deterministic integrity expectations.'
+  cts_check_id: dedi_subscriber_schema
+  expected_evidence:
+  - Published subscriber records
+  - Ecosystem governance rules
+  - Publication cadence and integrity checksums/manifest (recommended)
+  - Operator declaration for higher ALs
+  cts_schema_path: schemas/dedi/Beckn_subscriber.schema.json
