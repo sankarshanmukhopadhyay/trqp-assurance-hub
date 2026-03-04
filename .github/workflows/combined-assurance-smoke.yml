@@ -89,7 +89,21 @@ jobs:
           assurance_level=${{ github.event_name == 'workflow_dispatch' && inputs.tspp_assurance_level || 'AL1' }}
           EOF
 
-          python tools/generate-manifest.py             --build-id "${HUB_SHA}"             --target "${{ github.event_name == 'workflow_dispatch' && inputs.target || 'https://registry.example.org' }}"             --hub-commit "${HUB_SHA}"             --ci-run-url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"             --cs-version "${{ github.event_name == 'workflow_dispatch' && inputs.conformance_ref || 'main' }}"             --cs-profile-id "${{ github.event_name == 'workflow_dispatch' && inputs.conformance_profile || 'smoke' }}"             --cs-run-id "cts-${GITHUB_RUN_ID}"             --tspp-version "${{ github.event_name == 'workflow_dispatch' && inputs.tspp_ref || 'main' }}"             --tspp-assurance-level "${{ github.event_name == 'workflow_dispatch' && inputs.tspp_assurance_level || 'AL1' }}"             --tspp-run-id "tspp-${GITHUB_RUN_ID}"             --artifact "log:artifacts/conformance-suite-checkout.txt:trqp_conformance_suite:text/plain:smoke-v0:checkout metadata"             --artifact "log:artifacts/tspp-checkout.txt:trqp_tspp:text/plain:smoke-v0:checkout metadata"             --out artifacts/combined-assurance-manifest.json             --schema schemas/combined-assurance-manifest.schema.json
+          python tools/generate-manifest.py \
+            --build-id "${HUB_SHA}" \
+            --target "${{ github.event_name == 'workflow_dispatch' && inputs.target || 'https://registry.example.org' }}" \
+            --hub-commit "${HUB_SHA}" \
+            --ci-run-url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+            --cs-version "${{ github.event_name == 'workflow_dispatch' && inputs.conformance_ref || 'main' }}" \
+            --cs-profile-id "${{ github.event_name == 'workflow_dispatch' && inputs.conformance_profile || 'smoke' }}" \
+            --cs-run-id "cts-${GITHUB_RUN_ID}" \
+            --tspp-version "${{ github.event_name == 'workflow_dispatch' && inputs.tspp_ref || 'main' }}" \
+            --tspp-assurance-level "${{ github.event_name == 'workflow_dispatch' && inputs.tspp_assurance_level || 'AL1' }}" \
+            --tspp-run-id "tspp-${GITHUB_RUN_ID}" \
+            --artifact "log:artifacts/conformance-suite-checkout.txt:trqp_conformance_suite:text/plain:smoke-v0:checkout metadata" \
+            --artifact "log:artifacts/tspp-checkout.txt:trqp_tspp:text/plain:smoke-v0:checkout metadata" \
+            --out artifacts/combined-assurance-manifest.json \
+            --schema schemas/combined-assurance-manifest.schema.json
 
       - name: Upload manifest artifact
         uses: actions/upload-artifact@v4
