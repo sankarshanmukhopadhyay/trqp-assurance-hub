@@ -1,6 +1,9 @@
 ---
 layout: default
 title: TRQP Assurance Hub
+owner: maintainers
+last_reviewed: 2026-03-04
+tier: 0
 ---
 
 # Documentation Index
@@ -84,3 +87,6 @@ TRQP Assurance Hub includes an **experimental DeDi profile** to map decentralize
 - Profile: `profiles/dedi-experimental-profile.md`
 - Upstream: https://github.com/LF-Decentralized-Trust-labs/decentralized-directory-protocol
 
+## Governance
+
+- Documentation freshness policy: [`docs/governance/README.md`](governance/README.md)

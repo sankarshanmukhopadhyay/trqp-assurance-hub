@@ -1,0 +1,13 @@
+tier_sla_days:
+  "0": 30
+  "1": 60
+  "2": 90
+  "3": 180
+
+# Files that are exempt from SLA checks (generated content, release notes, etc.)
+exempt_globs:
+  - "releases/**"
+  - "CHANGELOG.md"
+  - ".github/**"
+  - "LICENSE"
+  - "NOTICE"

@@ -1,3 +1,9 @@
+---
+owner: maintainers
+last_reviewed: 2026-03-04
+tier: 0
+---
+
 # Quickstart
 
 This repo is the front door for running **combined assurance** in the TRQP ecosystem.

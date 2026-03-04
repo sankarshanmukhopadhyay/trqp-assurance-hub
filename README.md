@@ -1,3 +1,13 @@
+---
+owner: maintainers
+last_reviewed: 2026-03-04
+tier: 0
+---
+
+## Documentation
+
+- Documentation governance: [`docs/governance/README.md`](docs/governance/README.md)
+
 # TRQP Assurance Hub
 
 📘 **Documentation site (GitHub Pages):** https://<OWNER>.github.io/trqp-assurance-hub/
@@ -220,4 +230,3 @@ Some authoritative directories use UNTP DIA (and Identity Resolver patterns) to 
 
 - Mapping matrix: `docs/reference/dedi-mapping-matrix.md`
 - Machine-readable matrix: `docs/reference/dedi-mapping-matrix.yaml`
-
