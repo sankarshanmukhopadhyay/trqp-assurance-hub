@@ -31,17 +31,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout hub
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Checkout trqp-conformance-suite
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: sankarshanmukhopadhyay/trqp-conformance-suite
           ref: ${{ github.event_name == 'workflow_dispatch' && inputs.conformance_ref || 'main' }}
           path: external/trqp-conformance-suite
 
       - name: Checkout TRQP-TSPP
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: sankarshanmukhopadhyay/TRQP-TSPP
           ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tspp_ref || 'main' }}
