@@ -121,7 +121,10 @@ This is the current best guess of the most leverage-positive sequence (subject t
 - ✅ AL1–AL4 canonical lock and cross-repo contract (`docs/guides/assurance-levels.md`, `al-contract.json`).
 
 
-## Release readiness (v0.7.1)
+## Release readiness (v0.8.0)
+
+- Canonical AL contract remains stable for downstream pin verification.
+- Downstream release train synchronized to TSPP v0.5.0 and Conformance Suite v0.7.0.
 
 - ✅ Security and correctness stabilization completed for workflow versions, security policy coverage, and repository hygiene.
 - ✅ Public documentation, release notes, and cross-repo version pins synchronized for the patch release.

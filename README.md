@@ -13,7 +13,9 @@ tier: 0
 📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
 
 
-**Current version:** v0.7.1
+**Current version:** v0.8.0
+
+**Downstream release train:** TSPP v0.5.0 · Conformance Suite v0.7.0
 
 
 [![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)

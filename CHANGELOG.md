@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.8.0 (2026-03-06)
+
+- Reaffirm the canonical AL1 to AL4 contract for the hardening release train used by downstream TSPP and CTS repositories.
+- Synchronize roadmap, release, and README metadata with downstream version pins for TSPP v0.5.0 and CTS v0.7.0.
+
 ## v0.7.1 (2026-03-06)
 
 ### Fixed
