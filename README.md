@@ -1,6 +1,6 @@
 ---
 owner: maintainers
-last_reviewed: 2026-03-04
+last_reviewed: 2026-03-06
 tier: 0
 ---
 
@@ -13,9 +13,9 @@ tier: 0
 📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
 
 
-**Current version:** v0.8.0
+**Current version:** v0.8.1
 
-**Downstream release train:** TSPP v0.5.0 · Conformance Suite v0.7.0
+**Downstream release train:** TSPP v0.5.1 · Conformance Suite v0.7.1
 
 
 [![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)

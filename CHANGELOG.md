@@ -1,5 +1,26 @@
 # Changelog
 
+## v0.8.1 (2026-03-06)
+
+- Synchronize public-facing documentation, release metadata, and compatibility guidance with TRQP-TSPP v0.5.1 and Conformance Suite v0.7.1.
+- Update the known-good matrix to reflect the current supported CTS ↔ TSPP pairing after Commit 3 and 4 closure.
+- Publish a clean patch release that closes remaining documentation drift from the hardening train.
+
+## v0.2.0 (2026-03-06)
+
+### Added
+- Add AL3 combined assurance walkthrough to `docs/guides/combined-assurance.md`, including step-by-step evidence artifact production and independent review guidance.
+- Add AL4 combined assurance walkthrough to `docs/guides/combined-assurance.md`, including continuous monitoring artifact requirements, operational attestation, and assessor method recording.
+- Add evidence artifact vocabulary table to `docs/guides/combined-assurance.md` mapping AL requirements to concrete schemas and examples.
+
+### Changed
+- Expand `SECURITY.md` with threat model references covering `docs/grid-threat-annex.md`, canonical AL definitions, and reporting scope clarification distinguishing Hub guidance vulnerabilities from downstream operator issues.
+- Synchronize roadmap, release notes, and version references for the coordinated v0.2.0 release (TSPP v0.5.0, CTS v0.3.0).
+
+---
+
+*Prior entries below reflect earlier releases in this series.*
+
 ## v0.8.0 (2026-03-06)
 
 - Reaffirm the canonical AL1 to AL4 contract for the hardening release train used by downstream TSPP and CTS repositories.
@@ -57,6 +78,3 @@
 - Evidence artifacts matrix updated to include Certification Attestation.
 - CI example cross-checks extended to cover certification attestation evidence references.
 - README and TRQP alignment documentation updated to clarify the certification-baseline positioning.
-
-### Fixed
-- Documentation formatting and markdownlint compliance for headings, lists, and links.

@@ -15,8 +15,8 @@ python tools/generate-manifest.py \
   --target "https://registry.example.org" \
   --hub-commit "$GITHUB_SHA" \
   --ci-run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
-  --cs-version "0.3.0" --cs-profile-id "smoke" --cs-run-id "cts-smoke" \
-  --tspp-version "0.2.0" --tspp-assurance-level "AL1" --tspp-run-id "tspp-smoke" \
+  --cs-version "0.7.1" --cs-profile-id "smoke" --cs-run-id "cts-smoke" \
+  --tspp-version "0.5.1" --tspp-assurance-level "AL1" --tspp-run-id "tspp-smoke" \
   --artifact "evidence_bundle:artifacts/conformance-suite-evidence.json:trqp_conformance_suite" \
   --artifact "evidence_bundle:artifacts/tspp-evidence.json:trqp_tspp" \
   --out artifacts/combined-assurance-manifest.json \
