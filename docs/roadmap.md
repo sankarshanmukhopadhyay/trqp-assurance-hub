@@ -121,12 +121,12 @@ This is the current best guess of the most leverage-positive sequence (subject t
 - ✅ AL1–AL4 canonical lock and cross-repo contract (`docs/guides/assurance-levels.md`, `al-contract.json`).
 
 
-## Release readiness (v0.4.1)
+## Release readiness (v0.7.1)
 
-- ✅ Findings addressed: AL contract pinning, template hygiene, and code intent documentation.
-- ✅ Release artifacts: VERSION file, changelog entries, and release template updated.
+- ✅ Security and correctness stabilization completed for workflow versions, security policy coverage, and repository hygiene.
+- ✅ Public documentation, release notes, and cross-repo version pins synchronized for the patch release.
 
-_Last updated: 2026-03-03_
+_Last updated: 2026-03-06_
 
 ## GRID readiness kernel
 

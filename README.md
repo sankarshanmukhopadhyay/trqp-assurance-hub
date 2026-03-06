@@ -10,10 +10,10 @@ tier: 0
 
 # TRQP Assurance Hub
 
-📘 **Documentation site (GitHub Pages):** https://<OWNER>.github.io/trqp-assurance-hub/
+📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
 
 
-**Current version:** v0.7.0
+**Current version:** v0.7.1
 
 
 [![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)

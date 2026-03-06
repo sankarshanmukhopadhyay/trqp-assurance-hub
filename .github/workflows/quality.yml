@@ -9,7 +9,7 @@ jobs:
   markdown_lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
       - name: Markdown lint
         uses: avto-dev/markdown-lint@04d43ee9191307b50935a753da3b775ab695eceb # v1
         with:
@@ -18,7 +18,7 @@ jobs:
   link_check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
       - name: Link check
         uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2.8.0
         env:

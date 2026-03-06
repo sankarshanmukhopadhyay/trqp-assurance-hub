@@ -1,84 +1,57 @@
 # Changelog
 
+## v0.7.1 (2026-03-06)
+
+### Fixed
+- Remove committed Python bytecode from `tools/__pycache__/` and add a repository `.gitignore`.
+- Standardize workflow action versions to supported releases for checkout, Python setup, and artifact upload.
+- Synchronize README, roadmap, security guidance, and release metadata for the current patch release.
+
+### Added
+- Add a repository `SECURITY.md` clarifying the scope for tooling, guidance, schemas, and workflow reports.
 
 ## v0.7.0 (2026-03-03)
 
-- Add **DeDi experimental profile** (md + json) to support decentralized directory artifacts under the Hub assurance model.
+### Added
+- DeDi experimental profile (markdown plus JSON) to support decentralized directory artifacts under the Hub assurance model.
 - Vendor DeDi JSON Schemas (non-normative snapshot) under `schemas/dedi/` and add example artifacts under `examples/dedi/`.
+- SAD-1 profile (markdown plus JSON) to make directory evaluations portable across sovereign and non-sovereign implementations.
+- SAD-1 schemas and examples for directory entry, publication manifest, and status feed.
+- End-to-end directory assurance workflow guide and strategy note framing TRQP as meta-assurance for authoritative directories.
+
+### Changed
 - Update public docs to explain DeDi mapping and experimental stability posture.
-
-
-## v0.7.0 (2026-03-03)
-
-- Add SAD-1 (Sovereign Authoritative Directory) profile (md + json) to make directory evaluations portable across sovereign and non-sovereign implementations.
-- Add SAD-1 schemas and examples for directory entry, publication manifest, and status feed.
-- Add end-to-end directory assurance workflow guide and strategy note framing TRQP as meta-assurance for authoritative directories.
 - Clarify GRID as an instance profile implementing SAD-1.
 
-## Unreleased
-
-- Add OpenSSF-aligned supply chain integrity evidence guidance (TSPP-SCI) and documentation cross-links.
-
-- (nothing yet)
-- Add UNTP DIA / IDR references and wire SAD-1 identity anchoring extension (vendored DIA JSON-LD context).
 ## v0.5.0
 
 ### Added
-- GRID readiness kernel: profile + schemas + verifier workflow + threat annex
-- Registrar listing schema and GRID status feed schema (+ examples)
-- Crosswalk references to UN/CEFACT GTR/GRID and EBSI registry implementations
+- GRID readiness kernel: profile, schemas, verifier workflow, and threat annex.
+- Registrar listing schema and GRID status feed schema with examples.
+- Crosswalk references to UN/CEFACT GTR/GRID and EBSI registry implementations.
 
 ### Fixed
-- Made `tools/control-catalog.json` valid JSON to keep validation trustworthy
+- Made `tools/control-catalog.json` valid JSON to keep validation trustworthy.
 
 ## v0.4.1
 
 ### Added
-- `al-contract.json` to provide a machine-readable contract for canonical AL1–AL4 semantics (includes SHA-256 of the normative AL doc).
+- `al-contract.json` to provide a machine-readable contract for canonical AL1 to AL4 semantics, including the SHA-256 of the normative AL document.
 
 ### Changed
 - Clarified normative status of `docs/guides/assurance-levels.md` for cross-repo consumption and audit stability.
 
-
 ## v0.4.0
 
 ### Added
-
-- Candidate Trust Registry Assurance & Certification Baseline documentation pack (`docs/certification-baseline/`).
-- Certification Attestation artifact (schema + example) to bind assessor identity, scope, validity, and evidence references.
-- Normative control framework fields in the control catalog (requirements, evidence, evaluation method, severity, tier applicability).
+- Candidate Trust Registry Assurance and Certification Baseline documentation pack (`docs/certification-baseline/`).
+- Certification Attestation artifact (schema plus example) to bind assessor identity, scope, validity, and evidence references.
+- Normative control framework fields in the control catalog.
 
 ### Changed
-
 - Evidence artifacts matrix updated to include Certification Attestation.
 - CI example cross-checks extended to cover certification attestation evidence references.
 - README and TRQP alignment documentation updated to clarify the certification-baseline positioning.
 
-
-## v0.3.0
-
-### Added
-
-- Recognition Assertion artifact (schema + example + guide).
-- Lifecycle Assertion artifact and lifecycle state model guidance.
-- Candidate control catalog and Control Satisfaction Declaration artifact.
-- Recognition graph semantics and assurance-layer revocation semantics guides.
-- JSON Schema validation in CI (examples validated against schemas).
-
-### Changed
-
-- Assurance Profile schema extended to bind controls, lifecycle pointers, and references to standalone recognition assertions.
-- Evidence artifacts matrix updated to include control, lifecycle, recognition, and revocation artifacts.
-- Combined Assurance Manifest example extended to demonstrate new artifact kinds.
-
-### Added
-
-- Combined assurance smoke workflow that emits a manifest and an artifact checklist.
-- Combined Assurance Manifest schema and example.
-- Evidence artifacts and expectations guide (includes AL1–AL4 matrix).
-- Upstream TRQP RFE alignment document.
-- Candidate TRQP Assurance Profile schema and example (machine-readable governance + assurance declarations).
-
 ### Fixed
-
 - Documentation formatting and markdownlint compliance for headings, lists, and links.
