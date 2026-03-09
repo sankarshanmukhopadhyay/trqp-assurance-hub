@@ -1,0 +1,27 @@
+{
+  "directory_id": "sad-1-demo",
+  "published_at": "2026-03-03T00:00:00Z",
+  "entries_digest": {
+    "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "artifacts": [
+    {
+      "id": "entries",
+      "path": "directory/entries.json",
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "media_type": "application/json"
+    },
+    {
+      "id": "status_feed",
+      "path": "directory/status-feed.json",
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "media_type": "application/json"
+    }
+  ],
+  "signing": {
+    "algorithm": "ed25519",
+    "public_key_ref": "keys/public.pem",
+    "signature_ref": "signatures/manifest.sig"
+  },
+  "notes": "Demonstration manifest for SAD-1 publishing model."
+}

@@ -1,0 +1,43 @@
+{
+  "profile_id": "dedi-experimental",
+  "title": "Decentralized Directory Protocol (DeDi) Experimental Profile",
+  "version": "0.1.0",
+  "status": "experimental",
+  "artifacts": [
+    {
+      "id": "dedi_public_key_directory",
+      "schema": "schemas/dedi/public_key.schema.json",
+      "example": "examples/dedi/public_key.example.json"
+    },
+    {
+      "id": "dedi_revocation_list",
+      "schema": "schemas/dedi/revoke.schema.json",
+      "example": "examples/dedi/revoke.example.json"
+    },
+    {
+      "id": "dedi_membership_record",
+      "schema": "schemas/dedi/membership.schema.json",
+      "example": "examples/dedi/membership.example.json"
+    },
+    {
+      "id": "dedi_subscriber_record",
+      "schema": "schemas/dedi/Beckn_subscriber.schema.json",
+      "example": "examples/dedi/Beckn_subscriber.example.json"
+    }
+  ],
+  "docs": [
+    "profiles/dedi-experimental-profile.md",
+    "docs/guides/directory-assurance-workflow.md",
+    "docs/guides/assurance-profile.md"
+  ],
+  "references": [
+    {
+      "title": "Decentralized Directory Protocol (upstream)",
+      "url": "https://github.com/LF-Decentralized-Trust-labs/decentralized-directory-protocol"
+    }
+  ],
+  "notes": [
+    "This profile defines a provisional mapping from DeDi artifacts to the TRQP Assurance Hub directory assurance model.",
+    "The profile does not modify the upstream DeDi protocol; it only specifies how DeDi implementations MAY be evaluated using Hub controls and evidence patterns."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "assurance_level": "AL4",
+  "lifecycle_state": "operational",
+  "effective_at": "2026-02-27T00:00:00Z",
+  "transition_evidence": [
+    {
+      "type": "change_request",
+      "ref": "tickets/CR-010"
+    },
+    {
+      "type": "deployment_record",
+      "ref": "ci://example/run/2001"
+    }
+  ],
+  "change_control": {
+    "policy_ref": "policies/change-management.md",
+    "approval_ref": "tickets/CR-010#approval"
+  }
+}

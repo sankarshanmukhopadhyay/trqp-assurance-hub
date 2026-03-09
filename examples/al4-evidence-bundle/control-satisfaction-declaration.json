@@ -1,0 +1,37 @@
+{
+  "control_catalog": "tools/control-catalog.json",
+  "assurance_level": "AL4",
+  "satisfied_controls": [
+    {
+      "control_id": "GOV-001",
+      "evidence_refs": [
+        "operator-declaration.md"
+      ]
+    },
+    {
+      "control_id": "EVD-001",
+      "evidence_refs": [
+        "combined-assurance-manifest.json",
+        "version-tuple.json"
+      ]
+    },
+    {
+      "control_id": "MON-001",
+      "evidence_refs": [
+        "monitoring-evidence/monitoring-summary.json"
+      ]
+    },
+    {
+      "control_id": "REV-001",
+      "evidence_refs": [
+        "revocation-notice.json",
+        "renewal-plan.md"
+      ]
+    }
+  ],
+  "assessor": {
+    "id": "assessor:example:accredited-body",
+    "role": "accredited-assessor",
+    "method": "audit+sampling+telemetry-review"
+  }
+}

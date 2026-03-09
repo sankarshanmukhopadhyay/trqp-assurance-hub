@@ -1,0 +1,10 @@
+{
+  "nonconformity_id": "NC-2026-0001",
+  "detected_at": "2026-02-10",
+  "closed_at": "2026-02-20",
+  "closure_summary": "Updated key rotation procedure and re-ran posture checks.",
+  "evidence_refs": [
+    "ci://example/run/1201",
+    "ci://example/run/1234"
+  ]
+}

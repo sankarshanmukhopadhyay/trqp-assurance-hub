@@ -1,84 +1,99 @@
 # Changelog
 
-## v0.7.1 (2026-03-06)
-
-- Synchronize public-facing documentation and release metadata with TRQP-TSPP v0.5.1 and Assurance Hub v0.8.1.
-- Retain Commit 3 and 4 tooling additions while removing stale version drift from README, roadmap, and crosswalk docs.
-- Refresh release artifacts for the coordinated patch alignment release.
-
-## v0.3.0 (2026-03-06)
-
-### Added
-- Add `--dry-run` flag to `cts/run.py` to validate inputs and list applicable tests without making HTTP requests.
-- Add `--list-tests` flag to `cts/run.py` to print tests applicable to the selected profile and exit.
-- Add `identifiers` block support to `sut.yaml` config, allowing real SUTs to override `authority_id`, `entity_id`, `subject_authority_id`, and `action` without modifying core test definitions.
-- Add `QUICKSTART.md` at the repository root for fast onboarding of new implementers and operators.
+## v0.9.0 (2026-03-09)
 
 ### Fixed
-- Fix JSONPath wildcard token indexing bug: `tokens.index(tok)` was replaced with `enumerate`-based tracking, preventing incorrect remainder slicing when a wildcard token appeared more than once in a path.
+- Align `schemas/combined-assurance-manifest.schema.json` with the actual output of
+  `tools/generate-manifest.py`. The previous schema used a flat shape (`build_id`, `target`,
+  `version_tuple` at root; `additionalProperties: false`) that did not match the richer nested
+  structure the tool produces (`build: {build_id, target, commit, ci_run_url}`, `tools: {...}`,
+  `generator: {...}`). The artifact items schema also blocked `produced_by`, `media_type`,
+  `notes`, and `format`. This mismatch caused the `combined-assurance-smoke` CI to fail
+  on every push to `main` when schema validation was invoked via `--schema`.
+- Update `examples/combined-assurance-manifest.example.json` to match the corrected schema
+  shape so `tools/validate_examples.py` passes cleanly.
+
+### Added
+- New `validate` job in `.github/workflows/quality.yml` that runs
+  `tools/validate_examples.py` (example/schema conformance + cross-checks) and
+  `scripts/doc_tests.py` (JSON/YAML parse hygiene, markdown internal links) on every push
+  and pull request. Example drift from schemas is now caught in CI.
+
+## v0.8.1 (2026-03-06)
+
+- Synchronize public-facing documentation, release metadata, and compatibility guidance with TRQP-TSPP v0.5.1 and Conformance Suite v0.7.1.
+- Update the known-good matrix to reflect the current supported CTS ↔ TSPP pairing after Commit 3 and 4 closure.
+- Publish a clean patch release that closes remaining documentation drift from the hardening train.
+
+## v0.2.0 (2026-03-06)
+
+### Added
+- Add AL3 combined assurance walkthrough to `docs/guides/combined-assurance.md`, including step-by-step evidence artifact production and independent review guidance.
+- Add AL4 combined assurance walkthrough to `docs/guides/combined-assurance.md`, including continuous monitoring artifact requirements, operational attestation, and assessor method recording.
+- Add evidence artifact vocabulary table to `docs/guides/combined-assurance.md` mapping AL requirements to concrete schemas and examples.
 
 ### Changed
-- Refactor `cts/run.py` to extract `resolve_identifiers`, `apply_identifier_overrides`, and `list_tests` functions, reducing the size of `main()` and making each concern independently testable.
-- Update `examples/sut.local.yaml.example` to document the `identifiers:` override block.
-- Expand `SECURITY.md` with threat model references and reporting scope clarification.
-- Synchronize roadmap, release notes, and version pins for the coordinated v0.3.0 release.
+- Expand `SECURITY.md` with threat model references covering `docs/grid-threat-annex.md`, canonical AL definitions, and reporting scope clarification distinguishing Hub guidance vulnerabilities from downstream operator issues.
+- Synchronize roadmap, release notes, and version references for the coordinated v0.2.0 release (TSPP v0.5.0, CTS v0.3.0).
 
 ---
 
 *Prior entries below reflect earlier releases in this series.*
 
-## v0.7.0 (2026-03-06)
+## v0.8.0 (2026-03-06)
 
-- Add machine-verifiable AL contract pin checking using a canonical assurance-level snapshot from the Assurance Hub.
-- Synchronize cross-repo version references and public-facing release documentation for the AL3/AL4 hardening release train.
+- Reaffirm the canonical AL1 to AL4 contract for the hardening release train used by downstream TSPP and CTS repositories.
+- Synchronize roadmap, release, and README metadata with downstream version pins for TSPP v0.5.0 and CTS v0.7.0.
 
-## v0.6.1 (2026-03-06)
+## v0.7.1 (2026-03-06)
 
 ### Fixed
-- Reset per-test verdict override state in `cts/run.py` so an earlier ERROR does not leak into later passing cases.
-- Write `checksums.json.generated_at` with a real timestamp instead of a null value.
-- Synchronize README, roadmap, security guidance, and version pins for the current patch release.
-
-### Changed
-- Move the example SUT configuration to `examples/sut.local.yaml.example` and require generated local signing keys.
-- Add explicit security warnings to the PoC service and example SUT configuration.
-- Replace the placeholder GitHub Pages URL in the README with the production repository URL.
+- Remove committed Python bytecode from `tools/__pycache__/` and add a repository `.gitignore`.
+- Standardize workflow action versions to supported releases for checkout, Python setup, and artifact upload.
+- Synchronize README, roadmap, security guidance, and release metadata for the current patch release.
 
 ### Added
-- Extend `.gitignore` to keep generated local SUT configs out of version control.
+- Add a repository `SECURITY.md` clarifying the scope for tooling, guidance, schemas, and workflow reports.
 
-## v0.6.0 (2026-03-03)
-
-### Added
-- DeDi experimental artifact validation (vendored schemas plus validation script).
-- `profiles/dedi_experimental.yaml` to enable DeDi profile runs.
-- SAD-1 schemas for directory entry, publication manifest, and status feed.
-- `scripts/validate_directory_artifacts.py` to validate authoritative directory artifacts as evidence.
-- Documentation for directory artifact validation and how it complements API conformance testing.
-
-### Changed
-- Documentation updates linking DeDi profile to TRQP Assurance Hub experimental mapping.
-
-## v0.4.4
+## v0.7.0 (2026-03-03)
 
 ### Added
-- Optional GRID artifact schemas (registrar listing and status feed).
-- GRID support documentation with external reference pointers.
+- DeDi experimental profile (markdown plus JSON) to support decentralized directory artifacts under the Hub assurance model.
+- Vendor DeDi JSON Schemas (non-normative snapshot) under `schemas/dedi/` and add example artifacts under `examples/dedi/`.
+- SAD-1 profile (markdown plus JSON) to make directory evaluations portable across sovereign and non-sovereign implementations.
+- SAD-1 schemas and examples for directory entry, publication manifest, and status feed.
+- End-to-end directory assurance workflow guide and strategy note framing TRQP as meta-assurance for authoritative directories.
 
 ### Changed
-- Documentation crosswalk updated to reference GRID artifacts.
+- Update public docs to explain DeDi mapping and experimental stability posture.
+- Clarify GRID as an instance profile implementing SAD-1.
+
+## v0.5.0
+
+### Added
+- GRID readiness kernel: profile, schemas, verifier workflow, and threat annex.
+- Registrar listing schema and GRID status feed schema with examples.
+- Crosswalk references to UN/CEFACT GTR/GRID and EBSI registry implementations.
+
+### Fixed
+- Made `tools/control-catalog.json` valid JSON to keep validation trustworthy.
 
 ## v0.4.1
 
 ### Added
-- `al-contract.json` to pin Assurance Level semantics to the canonical TRQP Assurance Hub definitions.
-- `docs/templates/traceability-template.md` for implementer traceability (explicitly non-normative).
+- `al-contract.json` to provide a machine-readable contract for canonical AL1 to AL4 semantics, including the SHA-256 of the normative AL document.
 
 ### Changed
-- Clarified that this repo consumes canonical AL1 to AL4 semantics and does not redefine them.
-- Updated documentation to reduce template noise.
+- Clarified normative status of `docs/guides/assurance-levels.md` for cross-repo consumption and audit stability.
 
 ## v0.4.0
 
 ### Added
-- Conformance suite structure: profiles, requirements, tests, runner scaffolding, and evidence bundle patterns.
+- Candidate Trust Registry Assurance and Certification Baseline documentation pack (`docs/certification-baseline/`).
+- Certification Attestation artifact (schema plus example) to bind assessor identity, scope, validity, and evidence references.
+- Normative control framework fields in the control catalog.
+
+### Changed
+- Evidence artifacts matrix updated to include Certification Attestation.
+- CI example cross-checks extended to cover certification attestation evidence references.
+- README and TRQP alignment documentation updated to clarify the certification-baseline positioning.

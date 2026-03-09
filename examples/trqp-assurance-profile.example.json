@@ -1,0 +1,92 @@
+{
+  "profile_version": "0.3.0",
+  "profile_id": "example-registry-assurance-profile",
+  "published_at": "2026-02-22T00:00:00Z",
+  "subject": {
+    "name": "Example TRQP Registry",
+    "registry_base_url": "https://registry.example.org",
+    "operator": {
+      "name": "Example Operator",
+      "contact": "security@example.org"
+    }
+  },
+  "assurance": {
+    "assurance_level": "AL2",
+    "profile_family": "Standard"
+  },
+  "evidence_expectations": [
+    {
+      "artifact": "conformance evidence bundle",
+      "expectation": "required",
+      "notes": "Protocol behavior assurance produced by the Conformance Suite."
+    },
+    {
+      "artifact": "TSPP posture evidence bundle",
+      "expectation": "required",
+      "notes": "Security/privacy posture evidence produced by TRQP-TSPP."
+    },
+    {
+      "artifact": "Combined Assurance Manifest",
+      "expectation": "required",
+      "notes": "Binds conformance + posture evidence under a single build identifier."
+    },
+    {
+      "artifact": "version tuple declaration",
+      "expectation": "required",
+      "notes": "Prefer tags; otherwise use main@<sha>."
+    }
+  ],
+  "governance": {
+    "versioning": {
+      "compatibility_policy": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/blob/main/docs/policies/compatibility.md",
+      "version_tuple_required": true
+    },
+    "retention": {
+      "policy_url": "https://example.org/policies/evidence-retention",
+      "minimum_days": 90
+    },
+    "redaction": {
+      "redaction_report_required": true,
+      "policy_url": "https://example.org/policies/redaction"
+    }
+  },
+  "controls": {
+    "catalog_ref": "tools/control-catalog.json",
+    "control_ids": [
+      "TRQP-CTRL-01",
+      "TRQP-CTRL-02",
+      "TRQP-CTRL-03"
+    ],
+    "satisfaction_declaration_ref": "examples/control-satisfaction.example.json"
+  },
+  "lifecycle": {
+    "current_state": "active",
+    "lifecycle_assertion_ref": "examples/lifecycle-assertion.example.json"
+  },
+  "recognition": {
+    "assertion_refs": [
+      "examples/recognition-assertion.example.json"
+    ],
+    "assertions": [
+      {
+        "type": "recognizes-auditor",
+        "subject": "Example Audit Firm",
+        "basis": "Annual audit against internal control objectives",
+        "evidence": [
+          "artifact://audit-report/2025"
+        ]
+      }
+    ]
+  },
+  "discovery": {
+    "metadata_url": "https://registry.example.org/.well-known/trqp-metadata",
+    "capabilities": [
+      "supports-signed-errors",
+      "supports-cache-safe-metadata"
+    ]
+  },
+  "mappings": {
+    "credential_ecosystem": "W3C Verifiable Credentials",
+    "mapping_profile_url": "https://example.org/profiles/vc-mapping"
+  }
+}

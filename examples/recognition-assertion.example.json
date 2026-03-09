@@ -1,0 +1,35 @@
+{
+  "type": "TRQPRecognitionAssertion",
+  "id": "urn:trqp:recognition:example:2026-02",
+  "issuer": {
+    "id": "did:web:registry.example.org",
+    "name": "Example TRQP Registry",
+    "contact": "security@example.org"
+  },
+  "subject": {
+    "id": "did:web:registry.partner.example",
+    "name": "Partner Registry"
+  },
+  "recognition": {
+    "relationship": "recognizes_with_conditions",
+    "scope": {
+      "domain": "Example Trust Framework v1",
+      "jurisdictions": ["IN"],
+      "credential_types": ["VerifiableCredential"],
+      "policy_refs": [
+        "https://example.org/policies/recognition"
+      ]
+    },
+    "conditions": [
+      "Partner Registry MUST publish an Assurance Profile and Control Satisfaction Declaration.",
+      "Partner Registry MUST provide revocation endpoints consistent with its declared lifecycle policy."
+    ],
+    "evidence": [
+      {"kind": "audit-report", "ref": "artifact://audit-report/partner/2025"},
+      {"kind": "assurance-profile", "ref": "https://registry.partner.example/.well-known/trqp-assurance-profile"}
+    ],
+    "lifecycle_assertion_ref": "examples/lifecycle-assertion.example.json"
+  },
+  "issued_at": "2026-02-22T00:00:00Z",
+  "expires_at": "2027-02-22T00:00:00Z"
+}

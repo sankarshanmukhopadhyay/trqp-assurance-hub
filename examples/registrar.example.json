@@ -1,0 +1,16 @@
+{
+  "id": "did:example:registrar:india:001",
+  "name": "Example National Registrar",
+  "jurisdiction": "IN",
+  "governance_policy": {
+    "policy_uri": "https://example.org/policies/registrar-policy.md",
+    "policy_hash": "sha256:EXAMPLE"
+  },
+  "assurance": {
+    "assurance_level": "AL3",
+    "evidence_bundle_uri": "https://example.org/evidence/al3-bundle.zip",
+    "last_audit": "2026-03-02T00:00:00Z"
+  },
+  "status": "active",
+  "updated_at": "2026-03-02T00:00:00Z"
+}

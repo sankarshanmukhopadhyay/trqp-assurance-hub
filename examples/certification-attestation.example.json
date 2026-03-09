@@ -1,0 +1,60 @@
+{
+  "type": "TRQPCertificationAttestation",
+  "id": "urn:uuid:0f0cf6b8-1b61-4a2a-9c8e-1e3b4e2f9c41",
+  "certified_entity": {
+    "id": "did:example:trust-registry-operator-123",
+    "name": "Example Trust Registry Operator",
+    "contact": "sankarshan@qbfconsulting.digital"
+  },
+  "assurance_level": "AL3",
+  "assessor": {
+    "id": "did:example:assessor-001",
+    "name": "Example Independent Assessor",
+    "assessment_type": "independent",
+    "method": "Evidence review + schema validation; sampling of operational logs for selected controls."
+  },
+  "in_scope_controls": [
+    "TRQP-CTRL-01",
+    "TRQP-CTRL-02",
+    "TRQP-CTRL-03",
+    "TRQP-CTRL-04",
+    "TRQP-CTRL-07"
+  ],
+  "scope": {
+    "registry_endpoints": [
+      "/registries",
+      "/entries",
+      "/metadata"
+    ],
+    "trust_domain": "example.org/trust-domain",
+    "notes": "Certification applies to production deployment of the registry service and published artifacts."
+  },
+  "validity": {
+    "not_before": "2026-02-23T00:00:00Z",
+    "not_after": "2027-02-23T00:00:00Z"
+  },
+  "evidence_refs": [
+    {
+      "type": "assurance_profile",
+      "ref": "examples/trqp-assurance-profile.example.json"
+    },
+    {
+      "type": "control_satisfaction",
+      "ref": "examples/control-satisfaction.example.json"
+    },
+    {
+      "type": "lifecycle_assertion",
+      "ref": "examples/lifecycle-assertion.example.json"
+    },
+    {
+      "type": "recognition_assertion",
+      "ref": "examples/recognition-assertion.example.json"
+    },
+    {
+      "type": "combined_manifest",
+      "ref": "examples/combined-assurance-manifest.example.json"
+    }
+  ],
+  "revocation_uri": "docs/guides/revocation-semantics.md",
+  "issued_at": "2026-02-23T00:00:00Z"
+}

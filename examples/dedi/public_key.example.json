@@ -1,0 +1,8 @@
+{
+  "public_key_id": "example.org",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...\\n-----END PUBLIC KEY-----",
+  "keyType": "RSA",
+  "validFrom": "2026-01-01T00:00:00Z",
+  "validTo": "2027-01-01T00:00:00Z",
+  "previousKeys": []
+}

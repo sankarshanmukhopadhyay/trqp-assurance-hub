@@ -1,6 +1,6 @@
 # GitHub Pages (Jekyll) configuration
-title: "TRQP Conformance Suite"
-description: "Conformance tooling and documentation for TRQP implementations."
+title: "TRQP Assurance Hub"
+description: "Assurance, adoption, and GRID-aligned directory documentation for TRQP."
 theme: minima
 markdown: kramdown
 plugins:

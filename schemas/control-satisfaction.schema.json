@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trqp_assurance_hub/schemas/control-satisfaction.schema.json",
+  "title": "TRQP Control Satisfaction Declaration",
+  "type": "object",
+  "required": ["type", "id", "subject", "controls", "issued_at"],
+  "additionalProperties": false,
+  "properties": {
+    "type": {"const": "TRQPControlSatisfactionDeclaration"},
+    "id": {"type": "string", "minLength": 1},
+    "subject": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string"}
+      }
+    },
+    "catalog_ref": {
+      "type": "string",
+      "description": "Reference to the control catalog used (file path or URL)."
+    },
+    "controls": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["control_id", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "control_id": {"type": "string", "minLength": 1},
+          "status": {
+            "type": "string",
+            "enum": ["satisfied", "partially_satisfied", "not_satisfied", "not_applicable"]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["kind", "ref"],
+              "additionalProperties": false,
+              "properties": {
+                "kind": {"type": "string"},
+                "ref": {"type": "string"}
+              }
+            }
+          },
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "issued_at": {"type": "string"},
+    "expires_at": {"type": "string"},
+    "signature": {"type": "object", "additionalProperties": true}
+  }
+}

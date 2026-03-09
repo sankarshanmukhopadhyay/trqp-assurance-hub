@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trqp_assurance_hub/schemas/certification-attestation.schema.json",
+  "title": "TRQP Certification Attestation",
+  "type": "object",
+  "required": [
+    "type",
+    "id",
+    "certified_entity",
+    "assurance_level",
+    "assessor",
+    "in_scope_controls",
+    "validity",
+    "evidence_refs",
+    "issued_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "TRQPCertificationAttestation"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this attestation (URI/UUID)."
+    },
+    "certified_entity": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the certified registry/operator (DID/URI)."
+        },
+        "name": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "string"
+        }
+      }
+    },
+    "assurance_level": {
+      "type": "string",
+      "enum": [
+        "AL1",
+        "AL2",
+        "AL3",
+        "AL4"
+      ]
+    },
+    "assessor": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "assessment_type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier for the assessor (org DID/URI)."
+        },
+        "name": {
+          "type": "string"
+        },
+        "assessment_type": {
+          "type": "string",
+          "enum": [
+            "self",
+            "peer",
+            "independent",
+            "accredited"
+          ]
+        },
+        "method": {
+          "type": "string",
+          "description": "Optional description of method/sampling used."
+        }
+      }
+    },
+    "in_scope_controls": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      },
+      "description": "Control IDs in scope for this attestation."
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "registry_endpoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trust_domain": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "required": [
+        "not_before",
+        "not_after"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "not_before": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "not_after": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "ref"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "assurance_profile",
+              "control_satisfaction",
+              "lifecycle_assertion",
+              "recognition_assertion",
+              "combined_manifest",
+              "external"
+            ]
+          },
+          "ref": {
+            "type": "string",
+            "description": "Path or URL to referenced evidence artifact."
+          }
+        }
+      }
+    },
+    "revocation_uri": {
+      "type": "string",
+      "description": "Pointer to revocation bulletin/notice for this attestation."
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "type": "string",
+          "enum": [
+            "JWS",
+            "DataIntegrity"
+          ]
+        },
+        "kid": {
+          "type": "string"
+        },
+        "alg": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "description": "Signature value or proof object (stringified)."
+        }
+      }
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

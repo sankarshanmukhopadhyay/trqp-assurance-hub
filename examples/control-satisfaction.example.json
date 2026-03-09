@@ -1,0 +1,37 @@
+{
+  "type": "TRQPControlSatisfactionDeclaration",
+  "id": "urn:trqp:controls:satisfaction:example-registry:2026-02",
+  "subject": {
+    "id": "did:web:registry.example.org",
+    "name": "Example TRQP Registry"
+  },
+  "catalog_ref": "tools/control-catalog.json",
+  "controls": [
+    {
+      "control_id": "TRQP-CTRL-01",
+      "status": "satisfied",
+      "evidence": [
+        {"kind": "policy", "ref": "https://example.org/policies/versioning"}
+      ],
+      "notes": "Version tuple policy published and enforced in release process."
+    },
+    {
+      "control_id": "TRQP-CTRL-02",
+      "status": "satisfied",
+      "evidence": [
+        {"kind": "runbook", "ref": "artifact://runbook/incident-response"}
+      ],
+      "notes": "Operational incident response documented and exercised."
+    },
+    {
+      "control_id": "TRQP-CTRL-03",
+      "status": "partially_satisfied",
+      "evidence": [
+        {"kind": "audit-report", "ref": "artifact://audit-report/2025"}
+      ],
+      "notes": "External audit performed annually; continuous monitoring rollout in progress."
+    }
+  ],
+  "issued_at": "2026-02-22T00:00:00Z",
+  "expires_at": "2026-08-22T00:00:00Z"
+}

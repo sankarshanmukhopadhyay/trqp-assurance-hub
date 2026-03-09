@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trqp-assurance_hub/combined-assurance-manifest.schema.json",
+  "title": "Combined Assurance Manifest",
+  "description": "Machine-readable manifest produced by the combined-assurance workflow, capturing build provenance, tool versions, run identifiers, and evidence artifact references for a given assurance run.",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "generated_at",
+    "build",
+    "tools",
+    "artifacts"
+  ],
+  "properties": {
+    "manifest_version": {
+      "type": "string",
+      "description": "Schema version of this manifest document (semver string)."
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "RFC 3339 UTC timestamp of manifest generation."
+    },
+    "build": {
+      "type": "object",
+      "description": "CI build provenance for this assurance run.",
+      "required": ["build_id", "target"],
+      "properties": {
+        "build_id": {
+          "type": "string",
+          "description": "Opaque build identifier (e.g., commit SHA or CI build number)."
+        },
+        "target": {
+          "type": "string",
+          "description": "Base URL of the TRQP registry under test."
+        },
+        "commit": {
+          "type": "string",
+          "description": "Hub repository commit SHA for this run."
+        },
+        "ci_run_url": {
+          "type": "string",
+          "description": "URL of the CI run that produced this manifest."
+        }
+      },
+      "additionalProperties": false
+    },
+    "tools": {
+      "type": "object",
+      "description": "Versions and run identifiers for the tools that contributed to this assurance run.",
+      "required": ["trqp_conformance_suite", "trqp_tspp"],
+      "properties": {
+        "trqp_conformance_suite": {
+          "type": "object",
+          "required": ["version", "profile_id", "run_id"],
+          "properties": {
+            "version": { "type": "string" },
+            "profile_id": { "type": "string" },
+            "run_id": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "trqp_tspp": {
+          "type": "object",
+          "required": ["version", "assurance_level", "run_id"],
+          "properties": {
+            "version": { "type": "string" },
+            "assurance_level": {
+              "type": "string",
+              "enum": ["AL1", "AL2", "AL3", "AL4"]
+            },
+            "run_id": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "type": "array",
+      "description": "Evidence artifacts produced or referenced by this assurance run.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind", "path"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Artifact kind (e.g., log, evidence_bundle, conformance_report)."
+          },
+          "path": {
+            "type": "string",
+            "description": "Relative path or stable reference to the artifact."
+          },
+          "produced_by": {
+            "type": "string",
+            "description": "Tool or component that produced this artifact."
+          },
+          "media_type": {
+            "type": "string",
+            "description": "MIME type of the artifact."
+          },
+          "format": {
+            "type": "string",
+            "description": "Internal format identifier for versioned artifact formats."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Human-readable notes about this artifact."
+          },
+          "sha256": {
+            "type": "string",
+            "description": "SHA-256 hex digest of the artifact file, if available."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "generator": {
+      "type": "object",
+      "description": "Identity of the tool that generated this manifest.",
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "uri": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "description": "Optional high-level pass/fail summary for this assurance run.",
+      "properties": {
+        "overall_status": { "type": "string", "enum": ["pass", "fail", "partial"] },
+        "conformance_status": { "type": "string", "enum": ["pass", "fail", "partial"] },
+        "tspp_status": { "type": "string", "enum": ["pass", "fail", "partial"] },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

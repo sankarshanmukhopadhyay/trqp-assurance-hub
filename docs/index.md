@@ -1,34 +1,91 @@
 ---
 layout: default
-title: TRQP Conformance Suite
+title: TRQP Assurance Hub
 owner: maintainers
 last_reviewed: 2026-03-04
 tier: 0
 ---
 
-# TRQP Conformance Suite
+# Documentation Index
 
-This site publishes the documentation for the **TRQP Conformance Suite** repository via **GitHub Pages**.
+This hub is designed to be *role-first*: you should be able to find what you need without reading every file.
 
-## Start here
+## Choose your path
 
-- [Start Here](START_HERE.md)
-- [Architecture](ARCHITECTURE.md)
-- [FAQ](FAQ.md)
-- [Roadmap](ROADMAP.md)
+### Operators (registry / trust list operators)
+You are responsible for running a service and producing assurance evidence.
 
-## Conformance approach
+- Start with: [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
+- Then: [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
+- Worked bundles:
+  - [AL3 evidence bundle (example)](../examples/al3-evidence-bundle/README.md)
+  - [AL4 evidence bundle (example)](../examples/al4-evidence-bundle/README.md)
+- Certification baseline: [Certification baseline](certification-baseline/)
 
-- [TRQP Conformance Philosophy](TRQP_Conformance_Philosophy.md)
-- [Evidence verification](VERIFY_EVIDENCE.md)
+### Certifiers / assessors
+You are evaluating evidence, validating conformance, and closing remediation.
 
-## GRID alignment (optional)
+- Canonical definitions: [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
+- What to ask for: [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
+- Example submissions:
+  - [AL3 evidence bundle (example)](../examples/al3-evidence-bundle/README.md)
+  - [AL4 evidence bundle (example)](../examples/al4-evidence-bundle/README.md)
+- Program scaffolding: [Certification baseline](certification-baseline/)
 
-- [GRID support notes](GRID_SUPPORT.md)
+### Implementers / tooling integrators
+You are integrating endpoints, schemas, and validation into pipelines.
 
-## Repo entry points
+- Getting started: [Quickstart](../QUICKSTART.md)
+- The workflow: [Combined assurance guide](guides/combined-assurance.md)
+- Schemas: [Schemas](../schemas/)
+- Example payloads: [Examples](../examples/)
+- Error handling: [Error states](guides/error-states.md)
 
-- Source repository: see root `README.md`
+### Governance / policy designers
+You are translating governance intent into implementable and auditable artifacts.
+
+- Canonical model: [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
+- Evidence structure: [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
+- Certification baseline: [Certification baseline](certification-baseline/)
+- Roadmap: [Roadmap](roadmap.md)
+
+## Canonical references
+- [TSAM (Trust Systems Assurance Method)](tsam/README.md)
+- [TRACE ↔ TSAM relationship](strategy/TRACE-TSAM-relationship.md)
+- [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
+- [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
+- [Combined assurance workflow](guides/combined-assurance.md)
+
+### GRID implementers (directory operators)
+
+- Profile: `../profiles/grid-profile.md`
+- Verifier workflow: `how-to-verify-grid.md`
+- Crosswalk to GTR: `grid-gtr-crosswalk.md`
+
+
+### Authoritative directories (SAD-1)
+
+SAD-1 is the **registry-agnostic profile** that lets the TRQP ecosystem evaluate authoritative directories, including sovereign registries.
+
+- Profile: `../profiles/sad-1-profile.md`
+- End-to-end workflow: `guides/directory-assurance-workflow.md`
+- Strategy note: `strategy/authoritative-directories.md`
+
+
+## Reference
+
+- [UNTP Digital Identity Anchor (DIA)](reference/untp-digital-identity-anchor.md)
+
+## Supply chain integrity
+
+- OpenSSF-aligned reference: `docs/reference/openssf-supply-chain.md`
+
+## Experimental support
+
+TRQP Assurance Hub includes an **experimental DeDi profile** to map decentralized directory artifacts into the Hub’s assurance workflow.
+
+- Profile: `profiles/dedi-experimental-profile.md`
+- Upstream: https://github.com/LF-Decentralized-Trust-labs/decentralized-directory-protocol
 
 ## Governance
 

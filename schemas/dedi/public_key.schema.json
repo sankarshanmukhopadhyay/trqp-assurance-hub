@@ -1,5 +1,5 @@
 {
-  "$id": "https://nfh-trust-labs.github.io/trqp-conformance-suite/schemas/dedi/public_key.schema.json",
+  "$id": "https://nfh-trust-labs.github.io/trqp-assurance-hub/schemas/dedi/public_key.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Public Key Directory",
   "description": "This schema is used to get public key details from the public directory for a given entity\n\nProvenance: vendored snapshot from LF-Decentralized-Trust-labs/decentralized-directory-protocol (non-normative copy) as of 2026-03-03.",

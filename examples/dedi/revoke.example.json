@@ -1,0 +1,5 @@
+{
+  "revoked_id": "example.org",
+  "reason": "key_compromise",
+  "revoked_at": "2026-02-01T00:00:00Z"
+}
