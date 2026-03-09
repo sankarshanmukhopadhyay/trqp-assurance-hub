@@ -1,0 +1,66 @@
+{
+  "$id": "https://schemas.trqp.example/evidence/bundle_descriptor.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TRQP CTS Evidence Bundle Descriptor",
+  "type": "object",
+  "required": [
+    "bundle_version",
+    "run",
+    "artifacts",
+    "artifact_index"
+  ],
+  "properties": {
+    "bundle_version": {
+      "type": "string"
+    },
+    "run": {
+      "type": "object"
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "artifact_index": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "path",
+          "produced_by"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "artifact_kind": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "produced_by": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "media_type": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

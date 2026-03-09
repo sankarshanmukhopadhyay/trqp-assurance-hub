@@ -1,0 +1,12 @@
+id: smoke
+name: Smoke (fast)
+description: Minimal deterministic profile for CI smoke + combined-assurance workflows.
+requirements:
+  include:
+    - TRQP-HTTP-001
+    - TRQP-ERR-001
+    - TRQP-AUTHZ-001
+    - TRQP-RECOG-001
+evidence:
+  sign_manifest: false
+  bundle: true

@@ -1,0 +1,14 @@
+id: high_assurance
+name: High-Assurance TRQP
+description: Certification-grade profile with security and determinism gates.
+requirements:
+  include:
+    - enterprise
+    - TRQP-SEC-001
+    - TRQP-SEC-002
+    - TRQP-CTX-001
+gates:
+  require_state_reference: true
+evidence:
+  sign_manifest: true
+  bundle: true

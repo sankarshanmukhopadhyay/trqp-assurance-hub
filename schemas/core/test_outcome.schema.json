@@ -1,0 +1,14 @@
+{
+  "$id": "https://schemas.trqp.example/core/test_outcome.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "enum": [
+    "PASS",
+    "FAIL",
+    "SKIP",
+    "NOT_APPLICABLE",
+    "ERROR",
+    "XFAIL"
+  ],
+  "title": "TestOutcome",
+  "type": "string"
+}

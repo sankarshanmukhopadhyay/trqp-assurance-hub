@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "authority_id",
+    "statement"
+  ],
+  "properties": {
+    "authority_id": {
+      "type": "string"
+    },
+    "subject_authority_id": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "object",
+      "required": [
+        "recognised",
+        "reason"
+      ],
+      "properties": {
+        "recognised": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "recognised_since": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "valid_until": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "governance_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "entity_id": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "oneOf": [
+    {
+      "required": [
+        "subject_authority_id"
+      ]
+    },
+    {
+      "required": [
+        "entity_id"
+      ]
+    }
+  ]
+}

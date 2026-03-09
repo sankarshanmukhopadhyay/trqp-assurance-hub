@@ -1,0 +1,8 @@
+{
+  "hash_alg": "sha256",
+  "files": {
+    "run.json": "14a938630ca4c44959b0c77eb87a594abdd7035a1cddf1dbaa1eebf4dc36c948",
+    "verdicts.json": "f33bdd17bc579a65a2f601635cf15326c0b497cc1859467494e4db4ff4cf969a",
+    "cases/authorization_happy.json": "1ae4fcc539e24298aa7fdd04a6e9120d04b2a9936834df6304aac8ccab917b48"
+  }
+}

@@ -1,0 +1,293 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/sankarshanmukhopadhyay/trqp-conformance-suite/main/docs/evidence_bundle.schema.json",
+  "title": "TRQP Conformance Evidence Bundle Descriptor",
+  "description": "Schema for a machine-readable descriptor of a TRQP conformance evidence bundle.",
+  "type": "object",
+  "required": [
+    "bundle_version",
+    "run",
+    "artifacts"
+  ],
+  "properties": {
+    "bundle_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[A-Za-z0-9][A-Za-z0-9\\.\\-_]*)?$",
+      "description": "Version of the evidence bundle format."
+    },
+    "run": {
+      "type": "object",
+      "required": [
+        "test_run_id",
+        "profile_id",
+        "sut",
+        "started_at",
+        "ended_at",
+        "tool"
+      ],
+      "properties": {
+        "test_run_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "test_run_id for this test run."
+        },
+        "profile_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "profile_id for this test run."
+        },
+        "sut": {
+          "type": "object",
+          "required": [
+            "endpoint"
+          ],
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": "string"
+            },
+            "state_reference": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": true,
+          "description": "sut for this test run."
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "started_at for this test run."
+        },
+        "ended_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ended_at for this test run."
+        },
+        "tool": {
+          "type": "object",
+          "required": [
+            "name",
+            "version"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "commit": {
+              "type": "string"
+            },
+            "build": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "description": "tool for this test run."
+        },
+        "environment": {
+          "type": "object",
+          "description": "Optional environment metadata (CI, OS, Python version, network mode, etc.).",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "artifacts": {
+      "type": "object",
+      "required": [
+        "run_json",
+        "verdicts",
+        "manifest",
+        "cases_dir"
+      ],
+      "properties": {
+        "run_json": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to run_json."
+        },
+        "verdicts": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to verdicts."
+        },
+        "manifest": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to manifest."
+        },
+        "signature": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to signature."
+        },
+        "signing_public_key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to signing_public_key."
+        },
+        "bundle_zip": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to bundle_zip."
+        },
+        "cases_dir": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to cases_dir."
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "case_id",
+              "transcript_path"
+            ],
+            "properties": {
+              "case_id": {
+                "type": "string",
+                "minLength": 1,
+                "description": "case_id for the test case."
+              },
+              "transcript_path": {
+                "type": "string",
+                "minLength": 1,
+                "description": "transcript_path for the test case."
+              },
+              "request_path": {
+                "type": "string",
+                "description": "request_path for the test case."
+              },
+              "response_path": {
+                "type": "string",
+                "description": "response_path for the test case."
+              },
+              "notes": {
+                "type": "string",
+                "description": "notes for the test case."
+              }
+            },
+            "additionalProperties": true
+          },
+          "description": "Relative path to cases."
+        }
+      },
+      "additionalProperties": true,
+      "description": "Paths to key artifacts in the evidence bundle."
+    },
+    "hashes": {
+      "type": "object",
+      "description": "Optional mapping of artifact path -> hash. Typically redundant with manifest.json but allowed for convenience.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "artifact_index": {
+      "type": "array",
+      "description": "Optional normalized index of artifacts produced by the conformance run, using canonical 'kind' values where applicable.",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "path"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Artifact kind. Prefer canonical kinds shared across TRQP tooling; CTS-specific kinds are allowed.",
+            "enum": [
+              "binding_meta_log",
+              "build_provenance",
+              "change_log_snapshot",
+              "cts_bundle_zip",
+              "cts_case_file",
+              "cts_manifest",
+              "cts_manifest_sig",
+              "cts_run_json",
+              "cts_verdicts",
+              "error_response_sample",
+              "jwks_snapshot",
+              "key_custody_evidence",
+              "key_rotation_evidence",
+              "monitoring_runbook",
+              "openssf_scorecard_report",
+              "replay_window_test_log",
+              "retention_policy",
+              "signed_response_sample",
+              "software_sbom"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Path to the artifact relative to the bundle root."
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "SHA-256 hash of the artifact bytes."
+          },
+          "media_type": {
+            "type": "string",
+            "description": "Optional media type (MIME) for the artifact."
+          },
+          "produced_by": {
+            "type": "string",
+            "description": "Tool or component that produced the artifact (e.g., trqp-cts)."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Optional notes to aid auditors."
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "run": {
+            "properties": {
+              "profile_id": {
+                "pattern": "(?i)high[-_ ]?assurance"
+              }
+            },
+            "required": [
+              "profile_id"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "run": {
+            "properties": {
+              "sut": {
+                "required": [
+                  "state_reference"
+                ]
+              }
+            }
+          },
+          "artifacts": {
+            "required": [
+              "signature"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

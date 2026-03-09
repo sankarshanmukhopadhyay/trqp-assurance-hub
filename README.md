@@ -8,227 +8,344 @@ tier: 0
 
 - Documentation governance: [`docs/governance/README.md`](docs/governance/README.md)
 
-# TRQP Assurance Hub
+# TRQP Conformance Suite
 
-📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
-
-
-**Current version:** v0.8.1
-
-**Downstream release train:** TSPP v0.5.1 · Conformance Suite v0.7.1
+📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-conformance-suite/
 
 
-[![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)
-[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+**Current version:** v0.7.1
 
-A pragmatic, adopter-first landing zone that makes the TRQP ecosystem feel like **one product** while keeping core components decoupled for independent iteration.
 
-Positioning: this repository is a **candidate Assurance Profile and Governance Hardening Layer** that helps operationalize open TRQP RFEs by turning “should” discussions into **profiles, artifacts, and machine-checkable evidence**.
+![CI](https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/actions/workflows/cts.yml/badge.svg)
+![License](https://img.shields.io/badge/license-Apache--2.0-blue)
+![Status](https://img.shields.io/badge/status-Experimental-orange)
 
-## Quick links
+## Start here: TRQP Assurance Hub
 
-- [Documentation index (role-based)](docs/index.md)
-- [TSAM (Trust Systems Assurance Method)](docs/tsam/README.md)
-- [Quickstart](QUICKSTART.md)
-- [Operating model](#the-operating-model)
-- [Combined assurance workflow](docs/guides/combined-assurance.md)
-- [Error states](docs/guides/error-states.md)
-- [Compatibility policy and matrix](docs/policies/compatibility.md)
-- [Issue routing](docs/policies/issue-routing.md)
-- [Upstream TRQP RFE alignment](docs/trqp-alignment.md)
-- [Assurance profile (candidate, machine-readable)](docs/guides/assurance-profile.md)
-- [Assurance Levels (AL1–AL4, canonical)](docs/guides/assurance-levels.md)
-- [AL contract (machine-readable)](al-contract.json)
-- [Control objectives](docs/guides/control-objectives.md)
-- [Recognition Assertion](docs/guides/recognition-assertion.md)
-- [Lifecycle state model](docs/guides/lifecycle-state.md)
-- [Recognition graph semantics](docs/guides/recognition-graph.md)
-- [Revocation semantics](docs/guides/revocation-semantics.md)
-- [Candidate certification baseline (CTR-ACB)](docs/certification-baseline/README.md)
-- [Glossary](docs/glossary.md)
+Looking for the *single front door* across TRQP conformance + security/privacy assurance?
 
-## Methodological Context
+- Hub repo (onboarding, operating model, combined workflows): https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub
 
-This repository implements components of the **Trust Systems Assurance Method (TSAM)** — a structured, **registry-agnostic** methodology for assurance and conformance in trust-bearing distributed systems.
 
-TSAM binds governance semantics, assurance levels, conformance verification, runtime integrity controls, and evidence production into a coherent architecture.
 
-See: [`docs/tsam/`](docs/tsam/README.md)
-See also: [`docs/strategy/TRACE-TSAM-relationship.md`](docs/strategy/TRACE-TSAM-relationship.md)
+## Assurance Level Semantics
 
-## Assurance Levels
+This repository **consumes** Assurance Level (AL1–AL4) semantics from the **TRQP Assurance Hub**.
 
-This repo is the **canonical source of truth** for TRQP Assurance Level definitions **AL1–AL4**.
+- Canonical definitions: `docs/guides/assurance-levels.md` (in the Hub)
+- Machine-readable contract: `al-contract.json`
 
-- Canonical definitions: `docs/guides/assurance-levels.md`
-- Machine-readable contract: `al-contract.json` (includes a SHA-256 hash of the canonical AL doc for pinning)
+This suite parameterizes tests and evidence templates by AL but **MUST NOT** redefine AL meanings locally. For audit stability, this repo includes an `al-contract.json` with the SHA-256 of the canonical AL definition document (`61c599c5fa06e0c9110f40ff71c0174db5502105b97f1391dbd9ae8548115f71`).
 
-Downstream repositories (e.g., TSPP, Conformance Suite) **MUST** reference these definitions and **MUST NOT** redefine AL semantics locally.
+Conformance Test Suite for the Trust Registry Query Protocol (TRQP).
 
-- Producer repos:
-  - Conformance Suite (CTS): https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite (crosswalk: `docs/hub-crosswalk.md`)
-  - TRQP-TSPP: https://github.com/sankarshanmukhopadhyay/TRQP-TSPP (crosswalk: `docs/hub-crosswalk.md`)
-## What this is
+This repository provides a profile-driven, evidence-oriented testing framework to validate TRQP implementations for interoperability, determinism, lifecycle correctness, and operational readiness.
 
-This repository is the **front door** for TRQP implementation and assurance work across:
+This is an independent, open reference implementation. It is not an official artifact of the Trust over IP Foundation. The goal is to support ecosystem alignment and accelerate production-grade conformance discussions.
 
-- **Core conformance runner and profiles:** [`trqp-conformance-suite`](https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite)
-- **Security and privacy profile overlay:** [`TRQP-TSPP`](https://github.com/sankarshanmukhopadhyay/TRQP-TSPP)
+---
 
-It provides:
 
-- A single onboarding narrative (choose-your-path)
-- A shared terminology map (runner vs profile packs)
-- Cross-repo compatibility expectations
-- A lightweight governance and issue routing model
-- Minimal schemas to bind conformance and posture evidence together
-- A candidate assurance profile format for publishing posture and governance expectations
+## Authoritative directories (SAD-1 / GRID)
 
-To keep the repo trustworthy, CI validates that JSON examples match their JSON Schemas.
+The TRQP ecosystem can evaluate **authoritative digital trust directories** (including sovereign registry patterns) by treating published directory artifacts as evidence.
 
-## Certification baseline
+This suite ships schemas and a lightweight validator:
 
-This repo includes a **Candidate Trust Registry Assurance & Certification Baseline (CTR-ACB)**: a transport-neutral, implementation-neutral baseline for certifiable controls, evaluation procedures, and machine-readable certification attestations. See `docs/certification-baseline/`.
+- Docs: `docs/directory-artifact-validation.md`
+- Tool: `scripts/validate_directory_artifacts.py`
 
-## Choose your path
+## Start Here
 
-| You are trying to… | Start here | Outcome |
-|---|---|---|
-| Implement TRQP endpoints and prove protocol conformance | **Conformance Suite** | Test results + evidence bundles |
-| Add security and privacy posture checks (AL1/AL2) | **TRQP-TSPP** | AL checks + posture evidence |
-| Ship a production registry with both | **Both** | Protocol + posture assurance |
+Choose the path that matches your role:
 
-### Decision guide
+- **TRQP implementer**: run the **Baseline** profile, review `docs/START_HERE.md`, then compare results to the reference reports in `docs/reference-reports/`.
+- **Spec author / working group participant**: review `docs/TRQP_Conformance_Philosophy.md` and `docs/ROADMAP.md` to see how requirements map to executable tests and evidence.
+- **Ecosystem / governance / assurance**: read `docs/SOCIALIZING_NOTES.md`, `docs/evidence_bundles.md`, and the Hub crosswalk (`docs/hub-crosswalk.md`) to understand the evidence contract and profile model.
 
-- If you need **“Does my TRQP implementation behave correctly?”** → Conformance Suite
-- If you need **“Is my deployment secure enough for the threat model?”** → TRQP-TSPP
-- If you need **“Can I show auditors both behavior and posture?”** → Use both
+---
 
-## The operating model
 
-Think in layers:
 
-- **Runner / Engine (platform):** runs tests, produces evidence, enforces result format
-- **Profile Packs (products):** define requirements, mappings, and test plans
+## Local example configuration
+
+The example SUT configuration is now shipped as `examples/sut.local.yaml.example`. Copy it to `examples/sut.local.yaml` and generate a fresh Ed25519 signing key before running the high-assurance profile locally.
+
+## Evidence artifacts produced by CTS
+
+CTS produces a **self-describing evidence bundle** per run under `reports/<run-id>/`.
+
+For a fast deterministic sanity check, use the **Smoke** profile: `profiles/smoke.yaml`. The bundle includes a machine-readable descriptor (`bundle_descriptor.json`) that indexes artifacts using canonical `kind` labels (aligned where possible with the Assurance Hub / TSPP vocabulary).
+
+| Canonical kind | Produced by CTS | Where in bundle | Notes |
+|---|---:|---|---|
+| `cts_bundle_descriptor` | Yes | `bundle_descriptor.json` | Bundle index (paths + hashes). Includes Hub-aligned `artifact_kind` values. |
+| `cts_checksums` | Yes | `checksums.json` | SHA-256 checksums for key artifacts. |
+| `cts_run_json` | Yes | `run.json` | Run metadata (profile, SUT, timing, tool version) |
+| `cts_verdicts` | Yes | `verdicts.json` | Per-test verdicts |
+| `cts_manifest` | Yes | `manifest.json` | Hash manifest for integrity verification |
+| `cts_manifest_sig` | Profile-dependent | `manifest.sig` | Present for high-assurance profiles when signing enabled |
+| `cts_case_file` | Yes | `cases/<case-id>.json` | Captured case transcript (requests/responses/notes where applicable) |
+| `cts_bundle_zip` | Profile-dependent | `bundle.zip` | Convenience zip of the run directory |
+| `jwks_snapshot` | Sometimes | `cases/...` | Emitted when a test case captures JWKS material; referenced via `bundle_descriptor.json` when present |
+| `signed_response_sample` | Sometimes | `cases/...` | Emitted when a test captures a signed response envelope |
+
+For auditors and integrators, treat `bundle_descriptor.json` as the **index of record** for what was produced and how to reference it downstream.
+
+## Why This Exists
+
+Specifications describe behavior. Deployments require proof.
+
+TRQP is designed as a lightweight verification rail across trust ecosystems. Without structured conformance testing, implementations may diverge in subtle but critical ways:
+
+- Non-deterministic authorization outcomes
+- Inconsistent lifecycle semantics
+- Fragmented security posture
+- Weak or undefined error modeling
+- “Pass” results without verifiable evidence
+
+This suite addresses those risks through executable, assertion-based testing.
+
+---
+
+## What You Get
+
+- **Profiles** that scale assurance without changing core protocol semantics
+  - Baseline, Enterprise, High-Assurance
+- **Requirement IDs** mapped to executable tests
+- **Deterministic verdict model** (PASS/FAIL/INCONCLUSIVE/NOT_APPLICABLE)
+- **Evidence bundles** that are audit-friendly
+  - transcripts, canonical payloads, hashes, manifest
+  - signatures for High-Assurance runs (where configured)
+
+---
+
+## Core Principles
+
+### Profile-Based Conformance
+
+Different ecosystems require different assurance levels.
+
+Profiles:
+
+- **Baseline** — Minimal interoperable TRQP behavior
+- **Enterprise** — Governance metadata and operational discipline
+- **High-Assurance** — Deterministic state reference, replay resistance, stronger security enforcement
+
+Profiles determine which requirements are mandatory.
+
+---
+
+### Assertion-Based Testing
+
+Every normative requirement is mapped to:
+
+- A stable requirement ID
+- One or more executable tests
+- Explicit pass/fail criteria
+- Required evidence artifacts
+
+A test does not pass without evidence.
+
+---
+
+### Deterministic Verdict Model
+
+Each test produces one of:
+
+- `PASS`
+- `FAIL`
+- `INCONCLUSIVE`
+- `NOT_APPLICABLE`
+
+Verdicts are derived from requirement-level assertions, not HTTP status codes.
+
+---
+
+### Evidence-First Reporting
+
+Each test run generates:
+
+- Canonicalized request/response pairs
+- Full HTTP transcripts
+- Hashes of payloads
+- A structured verdict manifest
+- A signed evidence bundle (High-Assurance profile)
+
+This enables auditability and reproducibility.
+
+---
+
+## Why Determinism Matters
+
+TRQP decisions depend on registry state.
+
+If identical inputs can produce different outputs under unclear state conditions, interoperability collapses.
+
+High-Assurance profile requires:
+
+- A declared `state_reference`
+- Controlled fixture conditions
+- Deterministic decision behavior for identical inputs
+
+Without stable state reference, semantic conformance cannot be validated.
+
+---
+
+## Conformance Architecture Overview
 
 ```mermaid
-flowchart LR
-  A["TRQP Implementer"] --> B["Assurance Hub<br/>this repo"];
-  B --> C["Conformance Suite<br/>runner + profiles"];
-  B --> D["TSPP<br/>security/privacy profile pack"];
-  C --> E["Evidence Bundle"];
-  D --> E;
-  E --> F["Verification / Audit / Procurement"];
+graph TD
+    A[Verifier / Client] --> B[TRQP Conformance Runner]
+    B --> C[System Under Test]
+    B --> D[Evidence Artifacts]
+    D --> E[Manifest + Signature]
 ```
 
-## Evidence flow
+The runner executes profile-bound tests, captures transcripts, validates assertions, and produces a cryptographically verifiable evidence bundle.
 
-```mermaid
-flowchart TB
-  A["TRQP Registry (target)"] --> B["Conformance Suite run"];
-  A --> C["TSPP run"];
-  B --> D["Conformance evidence bundle"];
-  C --> E["TSPP evidence bundle"];
-  D --> F["Combined Assurance Manifest"];
-  E --> F;
-  F --> G["Auditors / Authorities / Procurement"];
-  F --> H["Automated gating in CI/CD"];
+---
+
+## Repository Structure
+
+```
+profiles/         Conformance profiles
+requirements/     Requirement catalog with stable IDs
+tests/            Declarative test definitions
+schemas/          JSON schemas for validation
+cts/              Conformance test runner
+examples/         Example TRQP-like service and configuration
+docs/             Design philosophy and evidence model
 ```
 
-For machine-readable provenance across both runs, see the schema at:
-- `schemas/combined-assurance-manifest.schema.json`
+---
 
-## How the repos integrate (without merging)
+## Running the Suite
 
-### Integration contract
+### 1. Start the Example SUT
 
-We treat these as shared contracts between repos:
+```
+uvicorn examples.poc_service:app --reload
+```
 
-1. **Requirement identifiers** (stable IDs)
-2. **Evidence bundle shape** (what an implementer produces)
-3. **Result semantics** (pass/fail/skip + severity + rationale)
-4. **Version compatibility declaration** (known-good combinations)
+### 2. Run Baseline Profile
 
-See:
-- [Compatibility policy and matrix](docs/policies/compatibility.md)
+```
+python cts/run.py   --profile profiles/baseline.yaml   --sut examples/sut.local.yaml   --out reports/run1
+```
 
-### What stays independent
+### 3. Run High-Assurance Profile
 
-- Release cadence
-- Roadmaps
-- Issue trackers
-- Packaging choices
+```
+python cts/run.py   --profile profiles/high_assurance.yaml   --sut examples/sut.local.yaml   --out reports/runHA
+```
 
-## Golden path workflows
+---
 
-### Workflow A: Protocol conformance only
+## Evidence Artifacts
 
-1. Install and run the Conformance Suite
-2. Pick a profile (Baseline / Enterprise / High-Assurance)
-3. Produce an evidence bundle for your build artifacts
+Each run produces:
 
-### Workflow B: Security and privacy posture only
+```
+reports/<run-id>/
+  run.json
+  verdicts.json
+  manifest.json
+  manifest.sig   (High-Assurance)
+  cases/
+  bundle.zip
+```
 
-1. Install and run TRQP-TSPP
-2. Choose AL1 or AL2
-3. Produce posture evidence artifacts
+The manifest includes cryptographic hashes of all artifacts.
+High-Assurance profile signs the manifest for integrity verification.
 
-### Workflow C: Combined assurance (recommended)
+See `docs/evidence_bundle.schema.json` for the evidence contract.
 
-1. Run a Conformance Suite profile
-2. Run a TSPP profile
-3. Bind both runs under a single build identifier using a Combined Assurance Manifest
+---
 
-See:
-- [Combined assurance workflow](docs/guides/combined-assurance.md)
+## Reference Reports
 
-## Issue routing
+This repo includes sample evidence bundles under:
 
-- If the issue is about **test runner behavior, evidence output, CI, profiles in-suite** → file in `trqp-conformance-suite`
-- If the issue is about **security/privacy requirements, AL levels, posture checks** → file in `TRQP-TSPP`
-- If the issue is about **cross-repo compatibility, documentation, onboarding** → file here
+- `docs/reference-reports/sample_run_baseline/`
+- `docs/reference-reports/sample_run_high_assurance/`
 
-See:
-- [Issue routing policy](docs/policies/issue-routing.md)
+These are intended as concrete examples of what “good evidence” looks like, and how to verify manifests and signatures.
 
-## Alignment with upstream TRQP
+---
 
-This work is intended as an extension of the Trust over IP TRQP workstream:
+## Status
 
-- [ToIP TRQP upstream repository](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
+**Status:** Experimental
 
-For how this repo maps to current upstream RFEs (and what it explicitly does *not* try to solve), see:
+This repository is evolving and intended to inform structured conformance approaches for TRQP. It does not represent a formal certification authority.
 
-- [Upstream TRQP RFE alignment](docs/trqp-alignment.md)
+---
 
-## License
+## Roadmap
 
-Documentation and original content in this repo are licensed under **CC BY-SA 4.0**.
+See `docs/ROADMAP.md`.
 
-See: [LICENSE](LICENSE)
+---
 
-## GRID readiness
+## Contributing
 
-This repository includes a minimal **GRID readiness kernel** to demonstrate how TRQP can be extended to support multiple trust registry/directory implementations.
+All additions must:
 
-- Profile: `profiles/grid-profile.md`
-- Schemas: `schemas/registrar.schema.json`, `schemas/grid-status-feed.schema.json`
-- Verifier workflow: `docs/how-to-verify-grid.md`
-- Crosswalk: `docs/grid-gtr-crosswalk.md`
+- Map to a requirement ID
+- Produce structured evidence
+- Respect profile definitions
+- Avoid introducing undefined semantic assumptions
 
-External references:
-- UN/CEFACT GTR / GRID: https://un.opensource.unicc.org/unece/uncefact/gtr/
-- EBSI Trusted Issuers Registry / Trusted Entity Registry APIs: https://hub.ebsi.eu/apis/pilot/trusted-issuers-registry
+See `CONTRIBUTING.md` for guidelines.
+
+---
+
+## Strategic Positioning
+
+This suite is intended to:
+
+- Encourage interoperable TRQP implementations
+- Support production-readiness discussions
+- Provide a structured foundation for future conformance programs
+- Reduce ambiguity in multi-ecosystem deployments
+
+It does not assert normative authority over the TRQP specification.
+
+
+## Repo hygiene and assurance artifacts
+
+- Schema checks: `python scripts/schema_check.py`
+- Preflight (optional): `python scripts/preflight.py --base-url https://your-sut/ --endpoint /.well-known/jwks.json`
+- Traceability template: `docs/traceability.md`
+- Evidence bundle guidance: `docs/evidence_bundles.md`
+
+
+## Certification Baseline Alignment (CTR-ACB)
+
+This repository is the **executable verification engine** for the *Candidate Trust Registry Assurance & Certification Baseline (CTR-ACB)* defined in the TRQP Assurance Hub.
+
+In practice:
+
+- The Assurance Hub defines **what** a trust registry claims (assurance profile, controls, lifecycle, recognition).
+- The Conformance Suite provides **how to verify** those claims and produce evidence artifacts that can be referenced from:
+  - Control Satisfaction Declarations
+  - Certification Attestations (if/when an ecosystem chooses to operationalize certification)
+
+See: `docs/certification-alignment.md`.
 
 ## UNTP Digital Identity Anchor (DIA)
 
-Some authoritative directories use UNTP DIA (and Identity Resolver patterns) to anchor issuer identities. This repo supports DIA-aware directory assurance via the SAD-1 `identity_anchor` extension and vendors the DIA JSON-LD context for reproducible checks. See `docs/reference/untp-digital-identity-anchor.md`.
+Some authoritative directories use UNTP DIA for issuer identity anchoring. See [`docs/UNTP_DIA_SUPPORT.md`](docs/UNTP_DIA_SUPPORT.md).
 
-## Experimental profiles
+### Supply chain integrity evidence
 
-- **DeDi (Decentralized Directory Protocol)**: `profiles/dedi-experimental-profile.*` (experimental mapping for decentralized directories)
+CTS supports evidence bundle descriptors that can include SBOM, build provenance, and Scorecard outputs for audit-ready evaluations.
 
-### DeDi experimental spine
+## Experimental: DeDi support
 
-- Mapping matrix: `docs/reference/dedi-mapping-matrix.md`
-- Machine-readable matrix: `docs/reference/dedi-mapping-matrix.yaml`
+The CTS ships an **experimental** DeDi artifact validator (schema checks) to support decentralized directory ecosystems.
+
+- See `docs/profiles.md` and `profiles/dedi_experimental.yaml` (snapshot 2026-03-03).
+
+- DeDi mapping matrix: `docs/reference/dedi-mapping-matrix.md`

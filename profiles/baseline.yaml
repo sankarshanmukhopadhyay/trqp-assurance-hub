@@ -1,0 +1,13 @@
+id: baseline
+name: Baseline TRQP
+description: Minimal interoperable TRQP conformance.
+requirements:
+  include:
+    - TRQP-HTTP-001
+    - TRQP-HTTP-002
+    - TRQP-ERR-001
+    - TRQP-AUTHZ-001
+    - TRQP-RECOG-001
+evidence:
+  sign_manifest: false
+  bundle: true

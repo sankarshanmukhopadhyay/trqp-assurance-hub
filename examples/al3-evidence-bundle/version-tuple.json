@@ -1,9 +1,0 @@
-{
-  "hub": "trqp-assurance-hub@main",
-  "conformance_suite": "trqp-conformance-suite@v0.0.0",
-  "tspp_profiles": "trqp-tspp@v0.0.0",
-  "build": {
-    "source": "ci://example/run/1234",
-    "commit": "abcdef0"
-  }
-}

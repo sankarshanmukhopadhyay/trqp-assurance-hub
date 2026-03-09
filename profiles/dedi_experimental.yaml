@@ -1,0 +1,18 @@
+# DeDi Experimental Profile
+# Structural validation of DeDi artifacts (schema validation)
+profile_id: dedi-experimental
+status: experimental
+snapshot_date: "2026-03-03"
+checks:
+  - id: dedi_public_key_schema
+    tool: python
+    command: "scripts/validate_dedi_artifacts.py --public-key {public_key_path}"
+  - id: dedi_revoke_schema
+    tool: python
+    command: "scripts/validate_dedi_artifacts.py --revoke {revoke_path}"
+  - id: dedi_membership_schema
+    tool: python
+    command: "scripts/validate_dedi_artifacts.py --membership {membership_path}"
+  - id: dedi_subscriber_schema
+    tool: python
+    command: "scripts/validate_dedi_artifacts.py --subscriber {subscriber_path}"

@@ -1,5 +1,5 @@
 {
-  "$id": "https://nfh-trust-labs.github.io/trqp-assurance-hub/schemas/dedi/membership.schema.json",
+  "$id": "https://nfh-trust-labs.github.io/trqp-conformance-suite/schemas/dedi/membership.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "Membership. This schema is used to establish membership of person/entity to a club, an entity in a larger consortium, or even can be citizenship of a country. Think of this as 'Affiliation'\n\nProvenance: vendored snapshot from LF-Decentralized-Trust-labs/decentralized-directory-protocol (non-normative copy) as of 2026-03-03.",
   "type": "object",

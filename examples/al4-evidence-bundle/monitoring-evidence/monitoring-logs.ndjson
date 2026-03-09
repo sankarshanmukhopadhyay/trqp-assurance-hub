@@ -1,3 +1,0 @@
-{"ts":"2026-02-10T10:12:03Z","event":"trust_list_publish","status":"ok","snapshot_id":"tls-2026-02-10T101203Z","hash":"sha256:..."}
-{"ts":"2026-02-12T03:44:59Z","event":"signature_verify","status":"ok","subject":"did:web:issuer.example.org"}
-{"ts":"2026-02-20T22:11:07Z","event":"trust_list_publish","status":"ok","snapshot_id":"tls-2026-02-20T221107Z","hash":"sha256:..."}

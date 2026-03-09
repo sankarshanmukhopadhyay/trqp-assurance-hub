@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "error",
+    "message"
+  ],
+  "properties": {
+    "error": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "details": {
+      "type": [
+        "object",
+        "array",
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

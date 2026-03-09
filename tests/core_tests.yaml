@@ -1,0 +1,156 @@
+tests:
+  - id: TC-HTTP-001
+    name: Accept JSON Content-Type
+    method: POST
+    path: /authorization
+    request:
+      headers:
+        Content-Type: application/json
+      body:
+        authority_id: "did:example:transport-ministry"
+        entity_id: "did:example:logistics-sp-123"
+        action: "issue-transport-credential"
+    expect:
+      status_in: [200, 401, 403]
+      response_json: true
+
+  - id: TC-HTTP-002
+    name: Success response is JSON
+    method: POST
+    path: /recognition
+    request:
+      headers:
+        Content-Type: application/json
+      body:
+        authority_id: "did:example:transport-ministry"
+        subject_authority_id: "did:example:foreign-authority-xyz"
+    expect:
+      status_in: [200, 401, 403]
+      response_header_contains:
+        Content-Type: "application/json"
+
+  - id: TC-ERR-001
+    name: Invalid schema yields structured error
+    method: POST
+    path: /authorization
+    request:
+      headers:
+        Content-Type: application/json
+      body:
+        authority_id: "did:example:transport-ministry"
+        action: "issue-transport-credential"
+    expect:
+      status_in: [400, 422]
+      schema: schemas/error.schema.json
+
+  - id: TC-AUTHZ-001
+    name: Authorization decision present
+    method: POST
+    path: /authorization
+    request:
+      headers:
+        Content-Type: application/json
+      body:
+        authority_id: "did:example:transport-ministry"
+        entity_id: "did:example:logistics-sp-123"
+        action: "issue-transport-credential"
+        resource: "TransportCredentialV1"
+    expect:
+      status: 200
+      schema: schemas/authz_response.schema.json
+
+  - id: TC-RECOG-001
+    name: Recognition statement present
+    method: POST
+    path: /recognition
+    request:
+      headers:
+        Content-Type: application/json
+      body:
+        authority_id: "did:example:transport-ministry"
+        subject_authority_id: "did:example:foreign-authority-xyz"
+    expect:
+      status: 200
+      schema: schemas/recog_response.schema.json
+
+  - id: TC-OPS-001
+    name: Correlation id echo
+    method: POST
+    path: /authorization
+    request:
+      headers:
+        Content-Type: application/json
+        X-Correlation-Id: "corr-123"
+      body:
+        authority_id: "did:example:transport-ministry"
+        entity_id: "did:example:logistics-sp-123"
+        action: "issue-transport-credential"
+    expect:
+      status_in: [200, 401, 403]
+      response_header_contains:
+        X-Correlation-Id: "corr-123"
+
+  - id: TC-ERR-010
+    name: Error includes code fields
+    method: POST
+    path: /authorization
+    request:
+      headers:
+        Content-Type: application/json
+      body: {}
+    expect:
+      status_in: [400, 422]
+      json_path_exists:
+        - "$.error"
+        - "$.message"
+
+  - id: TC-SEC-001
+    name: High-Assurance requires auth
+    method: POST
+    path: /authorization
+    request:
+      headers:
+        Content-Type: application/json
+      body:
+        authority_id: "did:example:transport-ministry"
+        entity_id: "did:example:logistics-sp-123"
+        action: "issue-transport-credential"
+    expect:
+      status_in: [401, 403]
+
+  - id: TC-SEC-002
+    name: Replay detection rejects reused nonce
+    profiles: [high_assurance]
+    method: POST
+    path: /authorization
+    request:
+      headers:
+        Content-Type: application/json
+      body:
+        authority_id: "did:example:transport-ministry"
+        entity_id: "did:example:logistics-sp-123"
+        action: "issue-transport-credential"
+        context:
+          timestamp: "2025-01-01T00:00:00Z"
+    expect:
+      status: 409
+
+  - id: TC-CTX-001
+    name: Context timestamp evaluated as-of time
+    method: POST
+    path: /authorization
+    request:
+      headers:
+        Content-Type: application/json
+      body:
+        authority_id: "did:example:transport-ministry"
+        entity_id: "did:example:logistics-sp-123"
+        action: "issue-transport-credential"
+        context:
+          timestamp: "2025-01-01T00:00:00Z"
+    expect:
+      status: 200
+      schema: schemas/authz_response.schema.json
+      json_path_in:
+        - ["$.decision.authorized", ["true", "false", "indeterminate"]]
+

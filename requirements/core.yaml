@@ -1,0 +1,50 @@
+requirements:
+  - id: TRQP-HTTP-001
+    level: MUST
+    statement: Server MUST accept JSON requests with Content-Type application/json.
+    tests: [TC-HTTP-001]
+
+  - id: TRQP-HTTP-002
+    level: MUST
+    statement: Server MUST respond with JSON for successful requests.
+    tests: [TC-HTTP-002]
+
+  - id: TRQP-ERR-001
+    level: MUST
+    statement: Server MUST return 4xx on invalid schema with a structured error payload.
+    tests: [TC-ERR-001]
+
+  - id: TRQP-AUTHZ-001
+    level: MUST
+    statement: Authorization query endpoint MUST return an authorization decision.
+    tests: [TC-AUTHZ-001]
+
+  - id: TRQP-RECOG-001
+    level: MUST
+    statement: Recognition query endpoint MUST return a recognition statement.
+    tests: [TC-RECOG-001]
+
+  - id: TRQP-OPS-001
+    level: SHOULD
+    statement: Server SHOULD echo correlation id when provided.
+    tests: [TC-OPS-001]
+
+  - id: TRQP-ERR-010
+    level: SHOULD
+    statement: Error payload SHOULD include a stable error code.
+    tests: [TC-ERR-010]
+
+  - id: TRQP-SEC-001
+    level: MUST
+    statement: High-Assurance profile MUST require authenticated requests.
+    tests: [TC-SEC-001]
+
+  - id: TRQP-SEC-002
+    level: MUST
+    statement: High-Assurance profile MUST provide replay resistance (nonce + timestamp).
+    tests: [TC-SEC-002]
+
+  - id: TRQP-CTX-001
+    level: MUST
+    statement: If context.timestamp is supplied, decision MUST be evaluated as-of that time.
+    tests: [TC-CTX-001]

@@ -1,15 +1,14 @@
-# OpenSSF-aligned Supply Chain Integrity (Reference)
+# OpenSSF-aligned Supply Chain Evidence (Reference)
 
-Authoritative directories and trust registries are operational trust systems. If the implementation's software supply chain is compromised, governance and protocol conformance do not provide meaningful assurance.
+The TRQP Conformance Suite (CTS) recognizes supply chain integrity evidence as part of an audit-ready assurance posture.
 
-The Assurance Hub therefore recognizes **supply chain integrity evidence** aligned with OpenSSF guidance, including:
+CTS does not mandate a specific toolchain. It supports **evidence descriptors** that may include:
+- `software_sbom`
+- `build_provenance`
+- `openssf_scorecard_report`
 
-- SBOMs for deployed artifacts (`software_sbom`)
-- Build provenance / attestations (`build_provenance`)
-- OpenSSF Scorecard outputs or equivalent posture checks (`openssf_scorecard_report`)
+These artifacts typically originate from the implementation repository's CI/CD pipeline and are bundled alongside CTS run outputs for end-to-end assurance.
 
-These artifacts support the **TSPP-SCI** control family and are included as optional evidence in Hub workflows.
-
-See:
-- `docs/guides/evidence-artifacts.md`
-- `docs/guides/directory-assurance-workflow.md`
+See also:
+- `docs/evidence_bundles.md`
+- `docs/hub-crosswalk.md`

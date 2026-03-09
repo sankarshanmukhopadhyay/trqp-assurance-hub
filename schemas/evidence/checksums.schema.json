@@ -1,0 +1,52 @@
+{
+  "$id": "https://schemas.trqp.example/evidence/checksums.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TRQP Evidence Bundle Checksums",
+  "type": "object",
+  "required": [
+    "checksums_version",
+    "algorithm",
+    "entries"
+  ],
+  "properties": {
+    "checksums_version": {
+      "type": "string"
+    },
+    "algorithm": {
+      "type": "string",
+      "enum": [
+        "sha256"
+      ]
+    },
+    "generated_by": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": true
+}

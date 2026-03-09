@@ -1,0 +1,11 @@
+id: enterprise
+name: Enterprise TRQP
+description: Adds governance + operational expectations.
+requirements:
+  include:
+    - baseline
+    - TRQP-OPS-001
+    - TRQP-ERR-010
+evidence:
+  sign_manifest: false
+  bundle: true

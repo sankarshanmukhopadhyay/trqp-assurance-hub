@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "authority_id",
+    "entity_id",
+    "action",
+    "decision"
+  ],
+  "properties": {
+    "authority_id": {
+      "type": "string"
+    },
+    "entity_id": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string"
+    },
+    "resource": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision": {
+      "type": "object",
+      "required": [
+        "authorized",
+        "reason"
+      ],
+      "properties": {
+        "authorized": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false",
+            "indeterminate"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "valid_from": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "valid_until": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "assertion_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

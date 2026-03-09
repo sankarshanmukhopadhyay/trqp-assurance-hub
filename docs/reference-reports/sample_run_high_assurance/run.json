@@ -1,0 +1,5 @@
+{
+  "test_run_id": "sample-ha-001",
+  "profile_id": "high-assurance",
+  "state_reference": "snapshothash:abc123"
+}
