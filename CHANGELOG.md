@@ -1,5 +1,24 @@
 # Changelog
 
+## v0.9.0 (2026-03-09)
+
+### Fixed
+- Align `schemas/combined-assurance-manifest.schema.json` with the actual output of
+  `tools/generate-manifest.py`. The previous schema used a flat shape (`build_id`, `target`,
+  `version_tuple` at root; `additionalProperties: false`) that did not match the richer nested
+  structure the tool produces (`build: {build_id, target, commit, ci_run_url}`, `tools: {...}`,
+  `generator: {...}`). The artifact items schema also blocked `produced_by`, `media_type`,
+  `notes`, and `format`. This mismatch caused the `combined-assurance-smoke` CI to fail
+  on every push to `main` when schema validation was invoked via `--schema`.
+- Update `examples/combined-assurance-manifest.example.json` to match the corrected schema
+  shape so `tools/validate_examples.py` passes cleanly.
+
+### Added
+- New `validate` job in `.github/workflows/quality.yml` that runs
+  `tools/validate_examples.py` (example/schema conformance + cross-checks) and
+  `scripts/doc_tests.py` (JSON/YAML parse hygiene, markdown internal links) on every push
+  and pull request. Example drift from schemas is now caught in CI.
+
 ## v0.8.1 (2026-03-06)
 
 - Synchronize public-facing documentation, release metadata, and compatibility guidance with TRQP-TSPP v0.5.1 and Conformance Suite v0.7.1.

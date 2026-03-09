@@ -1,55 +1,51 @@
 {
   "manifest_version": "0.1.0",
-  "generated_at": "2026-02-22T00:00:00Z",
-  "build_id": "example-build",
-  "target": "https://example.com/trqp",
-  "version_tuple": {
-    "hub": "main@<sha>",
-    "conformance_suite": "main@<sha>",
-    "tspp": "main@<sha>"
+  "generated_at": "2026-03-09T00:00:00Z",
+  "build": {
+    "build_id": "example-build-abc123",
+    "target": "https://registry.example.org",
+    "commit": "abc123def456",
+    "ci_run_url": "https://github.com/example/trqp-assurance-hub/actions/runs/1"
+  },
+  "tools": {
+    "trqp_conformance_suite": {
+      "version": "v0.7.1",
+      "profile_id": "smoke",
+      "run_id": "cts-example-run-1"
+    },
+    "trqp_tspp": {
+      "version": "v0.5.1",
+      "assurance_level": "AL1",
+      "run_id": "tspp-example-run-1"
+    }
   },
   "artifacts": [
     {
-      "kind": "conformance_evidence_bundle",
-      "level": "AL1",
-      "required": true,
-      "path": "artifacts/evidence/conformance-bundle.json"
+      "kind": "log",
+      "path": "artifacts/conformance-suite-checkout.txt",
+      "produced_by": "trqp_conformance_suite",
+      "media_type": "text/plain",
+      "format": "smoke-v0",
+      "notes": "Conformance suite checkout metadata"
     },
     {
-      "kind": "tspp_posture_evidence_bundle",
-      "level": "AL1",
-      "required": true,
-      "path": "artifacts/evidence/tspp-bundle.json"
-    },
-    {
-      "kind": "combined_assurance_manifest",
-      "level": "AL1",
-      "required": false,
-      "path": "artifacts/combined-assurance-manifest.json"
-    },
-    {
-      "kind": "assurance_profile",
-      "level": "AL2",
-      "required": true,
-      "path": "examples/trqp-assurance-profile.example.json"
-    },
-    {
-      "kind": "control_satisfaction_declaration",
-      "level": "AL2",
-      "required": false,
-      "path": "examples/control-satisfaction.example.json"
-    },
-    {
-      "kind": "lifecycle_assertion",
-      "level": "AL2",
-      "required": false,
-      "path": "examples/lifecycle-assertion.example.json"
-    },
-    {
-      "kind": "recognition_assertion",
-      "level": "AL3",
-      "required": false,
-      "path": "examples/recognition-assertion.example.json"
+      "kind": "log",
+      "path": "artifacts/tspp-checkout.txt",
+      "produced_by": "trqp_tspp",
+      "media_type": "text/plain",
+      "format": "smoke-v0",
+      "notes": "TSPP checkout metadata"
     }
-  ]
+  ],
+  "generator": {
+    "name": "trqp-assurance-hub:generate-manifest",
+    "version": "0.9.0",
+    "uri": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub"
+  },
+  "summary": {
+    "overall_status": "pass",
+    "conformance_status": "pass",
+    "tspp_status": "pass",
+    "notes": "Smoke run example — not a real assurance result."
+  }
 }
