@@ -1,10 +1,8 @@
 name: quality
-
 on:
   push:
     branches: [ main ]
   pull_request:
-
 jobs:
   markdown_lint:
     runs-on: ubuntu-latest
@@ -13,8 +11,8 @@ jobs:
       - name: Markdown lint
         uses: avto-dev/markdown-lint@04d43ee9191307b50935a753da3b775ab695eceb # v1
         with:
+          config: '.markdownlint.yml'
           args: '**/*.md'
-
   link_check:
     runs-on: ubuntu-latest
     steps:
