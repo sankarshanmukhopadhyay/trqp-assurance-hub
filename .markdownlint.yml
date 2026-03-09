@@ -1,4 +1,29 @@
-# Keep linting pragmatic for standards-style docs
+# Markdownlint configuration for trqp-assurance-hub
+#
+# Philosophy: enforce rules that catch broken structure or missing content,
+# not style preferences. The repo's docs predate strict lint enforcement;
+# style rules are suppressed to keep CI signal meaningful rather than noisy.
+
+# --- Disabled: style preferences pervasive in existing docs ---
+MD004: false   # ul-style: dash vs asterisk list markers
+MD007: false   # ul-indent: unordered list indentation
+MD012: false   # no-multiple-blanks: consecutive blank lines
 MD013: false   # line-length
+MD022: false   # blanks-around-headings: heading spacing
+MD024: false   # no-duplicate-heading: ### Added / ### Fixed repeat across releases
+MD025: false   # single-title: multi-section docs intentionally use multiple H1s
+MD030: false   # list-marker-space: spaces after list markers
+MD032: false   # blanks-around-lists: changelog and doc bullet style
 MD033: false   # inline HTML
-MD041: false   # first line in file should be a top-level heading
+MD034: false   # no-bare-urls: bare URLs used intentionally in reference sections
+MD035: false   # hr-style: horizontal rule style
+MD036: false   # no-emphasis-as-heading: emphasis used as lightweight heading
+MD041: false   # first-line-h1: not all docs start with a heading
+MD047: false   # single-trailing-newline: not consistently applied in existing files
+
+# --- Enabled: structural correctness ---
+# MD001: heading levels increment one at a time
+# MD009: no trailing spaces
+# MD010: no hard tabs
+# MD011: no reversed link syntax
+# MD018: space after hash in headings
