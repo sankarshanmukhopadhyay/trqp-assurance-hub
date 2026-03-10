@@ -1,5 +1,26 @@
 # Changelog
 
+## v1.0.0 (2026-03-10)
+
+### Fixed
+- Align `README.md` version references with `VERSION` file: README declared v0.8.1 while
+  `VERSION` and `al-contract.json` already reflected v0.9.0 from the prior release.
+- Update downstream release train reference in README to TSPP v0.6.0 · CTS v0.8.0.
+
+### Added
+- `tools/ayra-mapping.md`: end-to-end crosswalk from the five Assurance Hub canonical
+  controls (TRQP-CTRL-01 through TRQP-CTRL-07) to Ayra Trust Network conformance
+  requirements, evidence artifacts, and sufficiency notes per AL tier. Includes a
+  three-tier submission checklist (Basic / Cross-Ecosystem / Sovereign).
+
+## Cross-repo versions
+
+| Repository | Version |
+|---|---|
+| TRQP-TSPP | v0.6.0 |
+| Conformance Suite | v0.8.0 |
+| Assurance Hub | v1.0.0 |
+
 ## v0.9.0 (2026-03-09)
 
 ### Fixed
