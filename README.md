@@ -12,18 +12,16 @@ tier: 0
 
 📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
 
+**Current version:** v1.0.1
 
-**Current version:** v1.0.0
-
-**Downstream release train:** TSPP v0.6.0 · Conformance Suite v0.8.0
-
+**Downstream release train:** TSPP v0.7.0 · Conformance Suite v0.9.0
 
 [![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 A pragmatic, adopter-first landing zone that makes the TRQP ecosystem feel like **one product** while keeping core components decoupled for independent iteration.
 
-Positioning: this repository is a **candidate Assurance Profile and Governance Hardening Layer** that helps operationalize open TRQP RFEs by turning “should” discussions into **profiles, artifacts, and machine-checkable evidence**.
+Positioning: this repository is a **candidate Assurance Profile and Governance Hardening Layer** that helps operationalize open TRQP RFEs by turning "should" discussions into **profiles, artifacts, and machine-checkable evidence**.
 
 ## Quick links
 
@@ -32,6 +30,7 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 - [Quickstart](QUICKSTART.md)
 - [Operating model](#the-operating-model)
 - [Combined assurance workflow](docs/guides/combined-assurance.md)
+- [Ayra Trust Network crosswalk](tools/ayra-mapping.md)
 - [Error states](docs/guides/error-states.md)
 - [Compatibility policy and matrix](docs/policies/compatibility.md)
 - [Issue routing](docs/policies/issue-routing.md)
@@ -68,6 +67,24 @@ Downstream repositories (e.g., TSPP, Conformance Suite) **MUST** reference these
 - Producer repos:
   - Conformance Suite (CTS): https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite (crosswalk: `docs/hub-crosswalk.md`)
   - TRQP-TSPP: https://github.com/sankarshanmukhopadhyay/TRQP-TSPP (crosswalk: `docs/hub-crosswalk.md`)
+
+## Ayra Trust Network
+
+This repository includes an end-to-end crosswalk mapping the five Hub controls to
+[Ayra Trust Network](https://ayra.forum) conformance tiers. Ayra operators can use
+this as a pre-submission checklist before engaging the Ayra conformance process.
+
+- Crosswalk and submission checklists: [`tools/ayra-mapping.md`](tools/ayra-mapping.md)
+- Ayra TRQP Profile: https://ayraforum.github.io/ayra-trust-registry-resources/
+- CTS Ayra profile: `profiles/ayra_baseline.yaml` (in `trqp-conformance-suite`)
+- TSPP Ayra profile: `docs/profiles/ayra-baseline.md` (in `TRQP-TSPP`)
+
+Key points for Ayra operators:
+
+- `did:webvh` is required for all ecosystem, trust registry, and cluster identifiers
+- JWS response signing is required at every Ayra tier — not an AL2-only upgrade
+- Both `/authorization` and `/recognition` endpoints are required by Ayra (TRQP core requires only one)
+
 ## What this is
 
 This repository is the **front door** for TRQP implementation and assurance work across:
@@ -97,12 +114,14 @@ This repo includes a **Candidate Trust Registry Assurance & Certification Baseli
 | Implement TRQP endpoints and prove protocol conformance | **Conformance Suite** | Test results + evidence bundles |
 | Add security and privacy posture checks (AL1/AL2) | **TRQP-TSPP** | AL checks + posture evidence |
 | Ship a production registry with both | **Both** | Protocol + posture assurance |
+| Join the Ayra Trust Network | **Both + Ayra crosswalk** | Pre-certification evidence package |
 
 ### Decision guide
 
-- If you need **“Does my TRQP implementation behave correctly?”** → Conformance Suite
-- If you need **“Is my deployment secure enough for the threat model?”** → TRQP-TSPP
-- If you need **“Can I show auditors both behavior and posture?”** → Use both
+- If you need **"Does my TRQP implementation behave correctly?"** → Conformance Suite
+- If you need **"Is my deployment secure enough for the threat model?"** → TRQP-TSPP
+- If you need **"Can I show auditors both behavior and posture?"** → Use both
+- If you need **"Am I ready for Ayra conformance submission?"** → Use both + `tools/ayra-mapping.md`
 
 ## The operating model
 
@@ -181,6 +200,13 @@ See:
 
 See:
 - [Combined assurance workflow](docs/guides/combined-assurance.md)
+
+### Workflow D: Ayra Trust Network submission
+
+1. Run CTS `ayra_baseline` profile
+2. Run TSPP with AL2 (JWS required at all Ayra tiers) and recognition security tests
+3. Generate combined assurance manifest
+4. Verify checklist in `tools/ayra-mapping.md` for your target tier (Basic / Cross-Ecosystem / Sovereign)
 
 ## Issue routing
 
