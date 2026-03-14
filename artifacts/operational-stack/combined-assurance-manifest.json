@@ -1,20 +1,20 @@
 {
   "manifest_version": "0.2.0",
-  "generated_at": "2026-03-14T03:01:11Z",
+  "generated_at": "2026-03-14T03:48:39Z",
   "build": {
-    "build_id": "opstack-demo-001",
+    "build_id": "opstack-demo-002",
     "target": "https://directory.example.org",
-    "run_id": "opstack-demo-001",
+    "run_id": "opstack-demo-002",
     "target_id": "demo-directory"
   },
   "tools": {
     "trqp_conformance_suite": {
-      "version": "0.9.0",
+      "version": "0.9.1",
       "profile_id": "interop_demo",
       "run_id": "opstack-demo-001"
     },
     "trqp_tspp": {
-      "version": "0.7.0",
+      "version": "0.7.1",
       "assurance_level": "AL1",
       "run_id": "opstack-demo-001"
     }
@@ -26,7 +26,7 @@
       "produced_by": "trqp_conformance_suite",
       "media_type": "application/json",
       "format": "cts-report-v0",
-      "sha256": "a107b5f2b5aebb6166a61baea48a3aef30ee6e20158b8315b0bf7e62b9fff650"
+      "sha256": "08eef8dd18bdcbe814612255b1eb477b374c60c55a4a9ad83510f2aa6c826252"
     },
     {
       "kind": "posture_report",
@@ -34,7 +34,7 @@
       "produced_by": "trqp_tspp",
       "media_type": "application/json",
       "format": "tspp-report-v0",
-      "sha256": "21f868fbd9210a6e5af44aeced8939b97bf7f7cc07e8e1ca6146b91f1fc8d1bb"
+      "sha256": "b61ce5c2a39c508e131e2b63d7a87fa1137e9493c61cc77d566a0888b2595773"
     },
     {
       "kind": "stack_run_metadata",
@@ -42,7 +42,15 @@
       "produced_by": "trqp_assurance_hub",
       "media_type": "application/json",
       "format": "operational-stack-run-v0",
-      "sha256": "a05cb9db4115fc481709a6051f7c610c856c970a68f6b932014259826587618b"
+      "sha256": "1d5bca6f2888f9e9a1b2ac272a9f7e918328bdc503e733a4baa9098866f93da6"
+    },
+    {
+      "kind": "assurance_profile",
+      "path": "profiles/al2-verified.yaml",
+      "produced_by": "trqp_assurance_hub",
+      "media_type": "application/yaml",
+      "format": "assurance-profile-v1",
+      "sha256": "b7dd60f6b4675478614fc9f60320406c76ca68a2e4afcea75d791a71093918b9"
     }
   ],
   "generator": {

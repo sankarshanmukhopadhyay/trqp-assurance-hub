@@ -1,8 +1,9 @@
 {
-  "run_id": "opstack-demo-001",
+  "run_id": "opstack-demo-002",
   "target_id": "demo-directory",
   "target": "https://directory.example.org",
-  "build_id": "opstack-demo-001",
+  "build_id": "opstack-demo-002",
+  "assurance_profile": "profiles/al2-verified.yaml",
   "artifacts": {
     "cts_report": "conformance/cts-report.json",
     "tspp_report": "posture/tspp-report.json"

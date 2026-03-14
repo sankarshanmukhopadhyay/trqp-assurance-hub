@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/schemas/machine-readable-assurance-profile.schema.json",
+  "title": "Machine-readable Assurance Profile",
+  "type": "object",
+  "required": [
+    "profile_id",
+    "version",
+    "assurance_level",
+    "summary",
+    "required_evidence",
+    "required_artifacts",
+    "controls"
+  ],
+  "properties": {
+    "profile_id": {"type": "string"},
+    "version": {"type": "string"},
+    "assurance_level": {"type": "string", "enum": ["AL1", "AL2", "AL3", "AL4"]},
+    "summary": {"type": "string"},
+    "required_evidence": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1
+    },
+    "required_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "path_hint"],
+        "properties": {
+          "kind": {"type": "string"},
+          "path_hint": {"type": "string"}
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "controls": {
+      "type": "object",
+      "required": ["governance_commitments", "publication"],
+      "properties": {
+        "governance_commitments": {
+          "type": "object",
+          "additionalProperties": {"type": "string", "enum": ["MUST", "SHOULD", "MAY"]}
+        },
+        "publication": {
+          "type": "object",
+          "additionalProperties": {"type": "string", "enum": ["MUST", "SHOULD", "MAY"]}
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

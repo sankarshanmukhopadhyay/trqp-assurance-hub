@@ -1,0 +1,24 @@
+profile_id: al3-audited
+version: 1.0.0
+assurance_level: AL3
+summary: Independently assessed baseline with audit-oriented evidence expectations.
+required_evidence:
+  - combined_assurance_manifest
+  - cts_report
+  - tspp_report
+  - governance_policy
+  - remediation_log
+required_artifacts:
+  - kind: combined_manifest
+    path_hint: combined-assurance-manifest.json
+  - kind: external_assessment
+    path_hint: audit/assessor-statement.json
+controls:
+  governance_commitments:
+    evidence_retention: MUST
+    remediation_tracking: MUST
+    segregation_of_duties: SHOULD
+  publication:
+    registry_publication: MUST
+    profile_publication: MUST
+    audit_summary_publication: SHOULD

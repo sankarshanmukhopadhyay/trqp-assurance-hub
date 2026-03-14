@@ -1,0 +1,23 @@
+profile_id: al2-verified
+version: 1.0.0
+assurance_level: AL2
+summary: Evidence-bound verified baseline for interoperable production operations.
+required_evidence:
+  - combined_assurance_manifest
+  - cts_report
+  - tspp_report
+required_artifacts:
+  - kind: conformance_report
+    path_hint: conformance/cts-report.json
+  - kind: posture_report
+    path_hint: posture/tspp-report.json
+  - kind: combined_manifest
+    path_hint: combined-assurance-manifest.json
+controls:
+  governance_commitments:
+    operator_contact: MUST
+    incident_response: SHOULD
+    evidence_retention: MUST
+  publication:
+    registry_publication: MUST
+    profile_publication: MUST

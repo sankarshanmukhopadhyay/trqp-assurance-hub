@@ -1,0 +1,27 @@
+profile_id: al4-regulated
+version: 1.0.0
+assurance_level: AL4
+summary: Regulated or sovereign-grade baseline with external dependency and governance disclosure.
+required_evidence:
+  - combined_assurance_manifest
+  - cts_report
+  - tspp_report
+  - governance_policy
+  - remediation_log
+  - external_assessment
+  - regulatory_mapping
+required_artifacts:
+  - kind: combined_manifest
+    path_hint: combined-assurance-manifest.json
+  - kind: regulatory_mapping
+    path_hint: governance/regulatory-mapping.json
+controls:
+  governance_commitments:
+    evidence_retention: MUST
+    remediation_tracking: MUST
+    external_dependency_register: MUST
+    formal_change_control: MUST
+  publication:
+    registry_publication: MUST
+    profile_publication: MUST
+    public_status_feed: SHOULD

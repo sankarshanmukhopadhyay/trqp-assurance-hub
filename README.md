@@ -14,7 +14,7 @@ tier: 0
 
 **Current version:** v1.1.0
 
-**Downstream release train:** TSPP v0.7.0 · Conformance Suite v0.9.0
+**Downstream release train:** TSPP v0.7.1 · Conformance Suite v0.9.1
 
 [![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
@@ -26,6 +26,9 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 ## Quick links
 
 - [Run the stack](docs/guides/run-the-stack.md)
+- [Operational Stack narrative](docs/architecture/operational-stack.md)
+- [Trust Registry reference service](docs/guides/trust-registry-reference-service.md)
+- [Machine-readable assurance profiles](docs/guides/machine-readable-assurance-profiles.md)
 - [Compatibility matrix](docs/reference/compatibility-matrix.md)
 - [Documentation index (role-based)](docs/index.md)
 - [TSAM (Trust Systems Assurance Method)](docs/tsam/README.md)
@@ -158,6 +161,11 @@ flowchart TB
 
 For machine-readable provenance across both runs, see the schema at:
 - `schemas/combined-assurance-manifest.schema.json`
+
+For the narrative layer and discovery surface, see:
+- `docs/architecture/operational-stack.md`
+- `services/trust-registry-reference/`
+- `profiles/al1-basic.yaml` through `profiles/al4-regulated.yaml`
 
 ## How the repos integrate (without merging)
 

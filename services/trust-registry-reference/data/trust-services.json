@@ -1,0 +1,13 @@
+{
+  "registry_id": "trqp-reference-registry",
+  "generated_at": "2026-03-14T00:00:00Z",
+  "items": [
+    {
+      "service_id": "demo-registry",
+      "name": "Demo Registry",
+      "service_type": "trust_registry",
+      "assurance_level": "AL2",
+      "href": "/trust-services/demo-registry"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "service_id": "demo-registry",
+  "profile_id": "interop_demo",
+  "cts_report": "../../../examples/operational-stack/demo-input/cts-report.json",
+  "tspp_report": "../../../examples/operational-stack/demo-input/tspp-report.json",
+  "status": "pass"
+}

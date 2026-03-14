@@ -76,3 +76,10 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 - Add schema validation CI step for `examples/` artifacts.
 
 _Last updated: 2026-03-06_
+
+
+## Recently completed integration increments
+
+- Operational Stack narrative published as a first-class architecture note.
+- Minimal Trust Registry reference service added for local discovery and demo flows.
+- Machine-readable assurance profiles for AL1-AL4 added with schema-backed validation.

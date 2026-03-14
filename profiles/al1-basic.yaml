@@ -1,0 +1,16 @@
+profile_id: al1-basic
+version: 1.0.0
+assurance_level: AL1
+summary: Minimal self-attested operational baseline.
+required_evidence:
+  - combined_assurance_manifest
+  - tspp_report
+required_artifacts:
+  - kind: posture_report
+    path_hint: posture/tspp-report.json
+controls:
+  governance_commitments:
+    operator_contact: MUST
+    change_log: SHOULD
+  publication:
+    registry_publication: SHOULD

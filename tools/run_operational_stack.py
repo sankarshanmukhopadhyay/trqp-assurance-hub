@@ -25,6 +25,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--target-id", required=True)
     p.add_argument("--run-id", required=True)
     p.add_argument("--out", default="artifacts/operational-stack")
+    p.add_argument("--assurance-profile", default=None, help="Optional path to selected machine-readable assurance profile")
     args = p.parse_args(argv)
 
     repo_root = Path(__file__).resolve().parent.parent
@@ -44,6 +45,7 @@ def main(argv: list[str] | None = None) -> int:
         "target_id": args.target_id,
         "target": args.target,
         "build_id": args.build_id,
+        **({"assurance_profile": args.assurance_profile} if args.assurance_profile else {}),
         "artifacts": {
             "cts_report": str(cts_dst.relative_to(out)),
             "tspp_report": str(tspp_dst.relative_to(out)),
@@ -52,6 +54,11 @@ def main(argv: list[str] | None = None) -> int:
     metadata_path = out / "metadata" / "stack-run.json"
     metadata_path.parent.mkdir(parents=True, exist_ok=True)
     metadata_path.write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
+
+    if args.assurance_profile:
+        profile_src = Path(args.assurance_profile).resolve()
+        profile_dst = out / "profiles" / profile_src.name
+        copy_into(profile_src, profile_dst)
 
     manifest_path = out / "combined-assurance-manifest.json"
     cmd = [
@@ -66,10 +73,14 @@ def main(argv: list[str] | None = None) -> int:
         "--artifact", "conformance_report:conformance/cts-report.json:trqp_conformance_suite:application/json:cts-report-v0",
         "--artifact", "posture_report:posture/tspp-report.json:trqp_tspp:application/json:tspp-report-v0",
         "--artifact", "stack_run_metadata:metadata/stack-run.json:trqp_assurance_hub:application/json:operational-stack-run-v0",
+    ]
+    if args.assurance_profile:
+        cmd.extend(["--artifact", f"assurance_profile:profiles/{Path(args.assurance_profile).name}:trqp_assurance_hub:application/yaml:assurance-profile-v1"] )
+    cmd.extend([
         "--base-dir", str(out),
         "--schema", str(repo_root / "schemas" / "combined-assurance-manifest.schema.json"),
         "--out", str(manifest_path),
-    ]
+    ])
     subprocess.check_call(cmd)
     print(f"Operational Stack artifacts written to {out}")
     return 0

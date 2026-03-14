@@ -47,6 +47,9 @@ You are integrating endpoints, schemas, and validation into pipelines.
 
 - Getting started: [Quickstart](../QUICKSTART.md)
 - The workflow: [Combined assurance guide](guides/combined-assurance.md)
+- Narrative: [Operational Stack narrative](architecture/operational-stack.md)
+- Discovery: [Trust Registry reference service](guides/trust-registry-reference-service.md)
+- Contracts: [Machine-readable assurance profiles](guides/machine-readable-assurance-profiles.md)
 - Schemas: [Schemas](../schemas/)
 - Example payloads: [Examples](../examples/)
 - Error handling: [Error states](guides/error-states.md)
@@ -65,6 +68,9 @@ You are translating governance intent into implementable and auditable artifacts
 - [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
 - [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
 - [Combined assurance workflow](guides/combined-assurance.md)
+- [Operational Stack narrative](architecture/operational-stack.md)
+- [Trust Registry reference service](guides/trust-registry-reference-service.md)
+- [Machine-readable assurance profiles](guides/machine-readable-assurance-profiles.md)
 - [Ayra Trust Network crosswalk](../tools/ayra-mapping.md)
 
 ### GRID implementers (directory operators)

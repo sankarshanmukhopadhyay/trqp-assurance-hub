@@ -26,6 +26,7 @@ Maintain this table over time.
 
 | Conformance Suite version | TRQP-TSPP version | Status | Notes |
 |---:|---:|---|---|
+| 0.9.1 | 0.7.1 | Supported | Current non-release integration baseline with registry and profile support |
 | 0.7.1 | 0.5.1 | Supported | Current coordinated patch release after Commit 3 and 4 closure |
 | 0.7.0 | 0.5.0 | Supported | Initial High-Assurance Hardening coordinated release |
 | 0.4.2 | 0.2.2 | Supported | Documentation alignment increment |

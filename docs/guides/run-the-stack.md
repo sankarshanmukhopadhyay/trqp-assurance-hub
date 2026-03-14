@@ -2,7 +2,7 @@
 
 This guide is the front door for the TRQP Operational Stack baseline.
 
-The goal is blunt and useful: produce a single directory that contains conformance evidence, TSPP posture evidence, and a combined assurance manifest that ties the run together.
+The goal is blunt and useful: produce a single directory that contains conformance evidence, TSPP posture evidence, a combined assurance manifest, and optionally a selected machine-readable assurance profile.
 
 ## Outcome
 
@@ -17,6 +17,8 @@ artifacts/operational-stack/
     tspp-report.json
   metadata/
     stack-run.json
+  profiles/
+    al2-verified.yaml
 ```
 
 ## Inputs
@@ -35,7 +37,15 @@ This repository ships a reproducible demo input set under `examples/operational-
 Run:
 
 ```bash
-python tools/run_operational_stack.py   --cts-report examples/operational-stack/demo-input/cts-report.json   --tspp-report examples/operational-stack/demo-input/tspp-report.json   --target https://directory.example.org   --build-id opstack-demo-001   --target-id demo-directory   --run-id opstack-demo-001   --out artifacts/operational-stack
+python tools/run_operational_stack.py \
+  --cts-report examples/operational-stack/demo-input/cts-report.json \
+  --tspp-report examples/operational-stack/demo-input/tspp-report.json \
+  --target https://directory.example.org \
+  --build-id opstack-demo-001 \
+  --target-id demo-directory \
+  --run-id opstack-demo-001 \
+  --assurance-profile profiles/al2-verified.yaml \
+  --out artifacts/operational-stack
 ```
 
 ## With real repo outputs
@@ -43,7 +53,9 @@ python tools/run_operational_stack.py   --cts-report examples/operational-stack/
 1. Generate a CTS report in the Conformance Suite.
 2. Generate a TSPP report in TRQP-TSPP.
 3. Copy or reference those reports here.
-4. Run the wrapper above.
+4. Select the assurance profile that matches the intended deployment baseline.
+5. Run the wrapper above.
+6. Publish the resulting manifest and selected profile through the Trust Registry reference service.
 
 ## Operational conventions
 
@@ -58,6 +70,9 @@ Those four fields are the boring plumbing that make audit trails work.
 
 ## Related references
 
+- `docs/architecture/operational-stack.md`
+- `docs/guides/trust-registry-reference-service.md`
+- `docs/guides/machine-readable-assurance-profiles.md`
 - `docs/reference/compatibility-matrix.md`
 - `schemas/combined-assurance-manifest.schema.json`
 - `examples/operational-stack/README.md`

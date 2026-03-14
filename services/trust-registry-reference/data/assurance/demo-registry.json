@@ -1,0 +1,8 @@
+{
+  "service_id": "demo-registry",
+  "profile_id": "al2-verified",
+  "assurance_level": "AL2",
+  "combined_manifest": "../../../examples/operational-stack/expected-output/combined-assurance-manifest.json",
+  "machine_readable_profile": "../../../profiles/al2-verified.yaml",
+  "status": "pass"
+}

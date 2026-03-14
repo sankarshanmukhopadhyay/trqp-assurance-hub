@@ -4,10 +4,10 @@
   "run_id": "opstack-demo-001",
   "target_id": "demo-directory",
   "assurance_level": "AL1",
-  "tool_version": "0.7.0",
+  "tool_version": "0.7.1",
   "tool": {
     "name": "trqp-tspp",
-    "version": "0.7.0"
+    "version": "0.7.1"
   },
   "target": {
     "base_url": "https://directory.example.org",

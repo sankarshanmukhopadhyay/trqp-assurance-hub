@@ -9,12 +9,12 @@
   },
   "tools": {
     "trqp_conformance_suite": {
-      "version": "0.9.0",
+      "version": "0.9.1",
       "profile_id": "interop_demo",
       "run_id": "opstack-demo-001"
     },
     "trqp_tspp": {
-      "version": "0.7.0",
+      "version": "0.7.1",
       "assurance_level": "AL1",
       "run_id": "opstack-demo-001"
     }

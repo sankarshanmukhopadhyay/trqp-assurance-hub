@@ -1,0 +1,10 @@
+{
+  "service_id": "demo-registry",
+  "name": "Demo Registry",
+  "service_type": "trust_registry",
+  "description": "Reference service record for Operational Stack demonstrations.",
+  "endpoint": "https://example.org/trqp",
+  "assurance_profile_id": "al2-verified",
+  "assurance_href": "/assurance/demo-registry",
+  "conformance_href": "/conformance/demo-registry"
+}
