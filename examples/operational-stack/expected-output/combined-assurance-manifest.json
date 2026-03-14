@@ -1,0 +1,54 @@
+{
+  "manifest_version": "0.2.0",
+  "generated_at": "2026-03-14T08:00:20Z",
+  "build": {
+    "build_id": "opstack-demo-001",
+    "target": "https://directory.example.org",
+    "run_id": "opstack-demo-001",
+    "target_id": "demo-directory"
+  },
+  "tools": {
+    "trqp_conformance_suite": {
+      "version": "0.9.0",
+      "profile_id": "interop_demo",
+      "run_id": "opstack-demo-001"
+    },
+    "trqp_tspp": {
+      "version": "0.7.0",
+      "assurance_level": "AL1",
+      "run_id": "opstack-demo-001"
+    }
+  },
+  "artifacts": [
+    {
+      "kind": "conformance_report",
+      "path": "conformance/cts-report.json",
+      "produced_by": "trqp_conformance_suite",
+      "media_type": "application/json",
+      "format": "cts-report-v0"
+    },
+    {
+      "kind": "posture_report",
+      "path": "posture/tspp-report.json",
+      "produced_by": "trqp_tspp",
+      "media_type": "application/json",
+      "format": "tspp-report-v0"
+    },
+    {
+      "kind": "stack_run_metadata",
+      "path": "metadata/stack-run.json",
+      "produced_by": "trqp_assurance_hub",
+      "media_type": "application/json",
+      "format": "operational-stack-run-v0"
+    }
+  ],
+  "generator": {
+    "name": "trqp-assurance-hub:generate-manifest",
+    "uri": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub"
+  },
+  "summary": {
+    "overall_status": "pass",
+    "conformance_status": "pass",
+    "tspp_status": "pass"
+  }
+}

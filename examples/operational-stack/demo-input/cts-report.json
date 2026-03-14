@@ -1,0 +1,38 @@
+{
+  "run_id": "opstack-demo-001",
+  "target_id": "demo-directory",
+  "generated_at": "2026-03-14T08:00:00Z",
+  "profile": "interop_demo",
+  "profile_id": "interop_demo",
+  "suite_version": "0.9.0",
+  "tool": {
+    "name": "trqp-cts",
+    "version": "0.9.0"
+  },
+  "summary": {
+    "PASS": 3,
+    "FAIL": 0,
+    "SKIP": 0,
+    "NOT_APPLICABLE": 0,
+    "ERROR": 0,
+    "XFAIL": 0,
+    "exit_status": 0
+  },
+  "results": [
+    {
+      "test_case_id": "TC-SMOKE-001",
+      "result": "PASS",
+      "elapsed_ms": 10
+    },
+    {
+      "test_case_id": "TC-SMOKE-002",
+      "result": "PASS",
+      "elapsed_ms": 12
+    },
+    {
+      "test_case_id": "TC-SMOKE-003",
+      "result": "PASS",
+      "elapsed_ms": 9
+    }
+  ]
+}

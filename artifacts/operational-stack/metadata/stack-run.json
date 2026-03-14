@@ -1,0 +1,10 @@
+{
+  "run_id": "opstack-demo-001",
+  "target_id": "demo-directory",
+  "target": "https://directory.example.org",
+  "build_id": "opstack-demo-001",
+  "artifacts": {
+    "cts_report": "conformance/cts-report.json",
+    "tspp_report": "posture/tspp-report.json"
+  }
+}

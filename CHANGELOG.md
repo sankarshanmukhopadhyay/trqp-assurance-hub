@@ -1,3 +1,9 @@
+## v1.1.0
+
+- Add the Operational Stack baseline with a new `Run the Stack` guide, compatibility matrix, and demo example set.
+- Add `tools/run_operational_stack.py` and extend `tools/generate-manifest.py` to ingest CTS and TSPP report metadata directly.
+- Add an Operational Stack GitHub Actions smoke workflow and update the combined assurance manifest schema with shared `run_id` and `target_id` fields.
+
 # Changelog
 
 ## v1.0.0 (2026-03-10)

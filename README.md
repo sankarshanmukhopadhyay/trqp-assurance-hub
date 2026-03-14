@@ -12,7 +12,7 @@ tier: 0
 
 📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
 
-**Current version:** v1.0.1
+**Current version:** v1.1.0
 
 **Downstream release train:** TSPP v0.7.0 · Conformance Suite v0.9.0
 
@@ -25,6 +25,8 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 
 ## Quick links
 
+- [Run the stack](docs/guides/run-the-stack.md)
+- [Compatibility matrix](docs/reference/compatibility-matrix.md)
 - [Documentation index (role-based)](docs/index.md)
 - [TSAM (Trust Systems Assurance Method)](docs/tsam/README.md)
 - [Quickstart](QUICKSTART.md)

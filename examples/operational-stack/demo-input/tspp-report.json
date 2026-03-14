@@ -1,0 +1,36 @@
+{
+  "profile": "TSPP-TRQP-0.1",
+  "generated_at": "2026-03-14T08:00:10Z",
+  "run_id": "opstack-demo-001",
+  "target_id": "demo-directory",
+  "assurance_level": "AL1",
+  "tool_version": "0.7.0",
+  "tool": {
+    "name": "trqp-tspp",
+    "version": "0.7.0"
+  },
+  "target": {
+    "base_url": "https://directory.example.org",
+    "expected_assurance_level": "AL1"
+  },
+  "summary": {
+    "exit_status": 0,
+    "PASS": 4,
+    "FAIL": 0,
+    "SKIP": 0,
+    "NOT_APPLICABLE": 0,
+    "ERROR": 0,
+    "XFAIL": 0
+  },
+  "results": [
+    {
+      "nodeid": "test_01",
+      "name": "metadata",
+      "outcome": "PASS",
+      "duration_seconds": 0.01,
+      "requirement_ids": [
+        "TSPP-META-01"
+      ]
+    }
+  ]
+}
