@@ -86,6 +86,17 @@ def _infer_status(report: Dict[str, Any], fail_key: str = "FAIL", pass_key: str 
     return "partial"
 
 
+def _summary_number(report: Dict[str, Any], key: str) -> Optional[float]:
+    summary = report.get("summary", {}) if isinstance(report, dict) else {}
+    value = summary.get(key)
+    if value is None:
+        return None
+    try:
+        return float(value)
+    except Exception:
+        return None
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     p = argparse.ArgumentParser(description="Generate a Combined Assurance Manifest (JSON).")
     p.add_argument("--manifest-version", default="0.2.0")
@@ -206,7 +217,12 @@ def main(argv: Optional[List[str]] = None) -> int:
         elif statuses:
             overall_status = "partial"
 
-    if any([overall_status, conformance_status, tspp_status, args.notes]):
+    posture_score = _summary_number(tspp_report, "posture_score")
+    coverage_index = _summary_number(cts_report, "coverage_index")
+    evidence_completeness = _summary_number(cts_report, "evidence_completeness")
+    assurance_tier = tspp_assurance_level if tspp_assurance_level in {"AL1", "AL2", "AL3", "AL4"} else None
+
+    if any([overall_status, conformance_status, tspp_status, args.notes, posture_score is not None, coverage_index is not None, evidence_completeness is not None, assurance_tier]):
         summary: Dict[str, Any] = {}
         if overall_status:
             summary["overall_status"] = overall_status
@@ -214,6 +230,14 @@ def main(argv: Optional[List[str]] = None) -> int:
             summary["conformance_status"] = conformance_status
         if tspp_status:
             summary["tspp_status"] = tspp_status
+        if posture_score is not None:
+            summary["posture_score"] = posture_score
+        if coverage_index is not None:
+            summary["coverage_index"] = coverage_index
+        if evidence_completeness is not None:
+            summary["evidence_completeness"] = evidence_completeness
+        if assurance_tier:
+            summary["assurance_tier"] = assurance_tier
         if args.notes:
             summary["notes"] = args.notes
         doc["summary"] = summary

@@ -1,3 +1,8 @@
+## v1.2.0
+
+- Added manifest summary metrics for posture, coverage, completeness, and assurance tier.
+- Refreshed Operational Trust Stack documentation and synchronized downstream versions.
+
 ## v1.1.0
 
 - Add the Operational Stack baseline with a new `Run the Stack` guide, compatibility matrix, and demo example set.

@@ -1,3 +1,9 @@
+---
+owner: maintainers
+last_reviewed: 2026-03-17
+tier: 0
+---
+
 # Combined Assurance Guide
 
 This guide gives implementers a repeatable workflow to generate **one coherent assurance story** using both:

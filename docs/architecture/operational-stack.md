@@ -1,3 +1,9 @@
+---
+owner: maintainers
+last_reviewed: 2026-03-17
+tier: 0
+---
+
 # Operational Stack Narrative
 
 The TRQP stack is easiest to understand when treated as an **operational pipeline** rather than as three adjacent repositories.

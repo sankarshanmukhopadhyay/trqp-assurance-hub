@@ -46,6 +46,10 @@
     "overall_status": "pass",
     "conformance_status": "pass",
     "tspp_status": "pass",
-    "notes": "Smoke run example — not a real assurance result."
+    "notes": "Smoke run example \u2014 not a real assurance result.",
+    "posture_score": 100.0,
+    "coverage_index": 93.33,
+    "evidence_completeness": 100.0,
+    "assurance_tier": "AL2"
   }
 }

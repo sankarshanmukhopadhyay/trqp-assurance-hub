@@ -1,6 +1,6 @@
 ---
 owner: maintainers
-last_reviewed: 2026-03-10
+last_reviewed: 2026-03-17
 tier: 0
 ---
 
@@ -12,16 +12,33 @@ tier: 0
 
 📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
 
-**Current version:** v1.1.0
+**Current version:** v1.2.0
 
-**Downstream release train:** TSPP v0.7.1 · Conformance Suite v0.9.1
+**Downstream release train:** TSPP v0.8.0 · Conformance Suite v1.0.0
+
+**Release line:** Operational Trust Stack v1
 
 [![quality](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml/badge.svg)](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/actions/workflows/quality.yml)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-A pragmatic, adopter-first landing zone that makes the TRQP ecosystem feel like **one product** while keeping core components decoupled for independent iteration.
+TRQP Assurance Hub is the **assurance orchestration and publication layer** in the Operational Trust Stack v1 release line.
+It ties TSPP posture outputs and Conformance Suite verification outputs into a machine-readable **Combined Assurance Manifest**
+that can be reviewed, exchanged, and published through registry-oriented workflows.
 
-Positioning: this repository is a **candidate Assurance Profile and Governance Hardening Layer** that helps operationalize open TRQP RFEs by turning "should" discussions into **profiles, artifacts, and machine-checkable evidence**.
+## Where this fits
+
+| Layer | Repository role | Primary output |
+|---|---|---|
+| TSPP | Posture computation | Posture Report |
+| Conformance Suite | Protocol verification | Conformance Report |
+| Assurance Hub | Assurance orchestration and publication | Combined Assurance Manifest |
+
+## What is new in v1.2.0
+
+- Combined Assurance Manifest now surfaces `posture_score`, `coverage_index`, and `evidence_completeness`
+- Assurance summary carries the selected assurance tier for downstream publication workflows
+- Public docs refreshed around the Golden Flow and release synchronization
+- Versions aligned across the three repos for a coherent release story
 
 ## Quick links
 
@@ -33,25 +50,6 @@ Positioning: this repository is a **candidate Assurance Profile and Governance H
 - [Documentation index (role-based)](docs/index.md)
 - [TSAM (Trust Systems Assurance Method)](docs/tsam/README.md)
 - [Quickstart](QUICKSTART.md)
-- [Operating model](#the-operating-model)
-- [Combined assurance workflow](docs/guides/combined-assurance.md)
-- [Ayra Trust Network crosswalk](tools/ayra-mapping.md)
-- [Error states](docs/guides/error-states.md)
-- [Compatibility policy and matrix](docs/policies/compatibility.md)
-- [Issue routing](docs/policies/issue-routing.md)
-- [Upstream TRQP RFE alignment](docs/trqp-alignment.md)
-- [Assurance profile (candidate, machine-readable)](docs/guides/assurance-profile.md)
-- [Assurance Levels (AL1–AL4, canonical)](docs/guides/assurance-levels.md)
-- [AL contract (machine-readable)](al-contract.json)
-- [Control objectives](docs/guides/control-objectives.md)
-- [Recognition Assertion](docs/guides/recognition-assertion.md)
-- [Lifecycle state model](docs/guides/lifecycle-state.md)
-- [Recognition graph semantics](docs/guides/recognition-graph.md)
-- [Revocation semantics](docs/guides/revocation-semantics.md)
-- [Candidate certification baseline (CTR-ACB)](docs/certification-baseline/README.md)
-- [Glossary](docs/glossary.md)
-
-## Methodological Context
 
 This repository implements components of the **Trust Systems Assurance Method (TSAM)** — a structured, **registry-agnostic** methodology for assurance and conformance in trust-bearing distributed systems.
 

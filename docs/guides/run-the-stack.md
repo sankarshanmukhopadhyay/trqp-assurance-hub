@@ -1,3 +1,9 @@
+---
+owner: maintainers
+last_reviewed: 2026-03-17
+tier: 0
+---
+
 # Run the Stack
 
 This guide is the front door for the TRQP Operational Stack baseline.
