@@ -2,7 +2,7 @@
 layout: default
 title: TRQP Assurance Hub
 owner: maintainers
-last_reviewed: 2026-03-10
+last_reviewed: 2026-03-17
 tier: 0
 ---
 
@@ -28,7 +28,7 @@ You are preparing to join or are operating within the Ayra Trust Network.
 
 - Pre-certification crosswalk: [Ayra control mapping and submission checklists](../tools/ayra-mapping.md)
 - CTS profile: `profiles/ayra_baseline.yaml` (in `trqp-conformance-suite`)
-- TSPP profile: [TSPP Ayra baseline](../docs/profiles/ayra-baseline.md) (in `TRQP-TSPP`)
+- TSPP profile: [TSPP Ayra baseline](https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/blob/main/docs/profiles/ayra-baseline.md) (in `TRQP-TSPP`)
 - Ayra TRQP Profile: https://ayraforum.github.io/ayra-trust-registry-resources/
 - Ayra Implementers Guide: https://ayraforum.github.io/ayra-trust-registry-resources/guides/
 

@@ -31,17 +31,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout hub
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Checkout trqp-conformance-suite
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           repository: sankarshanmukhopadhyay/trqp-conformance-suite
           ref: ${{ github.event_name == 'workflow_dispatch' && inputs.conformance_ref || 'main' }}
           path: external/trqp-conformance-suite
 
       - name: Checkout TRQP-TSPP
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           repository: sankarshanmukhopadhyay/TRQP-TSPP
           ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tspp_ref || 'main' }}
@@ -57,7 +57,7 @@ jobs:
           echo "TSPP HEAD: $(git -C external/TRQP-TSPP rev-parse --short HEAD)"
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -106,13 +106,13 @@ jobs:
             --schema schemas/combined-assurance-manifest.schema.json
 
       - name: Upload manifest artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: combined-assurance-manifest
           path: artifacts/combined-assurance-manifest.json
 
       - name: Upload smoke artifacts
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: combined-assurance-smoke-artifacts
           path: artifacts/*.txt
