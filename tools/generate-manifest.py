@@ -133,6 +133,9 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     p.add_argument("--out", required=True)
     p.add_argument("--schema", default=None)
+    p.add_argument("--dry-run", action="store_true",
+                   help="Validate all inputs and preview the manifest without writing any output files. "
+                        "Exits 0 if all inputs are valid, non-zero on any validation failure.")
     args = p.parse_args(argv)
 
     generated_at = args.generated_at or _utc_now_rfc3339()
@@ -241,6 +244,16 @@ def main(argv: Optional[List[str]] = None) -> int:
         if args.notes:
             summary["notes"] = args.notes
         doc["summary"] = summary
+
+    if args.dry_run:
+        # Validate schema if provided, but write nothing to disk.
+        if args.schema:
+            _validate(Path(args.schema), doc)
+        # Emit the preview to stdout so callers can inspect without writing files.
+        import sys
+        print(json.dumps(doc, indent=2, ensure_ascii=False), file=sys.stdout)
+        print(f"\nDry run complete — manifest is valid. Output would be written to: {args.out}", file=sys.stderr)
+        return 0
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)

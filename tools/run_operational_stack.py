@@ -40,11 +40,14 @@ def main(argv: list[str] | None = None) -> int:
     copy_into(cts_src, cts_dst)
     copy_into(tspp_src, tspp_dst)
 
+    from datetime import datetime, timezone
+    _generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     metadata = {
         "run_id": args.run_id,
         "target_id": args.target_id,
         "target": args.target,
         "build_id": args.build_id,
+        "generated_at": _generated_at,
         **({"assurance_profile": args.assurance_profile} if args.assurance_profile else {}),
         "artifacts": {
             "cts_report": str(cts_dst.relative_to(out)),

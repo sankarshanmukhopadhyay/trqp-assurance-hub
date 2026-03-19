@@ -1,3 +1,10 @@
+## v1.3.0
+
+- Add `--dry-run` flag to `tools/generate-manifest.py`: validates all inputs and emits a manifest preview to stdout without writing any output files. Schema validation (via `--schema`) is still executed in dry-run mode. Exit 0 on success, non-zero on any validation failure. Added as a CI step in `quality.yml` on every push.
+- Add `generated_at` field to the metadata JSON written by `tools/run_operational_stack.py`, completing the operational stack audit trail.
+- Update `quality.yml` to include a `validate` job that runs `tools/validate_examples.py`, `scripts/doc_tests.py`, and `generate-manifest.py --dry-run` on every push and pull request.
+- Synchronize downstream version references: TRQP-TSPP v0.9.0, Conformance Suite v1.1.0.
+
 ## v1.2.0
 
 - Added manifest summary metrics for posture, coverage, completeness, and assurance tier.

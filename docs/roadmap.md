@@ -48,8 +48,8 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 - ✅ Combined-assurance smoke workflow stable, CI-backed, and `workflow_dispatch`-capable.
 - ✅ Manifest schema aligned with `generate-manifest.py` output.
 - ✅ Artifact checklist aligned with evidence matrix.
+- ✅ `generate-manifest.py --dry-run`: validates inputs and emits a preview to stdout without writing output files. CI step added to `quality.yml`.
 - **Next:** Publish a copy/paste adopter template for the combined-assurance workflow, usable in downstream repos without Hub dependency.
-- **Next:** Add a `--dry-run` mode to `generate-manifest.py` that validates inputs and emits a preview without writing output files.
 
 ### 3) Schemas and machine readability
 
@@ -75,7 +75,8 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 
 - ✅ `tools/generate-manifest.py` supports full combined-assurance manifest generation with CTS and TSPP report ingestion.
 - ✅ Schema validation CI step in place.
+- ✅ `generate-manifest.py --dry-run` CI step added to `quality.yml` — generation path is now verified on every push.
 - **Next:** Add a `tools/check-freshness.py` script that reads `last_reviewed` frontmatter and flags docs past their SLA threshold in CI.
 - **Next:** Extend `validate_examples.py` to cover AL evidence bundle examples (AL3/AL4 directories under `examples/`).
 
-_Last updated: 2026-03-17_
+_Last updated: 2026-03-19_
