@@ -1,3 +1,14 @@
+## v1.4.0
+
+- Add `examples/al1-evidence-bundle/` and `examples/al2-evidence-bundle/`: minimal viable bundle templates with README (what to produce, what to omit, toolchain invocation), `version-tuple.json`, `combined-assurance-manifest.json`, and `operator-declaration.md`.
+- Add `examples/al3-evidence-bundle/AUDIT_GUIDE.md` and `examples/al4-evidence-bundle/AUDIT_GUIDE.md`: per-artifact verifier checklists mapping evidence artifact → check → expected outcome → failure signal, with AL-level pass criteria.
+- Add `templates/combined-assurance-workflow.yml`: copy/paste GitHub Actions workflow template for the combined-assurance workflow, covering CTS run, TSPP run, manifest generation, dry-run validation, and artifact upload. No Hub dependency required.
+- Add `schemas/CONTRACT.md`: schema stability contract with per-schema field stability tiers and AL contract pin migration policy.
+- Add `docs/guides/al-decision-tree.md`: structured decision tree for AL selection (consequence → external reliance → continuous operation) with quick reference table and upgrade path guidance.
+- Add `docs/reference/hub-cts-crosswalk.md`: three-way mapping table from Hub control IDs to CTS test IDs and TSPP requirement IDs, with reverse indexes and coverage gap notes. CI-validated via `tools/validate_crosswalk.py`.
+- Extend `tools/validate_examples.py` to validate JSON files in all AL evidence bundle directories (`examples/al*-evidence-bundle/`) against their paired schemas.
+- Update cross-repo version references to TRQP-TSPP v0.10.0 and Conformance Suite v1.2.0.
+
 ## v1.3.0
 
 - Add `--dry-run` flag to `tools/generate-manifest.py`: validates all inputs and emits a manifest preview to stdout without writing any output files. Schema validation (via `--schema`) is still executed in dry-run mode. Exit 0 on success, non-zero on any validation failure. Added as a CI step in `quality.yml` on every push.

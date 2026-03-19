@@ -1,0 +1,53 @@
+{
+  "manifest_version": "0.2.0",
+  "generated_at": "2026-01-15T00:00:00Z",
+  "build": {
+    "build_id": "al1-mvb-example",
+    "target": "https://registry.example.org",
+    "run_id": "al1-example-run-001",
+    "target_id": "https://registry.example.org"
+  },
+  "tools": {
+    "trqp_conformance_suite": {
+      "version": "1.1.0",
+      "profile_id": "baseline",
+      "run_id": "cts-al1-example-001"
+    },
+    "trqp_tspp": {
+      "version": "0.9.0",
+      "assurance_level": "AL1",
+      "run_id": "tspp-al1-example-001"
+    }
+  },
+  "artifacts": [
+    {
+      "kind": "conformance_report",
+      "path": "conformance/cts-report.json",
+      "produced_by": "trqp_conformance_suite",
+      "media_type": "application/json"
+    },
+    {
+      "kind": "posture_report",
+      "path": "posture/tspp-report.json",
+      "produced_by": "trqp_tspp",
+      "media_type": "application/json"
+    },
+    {
+      "kind": "version_tuple",
+      "path": "version-tuple.json",
+      "produced_by": "operator",
+      "media_type": "application/json"
+    }
+  ],
+  "summary": {
+    "overall_status": "pass",
+    "conformance_status": "pass",
+    "tspp_status": "pass",
+    "assurance_tier": "AL1",
+    "notes": "AL1 minimal viable bundle example. See README.md for upgrade path to AL2."
+  },
+  "generator": {
+    "name": "trqp-assurance-hub:generate-manifest",
+    "uri": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub"
+  }
+}

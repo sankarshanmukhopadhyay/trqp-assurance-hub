@@ -1,0 +1,226 @@
+# combined-assurance-workflow.yml
+#
+# Copy/paste adopter template for the TRQP combined-assurance workflow.
+# Drop this file into .github/workflows/ in your own repository.
+#
+# Requirements:
+# - Set the TRQP_TARGET_URL repository variable (or supply at dispatch time).
+# - If signing is enabled in your CTS profile, store a base64 Ed25519 signing
+#   key in the TRQP_SIGNING_KEY_B64 repository secret.
+#
+# What this workflow does:
+# 1. Checks out the TRQP Conformance Suite and TRQP-TSPP at pinned versions.
+# 2. Runs the CTS against your registry and produces a conformance evidence bundle.
+# 3. Runs the TSPP harness against your registry and produces a posture report.
+# 4. Generates a Combined Assurance Manifest linking both bundles, validated
+#    against the Hub schema.
+# 5. Uploads all artifacts for audit access.
+#
+# Customise the inputs at the top of the file for your registry and AL target.
+
+name: combined-assurance
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: "Registry base URL (e.g. https://registry.example.org)"
+        required: true
+        default: "https://registry.example.org"
+      conformance_profile:
+        description: "CTS profile ID (baseline | high_assurance | smoke | ayra_baseline)"
+        required: true
+        default: "baseline"
+      tspp_assurance_level:
+        description: "TSPP assurance level (AL1 | AL2 | AL3 | AL4)"
+        required: true
+        default: "AL1"
+  push:
+    branches: ["main"]
+
+# ---------------------------------------------------------------------------
+# Pin these to tagged releases for audit-grade runs.
+# ---------------------------------------------------------------------------
+env:
+  CTS_REF: "v1.1.0"
+  TSPP_REF: "v0.9.0"
+  HUB_REF: "v1.3.0"
+  CTS_REPO: "sankarshanmukhopadhyay/trqp-conformance-suite"
+  TSPP_REPO: "sankarshanmukhopadhyay/TRQP-TSPP"
+  HUB_REPO: "sankarshanmukhopadhyay/trqp-assurance-hub"
+
+jobs:
+  combined-assurance:
+    runs-on: ubuntu-latest
+    steps:
+      # -----------------------------------------------------------------------
+      # Checkout
+      # -----------------------------------------------------------------------
+      - name: Checkout Conformance Suite
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.CTS_REPO }}
+          ref: ${{ env.CTS_REF }}
+          path: external/cts
+
+      - name: Checkout TSPP
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.TSPP_REPO }}
+          ref: ${{ env.TSPP_REF }}
+          path: external/tspp
+
+      - name: Checkout Assurance Hub (for manifest tool + schema)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.HUB_REPO }}
+          ref: ${{ env.HUB_REF }}
+          path: external/hub
+
+      # -----------------------------------------------------------------------
+      # Python setup
+      # -----------------------------------------------------------------------
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install CTS dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r external/cts/cts/requirements.txt
+
+      - name: Install TSPP harness
+        run: |
+          pip install -r external/tspp/harness/requirements.txt
+          pip install -e external/tspp/harness
+
+      - name: Install Hub tools dependencies
+        run: |
+          pip install jsonschema
+
+      # -----------------------------------------------------------------------
+      # Resolve inputs
+      # -----------------------------------------------------------------------
+      - name: Resolve inputs
+        id: inputs
+        run: |
+          TARGET="${{ github.event_name == 'workflow_dispatch' && inputs.target_url || vars.TRQP_TARGET_URL || 'https://registry.example.org' }}"
+          PROFILE="${{ github.event_name == 'workflow_dispatch' && inputs.conformance_profile || 'baseline' }}"
+          AL="${{ github.event_name == 'workflow_dispatch' && inputs.tspp_assurance_level || 'AL1' }}"
+          RUN_ID="ca-${GITHUB_SHA::8}-${GITHUB_RUN_ID}"
+          echo "target=${TARGET}" >> "$GITHUB_OUTPUT"
+          echo "profile=${PROFILE}" >> "$GITHUB_OUTPUT"
+          echo "al=${AL}" >> "$GITHUB_OUTPUT"
+          echo "run_id=${RUN_ID}" >> "$GITHUB_OUTPUT"
+          echo "generated_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
+
+      # -----------------------------------------------------------------------
+      # Create SUT config
+      # -----------------------------------------------------------------------
+      - name: Create SUT config
+        run: |
+          mkdir -p artifacts
+          cat > sut.yaml <<YAML
+          base_url: "${{ steps.inputs.outputs.target }}"
+          default_headers:
+            Accept: "application/json"
+          YAML
+          # Inject signing key if present (for high_assurance profile)
+          if [ -n "${{ secrets.TRQP_SIGNING_KEY_B64 }}" ]; then
+            echo "signing_key_b64: \"${{ secrets.TRQP_SIGNING_KEY_B64 }}\"" >> sut.yaml
+          fi
+
+      # -----------------------------------------------------------------------
+      # Run CTS
+      # -----------------------------------------------------------------------
+      - name: Run CTS conformance
+        run: |
+          python external/cts/cts/run.py \
+            --profile "external/cts/profiles/${{ steps.inputs.outputs.profile }}.yaml" \
+            --sut sut.yaml \
+            --run-id "${{ steps.inputs.outputs.run_id }}" \
+            --target-id "${{ steps.inputs.outputs.target }}" \
+            --generated-at "${{ steps.inputs.outputs.generated_at }}" \
+            --out artifacts/conformance
+
+      # -----------------------------------------------------------------------
+      # Run TSPP
+      # -----------------------------------------------------------------------
+      - name: Run TSPP harness
+        env:
+          TRQP_BASE_URL: ${{ steps.inputs.outputs.target }}
+          TSPP_EXPECT_AL: ${{ steps.inputs.outputs.al }}
+          TSPP_RUN_ID: ${{ steps.inputs.outputs.run_id }}
+          TSPP_TARGET_ID: ${{ steps.inputs.outputs.target }}
+          TSPP_REPORT_PATH: artifacts/tspp-report.json
+        run: |
+          pytest -q external/tspp/harness/tests || true
+          # Allow non-zero pytest exit when evidence is the goal, not CI gate.
+          # Remove '|| true' to make TSPP failures block the workflow.
+
+      # -----------------------------------------------------------------------
+      # Generate Combined Assurance Manifest
+      # -----------------------------------------------------------------------
+      - name: Generate Combined Assurance Manifest
+        run: |
+          python external/hub/tools/generate-manifest.py \
+            --build-id "${GITHUB_SHA}" \
+            --target "${{ steps.inputs.outputs.target }}" \
+            --run-id "${{ steps.inputs.outputs.run_id }}" \
+            --target-id "${{ steps.inputs.outputs.target }}" \
+            --generated-at "${{ steps.inputs.outputs.generated_at }}" \
+            --cts-report artifacts/conformance/cts-report.json \
+            --tspp-report artifacts/tspp-report.json \
+            --artifact "conformance_report:artifacts/conformance/cts-report.json:trqp_conformance_suite:application/json" \
+            --artifact "conformance_evidence_bundle_zip:artifacts/conformance/bundle.zip:trqp_conformance_suite:application/zip" \
+            --artifact "evidence_bundle_checksums:artifacts/conformance/checksums.json:trqp_conformance_suite:application/json" \
+            --artifact "posture_report:artifacts/tspp-report.json:trqp_tspp:application/json" \
+            --hub-commit "${{ env.HUB_REF }}" \
+            --ci-run-url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+            --schema external/hub/schemas/combined-assurance-manifest.schema.json \
+            --base-dir . \
+            --out artifacts/combined-assurance-manifest.json
+
+      # -----------------------------------------------------------------------
+      # Dry-run validation (catches schema drift before upload)
+      # -----------------------------------------------------------------------
+      - name: Validate manifest (dry-run)
+        run: |
+          python external/hub/tools/generate-manifest.py \
+            --build-id "${GITHUB_SHA}" \
+            --target "${{ steps.inputs.outputs.target }}" \
+            --cts-report artifacts/conformance/cts-report.json \
+            --tspp-report artifacts/tspp-report.json \
+            --schema external/hub/schemas/combined-assurance-manifest.schema.json \
+            --out /tmp/manifest-dryrun.json \
+            --dry-run
+
+      # -----------------------------------------------------------------------
+      # Upload artifacts
+      # -----------------------------------------------------------------------
+      - name: Upload Combined Assurance Manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: combined-assurance-manifest
+          path: artifacts/combined-assurance-manifest.json
+          if-no-files-found: error
+
+      - name: Upload conformance evidence bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: conformance-evidence-bundle
+          path: |
+            artifacts/conformance/cts-report.json
+            artifacts/conformance/verdicts.json
+            artifacts/conformance/manifest.json
+            artifacts/conformance/checksums.json
+            artifacts/conformance/bundle.zip
+          if-no-files-found: error
+
+      - name: Upload TSPP posture report
+        uses: actions/upload-artifact@v4
+        with:
+          name: tspp-posture-report
+          path: artifacts/tspp-report.json
+          if-no-files-found: error
