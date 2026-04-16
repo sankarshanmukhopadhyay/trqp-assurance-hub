@@ -1,6 +1,6 @@
 {
   "manifest_version": "0.2.0",
-  "generated_at": "2026-03-14T08:00:20Z",
+  "generated_at": "2026-04-16T00:00:00Z",
   "build": {
     "build_id": "opstack-demo-001",
     "target": "https://directory.example.org",
@@ -9,12 +9,12 @@
   },
   "tools": {
     "trqp_conformance_suite": {
-      "version": "0.9.1",
+      "version": "1.2.1",
       "profile_id": "interop_demo",
       "run_id": "opstack-demo-001"
     },
     "trqp_tspp": {
-      "version": "0.7.1",
+      "version": "0.10.1",
       "assurance_level": "AL1",
       "run_id": "opstack-demo-001"
     }
@@ -25,21 +25,32 @@
       "path": "conformance/cts-report.json",
       "produced_by": "trqp_conformance_suite",
       "media_type": "application/json",
-      "format": "cts-report-v0"
+      "format": "cts-report-v0",
+      "sha256": "60ce7b7d4195038c7db99440cb859e84d273bf0db5acb250e264cf9ecce55da7"
     },
     {
       "kind": "posture_report",
       "path": "posture/tspp-report.json",
       "produced_by": "trqp_tspp",
       "media_type": "application/json",
-      "format": "tspp-report-v0"
+      "format": "tspp-report-v0",
+      "sha256": "eab73869dd76b32ae2016c2d802fe4fb397348c50f7251d0fa85b395227f2ef1"
     },
     {
       "kind": "stack_run_metadata",
       "path": "metadata/stack-run.json",
       "produced_by": "trqp_assurance_hub",
       "media_type": "application/json",
-      "format": "operational-stack-run-v0"
+      "format": "operational-stack-run-v0",
+      "sha256": "87ee0367ac11e96f75f29b8079bfe3d70152d2cc597ea4d6b14384b78394cf63"
+    },
+    {
+      "kind": "assurance_profile",
+      "path": "profiles/al2-verified.yaml",
+      "produced_by": "trqp_assurance_hub",
+      "media_type": "application/yaml",
+      "format": "assurance-profile-v1",
+      "sha256": "b7dd60f6b4675478614fc9f60320406c76ca68a2e4afcea75d791a71093918b9"
     }
   ],
   "generator": {
@@ -49,6 +60,7 @@
   "summary": {
     "overall_status": "pass",
     "conformance_status": "pass",
-    "tspp_status": "pass"
+    "tspp_status": "pass",
+    "assurance_tier": "AL1"
   }
 }

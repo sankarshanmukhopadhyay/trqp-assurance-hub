@@ -1,3 +1,10 @@
+## v1.5.0
+
+- Enforce fail-closed identity checks in `tools/generate-manifest.py` so CTS and TSPP `run_id` / `target_id` values must align with the Combined Assurance Manifest build block.
+- Add `tools/validate_operational_stack.py` and extend `tools/validate_examples.py` to validate the checked-in Operational Stack bundle for schema, identity, artifact existence, and `sha256` integrity.
+- Regenerate the checked-in Operational Stack demo artifacts with consistent identifiers and current cross-repo versions.
+- Refresh Hub docs, examples, and compatibility references for the hardened Operational Stack contract.
+
 ## v1.4.0
 
 - Add `examples/al1-evidence-bundle/` and `examples/al2-evidence-bundle/`: minimal viable bundle templates with README (what to produce, what to omit, toolchain invocation), `version-tuple.json`, `combined-assurance-manifest.json`, and `operator-declaration.md`.

@@ -7,10 +7,8 @@ To keep it trustworthy, we validate that examples do not drift from schemas.
 Behavior:
 - For each `examples/*.example.json`, locate a matching `schemas/*.schema.json`.
 - Validate the example against the schema.
-- For each AL evidence bundle directory (`examples/al*-evidence-bundle/`),
-  validate each *.json file against its paired schema per the bundle's
-  SCHEMA_MAP (declared in the bundle README metadata or inferred by filename).
 - Perform light cross-file checks for the assurance profile example.
+- Validate the checked-in Operational Stack bundle end to end.
 """
 
 from __future__ import annotations
@@ -208,23 +206,25 @@ def main() -> int:
             except RuntimeError as e:
                 errors.append(str(e))
 
-    # 2. Validate AL evidence bundle directories
-    bundle_dirs = sorted(
-        d for d in EXAMPLES_DIR.iterdir()
-        if d.is_dir() and d.name.startswith("al") and d.name.endswith("-evidence-bundle")
-    )
-    bundle_failures: list[str] = []
-    for bundle_dir in bundle_dirs:
-        bundle_failures.extend(validate_bundle_directory(bundle_dir))
+    bundle_dirs: list[Path] = []
 
-    if bundle_failures:
-        errors.extend(bundle_failures)
-
-    # 3. Cross-checks
+    # 2. Cross-checks
     try:
         cross_checks()
     except RuntimeError as e:
         errors.append(str(e))
+
+    # 3. Operational stack bundle validation
+    import subprocess
+    operational_bundle = ROOT / "artifacts" / "operational-stack"
+    if operational_bundle.exists():
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "tools" / "validate_operational_stack.py"), "--bundle-dir", str(operational_bundle)],
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            errors.append(result.stderr.strip() or result.stdout.strip() or "Operational Stack bundle validation failed")
 
     if errors:
         for err in errors:

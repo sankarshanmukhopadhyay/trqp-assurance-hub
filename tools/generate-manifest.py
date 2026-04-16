@@ -97,6 +97,11 @@ def _summary_number(report: Dict[str, Any], key: str) -> Optional[float]:
         return None
 
 
+def _require_equal(label: str, left: Any, right: Any) -> None:
+    if left is not None and right is not None and left != right:
+        raise SystemExit(f"{label} mismatch: {left!r} != {right!r}")
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     p = argparse.ArgumentParser(description="Generate a Combined Assurance Manifest (JSON).")
     p.add_argument("--manifest-version", default="0.2.0")
@@ -133,9 +138,14 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     p.add_argument("--out", required=True)
     p.add_argument("--schema", default=None)
-    p.add_argument("--dry-run", action="store_true",
-                   help="Validate all inputs and preview the manifest without writing any output files. "
-                        "Exits 0 if all inputs are valid, non-zero on any validation failure.")
+    p.add_argument(
+        "--dry-run",
+        action="store_true",
+        help=(
+            "Validate all inputs and preview the manifest without writing any output files. "
+            "Exits 0 if all inputs are valid, non-zero on any validation failure."
+        ),
+    )
     args = p.parse_args(argv)
 
     generated_at = args.generated_at or _utc_now_rfc3339()
@@ -144,6 +154,13 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     run_id = args.run_id or cts_report.get("run_id") or tspp_report.get("run_id") or args.build_id
     target_id = args.target_id or cts_report.get("target_id") or tspp_report.get("target_id") or args.target
+
+    _require_equal("CTS vs TSPP run_id", cts_report.get("run_id"), tspp_report.get("run_id"))
+    _require_equal("CTS vs TSPP target_id", cts_report.get("target_id"), tspp_report.get("target_id"))
+    _require_equal("manifest build.run_id vs CTS report", run_id, cts_report.get("run_id"))
+    _require_equal("manifest build.run_id vs TSPP report", run_id, tspp_report.get("run_id"))
+    _require_equal("manifest build.target_id vs CTS report", target_id, cts_report.get("target_id"))
+    _require_equal("manifest build.target_id vs TSPP report", target_id, tspp_report.get("target_id"))
 
     build: Dict[str, Any] = {
         "build_id": args.build_id,
@@ -160,19 +177,25 @@ def main(argv: Optional[List[str]] = None) -> int:
     cs_profile_id = args.cs_profile_id or cts_report.get("profile_id") or cts_report.get("profile")
     cs_run_id = args.cs_run_id or cts_report.get("run_id")
     tspp_version = args.tspp_version or tspp_report.get("tool", {}).get("version") or tspp_report.get("tool_version")
-    tspp_assurance_level = args.tspp_assurance_level or tspp_report.get("assurance_level") or tspp_report.get("target", {}).get("expected_assurance_level")
+    tspp_assurance_level = (
+        args.tspp_assurance_level
+        or tspp_report.get("assurance_level")
+        or tspp_report.get("target", {}).get("expected_assurance_level")
+    )
     tspp_run_id = args.tspp_run_id or tspp_report.get("run_id")
 
     if not all([cs_version, cs_profile_id, cs_run_id, tspp_version, tspp_assurance_level, tspp_run_id]):
         missing = [
-            name for name, value in [
+            name
+            for name, value in [
                 ("cs-version", cs_version),
                 ("cs-profile-id", cs_profile_id),
                 ("cs-run-id", cs_run_id),
                 ("tspp-version", tspp_version),
                 ("tspp-assurance-level", tspp_assurance_level),
                 ("tspp-run-id", tspp_run_id),
-            ] if not value
+            ]
+            if not value
         ]
         raise SystemExit(f"Missing tool metadata for manifest generation: {', '.join(missing)}")
 
@@ -225,7 +248,18 @@ def main(argv: Optional[List[str]] = None) -> int:
     evidence_completeness = _summary_number(cts_report, "evidence_completeness")
     assurance_tier = tspp_assurance_level if tspp_assurance_level in {"AL1", "AL2", "AL3", "AL4"} else None
 
-    if any([overall_status, conformance_status, tspp_status, args.notes, posture_score is not None, coverage_index is not None, evidence_completeness is not None, assurance_tier]):
+    if any(
+        [
+            overall_status,
+            conformance_status,
+            tspp_status,
+            args.notes,
+            posture_score is not None,
+            coverage_index is not None,
+            evidence_completeness is not None,
+            assurance_tier,
+        ]
+    ):
         summary: Dict[str, Any] = {}
         if overall_status:
             summary["overall_status"] = overall_status
@@ -245,22 +279,16 @@ def main(argv: Optional[List[str]] = None) -> int:
             summary["notes"] = args.notes
         doc["summary"] = summary
 
+    if args.schema:
+        _validate(Path(args.schema), doc)
+
     if args.dry_run:
-        # Validate schema if provided, but write nothing to disk.
-        if args.schema:
-            _validate(Path(args.schema), doc)
-        # Emit the preview to stdout so callers can inspect without writing files.
-        import sys
-        print(json.dumps(doc, indent=2, ensure_ascii=False), file=sys.stdout)
-        print(f"\nDry run complete — manifest is valid. Output would be written to: {args.out}", file=sys.stderr)
+        print(json.dumps(doc, indent=2, ensure_ascii=False))
         return 0
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-
-    if args.schema:
-        _validate(Path(args.schema), doc)
     return 0
 
 

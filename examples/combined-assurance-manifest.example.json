@@ -5,7 +5,9 @@
     "build_id": "example-build-abc123",
     "target": "https://registry.example.org",
     "commit": "abc123def456",
-    "ci_run_url": "https://github.com/example/trqp-assurance-hub/actions/runs/1"
+    "ci_run_url": "https://github.com/example/trqp-assurance-hub/actions/runs/1",
+    "run_id": "example-run-001",
+    "target_id": "example-target-001"
   },
   "tools": {
     "trqp_conformance_suite": {

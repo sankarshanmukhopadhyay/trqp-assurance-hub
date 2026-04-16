@@ -16,6 +16,15 @@ def copy_into(src: Path, dst: Path) -> str:
     return str(dst)
 
 
+def load_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def require_equal(label: str, left, right) -> None:
+    if left != right:
+        raise SystemExit(f"{label} mismatch: {left!r} != {right!r}")
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="Build an Operational Stack artifact directory.")
     p.add_argument("--cts-report", required=True)
@@ -34,6 +43,15 @@ def main(argv: list[str] | None = None) -> int:
 
     cts_src = Path(args.cts_report).resolve()
     tspp_src = Path(args.tspp_report).resolve()
+    cts_report = load_json(cts_src)
+    tspp_report = load_json(tspp_src)
+
+    require_equal("CTS vs TSPP run_id", cts_report.get("run_id"), tspp_report.get("run_id"))
+    require_equal("CTS vs TSPP target_id", cts_report.get("target_id"), tspp_report.get("target_id"))
+    require_equal("provided run_id vs CTS report", args.run_id, cts_report.get("run_id"))
+    require_equal("provided run_id vs TSPP report", args.run_id, tspp_report.get("run_id"))
+    require_equal("provided target_id vs CTS report", args.target_id, cts_report.get("target_id"))
+    require_equal("provided target_id vs TSPP report", args.target_id, tspp_report.get("target_id"))
 
     cts_dst = out / "conformance" / "cts-report.json"
     tspp_dst = out / "posture" / "tspp-report.json"
@@ -41,13 +59,14 @@ def main(argv: list[str] | None = None) -> int:
     copy_into(tspp_src, tspp_dst)
 
     from datetime import datetime, timezone
-    _generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+    generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     metadata = {
         "run_id": args.run_id,
         "target_id": args.target_id,
         "target": args.target,
         "build_id": args.build_id,
-        "generated_at": _generated_at,
+        "generated_at": generated_at,
         **({"assurance_profile": args.assurance_profile} if args.assurance_profile else {}),
         "artifacts": {
             "cts_report": str(cts_dst.relative_to(out)),
@@ -67,23 +86,42 @@ def main(argv: list[str] | None = None) -> int:
     cmd = [
         sys.executable,
         str(repo_root / "tools" / "generate-manifest.py"),
-        "--build-id", args.build_id,
-        "--target", args.target,
-        "--run-id", args.run_id,
-        "--target-id", args.target_id,
-        "--cts-report", str(cts_dst),
-        "--tspp-report", str(tspp_dst),
-        "--artifact", "conformance_report:conformance/cts-report.json:trqp_conformance_suite:application/json:cts-report-v0",
-        "--artifact", "posture_report:posture/tspp-report.json:trqp_tspp:application/json:tspp-report-v0",
-        "--artifact", "stack_run_metadata:metadata/stack-run.json:trqp_assurance_hub:application/json:operational-stack-run-v0",
+        "--build-id",
+        args.build_id,
+        "--target",
+        args.target,
+        "--run-id",
+        args.run_id,
+        "--target-id",
+        args.target_id,
+        "--cts-report",
+        str(cts_dst),
+        "--tspp-report",
+        str(tspp_dst),
+        "--artifact",
+        "conformance_report:conformance/cts-report.json:trqp_conformance_suite:application/json:cts-report-v0",
+        "--artifact",
+        "posture_report:posture/tspp-report.json:trqp_tspp:application/json:tspp-report-v0",
+        "--artifact",
+        "stack_run_metadata:metadata/stack-run.json:trqp_assurance_hub:application/json:operational-stack-run-v0",
     ]
     if args.assurance_profile:
-        cmd.extend(["--artifact", f"assurance_profile:profiles/{Path(args.assurance_profile).name}:trqp_assurance_hub:application/yaml:assurance-profile-v1"] )
-    cmd.extend([
-        "--base-dir", str(out),
-        "--schema", str(repo_root / "schemas" / "combined-assurance-manifest.schema.json"),
-        "--out", str(manifest_path),
-    ])
+        cmd.extend(
+            [
+                "--artifact",
+                f"assurance_profile:profiles/{Path(args.assurance_profile).name}:trqp_assurance_hub:application/yaml:assurance-profile-v1",
+            ]
+        )
+    cmd.extend(
+        [
+            "--base-dir",
+            str(out),
+            "--schema",
+            str(repo_root / "schemas" / "combined-assurance-manifest.schema.json"),
+            "--out",
+            str(manifest_path),
+        ]
+    )
     subprocess.check_call(cmd)
     print(f"Operational Stack artifacts written to {out}")
     return 0

@@ -22,7 +22,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # Be strict on real breakage, but resilient to transient network churn and 429s.
           args: >-
             --verbose --no-progress
             --max-retries 3 --retry-wait-time 2 --timeout 20
@@ -43,6 +42,22 @@ jobs:
           pip install jsonschema
       - name: Validate examples against schemas
         run: python tools/validate_examples.py
+      - name: Regenerate operational stack demo bundle
+        run: |
+          rm -rf /tmp/operational-stack
+          python tools/run_operational_stack.py \
+            --cts-report examples/operational-stack/demo-input/cts-report.json \
+            --tspp-report examples/operational-stack/demo-input/tspp-report.json \
+            --target https://directory.example.org \
+            --build-id opstack-demo-001 \
+            --target-id demo-directory \
+            --run-id opstack-demo-001 \
+            --assurance-profile profiles/al2-verified.yaml \
+            --out /tmp/operational-stack
+      - name: Validate regenerated bundle
+        run: python tools/validate_operational_stack.py --bundle-dir /tmp/operational-stack
+      - name: Validate checked-in bundle
+        run: python tools/validate_operational_stack.py --bundle-dir artifacts/operational-stack
       - name: Doc tests (JSON/YAML parse hygiene)
         run: python scripts/doc_tests.py
       - name: generate-manifest dry-run (manifest generation path stays green)
@@ -50,13 +65,15 @@ jobs:
           python tools/generate-manifest.py \
             --build-id "dry-run-check" \
             --target "https://registry.example.org" \
-            --cs-version "1.1.0" \
+            --cs-version "1.2.1" \
             --cs-profile-id "baseline" \
-            --cs-run-id "dry-run-cts" \
-            --tspp-version "0.9.0" \
+            --cs-run-id "dry-run-run" \
+            --tspp-version "0.10.1" \
             --tspp-assurance-level "AL1" \
-            --tspp-run-id "dry-run-tspp" \
+            --tspp-run-id "dry-run-run" \
             --overall-status "pass" \
+            --artifact "log:README.md:trqp_assurance_hub:text/markdown:readme-v1:dry-run placeholder" \
+            --base-dir . \
             --schema schemas/combined-assurance-manifest.schema.json \
             --out /tmp/dry-run-manifest.json \
             --dry-run

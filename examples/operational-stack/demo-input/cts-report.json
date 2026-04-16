@@ -4,10 +4,10 @@
   "generated_at": "2026-03-14T08:00:00Z",
   "profile": "interop_demo",
   "profile_id": "interop_demo",
-  "suite_version": "0.9.1",
+  "suite_version": "1.2.1",
   "tool": {
     "name": "trqp-cts",
-    "version": "0.9.1"
+    "version": "1.2.1"
   },
   "summary": {
     "PASS": 3,

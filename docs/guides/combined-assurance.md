@@ -1,6 +1,6 @@
 ---
 owner: maintainers
-last_reviewed: 2026-03-17
+last_reviewed: 2026-04-16
 tier: 0
 ---
 
@@ -26,7 +26,7 @@ In most procurement/audit contexts you need both—behavior and posture—becaus
 
 ## Evidence normalization
 
-The key to a combined story is a shared build identifier.
+The key to a combined story is a shared execution identity. For the Operational Stack baseline, CTS and TSPP MUST share the same `run_id` and `target_id`, and the Combined Assurance Manifest MUST carry those same values in `build.run_id` and `build.target_id`.
 
 ### Minimum metadata to capture
 
@@ -69,7 +69,7 @@ Your combined manifest should be dead simple:
 - References (paths/URIs) to each bundle
 - High-level summary fields (counts, pass/fail totals)
 
-This hub repo will eventually host a small JSON schema for `combined-manifest.json` once both underlying bundle formats are stable.
+This repository now ships the Combined Assurance Manifest schema at `schemas/combined-assurance-manifest.schema.json`, a manifest generator at `tools/generate-manifest.py`, and an Operational Stack bundle validator at `tools/validate_operational_stack.py`. Mismatched CTS/TSPP identity values are rejected as a validation error.
 
 
 
@@ -105,6 +105,26 @@ Evidence output directory contains:
 Crosswalk: https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/blob/main/docs/hub-crosswalk.md
 
 ---
+
+## Validation commands
+
+Use these commands to keep the evidence chain machine-checkable:
+
+```bash
+python tools/run_operational_stack.py \
+  --cts-report examples/operational-stack/demo-input/cts-report.json \
+  --tspp-report examples/operational-stack/demo-input/tspp-report.json \
+  --target https://directory.example.org \
+  --build-id opstack-demo-001 \
+  --target-id demo-directory \
+  --run-id opstack-demo-001 \
+  --assurance-profile profiles/al2-verified.yaml \
+  --out artifacts/operational-stack
+
+python tools/validate_operational_stack.py --bundle-dir artifacts/operational-stack
+```
+
+A failed identity check is an evidence defect, not a documentation warning.
 
 ## AL3 combined assurance walkthrough
 

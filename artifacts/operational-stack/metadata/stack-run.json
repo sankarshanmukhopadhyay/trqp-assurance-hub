@@ -1,9 +1,10 @@
 {
-  "run_id": "opstack-demo-002",
+  "run_id": "opstack-demo-001",
   "target_id": "demo-directory",
   "target": "https://directory.example.org",
-  "build_id": "opstack-demo-002",
-  "assurance_profile": "profiles/al2-verified.yaml",
+  "build_id": "opstack-demo-001",
+  "generated_at": "2026-04-16T03:53:51Z",
+  "assurance_profile": "/mnt/data/work/hub/trqp-assurance-hub-main/profiles/al2-verified.yaml",
   "artifacts": {
     "cts_report": "conformance/cts-report.json",
     "tspp_report": "posture/tspp-report.json"

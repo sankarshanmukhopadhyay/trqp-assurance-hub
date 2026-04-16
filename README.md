@@ -1,6 +1,6 @@
 ---
 owner: maintainers
-last_reviewed: 2026-03-17
+last_reviewed: 2026-04-16
 tier: 0
 ---
 
@@ -12,7 +12,7 @@ tier: 0
 
 📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
 
-**Current version:** v1.2.0
+**Current version:** v1.5.0
 
 **Downstream release train:** TSPP v0.8.0 · Conformance Suite v1.0.0
 
@@ -33,7 +33,7 @@ that can be reviewed, exchanged, and published through registry-oriented workflo
 | Conformance Suite | Protocol verification | Conformance Report |
 | Assurance Hub | Assurance orchestration and publication | Combined Assurance Manifest |
 
-## What is new in v1.2.0
+## What is new in v1.5.0
 
 - Combined Assurance Manifest now surfaces `posture_score`, `coverage_index`, and `evidence_completeness`
 - Assurance summary carries the selected assurance tier for downstream publication workflows
@@ -205,6 +205,7 @@ See:
 1. Run a Conformance Suite profile
 2. Run a TSPP profile
 3. Bind both runs under a single build identifier using a Combined Assurance Manifest
+4. Reject publication if CTS and TSPP do not agree on `run_id` and `target_id`
 
 See:
 - [Combined assurance workflow](docs/guides/combined-assurance.md)
