@@ -11,12 +11,12 @@
   },
   "tools": {
     "trqp_conformance_suite": {
-      "version": "v0.7.1",
+      "version": "1.3.0",
       "profile_id": "smoke",
       "run_id": "cts-example-run-1"
     },
     "trqp_tspp": {
-      "version": "v0.5.1",
+      "version": "0.11.0",
       "assurance_level": "AL1",
       "run_id": "tspp-example-run-1"
     }

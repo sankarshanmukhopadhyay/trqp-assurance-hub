@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trqp/schemas/relying-party-assurance-summary.schema.json",
+  "title": "TRQP Relying-Party Assurance Summary",
+  "type": "object",
+  "required": ["target_id", "decision_supported", "assurance_level", "evidence", "safe_use_guidance"],
+  "properties": {
+    "target_id": {"type": "string"},
+    "decision_supported": {"type": "string"},
+    "assurance_level": {"type": "string", "enum": ["AL1", "AL2", "AL3", "AL4"]},
+    "evidence": {"type": "array", "items": {"type": "string"}},
+    "safe_use_guidance": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "redress_contact": {"type": "string"}
+  },
+  "additionalProperties": false
+}

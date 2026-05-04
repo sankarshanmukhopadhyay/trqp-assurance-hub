@@ -1,0 +1,33 @@
+{
+  "summary_version": "0.1.0",
+  "target_id": "demo-directory",
+  "target": "https://directory.example.org",
+  "assurance_level": "AL2",
+  "overall_status": "pass",
+  "conformance_status": "pass",
+  "posture_status": "pass",
+  "coverage_index": 100.0,
+  "evidence_completeness": 100.0,
+  "posture_score": 100.0,
+  "generated_at": "2026-04-16T03:53:53Z",
+  "valid_until": "2026-05-16T03:53:53Z",
+  "evidence_manifest": "combined-assurance-manifest.json",
+  "limitations": [
+    "This summary does not replace legal, financial, or ecosystem-specific due diligence."
+  ],
+  "consumer_relevance": {
+    "plain_language_summary": "The registry has current machine-verifiable evidence for protocol conformance and security posture.",
+    "what_was_checked": [
+      "protocol behavior",
+      "security posture",
+      "freshness expectations",
+      "evidence integrity"
+    ],
+    "what_was_not_checked": [
+      "legal liability",
+      "business solvency",
+      "all ecosystem-specific governance rules"
+    ],
+    "where_to_raise_concerns": "mailto:trust-ops@example.org"
+  }
+}

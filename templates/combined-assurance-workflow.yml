@@ -42,7 +42,7 @@ on:
 # Pin these to tagged releases for audit-grade runs.
 # ---------------------------------------------------------------------------
 env:
-  CTS_REF: "v1.1.0"
+  CTS_REF: "v1.3.0"
   TSPP_REF: "v0.9.0"
   HUB_REF: "v1.3.0"
   CTS_REPO: "sankarshanmukhopadhyay/trqp-conformance-suite"

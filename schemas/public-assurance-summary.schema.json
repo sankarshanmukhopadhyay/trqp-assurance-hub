@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/trqp/schemas/public-assurance-summary.schema.json",
+  "title": "TRQP Public Assurance Summary",
+  "type": "object",
+  "required": ["summary_version", "target_id", "target", "assurance_level", "overall_status", "conformance_status", "posture_status", "generated_at", "valid_until", "evidence_manifest", "consumer_relevance"],
+  "properties": {
+    "summary_version": {"type": "string"},
+    "target_id": {"type": "string", "minLength": 1},
+    "target": {"type": "string", "minLength": 1},
+    "assurance_level": {"type": "string", "enum": ["AL1", "AL2", "AL3", "AL4"]},
+    "overall_status": {"type": "string", "enum": ["pass", "warn", "fail", "unknown"]},
+    "conformance_status": {"type": "string", "enum": ["pass", "warn", "fail", "unknown"]},
+    "posture_status": {"type": "string", "enum": ["pass", "warn", "fail", "unknown"]},
+    "coverage_index": {"type": "number", "minimum": 0},
+    "evidence_completeness": {"type": "number", "minimum": 0},
+    "posture_score": {"type": "number", "minimum": 0},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "valid_until": {"type": "string", "format": "date-time"},
+    "evidence_manifest": {"type": "string", "minLength": 1},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "consumer_relevance": {
+      "type": "object",
+      "required": ["plain_language_summary", "what_was_checked", "what_was_not_checked"],
+      "properties": {
+        "plain_language_summary": {"type": "string"},
+        "what_was_checked": {"type": "array", "items": {"type": "string"}},
+        "what_was_not_checked": {"type": "array", "items": {"type": "string"}},
+        "where_to_raise_concerns": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

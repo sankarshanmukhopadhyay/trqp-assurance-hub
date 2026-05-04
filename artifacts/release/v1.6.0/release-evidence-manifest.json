@@ -1,0 +1,15 @@
+{
+  "release": "v1.6.0",
+  "release_train": {
+    "hub": "v1.6.0",
+    "cts": "v1.3.0",
+    "tspp": "v0.11.0"
+  },
+  "artifacts": [
+    "schemas/public-assurance-summary.schema.json",
+    "examples/public-assurance-summary.example.json",
+    "tools/generate-public-summary.py",
+    "docs/use-cases/README.md",
+    "docs/adoption/README.md"
+  ]
+}

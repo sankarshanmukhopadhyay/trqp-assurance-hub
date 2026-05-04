@@ -1,0 +1,18 @@
+{
+  "target_id": "demo-directory",
+  "decision_supported": "Relying party may accept registry claims for AL2 onboarding where local ecosystem policy permits.",
+  "assurance_level": "AL2",
+  "evidence": [
+    "combined-assurance-manifest.json",
+    "public-assurance-summary.json"
+  ],
+  "safe_use_guidance": [
+    "Check generated_at and valid_until before relying on the summary.",
+    "Review limitations before using evidence for high-impact decisions.",
+    "Use revocation/status guidance from the operator before caching registry claims."
+  ],
+  "limitations": [
+    "Does not certify legal authority outside the stated ecosystem scope."
+  ],
+  "redress_contact": "mailto:trust-ops@example.org"
+}

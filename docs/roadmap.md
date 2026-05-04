@@ -26,12 +26,12 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 - ✅ Ayra Trust Network control mapping and submission checklist (`tools/ayra-mapping.md`)
 - ✅ Compatibility matrix published at `docs/reference/compatibility-matrix.md`
 
-## Release readiness (v1.1.0)
+## Release readiness and adoption focus
 
-- Cross-repo release references are synchronized to TSPP v0.7.1 and Conformance Suite v0.9.1.
-- Compatibility matrix reflects the current supported pairing for the Operational Stack baseline.
-- Combined-assurance smoke workflow and manifest schema are aligned and CI-validated.
-- AL3/AL4 combined assurance guidance remains the canonical anchor for downstream repos.
+- Cross-repo release references are synchronized to TSPP v0.11.0 and Conformance Suite v1.3.0.
+- Compatibility matrix reflects the current supported pairing for the Public Assurance and Adoption Readiness release.
+- Combined-assurance manifest generation, public assurance summary generation, and validation tooling are aligned.
+- AL3/AL4 guidance remains the canonical anchor for high-reliance adoption, auditability, and consumer impact evidence.
 
 ## Workstreams
 

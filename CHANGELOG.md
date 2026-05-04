@@ -1,3 +1,10 @@
+## v1.6.0
+
+- Add Public Assurance Summary schema, generator, validator, examples, and operational-stack artifact.
+- Add business use-case guides, adoption kit, procurement language, and consumer impact documentation.
+- Refresh compatibility matrix for CTS v1.3.0 and TSPP v0.11.0.
+- Remove stale current-release references from templates and examples.
+
 ## v1.5.0
 
 - Enforce fail-closed identity checks in `tools/generate-manifest.py` so CTS and TSPP `run_id` / `target_id` values must align with the Combined Assurance Manifest build block.
