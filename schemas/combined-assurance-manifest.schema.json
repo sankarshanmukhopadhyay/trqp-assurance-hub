@@ -154,6 +154,42 @@
       },
       "additionalProperties": false
     },
+    "lifecycle": {
+      "type": "object",
+      "description": "Lifecycle and revocation publication state associated with the evaluated target.",
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "active",
+            "suspended",
+            "deprecated",
+            "revoked",
+            "retired",
+            "unknown"
+          ]
+        },
+        "status_feed_uri": {
+          "type": "string"
+        },
+        "revocation_supported": {
+          "type": "boolean"
+        },
+        "sla_seconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 31536000
+        },
+        "last_checked_at": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "summary": {
       "type": "object",
       "properties": {

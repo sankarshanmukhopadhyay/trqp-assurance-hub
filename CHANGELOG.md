@@ -1,3 +1,10 @@
+## v1.6.1
+
+- Extend the Combined Assurance Manifest schema with an optional `lifecycle` block covering target state, status feed URI, revocation support, publication SLA, and last-checked timestamp.
+- Add lifecycle and revocation publication flags to `tools/generate-manifest.py`, with inference from TSPP report metadata where present.
+- Extend public assurance summary generation and schema output so relying parties can see lifecycle status alongside conformance and posture status.
+- Update combined assurance guidance and examples to treat lifecycle/revocation publication as part of safe relying-party use.
+
 ## v1.6.0
 
 - Add Public Assurance Summary schema, generator, validator, examples, and operational-stack artifact.

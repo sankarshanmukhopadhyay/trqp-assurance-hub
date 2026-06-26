@@ -18,6 +18,18 @@
     "generated_at": {"type": "string", "format": "date-time"},
     "valid_until": {"type": "string", "format": "date-time"},
     "evidence_manifest": {"type": "string", "minLength": 1},
+    "lifecycle": {
+      "type": "object",
+      "required": ["state"],
+      "properties": {
+        "state": {"type": "string", "enum": ["draft", "active", "suspended", "deprecated", "revoked", "retired", "unknown"]},
+        "status_feed_uri": {"type": "string"},
+        "revocation_supported": {"type": "boolean"},
+        "sla_seconds": {"type": "integer", "minimum": 0},
+        "last_checked_at": {"type": "string", "format": "date-time"}
+      },
+      "additionalProperties": false
+    },
     "limitations": {"type": "array", "items": {"type": "string"}},
     "consumer_relevance": {
       "type": "object",

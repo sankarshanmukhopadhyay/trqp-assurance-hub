@@ -11,7 +11,7 @@ This declaration covers the AL2 assurance claim for the Example TRQP Trust Regis
 At AL2, the operator asserts that:
 
 - Protocol conformance evidence has been produced using the TRQP Conformance Suite
-  v1.3.0 baseline profile with a pinned `run_id` (`run-abc1234`).
+  v1.3.1 baseline profile with a pinned `run_id` (`run-abc1234`).
 - Deployment posture evidence has been produced using TRQP-TSPP v0.9.0 at AL2,
   including signed response verification.
 - All toolchain artifact versions are pinned to tagged releases.

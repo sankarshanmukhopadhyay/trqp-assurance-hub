@@ -12,6 +12,6 @@ tier: 0
 
 📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
 
-**Current version:** v1.6.0
+**Current version:** v1.6.1
 
-**Downstream release train:** TSPP v0.11.0 · Conformance Suite v1.3.0
+**Downstream release train:** TSPP v0.11.1 · Conformance Suite v1.3.1

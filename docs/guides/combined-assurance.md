@@ -68,8 +68,11 @@ Your combined manifest should be dead simple:
 - Build identifier
 - References (paths/URIs) to each bundle
 - High-level summary fields (counts, pass/fail totals)
+- Lifecycle and revocation publication status, where the evaluated target exposes a status feed
 
 This repository now ships the Combined Assurance Manifest schema at `schemas/combined-assurance-manifest.schema.json`, a manifest generator at `tools/generate-manifest.py`, and an Operational Stack bundle validator at `tools/validate_operational_stack.py`. Mismatched CTS/TSPP identity values are rejected as a validation error.
+
+The optional `lifecycle` block is the bridge from point-in-time evidence to safe relying-party use. It records the target state, the status feed URI, revocation support, and the status publication SLA. A passing conformance run should not be treated as operationally complete when suspension or revocation cannot be discovered after publication.
 
 
 

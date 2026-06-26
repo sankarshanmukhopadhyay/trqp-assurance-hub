@@ -23,6 +23,7 @@ def main():
     build = manifest.get("build", {})
     summary = manifest.get("summary", {})
     tools = manifest.get("tools", {})
+    lifecycle = manifest.get("lifecycle")
     generated_at = manifest.get("generated_at") or datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     try:
         dt = datetime.fromisoformat(generated_at.replace("Z", "+00:00"))
@@ -44,11 +45,13 @@ def main():
         "limitations": ["This summary does not replace legal, financial, or ecosystem-specific due diligence."],
         "consumer_relevance": {
             "plain_language_summary": "The registry has machine-verifiable evidence for protocol conformance and security posture. Relying parties should check freshness and limitations before use.",
-            "what_was_checked": ["protocol behavior", "security posture", "freshness expectations", "evidence integrity"],
+            "what_was_checked": ["protocol behavior", "security posture", "freshness expectations", "evidence integrity", "lifecycle publication"],
             "what_was_not_checked": ["legal liability", "business solvency", "all ecosystem-specific governance rules"],
             "where_to_raise_concerns": args.concerns
         }
     }
+    if isinstance(lifecycle, dict):
+        out["lifecycle"] = lifecycle
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(out, indent=2) + "\n")
 

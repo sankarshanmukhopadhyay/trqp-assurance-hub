@@ -127,6 +127,12 @@ def main(argv: Optional[List[str]] = None) -> int:
     p.add_argument("--artifact", action="append", default=[])
     p.add_argument("--base-dir", default=".")
 
+    p.add_argument("--lifecycle-state", default=None, choices=["draft", "active", "suspended", "deprecated", "revoked", "retired", "unknown"])
+    p.add_argument("--lifecycle-status-feed-uri", default=None)
+    p.add_argument("--lifecycle-last-checked-at", default=None)
+    p.add_argument("--revocation-supported", default=None, choices=["true", "false"])
+    p.add_argument("--revocation-sla-seconds", default=None, type=int)
+
     p.add_argument("--overall-status", default=None, choices=["pass", "fail", "partial"])
     p.add_argument("--conformance-status", default=None, choices=["pass", "fail", "partial"])
     p.add_argument("--tspp-status", default=None, choices=["pass", "fail", "partial"])
@@ -222,6 +228,27 @@ def main(argv: Optional[List[str]] = None) -> int:
             **({"uri": args.generator_uri} if args.generator_uri else {}),
         },
     }
+
+    lifecycle_publication = tspp_report.get("lifecycle_publication") or tspp_report.get("metadata", {}).get("lifecycle_publication") or {}
+    lifecycle_state = args.lifecycle_state
+    lifecycle_status_feed_uri = args.lifecycle_status_feed_uri or lifecycle_publication.get("status_feed_uri")
+    revocation_supported = (
+        (args.revocation_supported == "true")
+        if args.revocation_supported is not None
+        else lifecycle_publication.get("revocation_supported")
+    )
+    revocation_sla_seconds = args.revocation_sla_seconds
+    if revocation_sla_seconds is None:
+        revocation_sla_seconds = lifecycle_publication.get("sla_seconds")
+
+    if lifecycle_state or lifecycle_status_feed_uri or revocation_supported is not None or revocation_sla_seconds is not None:
+        doc["lifecycle"] = {
+            "state": lifecycle_state or "unknown",
+            **({"status_feed_uri": lifecycle_status_feed_uri} if lifecycle_status_feed_uri else {}),
+            **({"revocation_supported": revocation_supported} if revocation_supported is not None else {}),
+            **({"sla_seconds": revocation_sla_seconds} if revocation_sla_seconds is not None else {}),
+            **({"last_checked_at": args.lifecycle_last_checked_at or generated_at} if (args.lifecycle_last_checked_at or lifecycle_status_feed_uri) else {}),
+        }
 
     base_dir = Path(args.base_dir).resolve()
     artifacts: List[Dict[str, Any]] = []
