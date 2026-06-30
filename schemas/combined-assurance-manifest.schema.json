@@ -190,6 +190,102 @@
       },
       "additionalProperties": false
     },
+    "tsmm_mapping": {
+      "type": "object",
+      "description": "Optional semantic mapping from the assurance run to TSMM concepts so authority, delegation, evidence, lifecycle, decision, and effect are explicit.",
+      "properties": {
+        "model_version": {
+          "type": "string"
+        },
+        "governance_context": {
+          "type": "string"
+        },
+        "authority": {
+          "type": "object",
+          "properties": {
+            "authority_id": {
+              "type": "string"
+            },
+            "authority_type": {
+              "type": "string"
+            },
+            "delegation_scope": {
+              "type": "string"
+            },
+            "scope_limitations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "artifact_kind",
+              "produced_by"
+            ],
+            "properties": {
+              "artifact_kind": {
+                "type": "string"
+              },
+              "produced_by": {
+                "type": "string"
+              },
+              "supports_claim": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "decision": {
+          "type": "object",
+          "properties": {
+            "decision_type": {
+              "type": "string"
+            },
+            "effect": {
+              "type": "string"
+            },
+            "policy_basis": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "tis_artifacts": {
+      "type": "object",
+      "description": "Optional references to Trust Infrastructure Schemas artifact contracts used by the assurance run.",
+      "properties": {
+        "tis_version": {
+          "type": "string"
+        },
+        "evidence_bundle_manifest": {
+          "$ref": "#/$defs/artifactReference"
+        },
+        "conformance_declaration": {
+          "$ref": "#/$defs/artifactReference"
+        },
+        "decision_receipt": {
+          "$ref": "#/$defs/artifactReference"
+        },
+        "registry_publication": {
+          "$ref": "#/$defs/artifactReference"
+        },
+        "status_or_revocation_evidence": {
+          "$ref": "#/$defs/artifactReference"
+        }
+      },
+      "additionalProperties": false
+    },
     "summary": {
       "type": "object",
       "properties": {
@@ -248,5 +344,29 @@
       "additionalProperties": false
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "$defs": {
+    "artifactReference": {
+      "type": "object",
+      "required": [
+        "schema",
+        "path"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
 }

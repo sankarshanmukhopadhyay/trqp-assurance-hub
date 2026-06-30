@@ -51,6 +51,23 @@ def _parse_artifact(spec: str) -> Dict[str, Any]:
     return a
 
 
+def _parse_tis_artifact_ref(spec: Optional[str]) -> Optional[Dict[str, Any]]:
+    if not spec:
+        return None
+    parts = spec.split(":", 3)
+    if len(parts) < 2:
+        raise ValueError(f"Invalid TIS artifact reference '{spec}'. Expected 'schema:path[:sha256][:notes]'.")
+    schema, path = parts[0].strip(), parts[1].strip()
+    if not schema or not path:
+        raise ValueError(f"Invalid TIS artifact reference '{spec}'. schema and path are required.")
+    ref: Dict[str, Any] = {"schema": schema, "path": path}
+    if len(parts) >= 3 and parts[2].strip():
+        ref["sha256"] = parts[2].strip()
+    if len(parts) >= 4 and parts[3].strip():
+        ref["notes"] = parts[3].strip()
+    return ref
+
+
 def _maybe_add_sha256(artifact: Dict[str, Any], base_dir: Path) -> None:
     p = base_dir / artifact["path"]
     if p.exists() and p.is_file():
@@ -132,6 +149,23 @@ def main(argv: Optional[List[str]] = None) -> int:
     p.add_argument("--lifecycle-last-checked-at", default=None)
     p.add_argument("--revocation-supported", default=None, choices=["true", "false"])
     p.add_argument("--revocation-sla-seconds", default=None, type=int)
+
+    p.add_argument("--tsmm-model-version", default=None)
+    p.add_argument("--tsmm-governance-context", default=None)
+    p.add_argument("--tsmm-authority-id", default=None)
+    p.add_argument("--tsmm-authority-type", default=None)
+    p.add_argument("--tsmm-delegation-scope", default=None)
+    p.add_argument("--tsmm-scope-limitation", action="append", default=[])
+    p.add_argument("--tsmm-decision-type", default=None)
+    p.add_argument("--tsmm-decision-effect", default=None)
+    p.add_argument("--tsmm-policy-basis", default=None)
+
+    p.add_argument("--tis-version", default=None)
+    p.add_argument("--tis-evidence-bundle-manifest", default=None, help="schema:path[:sha256][:notes]")
+    p.add_argument("--tis-conformance-declaration", default=None, help="schema:path[:sha256][:notes]")
+    p.add_argument("--tis-decision-receipt", default=None, help="schema:path[:sha256][:notes]")
+    p.add_argument("--tis-registry-publication", default=None, help="schema:path[:sha256][:notes]")
+    p.add_argument("--tis-status-or-revocation-evidence", default=None, help="schema:path[:sha256][:notes]")
 
     p.add_argument("--overall-status", default=None, choices=["pass", "fail", "partial"])
     p.add_argument("--conformance-status", default=None, choices=["pass", "fail", "partial"])
@@ -249,6 +283,62 @@ def main(argv: Optional[List[str]] = None) -> int:
             **({"sla_seconds": revocation_sla_seconds} if revocation_sla_seconds is not None else {}),
             **({"last_checked_at": args.lifecycle_last_checked_at or generated_at} if (args.lifecycle_last_checked_at or lifecycle_status_feed_uri) else {}),
         }
+
+    if any(
+        [
+            args.tsmm_model_version,
+            args.tsmm_governance_context,
+            args.tsmm_authority_id,
+            args.tsmm_authority_type,
+            args.tsmm_delegation_scope,
+            args.tsmm_scope_limitation,
+            args.tsmm_decision_type,
+            args.tsmm_decision_effect,
+            args.tsmm_policy_basis,
+        ]
+    ):
+        tsmm_mapping: Dict[str, Any] = {}
+        if args.tsmm_model_version:
+            tsmm_mapping["model_version"] = args.tsmm_model_version
+        if args.tsmm_governance_context:
+            tsmm_mapping["governance_context"] = args.tsmm_governance_context
+        authority: Dict[str, Any] = {}
+        if args.tsmm_authority_id:
+            authority["authority_id"] = args.tsmm_authority_id
+        if args.tsmm_authority_type:
+            authority["authority_type"] = args.tsmm_authority_type
+        if args.tsmm_delegation_scope:
+            authority["delegation_scope"] = args.tsmm_delegation_scope
+        if args.tsmm_scope_limitation:
+            authority["scope_limitations"] = args.tsmm_scope_limitation
+        if authority:
+            tsmm_mapping["authority"] = authority
+        decision: Dict[str, Any] = {}
+        if args.tsmm_decision_type:
+            decision["decision_type"] = args.tsmm_decision_type
+        if args.tsmm_decision_effect:
+            decision["effect"] = args.tsmm_decision_effect
+        if args.tsmm_policy_basis:
+            decision["policy_basis"] = args.tsmm_policy_basis
+        if decision:
+            tsmm_mapping["decision"] = decision
+        doc["tsmm_mapping"] = tsmm_mapping
+
+    tis_refs = {
+        "evidence_bundle_manifest": _parse_tis_artifact_ref(args.tis_evidence_bundle_manifest),
+        "conformance_declaration": _parse_tis_artifact_ref(args.tis_conformance_declaration),
+        "decision_receipt": _parse_tis_artifact_ref(args.tis_decision_receipt),
+        "registry_publication": _parse_tis_artifact_ref(args.tis_registry_publication),
+        "status_or_revocation_evidence": _parse_tis_artifact_ref(args.tis_status_or_revocation_evidence),
+    }
+    if args.tis_version or any(tis_refs.values()):
+        tis_artifacts: Dict[str, Any] = {}
+        if args.tis_version:
+            tis_artifacts["tis_version"] = args.tis_version
+        for key, value in tis_refs.items():
+            if value:
+                tis_artifacts[key] = value
+        doc["tis_artifacts"] = tis_artifacts
 
     base_dir = Path(args.base_dir).resolve()
     artifacts: List[Dict[str, Any]] = []

@@ -11,12 +11,12 @@
   },
   "tools": {
     "trqp_conformance_suite": {
-      "version": "1.3.1",
+      "version": "1.4.0",
       "profile_id": "smoke",
       "run_id": "cts-example-run-1"
     },
     "trqp_tspp": {
-      "version": "0.11.1",
+      "version": "0.12.0",
       "assurance_level": "AL1",
       "run_id": "tspp-example-run-1"
     }
@@ -50,6 +50,60 @@
     "revocation_supported": true,
     "sla_seconds": 86400,
     "last_checked_at": "2026-03-09T00:00:00Z"
+  },
+  "tsmm_mapping": {
+    "model_version": "v0.21.0",
+    "governance_context": "TRQP registry assurance run",
+    "authority": {
+      "authority_id": "did:example:trust-framework-authority",
+      "authority_type": "GovernanceAuthority",
+      "delegation_scope": "evaluate and publish assurance posture for registry.example.org",
+      "scope_limitations": [
+        "does not certify legal liability",
+        "does not evaluate business solvency"
+      ]
+    },
+    "evidence": [
+      {
+        "artifact_kind": "conformance_report",
+        "produced_by": "trqp_conformance_suite",
+        "supports_claim": "protocol behavior conforms to selected profile"
+      },
+      {
+        "artifact_kind": "posture_report",
+        "produced_by": "trqp_tspp",
+        "supports_claim": "deployment posture satisfies selected assurance level"
+      }
+    ],
+    "decision": {
+      "decision_type": "assurance_publication",
+      "effect": "publish public assurance summary",
+      "policy_basis": "TRQP Assurance Hub AL2 profile"
+    }
+  },
+  "tis_artifacts": {
+    "tis_version": "v0.10.0",
+    "evidence_bundle_manifest": {
+      "schema": "trust-infrastructure-schemas/evidence/evidence-bundle-manifest.schema.json",
+      "path": "artifacts/evidence-bundle-manifest.json",
+      "notes": "TIS-aligned manifest for the combined assurance evidence set"
+    },
+    "conformance_declaration": {
+      "schema": "trust-infrastructure-schemas/conformance/conformance-declaration.schema.json",
+      "path": "artifacts/conformance-declaration.json"
+    },
+    "decision_receipt": {
+      "schema": "trust-infrastructure-schemas/decision/decision-receipt.schema.json",
+      "path": "artifacts/decision-receipt.json"
+    },
+    "registry_publication": {
+      "schema": "trust-infrastructure-schemas/registry/registry-publication-profile.schema.json",
+      "path": "artifacts/registry-publication.json"
+    },
+    "status_or_revocation_evidence": {
+      "schema": "trust-infrastructure-schemas/profiles/vti/status-list-reference.schema.json",
+      "path": "artifacts/status-list-reference.json"
+    }
   },
   "summary": {
     "overall_status": "pass",

@@ -9,7 +9,7 @@
 This declaration covers the AL1 assurance claim for the Example TRQP Trust Registry.
 At AL1, the operator asserts that:
 
-- Protocol conformance evidence has been produced using the TRQP Conformance Suite v1.3.1 baseline profile.
+- Protocol conformance evidence has been produced using the TRQP Conformance Suite v1.4.0 baseline profile.
 - Deployment posture evidence has been produced using TRQP-TSPP v0.9.0 at AL1.
 - All artifact versions are pinned to tagged releases.
 

@@ -28,8 +28,8 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 
 ## Release readiness and adoption focus
 
-- Cross-repo release references are synchronized to TSPP v0.11.1 and Conformance Suite v1.3.1.
-- Compatibility matrix reflects the current supported pairing for the Public Assurance and Adoption Readiness release.
+- Cross-repo release references are synchronized to TSPP v0.12.0 and Conformance Suite v1.4.0.
+- Compatibility matrix reflects the current supported pairing for the Runtime Assurance Contract Pack.
 - Combined-assurance manifest generation, public assurance summary generation, and validation tooling are aligned.
 - AL3/AL4 guidance remains the canonical anchor for high-reliance adoption, auditability, and consumer impact evidence.
 
@@ -78,5 +78,6 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 - ✅ `generate-manifest.py --dry-run` CI step added to `quality.yml` — generation path is now verified on every push.
 - **Next:** Add a `tools/check-freshness.py` script that reads `last_reviewed` frontmatter and flags docs past their SLA threshold in CI.
 - ✅ `tools/validate_examples.py` extended to validate JSON files in all AL bundle directories (`examples/al*-evidence-bundle/`) against their paired schemas.
+- ✅ TSMM/TIS runtime assurance contract support added to the Combined Assurance Manifest and generator.
 
 _Last updated: 2026-03-19_

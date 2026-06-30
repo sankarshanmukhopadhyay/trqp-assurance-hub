@@ -1,0 +1,20 @@
+review_id: portfolio-drift-20260629-hub-v1-7-0
+source_repo: trqp-assurance-hub
+source_release: v1.7.0
+change_type: assurance_artifact_contract_alignment
+relationship_ids_reviewed:
+  - trust-systems-meta-model-to-trqp-assurance-hub
+  - trust-infrastructure-schemas-to-trqp-assurance-hub
+  - trqp-conformance-suite-to-trqp-assurance-hub
+  - TRQP-TSPP-to-trqp-assurance-hub
+drift_classification: assurance_drift
+downstream_review_targets:
+  - trqp-conformance-suite
+  - TRQP-TSPP
+evidence:
+  - path: schemas/combined-assurance-manifest.schema.json
+  - path: examples/combined-assurance-manifest.example.json
+  - path: docs/reference/tsmm-tis-runtime-assurance-contract.md
+  - path: docs/reference/compatibility-matrix.md
+result: downstream_updates_completed_in_coordinated_release
+follow_up_issue: null

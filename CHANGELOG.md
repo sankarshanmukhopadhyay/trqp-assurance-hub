@@ -1,3 +1,13 @@
+## v1.7.0
+
+- Add TSMM/TIS Runtime Assurance Contract Pack for cross-repo assurance publication.
+- Extend `schemas/combined-assurance-manifest.schema.json` with optional `tsmm_mapping` and `tis_artifacts` blocks.
+- Extend `tools/generate-manifest.py` with CLI flags for TSMM authority/decision metadata and TIS artifact references.
+- Add `docs/reference/tsmm-tis-runtime-assurance-contract.md` to define authority, delegation, scope, lifecycle, revocation, evidence, decision, and audit expectations.
+- Add portfolio release-impact and drift-review records under `docs/governance/`.
+- Refresh README and compatibility matrix for the coordinated Hub v1.7.0 / CTS v1.4.0 / TSPP v0.12.0 release tuple.
+- Fix validation dependency hygiene by replacing the unavailable `requests==2.33.0` pin with `requests==2.32.5`.
+
 ## v1.6.1
 
 - Extend the Combined Assurance Manifest schema with an optional `lifecycle` block covering target state, status feed URI, revocation support, publication SLA, and last-checked timestamp.
