@@ -1,3 +1,12 @@
+## v1.8.0
+
+- Publish the Operational Trust Stack Maturity Release for the coordinated Hub v1.8.0 / CTS v1.5.0 / TSPP v0.13.0 release tuple.
+- Add `docs/governance/release-policy.md` to define patch, minor, maturity, and no-release thresholds.
+- Add `docs/governance/change-intake.md` to require adoption value, evidence impact, validation impact, and cross-repo compatibility review before a change is release-worthy.
+- Add `docs/release-validation.md` with the validation commands and release acceptance evidence expected for the maturity train.
+- Add GitHub PR and release templates aligned to the maturity gate.
+- Refresh README and roadmap language so the Hub is the canonical adoption front door for the Operational Trust Stack.
+
 ## v1.7.0
 
 - Add TSMM/TIS Runtime Assurance Contract Pack for cross-repo assurance publication.

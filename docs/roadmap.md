@@ -12,6 +12,8 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 
 ## Completed
 
+- ✅ Operational Trust Stack Maturity Release governance added (`docs/governance/release-policy.md`, `docs/governance/change-intake.md`, `docs/release-validation.md`).
+- ✅ Hub positioned as the canonical adoption front door for the coordinated CTS + TSPP + Hub release train.
 - ✅ AL3/AL4 combined assurance walkthroughs added to `docs/guides/combined-assurance.md`
 - ✅ Evidence artifact vocabulary table with schema and example cross-links
 - ✅ `SECURITY.md` expanded with threat model references and reporting scope clarification
@@ -28,10 +30,11 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 
 ## Release readiness and adoption focus
 
-- Cross-repo release references are synchronized to TSPP v0.12.0 and Conformance Suite v1.4.0.
+- Cross-repo release references are synchronized to TSPP v0.13.0 and Conformance Suite v1.5.0.
 - Compatibility matrix reflects the current supported pairing for the Runtime Assurance Contract Pack.
 - Combined-assurance manifest generation, public assurance summary generation, and validation tooling are aligned.
 - AL3/AL4 guidance remains the canonical anchor for high-reliance adoption, auditability, and consumer impact evidence.
+- Future releases are governed by the maturity release policy: small edits are batched unless they fix security, broken CI, broken links, or a validated adoption blocker.
 
 ## Workstreams
 
@@ -56,7 +59,7 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 - ✅ `tools/validate_examples.py` added; example drift from schemas now caught in CI.
 - ✅ Schema-backed machine-readable assurance profiles for AL1–AL4.
 - ✅ `schemas/CONTRACT.md`: stability tiers (Stable / Extensible / Experimental) with per-schema field table and AL contract pin upgrade policy.
-- Planned: Add canonical JSON examples (error path) for the combined-assurance manifest schema.
+- Backlog: Add canonical JSON examples (error path) for the combined-assurance manifest schema when a consumer needs negative-path fixture coverage.
 
 ### 4) Documentation UX and navigation
 
@@ -68,7 +71,7 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 
 - ✅ Ayra Trust Network crosswalk and submission checklist published.
 - ✅ Interop demo profile available in `trqp-conformance-suite` and `TRQP-TSPP`.
-- **Next:** Define a lightweight "interop profile" for repeatable workshop scenarios (fixed SUT, known inputs, expected verdicts).
+- Backlog: Define a lightweight "interop profile" for repeatable workshop scenarios (fixed SUT, known inputs, expected verdicts).
 - ✅ `docs/reference/hub-cts-crosswalk.md`: three-way mapping table (control → CTS test → TSPP requirement) with reverse indexes and coverage gap notes.
 
 ### 6) Tooling and automation
@@ -76,8 +79,8 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 - ✅ `tools/generate-manifest.py` supports full combined-assurance manifest generation with CTS and TSPP report ingestion.
 - ✅ Schema validation CI step in place.
 - ✅ `generate-manifest.py --dry-run` CI step added to `quality.yml` — generation path is now verified on every push.
-- **Next:** Add a `tools/check-freshness.py` script that reads `last_reviewed` frontmatter and flags docs past their SLA threshold in CI.
+- ✅ Documentation freshness checking is available through `scripts/check_doc_freshness.py`; release validation now requires maintainers to run it before tagging.
 - ✅ `tools/validate_examples.py` extended to validate JSON files in all AL bundle directories (`examples/al*-evidence-bundle/`) against their paired schemas.
 - ✅ TSMM/TIS runtime assurance contract support added to the Combined Assurance Manifest and generator.
 
-_Last updated: 2026-03-19_
+_Last updated: 2026-07-03_

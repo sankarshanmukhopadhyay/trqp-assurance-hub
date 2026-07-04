@@ -1,6 +1,6 @@
 ---
 owner: maintainers
-last_reviewed: 2026-03-17
+last_reviewed: 2026-07-03
 tier: 0
 ---
 
@@ -39,6 +39,14 @@ This creates a portable evidence bundle that can be consumed by:
 - procurement and governance teams.
 
 ## Stack components
+
+The current maturity tuple is:
+
+| Layer | Version |
+|---|---:|
+| TRQP Conformance Suite | v1.5.0 |
+| TRQP-TSPP | v0.13.0 |
+| TRQP Assurance Hub | v1.8.0 |
 
 ### 1. TRQP Conformance Suite
 

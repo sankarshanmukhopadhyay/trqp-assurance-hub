@@ -16,3 +16,9 @@ tier: 0|1|2|3
 
 - CI fails when `last_reviewed` exceeds the SLA threshold for the declared tier.
 - Exceptions MUST be tracked as issues and referenced in the PR description.
+
+## Release governance
+
+- Release policy: [`release-policy.md`](release-policy.md)
+- Change intake: [`change-intake.md`](change-intake.md)
+- Documentation freshness checklist: [`documentation-freshness-checklist.md`](documentation-freshness-checklist.md)
