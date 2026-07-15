@@ -10,6 +10,20 @@ tier: 0
 
 # TRQP Assurance Hub
 
+> **Portfolio status:** Tier 1 flagship · Active · Beta
+
+| Attribute | Value |
+|---|---|
+| Portfolio tier | Flagship |
+| Lifecycle | Active |
+| Primary role | assurance orchestration and publication |
+| Primary output | Combined Assurance Manifest |
+| Validation | `make validate` |
+| Evidence output | See repository-specific output contract and examples |
+| Governance authority | [`GOVERNANCE.md`](GOVERNANCE.md) |
+| Stack adoption path | [`docs/trqp-adoption-path.md`](docs/trqp-adoption-path.md) |
+
+
 📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
 
 **Current version:** v1.8.0

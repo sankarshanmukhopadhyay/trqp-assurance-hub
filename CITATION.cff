@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this repository, cite the repository and the version or commit evaluated."
+title: "TRQP Assurance Hub"
+type: software
+authors:
+  - family-names: Mukhopadhyay
+    given-names: Sankarshan
+repository-code: "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub"
+url: "https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/"
+version: "1.8.0"
+date-released: 2026-07-15
+license: Apache-2.0
