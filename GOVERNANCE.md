@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Governance"
+nav_exclude: true
+---
+
 # Governance
 
 ## Repository mandate

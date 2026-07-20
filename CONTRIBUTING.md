@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Contributing"
+nav_exclude: true
+---
+
 # Contributing
 
 This repository is an onboarding + coordination layer. Most code/test contributions will land in:

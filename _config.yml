@@ -1,12 +1,42 @@
-# GitHub Pages (Jekyll) configuration
 title: "TRQP Assurance Hub"
-description: "Assurance, adoption, and GRID-aligned directory documentation for TRQP."
-theme: minima
-markdown: kramdown
+description: "Combined assurance, adoption, compatibility, and directory publication documentation for the TRQP ecosystem."
+url: "https://sankarshanmukhopadhyay.github.io"
+baseurl: "/trqp-assurance-hub"
+theme: just-the-docs
+color_scheme: nil
+search_enabled: true
+heading_anchors: true
+permalink: pretty
+
 plugins:
   - jekyll-seo-tag
-# Ensure these directories/files are published even if Jekyll would otherwise ignore them
+
+aux_links:
+  "View repository":
+    - "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub"
+aux_links_new_tab: true
+
+callouts:
+  note:
+    title: Note
+    color: blue
+  warning:
+    title: Warning
+    color: yellow
+
+exclude:
+  - vendor
+  - .bundle
+  - Gemfile.lock
+  - node_modules
+  - external
+  - "**/__pycache__/**"
+  - "**/*.pyc"
+
 include:
+  - docs
   - schemas
   - profiles
   - examples
+  - artifacts
+  - releases

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "AI Agent Service Registry"
+nav_exclude: true
+---
+
 # AI Agent Service Registry
 
 ## Business problem

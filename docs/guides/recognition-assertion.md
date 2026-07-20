@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Recognition Assertion"
+nav_exclude: true
+---
+
 # Recognition Assertion
 
 The **Recognition Assertion** is a standalone artifact used to express registry-to-registry (or operator-to-operator) recognition in a **signable** and **evidence-linked** way.

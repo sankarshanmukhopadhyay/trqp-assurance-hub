@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Relying-Party Checklist"
+nav_exclude: true
+---
+
 # Relying-Party Checklist
 
 ## Purpose

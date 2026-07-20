@@ -1,3 +1,9 @@
+---
+layout: default
+title: "GRID Profile (Global Registrar Information Directory)"
+nav_exclude: true
+---
+
 # GRID Profile (Global Registrar Information Directory)
 
 This profile defines the minimum publishable artifacts for a **GRID-listed registrar**.

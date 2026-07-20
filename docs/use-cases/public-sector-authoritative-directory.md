@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Public-Sector Authoritative Directory"
+nav_exclude: true
+---
+
 # Public-Sector Authoritative Directory
 
 ## Business problem

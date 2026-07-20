@@ -1,3 +1,9 @@
+---
+layout: default
+title: "DeDi Experimental Profile (Decentralized Directory Protocol)"
+nav_exclude: true
+---
+
 # DeDi Experimental Profile (Decentralized Directory Protocol)
 
 **Status:** Experimental (non-normative)  

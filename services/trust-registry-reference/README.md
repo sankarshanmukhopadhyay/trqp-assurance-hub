@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Trust Registry Reference Service"
+nav_exclude: true
+---
+
 # Trust Registry Reference Service
 
 A minimal JSON-backed reference service for publishing and discovering trust-service metadata and related assurance artifacts.

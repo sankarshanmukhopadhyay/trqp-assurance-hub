@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Assurance tier model"
+nav_exclude: true
+---
+
 # Assurance tier model
 
 CTR-ACB aligns certification tiers to the repository’s assurance levels (AL1–AL4).

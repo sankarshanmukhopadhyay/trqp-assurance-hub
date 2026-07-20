@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Assurance Hub Controls ↔ Ayra Trust Network Crosswalk"
+nav_exclude: true
+---
+
 # Assurance Hub Controls ↔ Ayra Trust Network Crosswalk
 
 This document maps the five Assurance Hub canonical controls to the conformance

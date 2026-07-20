@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Renewal plan (example)"
+nav_exclude: true
+---
+
 # Renewal plan (example)
 
 - Renewal cadence: 90 days (time-bounded validity)

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Ecosystem Registry Onboarding"
+nav_exclude: true
+---
+
 # Ecosystem Registry Onboarding
 
 ## Business problem

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "SAD-1 Profile (Sovereign Authoritative Directory)"
+nav_exclude: true
+---
+
 # SAD-1 Profile (Sovereign Authoritative Directory)
 
 SAD-1 is a **registry-agnostic assurance profile** for evaluating *authoritative digital trust directories*.

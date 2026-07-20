@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TSAM Principles"
+nav_exclude: true
+---
+
 # TSAM Principles
 
 These principles are normative. A TSAM-aligned implementation MUST satisfy P1–P7.

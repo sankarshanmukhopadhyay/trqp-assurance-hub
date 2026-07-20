@@ -1,3 +1,9 @@
+---
+layout: default
+title: "UNTP Digital Identity Anchor (DIA) and TRQP Directory Assurance"
+nav_exclude: true
+---
+
 # UNTP Digital Identity Anchor (DIA) and TRQP Directory Assurance
 
 UN/CEFACT's UN Transparency Protocol (UNTP) defines the Digital Identity Anchor (DIA) credential as a mechanism to verify the identity of credential issuers and bind those identities to verifiable identifiers (typically DIDs).

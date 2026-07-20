@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Consumer Impact"
+nav_exclude: true
+---
+
 # Consumer Impact
 
 TRQP assurance is valuable only when it reduces the opacity of registry-mediated decisions. A consumer or affected user may never read a full conformance report, but they should benefit from systems that preserve evidence, disclose limitations, and expose accountability channels.

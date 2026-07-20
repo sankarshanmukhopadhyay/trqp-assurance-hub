@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TRQP Conformance (Proposed)"
+nav_exclude: true
+---
+
 # TRQP Conformance (Proposed)
 
 This is PR-ready text to introduce a conformance approach for TRQP:

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Code of Conduct"
+nav_exclude: true
+---
+
 # Code of Conduct
 
 We aim for a collaborative, professional environment.

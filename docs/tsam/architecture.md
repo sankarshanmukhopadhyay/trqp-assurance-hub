@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TSAM Conceptual Architecture"
+nav_exclude: true
+---
+
 # TSAM Conceptual Architecture
 
 The method binds five layers into a single assurance architecture:

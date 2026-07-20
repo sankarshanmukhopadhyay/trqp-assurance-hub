@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Assurance levels (AL1–AL4)"
+nav_exclude: true
+---
+
 # Assurance levels (AL1–AL4)
 
 ← [Back to Docs Index](../index.md)

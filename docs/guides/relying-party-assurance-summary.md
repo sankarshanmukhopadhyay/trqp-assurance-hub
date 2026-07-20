@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Relying-Party Assurance Summary"
+nav_exclude: true
+---
+
 # Relying-Party Assurance Summary
 
 Relying parties need to know whether registry evidence is sufficient for a specific decision. This guide explains how to use the public assurance summary as decision support rather than as an unconditional trust signal.

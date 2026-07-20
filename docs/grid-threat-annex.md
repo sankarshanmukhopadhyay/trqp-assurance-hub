@@ -1,3 +1,9 @@
+---
+layout: default
+title: "GRID threat annex (minimum)"
+nav_exclude: true
+---
+
 # GRID threat annex (minimum)
 
 A minimal threat model for GRID-style directories.

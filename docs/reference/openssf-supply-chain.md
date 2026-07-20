@@ -1,3 +1,9 @@
+---
+layout: default
+title: "OpenSSF-aligned Supply Chain Integrity (Reference)"
+nav_exclude: true
+---
+
 # OpenSSF-aligned Supply Chain Integrity (Reference)
 
 Authoritative directories and trust registries are operational trust systems. If the implementation's software supply chain is compromised, governance and protocol conformance do not provide meaningful assurance.

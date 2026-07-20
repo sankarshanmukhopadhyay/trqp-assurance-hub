@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Evaluation procedure"
+nav_exclude: true
+---
+
 # Evaluation procedure
 
 This document provides a repeatable evaluation flow for CTR-ACB.

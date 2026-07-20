@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Procurement Use Case"
+nav_exclude: true
+---
+
 # Procurement Use Case
 
 ## Business problem

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Change log — example (AL4)"
+nav_exclude: true
+---
+
 # Change log — example (AL4)
 
 This document illustrates the minimum operational change log expected at AL4.

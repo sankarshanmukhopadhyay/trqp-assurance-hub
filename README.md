@@ -4,6 +4,12 @@ last_reviewed: 2026-07-03
 tier: 0
 ---
 
+## Documentation site
+
+The complete repository documentation is published through GitHub Pages using Just the Docs. Every public Markdown file is included in the generated documentation catalogue, and Mermaid fenced diagrams are rendered client-side. The Pages workflow performs a production build for pull requests and deploys from `main`.
+
+For repository administrators, enable **Settings → Pages → Source: GitHub Actions** once. No branch-specific generated site content is committed.
+
 ## Documentation
 
 - Documentation governance: [`docs/governance/README.md`](docs/governance/README.md)

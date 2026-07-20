@@ -1,3 +1,9 @@
+---
+layout: default
+title: "How to audit this AL4 evidence bundle"
+nav_exclude: true
+---
+
 # How to audit this AL4 evidence bundle
 
 AL4 extends AL3 with continuous operational evidence, time-bounded validity,

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Public Assurance Publication"
+nav_exclude: true
+---
+
 # Public Assurance Publication
 
 A Combined Assurance Manifest is an audit artifact. A Public Assurance Summary is an adoption artifact. The summary gives ecosystem operators, relying parties, assessors, and affected users a compact description of what was checked, when it was checked, and what remains out of scope.

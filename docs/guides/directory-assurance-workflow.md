@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Directory assurance workflow (SAD-1 / GRID)"
+nav_exclude: true
+---
+
 # Directory assurance workflow (SAD-1 / GRID)
 
 This guide defines an **end-to-end workflow** for evaluating authoritative digital trust directories using the TRQP ecosystem.

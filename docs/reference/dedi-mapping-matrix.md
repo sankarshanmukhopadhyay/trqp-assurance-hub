@@ -1,3 +1,9 @@
+---
+layout: default
+title: "DeDi Mapping Matrix (Experimental Spine)"
+nav_exclude: true
+---
+
 # DeDi Mapping Matrix (Experimental Spine)
 
 **Purpose:** Provide a single, auditable spine linking **DeDi artifacts** to the TRQP Assurance Hub **control objectives**, the CTS **checks**, and the **expected evidence** patterns.

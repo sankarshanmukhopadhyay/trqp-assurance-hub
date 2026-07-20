@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Content Authenticity Verifier Registry"
+nav_exclude: true
+---
+
 # Content Authenticity Verifier Registry
 
 ## Business problem

@@ -45,7 +45,7 @@ def check_markdown_links(repo_root: Path):
         text = md.read_text(encoding="utf-8", errors="ignore")
         for m in LINK_RE.finditer(text):
             url = m.group(1).strip().split()[0]
-            if url.startswith(("http://", "https://", "mailto:", "#", "data:")):
+            if url.startswith(("http://", "https://", "mailto:", "#", "data:", "{{")):
                 continue
             path = url.split("#")[0]
             if not path or "${" in path or "<" in path:

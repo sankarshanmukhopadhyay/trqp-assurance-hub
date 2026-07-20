@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Certification attestation"
+nav_exclude: true
+---
+
 # Certification attestation
 
 CTR-ACB introduces a machine-readable **Certification Attestation** artifact.

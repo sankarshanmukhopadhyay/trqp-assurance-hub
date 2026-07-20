@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Key rotation proof — example (AL4)"
+nav_exclude: true
+---
+
 # Key rotation proof — example (AL4)
 
 **Rotation event ID:** KEY-ROT-001

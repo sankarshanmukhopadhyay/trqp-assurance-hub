@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Assessor Checklist"
+nav_exclude: true
+---
+
 # Assessor Checklist
 
 ## Purpose

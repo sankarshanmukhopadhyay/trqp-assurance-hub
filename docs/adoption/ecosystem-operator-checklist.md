@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Ecosystem Operator Checklist"
+nav_exclude: true
+---
+
 # Ecosystem Operator Checklist
 
 ## Purpose

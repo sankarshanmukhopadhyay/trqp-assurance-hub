@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Operational Stack example"
+nav_exclude: true
+---
+
 # Operational Stack example
 
 This example shows the minimum artifact set required for the Operational Stack baseline.

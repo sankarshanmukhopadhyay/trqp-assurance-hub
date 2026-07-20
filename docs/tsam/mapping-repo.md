@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TSAM Mapping — Repository Components"
+nav_exclude: true
+---
+
 # TSAM Mapping — Repository Components
 
 This mapping explains how this repository instantiates TSAM layers. It is informative, but the bindings between claims and evidence are normative.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Conformance declaration (signed) — example"
+nav_exclude: true
+---
+
 # Conformance declaration (signed) — example
 
 **Declaration ID:** CONFORM-DECL-001

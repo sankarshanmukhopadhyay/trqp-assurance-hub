@@ -1,3 +1,9 @@
+---
+layout: default
+title: "GRID assurance mapping"
+nav_exclude: true
+---
+
 # GRID assurance mapping
 
 This document binds TRQP Assurance Levels (AL) to **directory eligibility** decisions for GRID-style directories.

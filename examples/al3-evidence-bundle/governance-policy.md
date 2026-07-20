@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Governance policy (example)"
+nav_exclude: true
+---
+
 # Governance policy (example)
 
 **Document ID:** GOV-POL-001

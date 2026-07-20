@@ -1,3 +1,9 @@
+---
+layout: default
+title: "AL1 minimal viable evidence bundle"
+nav_exclude: true
+---
+
 # AL1 minimal viable evidence bundle
 
 This folder shows the **minimum viable** artifact set for an AL1 assurance claim.

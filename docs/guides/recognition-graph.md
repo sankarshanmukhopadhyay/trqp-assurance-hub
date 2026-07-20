@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Recognition graph semantics"
+nav_exclude: true
+---
+
 # Recognition graph semantics
 
 Recognition relationships are rarely isolated.

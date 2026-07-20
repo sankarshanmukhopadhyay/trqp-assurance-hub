@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Compatibility Policy"
+nav_exclude: true
+---
+
 # Compatibility Policy
 
 The canonical compatibility authority is [`data/compatibility-registry.yaml`](../../data/compatibility-registry.yaml). Hand-maintained compatibility tables are not authoritative.

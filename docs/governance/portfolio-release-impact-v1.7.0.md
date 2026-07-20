@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Portfolio Release Impact: TRQP Assurance Hub v1.7.0"
+nav_exclude: true
+---
+
 # Portfolio Release Impact: TRQP Assurance Hub v1.7.0
 
 | Field | Value |

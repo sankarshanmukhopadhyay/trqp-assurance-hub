@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Operator declaration (example)"
+nav_exclude: true
+---
+
 # Operator declaration (example)
 
 - Operator: Example Operator Ltd.

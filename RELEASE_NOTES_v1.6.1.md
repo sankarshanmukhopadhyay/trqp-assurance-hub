@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TRQP Assurance Hub v1.6.1 Release Notes"
+nav_exclude: true
+---
+
 # TRQP Assurance Hub v1.6.1 Release Notes
 
 ## Summary

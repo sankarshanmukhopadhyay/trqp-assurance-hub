@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Error states"
+nav_exclude: true
+---
+
 # Error states
 
 This guide documents common error and failure modes across the TRQP assurance toolchain.

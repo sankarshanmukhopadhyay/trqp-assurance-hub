@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Authoritative directories and meta-assurance"
+nav_exclude: true
+---
+
 # Authoritative directories and meta-assurance
 
 TRQP is often introduced as a protocol for querying trust registries. That framing is useful, but incomplete.

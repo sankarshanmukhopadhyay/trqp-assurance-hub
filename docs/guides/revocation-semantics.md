@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Revocation semantics (assurance layer)"
+nav_exclude: true
+---
+
 # Revocation semantics (assurance layer)
 
 Revocation is where trust systems go to either become real… or become theater.

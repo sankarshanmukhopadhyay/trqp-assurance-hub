@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Machine-readable Assurance Profiles"
+nav_exclude: true
+---
+
 # Machine-readable Assurance Profiles
 
 This repository now publishes a small set of machine-readable assurance profiles that make AL1-AL4 usable as **operational contracts**.

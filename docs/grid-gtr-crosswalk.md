@@ -1,3 +1,9 @@
+---
+layout: default
+title: "GRID ↔ GTR crosswalk"
+nav_exclude: true
+---
+
 # GRID ↔ GTR crosswalk
 
 This repository treats GRID as an implementation pattern that can be aligned with the UN/CEFACT Global Trust Registry (GTR) work.

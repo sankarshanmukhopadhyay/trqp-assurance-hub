@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Issue Routing Policy"
+nav_exclude: true
+---
+
 # Issue Routing Policy
 
 The point of this policy is to avoid “triage ping-pong” and keep contributor effort compounding.

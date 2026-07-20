@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Procurement Checklist"
+nav_exclude: true
+---
+
 # Procurement Checklist
 
 ## Purpose

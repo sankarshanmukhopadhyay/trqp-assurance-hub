@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Operational attestation statement — example (AL4)"
+nav_exclude: true
+---
+
 # Operational attestation statement — example (AL4)
 
 The Operator attests that the operational controls relevant to the assurance claim were continuously executed during the declared monitoring window.

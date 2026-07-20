@@ -1,3 +1,9 @@
+---
+layout: default
+title: "How to verify a GRID listing (verifier-first)"
+nav_exclude: true
+---
+
 # How to verify a GRID listing (verifier-first)
 
 This is a practical, minimal workflow for verifying a registrar listing in a GRID-style directory.

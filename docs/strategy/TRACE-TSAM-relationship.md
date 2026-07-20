@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TRACE and TSAM"
+nav_exclude: true
+---
+
 # TRACE and TSAM
 ## Governance Lens and Assurance Spine
 

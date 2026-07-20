@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Operator declaration (AL1 — optional)"
+nav_exclude: true
+---
+
 # Operator declaration (AL1 — optional)
 
 **Registry operator:** Example Trust Registry Operator

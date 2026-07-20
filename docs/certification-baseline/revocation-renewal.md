@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Revocation and renewal"
+nav_exclude: true
+---
+
 # Revocation and renewal
 
 Certification is only credible when it is time-bound and revocable.

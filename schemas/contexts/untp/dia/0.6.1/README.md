@@ -1,3 +1,9 @@
+---
+layout: default
+title: "UNTP Digital Identity Anchor JSON-LD Context (0.6.1)"
+nav_exclude: true
+---
+
 # UNTP Digital Identity Anchor JSON-LD Context (0.6.1)
 
 This directory vendors the **UN/CEFACT UN Transparency Protocol (UNTP)** Digital Identity Anchor (DIA) JSON-LD context

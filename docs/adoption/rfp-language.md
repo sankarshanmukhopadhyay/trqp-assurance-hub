@@ -1,3 +1,9 @@
+---
+layout: default
+title: "RFP Language"
+nav_exclude: true
+---
+
 # RFP Language
 
 ## Purpose

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Assurance profile (candidate)"
+nav_exclude: true
+---
+
 # Assurance profile (candidate)
 
 This repository treats “assurance” as something you can **publish and verify**, not something you merely describe.

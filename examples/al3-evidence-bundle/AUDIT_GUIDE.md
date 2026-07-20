@@ -1,3 +1,9 @@
+---
+layout: default
+title: "How to audit this AL3 evidence bundle"
+nav_exclude: true
+---
+
 # How to audit this AL3 evidence bundle
 
 This guide maps each artifact in the bundle to the verifier check it satisfies

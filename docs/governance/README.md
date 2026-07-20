@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Documentation freshness policy"
+nav_exclude: true
+---
+
 # Documentation freshness policy
 
 This repository treats documentation as a production interface. Tier 0–Tier 1 docs MUST be kept current; CI enforces a freshness SLA using `docs/governance/freshness-policy.yml` and frontmatter metadata.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Candidate Trust Registry Assurance & Certification Baseline"
+nav_exclude: true
+---
+
 # Candidate Trust Registry Assurance & Certification Baseline
 
 This package defines a **Candidate Trust Registry Assurance & Certification Baseline** (CTR-ACB).

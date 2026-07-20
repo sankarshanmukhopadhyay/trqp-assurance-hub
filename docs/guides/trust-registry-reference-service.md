@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Trust Registry Reference Service"
+nav_exclude: true
+---
+
 # Trust Registry Reference Service
 
 This guide describes the minimal Trust Registry reference service included in the Assurance Hub.

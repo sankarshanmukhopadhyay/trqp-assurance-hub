@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Trust Systems Assurance Method (TSAM)"
+nav_exclude: true
+---
+
 # Trust Systems Assurance Method (TSAM)
 
 ## Purpose

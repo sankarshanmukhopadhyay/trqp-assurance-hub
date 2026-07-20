@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Evidence artifacts and expectations"
+nav_exclude: true
+---
+
 # Evidence artifacts and expectations
 
 ← [Back to Docs Index](../index.md)

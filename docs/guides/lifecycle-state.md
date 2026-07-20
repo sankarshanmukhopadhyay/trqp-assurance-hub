@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Lifecycle state model"
+nav_exclude: true
+---
+
 # Lifecycle state model
 
 This repository introduces a minimal lifecycle model to make registry posture and assurance declarations **operationally legible**.

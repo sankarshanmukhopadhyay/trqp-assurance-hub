@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Security Policy"
+nav_exclude: true
+---
+
 # Security Policy
 
 ## Reporting a vulnerability

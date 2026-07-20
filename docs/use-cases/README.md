@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TRQP Business Use Cases"
+nav_exclude: true
+---
+
 # TRQP Business Use Cases
 
 These use cases translate the Operational Trust Stack into business decisions. Each use case identifies the decision being made, the evidence required, the appropriate assurance level, and the consumer or relying-party impact.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Evidence Acceptance Criteria"
+nav_exclude: true
+---
+
 # Evidence Acceptance Criteria
 
 ## Purpose

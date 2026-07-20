@@ -1,3 +1,9 @@
+---
+layout: default
+title: "AL4 evidence bundle example (worked reference)"
+nav_exclude: true
+---
+
 # AL4 evidence bundle example (worked reference)
 
 This folder illustrates a minimal **AL4** evidence bundle structure for operators and assessors.

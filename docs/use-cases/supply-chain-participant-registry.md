@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Supply-Chain Participant Registry"
+nav_exclude: true
+---
+
 # Supply-Chain Participant Registry
 
 ## Business problem

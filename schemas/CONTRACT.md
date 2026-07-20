@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Schema contract"
+nav_exclude: true
+---
+
 # Schema contract
 
 This document declares the stability guarantees and migration policy for all

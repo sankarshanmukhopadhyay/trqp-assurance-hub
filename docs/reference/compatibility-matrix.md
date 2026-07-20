@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Compatibility Matrix"
+nav_exclude: true
+---
+
 # Compatibility Matrix
 
 This matrix identifies coordinated release sets for the TRQP Operational Trust Stack. Operators SHOULD use a supported release set unless they have an explicit compatibility exception.

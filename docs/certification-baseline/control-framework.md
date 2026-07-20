@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Control framework"
+nav_exclude: true
+---
+
 # Control framework
 
 This document defines how CTR-ACB controls are specified so they can be **audited** and **automated**.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Independent assessment report — example"
+nav_exclude: true
+---
+
 # Independent assessment report — example
 
 **Report ID:** IA-REPORT-001

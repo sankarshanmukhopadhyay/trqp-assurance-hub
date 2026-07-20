@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TRQP Adoption Path"
+nav_exclude: true
+---
+
 # TRQP Adoption Path
 
 The TRQP portfolio separates protocol definition, security posture, reference implementation, conformance execution, and assurance publication so that authority does not collapse into one repository.

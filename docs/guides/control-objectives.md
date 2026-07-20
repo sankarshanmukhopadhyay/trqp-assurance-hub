@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Control objectives"
+nav_exclude: true
+---
+
 # Control objectives
 
 Assurance levels become useful when they can be audited without interpretive dance.

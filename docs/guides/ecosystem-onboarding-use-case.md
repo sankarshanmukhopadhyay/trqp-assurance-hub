@@ -1,3 +1,9 @@
+---
+layout: default
+title: "Ecosystem Onboarding Use Case"
+nav_exclude: true
+---
+
 # Ecosystem Onboarding Use Case
 
 ## Business problem
