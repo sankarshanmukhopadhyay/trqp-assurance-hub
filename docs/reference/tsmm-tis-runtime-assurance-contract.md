@@ -6,13 +6,13 @@ tier: 1
 
 # TSMM/TIS Runtime Assurance Contract
 
-This document defines how TRQP Assurance Hub v1.8.0 projects combined assurance evidence into the portfolio architecture established by TSMM v0.21.0 and Trust Infrastructure Schemas v0.10.0.
+This document defines how TRQP Assurance Hub v1.9.0 projects combined assurance evidence into the portfolio architecture established by TSMM v0.21.0 and Trust Infrastructure Schemas v0.10.0.
 
 The Hub remains the assurance orchestration layer. TSMM supplies the semantic model for authority, delegation, evidence, lifecycle, decision, and effect. TIS supplies executable artifact contracts that can be validated, referenced, signed, and audited.
 
 ## Contract summary
 
-| Layer | Responsibility | Hub v1.8.0 handling |
+| Layer | Responsibility | Hub v1.9.0 handling |
 |---|---|---|
 | TSMM | Defines what the trust system claim means | Captured in `tsmm_mapping` in the Combined Assurance Manifest |
 | TIS | Defines machine-readable artifact contracts | Captured in `tis_artifacts` in the Combined Assurance Manifest |
@@ -67,7 +67,7 @@ This prevents a passing CTS or TSPP run from being misread as unlimited certific
 
 Lifecycle evidence is part of operational assurance. A target can pass a point-in-time run and later become suspended, revoked, retired, or out of policy.
 
-Hub v1.8.0 therefore keeps lifecycle state in two places:
+Hub v1.9.0 therefore keeps lifecycle state in two places:
 
 | Surface | Role |
 |---|---|
@@ -78,7 +78,7 @@ Relying parties should treat lifecycle state as a live assurance input. A missin
 
 ## Auditability
 
-A v1.8.0 assurance package should preserve:
+A v1.9.0 assurance package should preserve:
 
 - shared `run_id` and `target_id` across CTS, TSPP, and Hub;
 - artifact paths and hashes;

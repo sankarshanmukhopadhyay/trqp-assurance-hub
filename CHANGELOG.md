@@ -1,3 +1,19 @@
+## v1.9.0
+
+### Added
+- Shared `PROJECT-STATUS.yaml` governance contract and schema validation.
+- Canonical compatibility registry for Hub v1.9.0, CTS v1.6.0, and TSPP v0.14.0.
+- Machine-readable assurance-decision contract and combined traceability output.
+- Fail-closed tests for target and run identity mismatch.
+
+### Changed
+- Replaced checkout-metadata smoke evidence with authentic producer evidence execution.
+- Added `make assurance-check` and `make evidence` as material validation entry points.
+- Updated current-version, compatibility, release-validation, and adoption documentation.
+
+### Assurance
+- Combined outcomes preserve producer failures and do not imply external certification.
+
 ## v1.8.0
 
 ## 1.9.0 - 2026-07-20

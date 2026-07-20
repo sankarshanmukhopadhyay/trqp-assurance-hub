@@ -6,15 +6,15 @@ tier: 0
 
 # Release Validation
 
-This record defines the validation gate for Hub v1.8.0 in the Operational Trust Stack Maturity Release.
+This record defines the validation gate for Hub v1.9.0 in the Operational Trust Stack Maturity Release.
 
 ## Compatibility tuple
 
 | Repository | Version | Role |
 |---|---:|---|
-| TRQP Assurance Hub | v1.8.0 | Combined assurance orchestration and publication |
-| TRQP Conformance Suite | v1.5.0 | Protocol conformance evidence producer |
-| TRQP-TSPP | v0.13.0 | Security and privacy posture evidence producer |
+| TRQP Assurance Hub | v1.9.0 | Combined assurance orchestration and publication |
+| TRQP Conformance Suite | v1.6.0 | Protocol conformance evidence producer |
+| TRQP-TSPP | v0.14.0 | Security and privacy posture evidence producer |
 
 ## Required commands
 
@@ -44,4 +44,4 @@ python tools/validate_operational_stack.py --bundle-dir artifacts/operational-st
 
 ## Release decision
 
-Hub v1.8.0 is release-worthy because it changes the operating model of the stack. It introduces the governance and validation gates required to stop low-signal release churn while preserving the ability to ship urgent fixes.
+Hub v1.9.0 is release-worthy because it changes the operating model of the stack. It introduces the governance and validation gates required to stop low-signal release churn while preserving the ability to ship urgent fixes.

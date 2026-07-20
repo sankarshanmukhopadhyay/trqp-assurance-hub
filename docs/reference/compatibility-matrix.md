@@ -4,6 +4,7 @@ This matrix identifies coordinated release sets for the TRQP Operational Trust S
 
 | Assurance Hub | Conformance Suite | TRQP-TSPP | Status | Notes |
 |---|---:|---:|---|---|
+| v1.9.0 | v1.6.0 | v0.14.0 | supported | End-to-End Assurance Execution and Evidence Chain with authentic producer evidence, canonical compatibility, traceability, and fail-closed identity validation. |
 | v1.8.0 | v1.5.0 | v0.13.0 | supported | Operational Trust Stack Maturity Release. Adds release governance, validation evidence, adoption packaging, and high-value commit discipline while retaining the Runtime Assurance Contract Pack. |
 | v1.7.0 | v1.4.0 | v0.12.0 | maintenance | Runtime Assurance Contract Pack. Aligns Hub, CTS, and TSPP with TSMM v0.21.0 semantics and TIS v0.10.0 executable artifact contracts for authority, evidence, decision, registry publication, and lifecycle/status evidence. |
 | v1.6.1 | v1.3.1 | v0.11.1 | supported | Operational Trust Stack: Public Assurance and Adoption Readiness. Adds public assurance summaries, scenario profiles, interop evidence matrices, relying-party controls, and adoption packs. |
@@ -15,4 +16,4 @@ This matrix identifies coordinated release sets for the TRQP Operational Trust S
 
 ## Compatibility rule
 
-A Combined Assurance Manifest SHOULD declare the exact release tuple used to produce it. Hub v1.8.0 validates identity binding across CTS and TSPP reports, supports public assurance summaries, can carry TSMM/TIS runtime assurance references for evidence, decision, registry publication, and status/revocation artifacts, and adds a release governance gate for future maturity increments.
+A Combined Assurance Manifest SHOULD declare the exact release tuple used to produce it. Hub v1.9.0 validates identity binding across CTS and TSPP reports, supports public assurance summaries, can carry TSMM/TIS runtime assurance references for evidence, decision, registry publication, and status/revocation artifacts, and adds a release governance gate for future maturity increments.

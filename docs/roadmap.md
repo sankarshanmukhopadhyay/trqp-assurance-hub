@@ -30,7 +30,7 @@ Items move as upstream TRQP work evolves, implementer feedback lands, and cross-
 
 ## Release readiness and adoption focus
 
-- Cross-repo release references are synchronized to TSPP v0.13.0 and Conformance Suite v1.5.0.
+- Cross-repo release references are synchronized to TSPP v0.14.0 and Conformance Suite v1.6.0.
 - Compatibility matrix reflects the current supported pairing for the Runtime Assurance Contract Pack.
 - Combined-assurance manifest generation, public assurance summary generation, and validation tooling are aligned.
 - AL3/AL4 guidance remains the canonical anchor for high-reliance adoption, auditability, and consumer impact evidence.

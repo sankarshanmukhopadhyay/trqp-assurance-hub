@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "decision_id": "decision:ots-local-validation",
+  "decision_id": "decision:ots-validation",
   "outcome": "fail",
   "scope": "TRQP conformance and TSPP posture evidence composition",
   "target": "trqp-reference-fixture",
   "evidence_considered": [
     {
       "role": "cts",
-      "path": "/mnt/data/work/cts/trqp-conformance-suite-main/artifacts/validation/cts-report.json",
-      "sha256": "21744a0e70ff4f80cd0278b5e66956fe5b48462d4ff579a92886a308e1e904a4"
+      "path": "/mnt/data/work_trqp/current/cts/trqp-conformance-suite-main/artifacts/validation/cts-report.json",
+      "sha256": "2e819a93ed421fd0c4514fa7af19617a7a10e0e3a5f171425dd22ce34791ab99"
     },
     {
       "role": "tspp",
-      "path": "/mnt/data/work/tspp/TRQP-TSPP-main/artifacts/validation/tspp-report.json",
-      "sha256": "fc7a9cef2f22ffd1a7713357a55f193755511f293cfc508d83e40b605d0d157f"
+      "path": "/mnt/data/work_trqp/current/tspp/TRQP-TSPP-main/artifacts/validation/tspp-report.json",
+      "sha256": "12f4de7f8083190c1b1d65903d82bec5a3b6c316d5f48522d884539bc7d518e0"
     }
   ],
   "conditions": [],

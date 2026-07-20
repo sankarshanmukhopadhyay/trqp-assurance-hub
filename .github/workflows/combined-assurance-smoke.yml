@@ -35,6 +35,9 @@ jobs:
         with:
           python-version: '3.11'
           cache: pip
+          cache-dependency-path: |
+            external/trqp-conformance-suite/cts/requirements.txt
+            external/TRQP-TSPP/harness/requirements.txt
 
       - name: Install coordinated toolchain
         run: |
@@ -45,29 +48,17 @@ jobs:
 
       - name: Generate CTS evidence
         working-directory: external/trqp-conformance-suite
+        env:
+          TRQP_RUN_ID: ots-${{ github.run_id }}
+          TRQP_TARGET_ID: trqp-reference-fixture
         run: make assurance-check
 
       - name: Generate TSPP evidence
         working-directory: external/TRQP-TSPP
+        env:
+          TRQP_RUN_ID: ots-${{ github.run_id }}
+          TRQP_TARGET_ID: trqp-reference-fixture
         run: make assurance-check
-
-      - name: Bind producer evidence to one operational run
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          run_id = 'ots-${{ github.run_id }}'
-          target_id = 'trqp-reference-fixture'
-          paths = [
-            Path('external/trqp-conformance-suite/artifacts/validation/cts-report.json'),
-            Path('external/TRQP-TSPP/artifacts/validation/tspp-report.json'),
-          ]
-          for path in paths:
-            doc = json.loads(path.read_text())
-            doc['run_id'] = run_id
-            doc['target_id'] = target_id
-            path.write_text(json.dumps(doc, indent=2) + '\n')
-          PY
 
       - name: Compose and validate combined assurance
         run: |

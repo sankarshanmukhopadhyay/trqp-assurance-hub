@@ -1,5 +1,5 @@
 {
-  "run_id": "ots-local-validation",
+  "run_id": "ots-validation",
   "target_id": "trqp-reference-fixture",
   "chain": [
     "TRQP requirement",

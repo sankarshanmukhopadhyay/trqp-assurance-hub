@@ -46,7 +46,7 @@ The current maturity tuple is:
 |---|---:|
 | TRQP Conformance Suite | v1.5.0 |
 | TRQP-TSPP | v0.13.0 |
-| TRQP Assurance Hub | v1.8.0 |
+| TRQP Assurance Hub | v1.9.0 |
 
 ### 1. TRQP Conformance Suite
 
