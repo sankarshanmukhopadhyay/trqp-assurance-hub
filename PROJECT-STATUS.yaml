@@ -1,0 +1,50 @@
+schema_version: "1.0"
+project:
+  name: trqp-assurance-hub
+  portfolio_disposition: included
+  strategic_tier: flagship
+  maturity: candidate
+  lifecycle: active
+  operational_status: active-validation
+  specification_status: candidate-specification
+  provenance: original
+  intended_use:
+    - evaluation
+    - interoperability testing
+    - pilot preparation
+  not_asserted:
+    - production certification
+    - independent assurance
+    - ownership of the TRQP protocol specification
+authority:
+  normative_scope:
+    - assurance evidence ingestion and composition
+    - assurance profile evaluation
+    - portable assurance publication
+    - combined assurance decision generation
+  does_not_own:
+    - the TRQP protocol specification
+    - raw conformance test execution
+    - TSPP control definition
+    - external certification or accreditation
+  approval: Maintainers approve normative, status, and release changes through reviewed pull requests.
+  delegation: Delegation is limited to the artefact scope stated in GOVERNANCE.md and may be withdrawn by maintainers.
+  revocation_or_supersession: Releases, profiles, evidence, and status claims are superseded or revoked through versioned notices and machine-readable lifecycle records.
+evidence:
+  validation_commands:
+    - make validate
+    - make assurance-check
+  evidence_outputs:
+    - artifacts/combined-assurance/combined-assurance-manifest.json
+    - artifacts/combined-assurance/assurance-decision.json
+    - artifacts/combined-assurance/traceability-report.json
+  known_limitations:
+    - Example and self-generated evidence is not independent assurance.
+    - Supported cross-repository conclusions require a compatibility-registry release tuple.
+relationships:
+  - type: supports
+    target: TRQP operational trust stack
+    constraint: Participation does not transfer protocol or external certification authority.
+review:
+  last_review: 2026-07-20
+  next_review: 2026-10-20

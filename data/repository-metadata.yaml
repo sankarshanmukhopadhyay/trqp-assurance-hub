@@ -4,7 +4,7 @@ portfolio_tier: flagship
 lifecycle: active
 role: assurance-orchestration-and-publication
 stability: beta
-current_version: "1.8.0"
+current_version: "1.9.0"
 primary_output: Combined Assurance Manifest
 authority:
   owns:
@@ -18,5 +18,5 @@ authority:
 validation_command: make validate
 documentation_url: https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
 release_policy: substantive
-last_portfolio_review: 2026-07-15
-next_portfolio_review: 2026-10-15
+last_portfolio_review: 2026-07-20
+next_portfolio_review: 2026-10-20

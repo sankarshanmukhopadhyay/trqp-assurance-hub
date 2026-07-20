@@ -1,0 +1,17 @@
+{
+  "run_id": "ots-local-validation",
+  "target_id": "trqp-reference-fixture",
+  "chain": [
+    "TRQP requirement",
+    "CTS test",
+    "CTS evidence",
+    "TSPP control",
+    "TSPP evidence",
+    "Hub assurance decision"
+  ],
+  "remediation_targets": {
+    "conformance": "trqp-conformance-suite",
+    "posture": "TRQP-TSPP",
+    "composition": "trqp-assurance-hub"
+  }
+}

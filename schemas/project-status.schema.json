@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/project-status.schema.json",
+  "title": "Portfolio project status contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "project",
+    "authority",
+    "evidence",
+    "relationships",
+    "review"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "name",
+        "portfolio_disposition",
+        "strategic_tier",
+        "maturity",
+        "lifecycle",
+        "operational_status",
+        "specification_status",
+        "provenance",
+        "intended_use",
+        "not_asserted"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "portfolio_disposition": {
+          "enum": [
+            "included",
+            "adjacent",
+            "upstream-reference",
+            "historical",
+            "unrelated",
+            "pending-review"
+          ]
+        },
+        "strategic_tier": {
+          "enum": [
+            "flagship",
+            "featured",
+            "supporting",
+            "incubating",
+            "upstream-collaboration",
+            "historical"
+          ]
+        },
+        "maturity": {
+          "enum": [
+            "exploratory",
+            "working-draft",
+            "implementation-draft",
+            "candidate",
+            "pilot-ready",
+            "stable",
+            "maintenance",
+            "historical",
+            "upstream-tracking"
+          ]
+        },
+        "lifecycle": {
+          "enum": [
+            "active",
+            "maintenance",
+            "superseded",
+            "archived"
+          ]
+        },
+        "operational_status": {
+          "enum": [
+            "active-development",
+            "active-validation",
+            "pilot-use",
+            "stable-maintenance",
+            "upstream-tracking",
+            "dormant",
+            "superseded",
+            "archived"
+          ]
+        },
+        "specification_status": {
+          "enum": [
+            "not-applicable",
+            "working-draft",
+            "community-draft",
+            "candidate-specification",
+            "stable-specification",
+            "upstream-controlled"
+          ]
+        },
+        "provenance": {
+          "enum": [
+            "original",
+            "fork",
+            "mirror",
+            "imported",
+            "collaboratively-hosted"
+          ]
+        },
+        "intended_use": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_asserted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "normative_scope",
+        "does_not_own",
+        "approval",
+        "delegation",
+        "revocation_or_supersession"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "validation_commands",
+        "evidence_outputs",
+        "known_limitations"
+      ]
+    },
+    "relationships": {
+      "type": "array"
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "last_review",
+        "next_review"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

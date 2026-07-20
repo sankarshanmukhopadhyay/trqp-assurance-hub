@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "authority",
+    "release_sets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "authority": {
+      "const": "trqp-assurance-hub"
+    },
+    "release_sets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "hub",
+          "conformance_suite",
+          "tspp",
+          "status",
+          "tested",
+          "contracts"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "proposed",
+              "supported",
+              "deprecated",
+              "revoked"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

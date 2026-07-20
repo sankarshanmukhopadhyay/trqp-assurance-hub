@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "decision_id",
+    "outcome",
+    "scope",
+    "target",
+    "evidence_considered",
+    "conditions",
+    "limitations",
+    "findings",
+    "issued_at",
+    "revoked"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "outcome": {
+      "enum": [
+        "pass",
+        "conditional-pass",
+        "fail",
+        "indeterminate"
+      ]
+    },
+    "revoked": {
+      "type": "boolean"
+    },
+    "evidence_considered": {
+      "type": "array"
+    },
+    "conditions": {
+      "type": "array"
+    },
+    "limitations": {
+      "type": "array"
+    },
+    "findings": {
+      "type": "array"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "decision_id": "decision:ots-local-validation",
+  "outcome": "fail",
+  "scope": "TRQP conformance and TSPP posture evidence composition",
+  "target": "trqp-reference-fixture",
+  "evidence_considered": [
+    {
+      "role": "cts",
+      "path": "/mnt/data/work/cts/trqp-conformance-suite-main/artifacts/validation/cts-report.json",
+      "sha256": "21744a0e70ff4f80cd0278b5e66956fe5b48462d4ff579a92886a308e1e904a4"
+    },
+    {
+      "role": "tspp",
+      "path": "/mnt/data/work/tspp/TRQP-TSPP-main/artifacts/validation/tspp-report.json",
+      "sha256": "fc7a9cef2f22ffd1a7713357a55f193755511f293cfc508d83e40b605d0d157f"
+    }
+  ],
+  "conditions": [],
+  "limitations": [
+    "This conclusion evaluates supplied evidence and is not external certification."
+  ],
+  "findings": [],
+  "issued_at": "2026-07-20T00:00:00Z",
+  "expires_at": null,
+  "supersedes": null,
+  "revoked": false,
+  "revocation_reason": null
+}

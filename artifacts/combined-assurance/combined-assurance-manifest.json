@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "release_set": {
+    "id": "ots-2026-07",
+    "hub": "1.9.0",
+    "conformance_suite": "1.6.0",
+    "tspp": "0.14.0",
+    "status": "supported",
+    "tested": {
+      "workflow": ".github/workflows/combined-assurance-smoke.yml",
+      "evidence_path": "artifacts/combined-assurance/"
+    },
+    "contracts": {
+      "project_status": "1.0",
+      "combined_manifest": "0.2.0",
+      "assurance_decision": "1.0"
+    },
+    "limitations": [
+      "Self-generated repository evidence is not independent assurance."
+    ]
+  },
+  "run_id": "ots-local-validation",
+  "target_id": "trqp-reference-fixture",
+  "artifacts": [
+    {
+      "role": "cts",
+      "path": "/mnt/data/work/cts/trqp-conformance-suite-main/artifacts/validation/cts-report.json",
+      "sha256": "21744a0e70ff4f80cd0278b5e66956fe5b48462d4ff579a92886a308e1e904a4"
+    },
+    {
+      "role": "tspp",
+      "path": "/mnt/data/work/tspp/TRQP-TSPP-main/artifacts/validation/tspp-report.json",
+      "sha256": "fc7a9cef2f22ffd1a7713357a55f193755511f293cfc508d83e40b605d0d157f"
+    }
+  ],
+  "producer_results": {
+    "cts": "fail",
+    "tspp": "pass"
+  }
+}

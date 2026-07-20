@@ -1,0 +1,17 @@
+schema_version: "1.0"
+authority: trqp-assurance-hub
+release_sets:
+  - id: ots-2026-07
+    hub: "1.9.0"
+    conformance_suite: "1.6.0"
+    tspp: "0.14.0"
+    status: supported
+    tested:
+      workflow: .github/workflows/combined-assurance-smoke.yml
+      evidence_path: artifacts/combined-assurance/
+    contracts:
+      project_status: "1.0"
+      combined_manifest: "0.2.0"
+      assurance_decision: "1.0"
+    limitations:
+      - Self-generated repository evidence is not independent assurance.
