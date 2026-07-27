@@ -1,0 +1,54 @@
+name: Dependabot policy-gated auto-merge
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  enable-auto-merge:
+    name: Evaluate Dependabot update
+    if: >-
+      github.actor == 'dependabot[bot]' &&
+      github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Read Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable auto-merge for eligible GitHub Actions updates
+        if: >-
+          steps.metadata.outputs.package-ecosystem == 'github_actions' &&
+          (
+            steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+            steps.metadata.outputs.update-type == 'version-update:semver-minor'
+          )
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: gh pr merge --auto --merge "$PR_URL"
+
+      - name: Record manual-review disposition
+        if: >-
+          !(
+            steps.metadata.outputs.package-ecosystem == 'github_actions' &&
+            (
+              steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+              steps.metadata.outputs.update-type == 'version-update:semver-minor'
+            )
+          )
+        run: |
+          echo "Update is outside the automatic merge policy."
+          echo "Ecosystem: ${{ steps.metadata.outputs.package-ecosystem }}"
+          echo "Update type: ${{ steps.metadata.outputs.update-type }}"
