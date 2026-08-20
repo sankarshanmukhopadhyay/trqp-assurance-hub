@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED_PREFIXES = (".github/", "vendor/", "node_modules/", "external/")
 errors = []
 public_docs = []
+catalog_required = []
 
 for path in sorted(ROOT.rglob("*.md")):
     rel = path.relative_to(ROOT).as_posix()
@@ -17,8 +18,14 @@ for path in sorted(ROOT.rglob("*.md")):
     text = path.read_text(encoding="utf-8")
     if not text.startswith("---\n"):
         errors.append(f"{rel}: missing Jekyll front matter")
+        front_matter = ""
     elif "\n---\n" not in text[4:]:
         errors.append(f"{rel}: unterminated Jekyll front matter")
+        front_matter = ""
+    else:
+        front_matter = text.split("\n---\n", 1)[0]
+    if not re.search(r"(?mi)^nav_exclude:\s*true\s*$", front_matter):
+        catalog_required.append(rel)
     if text.count("```mermaid") > text.count("```") // 2:
         errors.append(f"{rel}: Mermaid fence appears unterminated")
 
@@ -27,7 +34,7 @@ if not catalog.exists():
     errors.append("documentation.md: missing documentation catalogue")
 else:
     catalog_text = catalog.read_text(encoding="utf-8")
-    for rel in public_docs:
+    for rel in catalog_required:
         if rel in {"documentation.md", "index.md"}:
             continue
         if f"`/{rel}`" not in catalog_text:
