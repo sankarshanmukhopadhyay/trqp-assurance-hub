@@ -1,0 +1,28 @@
+name: Portfolio Integration Contract
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - name: Validate portfolio integration contract
+        run: python tools/validate_portfolio_contract.py --output artifacts/validation/portfolio-integration-result.json
+      - name: Upload portfolio integration evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: portfolio-integration-evidence
+          path: artifacts/validation/portfolio-integration-result.json
+          if-no-files-found: error
