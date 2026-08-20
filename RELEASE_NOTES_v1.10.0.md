@@ -1,3 +1,10 @@
+---
+layout: default
+title: "TRQP Assurance Hub v1.10.0"
+nav_exclude: true
+permalink: /RELEASE_NOTES_v1.10.0/
+---
+
 # TRQP Assurance Hub v1.10.0
 
 ## Portfolio integration release
