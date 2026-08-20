@@ -18,6 +18,8 @@ project:
     - ownership of the TRQP protocol specification
 authority:
   normative_scope:
+    - trqp-assurance-workflows
+  implementation_scope:
     - assurance evidence ingestion and composition
     - assurance profile evaluation
     - portable assurance publication
@@ -46,5 +48,5 @@ relationships:
     target: TRQP operational trust stack
     constraint: Participation does not transfer protocol or external certification authority.
 review:
-  last_review: 2026-07-20
-  next_review: 2026-10-20
+  last_review: 2026-08-20
+  next_review: 2026-11-20
