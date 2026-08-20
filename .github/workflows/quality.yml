@@ -39,7 +39,7 @@ jobs:
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
-          pip install jsonschema
+          pip install jsonschema PyYAML
       - name: Validate examples against schemas
         run: python tools/validate_examples.py
       - name: Regenerate operational stack demo bundle

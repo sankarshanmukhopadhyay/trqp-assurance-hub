@@ -21,7 +21,7 @@ This repository treats DIA as an **anchor extension** to the SAD-1 profile. The 
 - DIA specification: https://untp.unece.org/docs/specification/DigitalIdentityAnchor/
 - DIA JSON-LD context (0.6.1): https://test.uncefact.org/vocabulary/untp/dia/0.6.1/context/
 - Identity Resolver specification: https://untp.unece.org/docs/specification/IdentityResolver/
-- UNTP specification overview: https://uncefact.github.io/spec-untp/docs/specification/
+- UNTP technical specifications: https://untp.unece.org/docs/specification/
 
 ## Repository wiring
 

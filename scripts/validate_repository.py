@@ -13,7 +13,7 @@ for md in root.rglob('*.md'):
     text=md.read_text(encoding='utf-8',errors='replace')
     for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)', text):
         t=target.split('#',1)[0].strip()
-        if not t or '://' in t or t.startswith(('mailto:','data:','#')): continue
+        if not t or '://' in t or '{{' in t or '}}' in t or t.startswith(('mailto:','data:','#')): continue
         dest=(md.parent/t).resolve()
         try: dest.relative_to(root.resolve())
         except ValueError: continue
