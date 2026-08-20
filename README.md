@@ -1,140 +1,183 @@
 ---
 owner: maintainers
-last_reviewed: 2026-07-03
+last_reviewed: 2026-08-20
 tier: 0
 ---
 
-## Documentation site
-
-The complete repository documentation is published through GitHub Pages using Just the Docs. Every public Markdown file is included in the generated documentation catalogue, and Mermaid fenced diagrams are rendered client-side. The Pages workflow performs a production build for pull requests and deploys from `main`.
-
-For repository administrators, enable **Settings → Pages → Source: GitHub Actions** once. No branch-specific generated site content is committed.
-
-## Documentation
-
-- Documentation governance: [`docs/governance/README.md`](docs/governance/README.md)
-
 # TRQP Assurance Hub
 
-> **Portfolio status:** Tier 1 flagship · Active · Beta
+The TRQP Assurance Hub is the **evidence aggregation and assurance publication layer** in the TRQP Operational Trust Stack. It combines protocol-conformance evidence from the TRQP Conformance Suite with security/privacy posture evidence from TRQP-TSPP, evaluates the declared assurance profile, and publishes a machine-readable Combined Assurance Manifest and assurance decision for downstream review.
+
+> **Current release:** v1.10.0  
+> **Lifecycle:** Active  
+> **Maturity:** Candidate  
+> **Operational status:** Active validation  
+> **Specification status:** Candidate specification
 
 | Attribute | Value |
 |---|---|
 | Portfolio tier | Flagship |
-| Lifecycle | Active |
-| Primary role | assurance orchestration and publication |
-| Primary output | Combined Assurance Manifest |
+| Primary role | Assurance evidence ingestion, composition and publication |
+| Portfolio contract role | `assurance-aggregator` |
+| Primary output | Combined Assurance Manifest and assurance decision |
 | Validation | `make validate` |
-| Evidence output | See repository-specific output contract and examples |
-| Governance authority | [`GOVERNANCE.md`](GOVERNANCE.md) |
-| Stack adoption path | [`docs/trqp-adoption-path.md`](docs/trqp-adoption-path.md) |
+| Assurance evidence | `make assurance-check` |
+| Evidence output | `artifacts/combined-assurance/combined-assurance-manifest.json`, `artifacts/combined-assurance/assurance-decision.json`, `artifacts/combined-assurance/traceability-report.json` |
+| Governance authority | [`GOVERNANCE.md`](GOVERNANCE.md) and [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) |
+| Portfolio integration | [`portfolio/integration-contract.json`](portfolio/integration-contract.json) |
+| Documentation site | https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/ |
 
+## What v1.10.0 establishes
 
-📘 **Documentation site (GitHub Pages):** https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/
+v1.10.0 connects the Hub to the current executable governance layer and makes the cross-repository assurance boundary machine-verifiable.
 
-**Current version:** v1.9.0
+- Pins **Trust Systems Meta-Model (TSMM) v0.24.0** as semantic authority for TRQP assurance interpretation.
+- Pins **Trust Infrastructure Schemas (TIS) v0.14.1** as schema and portfolio-authority baseline.
+- Declares TRQP-TSPP v0.15.0 as the source of security/privacy posture evidence.
+- Declares TRQP Conformance Suite v1.7.0 as the source of executable conformance evidence.
+- Validates release pins, required source evidence, repository relationships and integration invalidation conditions in CI.
+- Treats missing or incompatible source evidence as an invalid portfolio integration state rather than a documentation warning.
 
-**Downstream release train:** TSPP v0.14.0 · Conformance Suite v1.6.0
+See [`RELEASE_NOTES_v1.10.0.md`](RELEASE_NOTES_v1.10.0.md) for the release record.
 
-TRQP Assurance Hub is the orchestration layer for the TRQP operational trust stack. It binds protocol conformance evidence and deployment posture evidence into a Combined Assurance Manifest, public assurance summary, and adoption workflow that operators, assessors, procurement teams, relying parties, and governance stewards can inspect without reverse-engineering tool output.
+## Authority and scope
 
-## What is new in v1.9.0
+The Assurance Hub has repository-local authority over:
 
-v1.9.0 introduces the **End-to-End Assurance Execution and Evidence Chain**. It moves the Hub from an integration guide into the adoption front door for the three-repository TRQP assurance stack.
+- assurance evidence ingestion and composition;
+- assurance profile evaluation;
+- portable assurance publication; and
+- combined assurance decision generation.
 
-- Adds release governance that blocks low-value version churn and requires evidence, validation, documentation impact, and compatibility review for future releases.
-- Publishes a maturity release validation record with the commands adopters and maintainers should expect before accepting a release.
-- Adds change-intake guidance so fixes, features, and ecosystem alignment work are batched into meaningful release increments.
-- Clarifies the adoption path across CTS, TSPP, and Hub so relying parties can move from conformance evidence to posture evidence to public assurance publication.
-- Refreshes compatibility metadata for the coordinated Hub v1.9.0 / CTS v1.6.0 / TSPP v0.14.0 release tuple.
-
-## Prior release: v1.8.0
-
-v1.7.0 adds the **TSMM/TIS Runtime Assurance Contract Pack**. The release aligns Hub assurance orchestration with TSMM v0.21.0 semantics and TIS v0.10.0 executable artifact contracts.
-
-- Combined Assurance Manifests can declare TSMM semantic mappings for authority, delegation, evidence, lifecycle, decision, and effect.
-- Manifests can reference TIS artifact contracts for evidence bundle manifests, conformance declarations, decision receipts, registry publication profiles, and status or revocation evidence.
-- A new runtime assurance contract guide explains how CTS and TSPP evidence becomes reviewable Hub assurance evidence.
-- Compatibility metadata is refreshed for the coordinated v1.7.0 / v1.4.0 / v0.12.0 release tuple.
-- Portfolio release-impact and drift-review records are published as governance evidence for cross-repo maintainers.
+The Hub **does not** own the TRQP protocol specification, raw conformance execution, TSPP control definitions, or external certification/accreditation. Those boundaries are declared in [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) and [`portfolio/integration-contract.json`](portfolio/integration-contract.json).
 
 ## Where this fits
 
-| Layer | Repository | Primary output | Consumed by Hub |
-|---|---|---|---|
-| Protocol verification | TRQP Conformance Suite v1.6.0 | Conformance Report and CTS evidence bundle | Combined Assurance Manifest |
-| Posture computation | TRQP-TSPP v0.14.0 | Posture Report and posture evidence bundle | Combined Assurance Manifest |
-| Assurance orchestration | TRQP Assurance Hub v1.9.0 | Combined Assurance Manifest and Public Assurance Summary | Relying parties, assessors, ecosystem operators |
-| Semantic model | TSMM v0.21.0 | Authority, delegation, evidence, decision, effect vocabulary | Runtime assurance contract |
-| Artifact contract layer | TIS v0.10.0 | Evidence, decision, conformance, registry, status schemas | Manifest references and validation targets |
+| Layer | Repository role | Primary output |
+|---|---|---|
+| TRQP-TSPP v0.15.0 | Security/privacy posture computation | Posture Report and control evidence |
+| TRQP Conformance Suite v1.7.0 | Executable protocol conformance | Conformance Report and evidence bundle |
+| TRQP Assurance Hub v1.10.0 | Evidence aggregation and assurance publication | Combined Assurance Manifest and assurance decision |
+
+Shared authorities:
+
+| Authority | Version | Purpose |
+|---|---:|---|
+| Trust Systems Meta-Model | 0.24.0 | TRQP semantic binding and semantic concepts |
+| Trust Infrastructure Schemas | 0.14.1 | Portfolio relationships, repository authority and validation-result contracts |
+
+The Hub integration becomes invalid when required source evidence is missing, source assurance evidence is invalid, or the declared semantic/schema authority versions are incompatible.
 
 ## Runtime assurance flow
 
 ```text
-CTS Conformance Report + TSPP Posture Report
-  -> Combined Assurance Manifest
-  -> Public Assurance Summary
-  -> Relying-party review, assessor review, procurement intake
+TRQP-TSPP Posture Report
+            +
+TRQP Conformance Suite evidence
+            ↓
+Combined Assurance Manifest
+            ↓
+Assurance decision + traceability report
+            ↓
+Relying-party, assessor, procurement or ecosystem review
 ```
 
-The current contract makes this flow more explicit:
+The machine-readable authority chain is:
 
 ```text
-TSMM semantics -> TIS artifact references -> Hub assurance publication
+TSMM semantic authority
+        ↓
+TIS schema / portfolio authority
+        ↓
+TSPP posture evidence + CTS conformance evidence
+        ↓
+Assurance Hub aggregation
 ```
 
-This matters because a passing test run is not enough. A relying party also needs to know who had authority, what scope was evaluated, what evidence was used, whether lifecycle or revocation state can change the result, and which artifacts can be audited later.
-
-## Start here
-
-- Maturity release validation: [`docs/release-validation.md`](docs/release-validation.md)
-- Release policy: [`docs/governance/release-policy.md`](docs/governance/release-policy.md)
-- Change intake: [`docs/governance/change-intake.md`](docs/governance/change-intake.md)
-- Runtime assurance contract: [`docs/reference/tsmm-tis-runtime-assurance-contract.md`](docs/reference/tsmm-tis-runtime-assurance-contract.md)
-- Combined assurance guide: [`docs/guides/combined-assurance.md`](docs/guides/combined-assurance.md)
-- Evidence artifacts guide: [`docs/guides/evidence-artifacts.md`](docs/guides/evidence-artifacts.md)
-- Compatibility matrix: [`docs/reference/compatibility-matrix.md`](docs/reference/compatibility-matrix.md)
-- Public assurance publication: [`docs/guides/public-assurance-publication.md`](docs/guides/public-assurance-publication.md)
-- Adoption checklists: [`docs/adoption/README.md`](docs/adoption/README.md)
+A passing test run alone is not an assurance conclusion. The Hub preserves who had authority, what scope was evaluated, which evidence was consumed, what lifecycle/revocation state applies, and what condition would invalidate the combined result.
 
 ## Evidence artifacts
 
 | Artifact | Purpose | Schema or example |
 |---|---|---|
-| Combined Assurance Manifest | Binds CTS and TSPP outputs to one target, run, and assurance claim | `schemas/combined-assurance-manifest.schema.json` |
-| Public Assurance Summary | Publishes the assurance result for relying-party consumption | `schemas/public-assurance-summary.schema.json` |
-| Machine-readable assurance profile | Declares AL1 to AL4 expectations | `schemas/machine-readable-assurance-profile.schema.json` |
+| Combined Assurance Manifest | Binds CTS and TSPP evidence to one target/run/claim | `schemas/combined-assurance-manifest.schema.json` |
+| Assurance decision | Machine-readable combined assurance outcome | `artifacts/combined-assurance/assurance-decision.json` |
+| Traceability report | Cross-repository evidence and control traceability | `artifacts/combined-assurance/traceability-report.json` |
+| Public Assurance Summary | Relying-party-facing assurance publication | `schemas/public-assurance-summary.schema.json` |
+| Machine-readable assurance profile | Declares AL1–AL4 expectations | `schemas/machine-readable-assurance-profile.schema.json` |
 | Control satisfaction evidence | Maps controls to evidence artifacts | `schemas/control-satisfaction.schema.json` |
-| Certification attestation | Binds assessor, scope, validity, and evidence | `schemas/certification-attestation.schema.json` |
+| Certification attestation | Binds assessor, scope, validity and evidence when used | `schemas/certification-attestation.schema.json` |
 
-## Validation
+## Start here
 
-Install repository validation dependencies:
+- [`docs/guides/combined-assurance.md`](docs/guides/combined-assurance.md) — compose CTS and TSPP evidence.
+- [`docs/guides/evidence-artifacts.md`](docs/guides/evidence-artifacts.md) — evidence artifact model.
+- [`docs/guides/public-assurance-publication.md`](docs/guides/public-assurance-publication.md) — publish relying-party-facing assurance.
+- [`docs/adoption/README.md`](docs/adoption/README.md) — adoption checklists.
+- [`docs/reference/compatibility-matrix.md`](docs/reference/compatibility-matrix.md) — supported release relationships.
+- [`docs/reference/tsmm-tis-runtime-assurance-contract.md`](docs/reference/tsmm-tis-runtime-assurance-contract.md) — semantic/artifact contract background.
+- [`docs/portfolio-integration.md`](docs/portfolio-integration.md) — synchronized TRQP portfolio integration.
+- [`docs/governance/release-policy.md`](docs/governance/release-policy.md) — release governance.
+- [`docs/governance/change-intake.md`](docs/governance/change-intake.md) — change intake criteria.
 
-```bash
-python -m pip install -r cts/requirements.txt
-```
+## Quick validation
 
-Run the local validation set:
-
-```bash
-python tools/validate_examples.py
-python scripts/doc_tests.py
-python tools/validate_operational_stack.py --bundle-dir artifacts/operational-stack
-```
-
-## Current release posture
-
-v1.9.0 is additive and evidence-focused. Existing v1.8.0 Combined Assurance Manifest consumers remain compatible. Future releases are expected to meet the release policy gate rather than shipping minor documentation or reference updates as standalone releases.
-
-
-## End-to-end assurance evidence chain
-
-This repository participates in the coordinated TRQP Operational Trust Stack. The supported execution path binds CTS conformance evidence and TSPP posture evidence to the same `run_id` and `target_id`, then composes them through the Assurance Hub.
+Run the repository validation gate:
 
 ```bash
 make validate
+```
+
+Run the cross-stack negative-case assurance checks:
+
+```bash
 make assurance-check
 ```
 
-The resulting artifacts are machine-readable and retain producer version, execution context, checksums, findings, and the repository authorised to remediate each finding. Example or self-generated evidence does not constitute independent certification. See [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) for maturity, authority, intended-use, and evidence declarations.
+The validation surface includes project-status validation, compatibility-registry validation, examples, documentation tests and operational-stack artifact checks.
+
+## Operational stack integration
+
+CTS and TSPP evidence should share the same `run_id` and `target_id` before aggregation. The Hub then binds those source artifacts into the Combined Assurance Manifest and preserves producer version, checksums and traceability.
+
+The synchronized release tuple is:
+
+```text
+TRQP-TSPP             v0.15.0
+TRQP Conformance Suite v1.7.0
+TRQP Assurance Hub     v1.10.0
+TSMM                    v0.24.0
+TIS                     v0.14.1
+```
+
+The CI manifest-generation smoke test uses the current CTS/TSPP tuple rather than obsolete example versions.
+
+## Repository map
+
+| Path | Purpose |
+|---|---|
+| `schemas/` | Combined assurance, profile, control-satisfaction and publication schemas |
+| `profiles/` | Machine-readable assurance profiles |
+| `tools/` | Manifest generation and operational-stack tooling |
+| `artifacts/combined-assurance/` | Current combined assurance evidence |
+| `examples/` | Example source and output artifacts |
+| `portfolio/` | Cross-repository integration contract |
+| `docs/guides/` | Operational assurance guidance |
+| `docs/reference/` | Compatibility and semantic/artifact contract references |
+| `docs/adoption/` | Adoption and implementation checklists |
+
+## Invalidation, supersession and auditability
+
+Combined assurance is explicitly conditional. It can be invalidated by incompatible semantic/schema authority versions, missing required source evidence, or invalid source assurance evidence. Releases and status claims are superseded through versioned repository artifacts rather than silently rewriting historical evidence.
+
+Example or self-generated evidence does not constitute independent assurance, certification or accreditation.
+
+## Documentation site
+
+GitHub Pages uses Just the Docs and is deployed from `main` through GitHub Actions. Repository administrators should configure **Settings → Pages → Source: GitHub Actions**.
+
+Documentation governance: [`docs/governance/README.md`](docs/governance/README.md).
+
+## License
+
+See [`LICENSE`](LICENSE).
