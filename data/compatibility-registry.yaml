@@ -1,6 +1,24 @@
 schema_version: "1.0"
 authority: trqp-assurance-hub
 release_sets:
+  - id: ots-2026-08
+    hub: "1.11.0"
+    conformance_suite: "1.8.0"
+    tspp: "0.15.0"
+    status: supported
+    tested:
+      workflow: .github/workflows/combined-assurance-smoke.yml
+      evidence_path: artifacts/combined-assurance/
+    contracts:
+      project_status: "1.0"
+      combined_manifest: "1.1"
+      assurance_decision: "1.0"
+    requires:
+      cts_replay_determinism: true
+    limitations:
+      - Self-generated repository evidence is not independent assurance.
+      - CTS replay determinism is valid only under the comparison policy recorded in the source determinism report.
+
   - id: ots-2026-07
     hub: "1.9.0"
     conformance_suite: "1.6.0"

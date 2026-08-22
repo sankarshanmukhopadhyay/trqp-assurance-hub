@@ -10,6 +10,7 @@ This matrix identifies coordinated release sets for the TRQP Operational Trust S
 
 | Assurance Hub | Conformance Suite | TRQP-TSPP | Status | Notes |
 |---|---:|---:|---|---|
+| v1.11.0 | v1.8.0 | v0.15.0 | supported | Deterministic Conformance Evidence release. Hub consumes CTS replay-determinism evidence, preserves policy identity and semantic hashes, and fails closed on missing/invalid determinism evidence. |
 | v1.9.0 | v1.6.0 | v0.14.0 | supported | End-to-End Assurance Execution and Evidence Chain with authentic producer evidence, canonical compatibility, traceability, and fail-closed identity validation. |
 | v1.8.0 | v1.5.0 | v0.13.0 | supported | Operational Trust Stack Maturity Release. Adds release governance, validation evidence, adoption packaging, and high-value commit discipline while retaining the Runtime Assurance Contract Pack. |
 | v1.7.0 | v1.4.0 | v0.12.0 | maintenance | Runtime Assurance Contract Pack. Aligns Hub, CTS, and TSPP with TSMM v0.21.0 semantics and TIS v0.10.0 executable artifact contracts for authority, evidence, decision, registry publication, and lifecycle/status evidence. |
@@ -22,4 +23,4 @@ This matrix identifies coordinated release sets for the TRQP Operational Trust S
 
 ## Compatibility rule
 
-A Combined Assurance Manifest SHOULD declare the exact release tuple used to produce it. Hub v1.9.0 validates identity binding across CTS and TSPP reports, supports public assurance summaries, can carry TSMM/TIS runtime assurance references for evidence, decision, registry publication, and status/revocation artifacts, and adds a release governance gate for future maturity increments.
+A Combined Assurance Manifest SHOULD declare the exact release tuple used to produce it. Hub v1.11.0 requires CTS replay-determinism evidence for the `ots-2026-08` release set and records the comparison policy identity, semantic hashes, and reproducibility status in the assurance chain. The Hub does not redefine the CTS policy; policy incompatibility or failed determinism invalidates the integration state.

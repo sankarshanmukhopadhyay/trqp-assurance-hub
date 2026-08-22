@@ -65,7 +65,7 @@ jobs:
           python tools/generate-manifest.py \
             --build-id "dry-run-check" \
             --target "https://registry.example.org" \
-            --cs-version "1.7.0" \
+            --cs-version "1.8.0" \
             --cs-profile-id "baseline" \
             --cs-run-id "dry-run-run" \
             --tspp-version "0.15.0" \
