@@ -20,14 +20,14 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: sankarshanmukhopadhyay/trqp-conformance-suite
-          ref: main
+          ref: v1.8.0
           path: external/trqp-conformance-suite
 
       - name: Checkout TSPP
         uses: actions/checkout@v7
         with:
           repository: sankarshanmukhopadhyay/TRQP-TSPP
-          ref: main
+          ref: v0.15.0
           path: external/TRQP-TSPP
 
       - name: Set up Python
@@ -44,14 +44,50 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r external/trqp-conformance-suite/cts/requirements.txt
           python -m pip install -r external/TRQP-TSPP/harness/requirements.txt
-          python -m pip install jsonschema pyyaml pytest
+          python -m pip install jsonschema pyyaml pytest pynacl
 
-      - name: Generate CTS evidence
+      - name: Generate CTS assurance evidence
         working-directory: external/trqp-conformance-suite
         env:
           TRQP_RUN_ID: ots-${{ github.run_id }}
           TRQP_TARGET_ID: trqp-reference-fixture
         run: make assurance-check
+
+      - name: Generate CTS replay determinism evidence
+        working-directory: external/trqp-conformance-suite
+        run: |
+          cp examples/sut.local.yaml.example examples/sut.local.yaml
+          python - <<'PY'
+          from pathlib import Path
+          from nacl.signing import SigningKey
+          from nacl.encoding import Base64Encoder
+          p = Path("examples/sut.local.yaml")
+          key = SigningKey.generate().encode(Base64Encoder).decode()
+          p.write_text(p.read_text(encoding="utf-8").replace("REPLACE_WITH_BASE64_ED25519_PRIVATE_KEY", key), encoding="utf-8")
+          PY
+          python cts/run.py \
+            --profile profiles/baseline.yaml \
+            --sut examples/sut.local.yaml \
+            --fixture-set fixtures/baseline.fixture-set.json \
+            --generated-at "2026-01-15T00:00:00Z" \
+            --run-id "hub-fixture-baseline" \
+            --out reports/hub_baseline_fixture
+          set +e
+          python cts/run.py \
+            --profile profiles/baseline.yaml \
+            --sut examples/sut.local.yaml \
+            --replay reports/hub_baseline_fixture \
+            --generated-at "2026-01-15T00:00:00Z" \
+            --out reports/hub_baseline_fixture_replay
+          replay_exit=$?
+          set -e
+          test -f reports/hub_baseline_fixture_replay/replay-report.json || exit "${replay_exit:-1}"
+          python scripts/build_replay_determinism_report.py \
+            --source reports/hub_baseline_fixture \
+            --replay-report reports/hub_baseline_fixture_replay/replay-report.json \
+            --policy policies/replay-determinism.v1.json \
+            --out reports/hub_baseline_fixture_replay/determinism-report.json
+          python scripts/verify_replay_determinism.py reports/hub_baseline_fixture_replay/determinism-report.json
 
       - name: Generate TSPP evidence
         working-directory: external/TRQP-TSPP
@@ -64,9 +100,11 @@ jobs:
         run: |
           python tools/run_combined_assurance.py \
             --cts-report external/trqp-conformance-suite/artifacts/validation/cts-report.json \
+            --cts-determinism-report external/trqp-conformance-suite/reports/hub_baseline_fixture_replay/determinism-report.json \
             --tspp-report external/TRQP-TSPP/artifacts/validation/tspp-report.json \
+            --release-set ots-2026-08 \
             --out artifacts/combined-assurance
-          python -m pytest -q tests/test_cross_stack_negative_cases.py
+          python -m pytest -q tests/test_cross_stack_negative_cases.py tests/test_cts_determinism.py
 
       - name: Upload immutable evidence chain
         uses: actions/upload-artifact@v7
@@ -75,5 +113,7 @@ jobs:
           path: |
             artifacts/combined-assurance/
             external/trqp-conformance-suite/artifacts/
+            external/trqp-conformance-suite/reports/hub_baseline_fixture_replay/determinism-report.json
+            external/trqp-conformance-suite/policies/replay-determinism.v1.json
             external/TRQP-TSPP/artifacts/
           if-no-files-found: error
