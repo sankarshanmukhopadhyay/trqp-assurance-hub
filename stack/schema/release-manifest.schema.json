@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/schemas/stack-release-manifest.schema.json",
+  "title": "TRQP coordinated stack release manifest",
+  "type": "object",
+  "required": ["schema_version", "stack", "components", "authorities", "release_gates"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "stack": {
+      "type": "object",
+      "required": ["id", "status"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "status": {"enum": ["candidate", "validated", "revoked", "superseded"]}
+      },
+      "additionalProperties": false
+    },
+    "components": {
+      "type": "object",
+      "required": ["tspp", "cts", "assurance_hub"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["repository", "ref", "commit"],
+        "properties": {
+          "repository": {"type": "string", "minLength": 1},
+          "ref": {"type": "string", "pattern": "^v"},
+          "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "authorities": {"type": "object", "required": ["tsmm", "tis"]},
+    "release_gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}

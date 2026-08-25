@@ -1,0 +1,13 @@
+{
+  "target_id": "trqp-reference-adopter",
+  "description": "Canonical coordinated-stack target used to prove adopter bootstrap, execution, evidence correlation, replay and fail-closed behavior.",
+  "assurance_profile": "baseline",
+  "expected_properties": {
+    "shared_run_id": true,
+    "shared_target_id": true,
+    "cts_replay_deterministic": true,
+    "combined_assurance_required": true,
+    "provenance_required": true,
+    "artifact_integrity_required": true
+  }
+}

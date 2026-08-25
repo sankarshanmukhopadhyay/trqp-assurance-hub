@@ -1,0 +1,109 @@
+name: stack-release-eligibility
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'stack/**'
+      - 'tools/stack_*.py'
+      - 'tests/test_stack_release_readiness.py'
+      - 'docs/adoption/**'
+      - 'GOVERNANCE.md'
+      - 'Makefile'
+      - '.github/workflows/stack-release-eligibility.yml'
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  decisive-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Hub candidate
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jsonschema pyyaml pytest pynacl
+
+      - name: Validate release contract and immutable tuple
+        run: make stack-release-check
+
+      - name: Prove clean-room bootstrap
+        run: python tools/stack_bootstrap.py --clean
+
+      - name: Install coordinated component dependencies
+        run: |
+          python -m pip install -r .stack-work/cts/cts/requirements.txt
+          python -m pip install -r .stack-work/tspp/harness/requirements.txt
+
+      - name: Execute declared tagged component assurance surfaces
+        run: python tools/stack_evaluate.py
+
+      - name: Generate correlated CTS evidence
+        working-directory: .stack-work/cts
+        env:
+          TRQP_RUN_ID: stack-${{ github.run_id }}
+          TRQP_TARGET_ID: trqp-reference-adopter
+        run: make assurance-check
+
+      - name: Generate deterministic CTS replay evidence
+        working-directory: .stack-work/cts
+        run: |
+          cp examples/sut.local.yaml.example examples/sut.local.yaml
+          python - <<'PY'
+          from pathlib import Path
+          from nacl.signing import SigningKey
+          from nacl.encoding import Base64Encoder
+          p = Path('examples/sut.local.yaml')
+          key = SigningKey.generate().encode(Base64Encoder).decode()
+          p.write_text(p.read_text(encoding='utf-8').replace('REPLACE_WITH_BASE64_ED25519_PRIVATE_KEY', key), encoding='utf-8')
+          PY
+          python cts/run.py --profile profiles/baseline.yaml --sut examples/sut.local.yaml --fixture-set fixtures/baseline.fixture-set.json --generated-at '2026-01-15T00:00:00Z' --run-id 'stack-fixture-baseline' --out reports/stack_fixture
+          set +e
+          python cts/run.py --profile profiles/baseline.yaml --sut examples/sut.local.yaml --replay reports/stack_fixture --generated-at '2026-01-15T00:00:00Z' --out reports/stack_fixture_replay
+          replay_exit=$?
+          set -e
+          test -f reports/stack_fixture_replay/replay-report.json || exit "${replay_exit:-1}"
+          python scripts/build_replay_determinism_report.py --source reports/stack_fixture --replay-report reports/stack_fixture_replay/replay-report.json --policy policies/replay-determinism.v1.json --out reports/stack_fixture_replay/determinism-report.json
+          python scripts/verify_replay_determinism.py reports/stack_fixture_replay/determinism-report.json
+
+      - name: Generate correlated TSPP evidence
+        working-directory: .stack-work/tspp
+        env:
+          TRQP_RUN_ID: stack-${{ github.run_id }}
+          TRQP_TARGET_ID: trqp-reference-adopter
+        run: make assurance-check
+
+      - name: Compose combined assurance twice
+        run: |
+          python tools/run_combined_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --release-set ots-2026-08 --out artifacts/stack-candidate/run-a
+          python tools/run_combined_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --release-set ots-2026-08 --out artifacts/stack-candidate/run-b
+
+      - name: Prove whole-stack semantic replay equivalence
+        run: |
+          python tools/stack_compare.py artifacts/stack-candidate/run-a/combined-assurance-manifest.json artifacts/stack-candidate/run-b/combined-assurance-manifest.json
+          python tools/stack_compare.py artifacts/stack-candidate/run-a/assurance-decision.json artifacts/stack-candidate/run-b/assurance-decision.json
+
+      - name: Verify fail-closed cross-stack cases
+        run: python -m pytest -q tests/test_cross_stack_negative_cases.py tests/test_cts_determinism.py tests/test_stack_release_readiness.py
+
+      - name: Publish candidate eligibility evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: trqp-stack-release-candidate-${{ github.run_id }}
+          path: |
+            artifacts/stack-candidate/
+            .stack-work/bootstrap-manifest.json
+            .stack-work/cts/artifacts/
+            .stack-work/cts/reports/stack_fixture_replay/determinism-report.json
+            .stack-work/tspp/artifacts/
+          if-no-files-found: error
