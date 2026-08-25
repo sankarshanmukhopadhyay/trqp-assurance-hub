@@ -1,86 +1,89 @@
 ---
 owner: maintainers
-last_reviewed: 2026-08-22
+last_reviewed: 2026-08-25
 tier: 0
 ---
 
 # TRQP Assurance Hub
 
-The TRQP Assurance Hub is the **evidence aggregation and assurance publication layer** in the TRQP Operational Trust Stack. It combines protocol-conformance evidence from the TRQP Conformance Suite with security/privacy posture evidence from TRQP-TSPP, evaluates the declared assurance profile, and publishes a machine-readable Combined Assurance Manifest and assurance decision for downstream review.
+The TRQP Assurance Hub is the **evidence aggregation, compatibility coordination, and assurance publication layer** in the TRQP Operational Trust Stack. It combines protocol-conformance evidence from the TRQP Conformance Suite with security/privacy posture evidence from TRQP-TSPP, evaluates the declared assurance profile, and publishes machine-readable combined assurance for downstream review.
 
-> **Current release:** v1.11.0  
+It is also the **adopter front door and coordinated Stack release authority**. A coordinated Stack release does not create a fourth implementation product; it declares which independently versioned component releases have been exercised together and preserves the evidence behind that claim.
+
+> **Current Hub component release:** v1.11.0  
+> **Current coordinated stack:** TRQP Stack 2026.1 — Coconut  
 > **Lifecycle:** Active  
 > **Maturity:** Candidate  
-> **Operational status:** Active validation  
-> **Specification status:** Candidate specification
+> **Operational status:** Active validation
 
 | Attribute | Value |
 |---|---|
-| Portfolio tier | Flagship |
-| Primary role | Assurance evidence ingestion, composition and publication |
+| Primary role | Assurance aggregation, compatibility coordination, release evidence publication |
 | Portfolio contract role | `assurance-aggregator` |
 | Primary output | Combined Assurance Manifest and assurance decision |
-| Validation | `make validate` |
-| Assurance evidence | `make assurance-check` |
-| Evidence output | `artifacts/combined-assurance/combined-assurance-manifest.json`, `artifacts/combined-assurance/assurance-decision.json`, `artifacts/combined-assurance/traceability-report.json` |
-| Governance authority | [`GOVERNANCE.md`](GOVERNANCE.md) and [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) |
-| Portfolio integration | [`portfolio/integration-contract.json`](portfolio/integration-contract.json) |
+| Repository validation | `make validate` |
+| Combined assurance | `make assurance-check` |
+| Stack release gate | `make stack-release-check` |
+| Current Stack record | [`stack/releases/2026.1/`](stack/releases/2026.1/) |
+| Canonical adopter workflow | [`docs/adoption/stack-quickstart.md`](docs/adoption/stack-quickstart.md) |
 | Documentation site | https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/ |
 
-## What v1.11.0 establishes
+## Start here: TRQP Stack 2026.1 — Coconut
 
-v1.11.0 promotes CTS evidence reproducibility into the Hub's executable assurance boundary.
+If your goal is to adopt, evaluate, procure, or assess the complete TRQP assurance workflow, **start with the coordinated Stack release rather than choosing repository versions independently**.
 
-- Consumes **TRQP Conformance Suite v1.8.0** conformance evidence and replay-determinism evidence.
-- Pins **TRQP-TSPP v0.15.0** for the coordinated August 2026 release tuple.
-- Preserves the CTS replay comparison policy ID, version and SHA-256 in the combined assurance evidence chain.
-- Fails closed when CTS replay determinism is missing, malformed, false, or contains prohibited semantic differences.
-- Distinguishes a conformance failure from an evidence-reproducibility failure; both are material assurance signals but they are not the same condition.
-- Pins **Trust Systems Meta-Model (TSMM) v0.24.0** as semantic authority and **Trust Infrastructure Schemas (TIS) v0.14.1** as schema/portfolio authority.
+TRQP Stack 2026.1 — Coconut validates this tuple:
+
+| Layer | Release | Authority / output |
+|---|---:|---|
+| TRQP-TSPP | v0.15.0 | Security/privacy controls and posture evidence |
+| TRQP Conformance Suite | v1.8.0 | Protocol conformance and deterministic replay evidence |
+| TRQP Assurance Hub | v1.11.0 | Evidence aggregation and assurance publication |
+| TSMM | v0.24.0 | Semantic authority |
+| TIS | v0.14.1 | Schema and portfolio authority |
+
+The canonical machine-readable release record is [`stack/releases/2026.1/manifest.json`](stack/releases/2026.1/manifest.json). The human-readable release explanation is [`stack/releases/2026.1/README.md`](stack/releases/2026.1/README.md).
+
+### Why an adopter benefits
+
+A coordinated Stack release answers the compatibility question before deployment: **which exact versions are known to work together under the declared assurance model?**
+
+The release gate verifies immutable component resolution, clean-room bootstrap, component evidence generation, deterministic CTS replay, combined-assurance validation, cross-repository run/target correlation, provenance and artifact integrity, fail-closed negative cases, whole-stack semantic replay equivalence, and the executable adopter walkthrough.
+
+This means an adopter can select one validated tuple, reproduce it, inspect every underlying authority boundary, and obtain a portable evidence chain without reverse-engineering compatibility across three repositories.
 
 ## Authority and scope
 
-The Assurance Hub has repository-local authority over:
+The Hub is authoritative for:
 
 - assurance evidence ingestion and composition;
 - assurance profile evaluation;
+- combined assurance decision generation;
 - portable assurance publication;
-- combined assurance decision generation; and
-- interpretation of CTS replay-determinism evidence for Hub assurance decisions.
+- coordinated compatibility tuple declaration;
+- Stack integration verification; and
+- coordinated release eligibility evidence.
 
-The Hub **does not** own the TRQP protocol specification, raw conformance execution, the CTS replay comparison policy, TSPP control definitions, or external certification/accreditation. Those boundaries are declared in [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) and [`portfolio/integration-contract.json`](portfolio/integration-contract.json).
+The Hub **does not** own the upstream TRQP protocol specification, TSPP control/posture semantics, CTS raw conformance execution or replay-comparison semantics, TSMM semantics, TIS schema authority, or external certification/accreditation.
 
-## Where this fits
-
-| Layer | Repository role | Primary output |
-|---|---|---|
-| TRQP-TSPP v0.15.0 | Security/privacy posture computation | Posture Report and control evidence |
-| TRQP Conformance Suite v1.8.0 | Executable protocol conformance + reproducibility | Conformance evidence + replay determinism report |
-| TRQP Assurance Hub v1.11.0 | Evidence aggregation and assurance publication | Combined Assurance Manifest and assurance decision |
-
-Shared authorities:
-
-| Authority | Version | Purpose |
-|---|---:|---|
-| Trust Systems Meta-Model | 0.24.0 | TRQP semantic binding and semantic concepts |
-| Trust Infrastructure Schemas | 0.14.1 | Portfolio relationships, repository authority and validation-result contracts |
-
-The Hub integration becomes invalid when required source evidence is missing, source assurance evidence is invalid, CTS replay determinism is invalid or policy-incompatible, or the declared semantic/schema authority versions are incompatible.
+A Stack release therefore proves tested interoperability without collapsing repository-local authority.
 
 ## Runtime assurance flow
 
 ```text
-TRQP-TSPP Posture Report
-            +
-TRQP Conformance Suite evidence
-            +
-CTS replay determinism report + comparison-policy identity
-            ↓
+TRQP-TSPP posture/control evidence
+                +
+TRQP Conformance Suite conformance evidence
+                +
+CTS deterministic replay evidence
+                ↓
+      TRQP Assurance Hub
+                ↓
 Combined Assurance Manifest
-            ↓
-Assurance decision + traceability report
-            ↓
-Relying-party, assessor, procurement or ecosystem review
++ assurance decision
++ traceability report
+                ↓
+Relying-party / assessor / procurement / ecosystem review
 ```
 
 The machine-readable authority chain is:
@@ -90,96 +93,56 @@ TSMM semantic authority
         ↓
 TIS schema / portfolio authority
         ↓
-TSPP posture evidence + CTS conformance/reproducibility evidence
+TSPP posture evidence + CTS conformance/replay evidence
         ↓
-Assurance Hub aggregation
+Assurance Hub aggregation + coordinated-release evidence
 ```
-
-A passing test run alone is not an assurance conclusion. The Hub preserves who had authority, what scope was evaluated, which evidence was consumed, whether CTS evidence was reproducible under its declared comparison policy, what lifecycle/revocation state applies, and what condition would invalidate the combined result.
 
 ## Evidence artifacts
 
-| Artifact | Purpose | Schema or source |
-|---|---|---|
-| Combined Assurance Manifest | Binds CTS, CTS replay determinism and TSPP evidence to one assurance chain | `artifacts/combined-assurance/combined-assurance-manifest.json` |
-| Assurance decision | Machine-readable combined assurance outcome | `schemas/assurance-decision.schema.json` |
-| Traceability report | Cross-repository evidence/control/reproducibility traceability | `artifacts/combined-assurance/traceability-report.json` |
-| CTS replay determinism report | Evidence-equivalence result consumed from CTS v1.8.0 | CTS `schemas/evidence/replay-determinism-report.schema.json` |
-| CTS replay comparison policy | Declared semantic/volatile comparison boundary | CTS `policies/replay-determinism.v1.json` |
-| Public Assurance Summary | Relying-party-facing assurance publication | `schemas/public-assurance-summary.schema.json` |
-| Machine-readable assurance profile | Declares AL1–AL4 expectations | `schemas/machine-readable-assurance-profile.schema.json` |
-| Control satisfaction evidence | Maps controls to evidence artifacts | `schemas/control-satisfaction.schema.json` |
-| Certification attestation | Binds assessor, scope, validity and evidence when used | `schemas/certification-attestation.schema.json` |
+Primary Hub outputs include:
 
-## Start here
+- `artifacts/combined-assurance/combined-assurance-manifest.json`;
+- `artifacts/combined-assurance/assurance-decision.json`; and
+- `artifacts/combined-assurance/traceability-report.json`.
 
+A passing test run alone is not an assurance conclusion. The evidence chain preserves authority, evaluated scope, producer versions, run and target identity, replay-policy provenance, lifecycle/invalidation conditions, and the evidence consumed by the final decision.
+
+## Decisive Stack release gate
+
+Run:
+
+```bash
+make stack-release-check
+```
+
+The dedicated `stack-release-eligibility` GitHub Actions workflow extends this with tagged component execution, clean bootstrap, deterministic replay, full combined-assurance composition, semantic replay comparison, negative cases, and candidate evidence publication.
+
+For TRQP Stack 2026.1 — Coconut, the decisive workflow completed successfully on the merged Hub `main` baseline at commit `045ba10ec436ea5d1e9e443894bbbf7bea27472b`. The release record preserves the workflow run and evidence artifact digest.
+
+## Adoption and implementation guides
+
+- [`docs/adoption/stack-quickstart.md`](docs/adoption/stack-quickstart.md) — canonical end-to-end Stack workflow.
 - [`docs/guides/combined-assurance.md`](docs/guides/combined-assurance.md) — compose CTS and TSPP evidence.
 - [`docs/guides/evidence-artifacts.md`](docs/guides/evidence-artifacts.md) — evidence artifact model.
 - [`docs/guides/public-assurance-publication.md`](docs/guides/public-assurance-publication.md) — publish relying-party-facing assurance.
-- [`docs/adoption/README.md`](docs/adoption/README.md) — adoption checklists.
-- [`docs/reference/compatibility-matrix.md`](docs/reference/compatibility-matrix.md) — supported release relationships.
-- [`docs/reference/tsmm-tis-runtime-assurance-contract.md`](docs/reference/tsmm-tis-runtime-assurance-contract.md) — semantic/artifact contract background.
-- [`docs/portfolio-integration.md`](docs/portfolio-integration.md) — synchronized TRQP portfolio integration.
-- [`docs/governance/release-policy.md`](docs/governance/release-policy.md) — release governance.
-- [`docs/governance/change-intake.md`](docs/governance/change-intake.md) — change intake criteria.
+- [`docs/reference/compatibility-matrix.md`](docs/reference/compatibility-matrix.md) — supported component relationships.
+- [`docs/portfolio-integration.md`](docs/portfolio-integration.md) — synchronized portfolio integration.
+- [`docs/governance/release-policy.md`](docs/governance/release-policy.md) — component and coordinated Stack release governance.
 
-## Quick validation
+## Release cadence
 
-Run the repository validation gate:
+Component repositories retain independent semantic versioning. Coordinated Stack releases are expected approximately monthly when meaningful capability has accumulated, and earlier when a capability, compatibility, security, evidence, or authority change makes a new validated tuple materially useful or necessary.
 
-```bash
-make validate
-```
+Each coordinated Stack release receives a randomly selected codename from the Wikipedia list of Indian state trees. The codename is human-facing identity only; the stable machine identity remains `trqp-stack-YYYY.N`.
 
-Run the cross-stack negative-case assurance checks:
+## Invalidation and supersession
 
-```bash
-make assurance-check
-```
+Combined assurance and coordinated-release claims are conditional. Missing evidence, invalid producer evidence, incompatible semantic/schema authorities, failed CTS replay determinism, replay-policy incompatibility, or other declared invalidation conditions can make a tuple unsuitable for continued use.
 
-The coordinated smoke workflow additionally generates CTS v1.8.0 fixture-pinned replay evidence, verifies its determinism report, then requires that report during Hub composition.
+Historical Stack manifests are retained as immutable evidence. Changed compatibility conditions require a new release or explicit supersession rather than silent rewriting.
 
-## Operational stack integration
-
-CTS and TSPP evidence must share the same `run_id` and `target_id` before aggregation. For the v1.11.0 release tuple, CTS replay determinism evidence is also mandatory and is preserved in the Combined Assurance Manifest with policy identity and semantic hashes.
-
-The synchronized release tuple is:
-
-```text
-TRQP-TSPP              v0.15.0
-TRQP Conformance Suite v1.8.0
-TRQP Assurance Hub     v1.11.0
-TSMM                    v0.24.0
-TIS                     v0.14.1
-```
-
-The CI smoke test checks out the tagged CTS/TSPP releases rather than mutable `main` branches.
-
-## Repository map
-
-| Path | Purpose |
-|---|---|
-| `schemas/` | Combined assurance, profile, control-satisfaction and publication schemas |
-| `profiles/` | Machine-readable assurance profiles |
-| `tools/` | Manifest generation, CTS determinism validation and operational-stack tooling |
-| `artifacts/combined-assurance/` | Current combined assurance evidence |
-| `examples/` | Example source and output artifacts |
-| `portfolio/` | Cross-repository integration contract |
-| `docs/guides/` | Operational assurance guidance |
-| `docs/reference/` | Compatibility and semantic/artifact contract references |
-| `docs/adoption/` | Adoption and implementation checklists |
-
-## Invalidation, supersession and auditability
-
-Combined assurance is explicitly conditional. It can be invalidated by incompatible semantic/schema authority versions, missing required source evidence, invalid source assurance evidence, failed CTS replay determinism, or a CTS replay comparison policy that the Hub release tuple does not recognise as compatible. Releases and status claims are superseded through versioned repository artifacts rather than silently rewriting historical evidence.
-
-Example or self-generated evidence does not constitute independent assurance, certification or accreditation.
-
-## Documentation site
-
-GitHub Pages uses Just the Docs and is deployed from `main` through GitHub Actions. Repository administrators should configure **Settings → Pages → Source: GitHub Actions**.
-
-Documentation governance: [`docs/governance/README.md`](docs/governance/README.md).
+Example or self-generated evidence does not constitute independent assurance, certification, or accreditation.
 
 ## License
 
