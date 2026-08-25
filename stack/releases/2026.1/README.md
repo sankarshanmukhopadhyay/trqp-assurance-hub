@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TRQP Stack 2026.1 — Coconut"
+nav_exclude: true
+---
+
 # TRQP Stack 2026.1 — Coconut
 
 **Status:** Validated coordinated release  
