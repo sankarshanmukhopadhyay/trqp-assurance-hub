@@ -8,23 +8,37 @@ nav_exclude: true
 
 ## Repository mandate
 
-`trqp-assurance-hub` is a Tier 1 flagship repository in the TRQP assurance stack. Its mandate is **assurance orchestration and publication**. The repository is maintained as executable governance: material claims should map to artifacts, validation, evidence, and a reviewable change record.
+`trqp-assurance-hub` is a Tier 1 flagship repository in the TRQP assurance stack. Its mandate is **assurance orchestration, publication, and coordinated stack-release declaration**. The repository is maintained as executable governance: material claims should map to artifacts, validation, evidence, and a reviewable change record.
 
 ## Authority
 
 This repository is authoritative for:
 
-- assurance evidence ingestion and composition
-- assurance profile evaluation
-- portable assurance publication
+- assurance evidence ingestion and composition;
+- assurance profile evaluation;
+- portable assurance publication;
+- coordinated TRQP Stack compatibility tuple declaration;
+- stack integration verification and release-eligibility evidence; and
+- the canonical adopter workflow for coordinated releases.
 
 This repository is not authoritative for:
 
-- the TRQP protocol specification
-- raw conformance test execution
-- TSPP control definition
+- the TRQP protocol specification;
+- raw conformance test execution or CTS replay-comparison semantics;
+- TSPP control definition or posture semantics;
+- TSMM semantic authority;
+- TIS schema authority; or
+- external certification/accreditation.
 
-Normative authority originating in an upstream specification remains with that specification and its governing body. Local profiles, mappings, examples, and implementation choices must not be represented as amendments to upstream standards.
+Normative authority originating in an upstream specification remains with that specification and its governing body. Local profiles, mappings, examples, release tuples, and implementation choices must not be represented as amendments to upstream standards.
+
+## Coordinated stack releases
+
+A coordinated TRQP Stack release is an interoperability and assurance declaration over an exact immutable component tuple. It does not replace component semantic versioning and does not transfer authority between repositories.
+
+A candidate may be promoted to a coordinated release only when the release-readiness gate demonstrates immutable tuple resolution, clean-room bootstrap, component execution, deterministic CTS replay, valid combined assurance, run/target correlation, provenance and integrity, fail-closed negative cases, and an executable adopter walkthrough.
+
+Changing a candidate to `validated`, creating a coordinated release tag, or publishing release notes is a deliberate maintainer action and is not performed automatically by readiness CI.
 
 ## Decision rights
 
@@ -36,7 +50,7 @@ Contributors may propose changes through pull requests. Review authority is dele
 
 ## Enforcement and revocation
 
-Non-conforming artifacts may be rejected, reverted, deprecated, or superseded. Compromised evidence, signing material, profiles, or implementation outputs must be withdrawn or marked invalid through the relevant lifecycle mechanism. Security reports follow [`SECURITY.md`](SECURITY.md).
+Non-conforming artifacts may be rejected, reverted, deprecated, revoked, or superseded. A coordinated stack tuple must be revoked or superseded when a component release, authority version, evidence chain, or security condition invalidates the release claim. Compromised evidence, signing material, profiles, or implementation outputs must be withdrawn or marked invalid through the relevant lifecycle mechanism. Security reports follow [`SECURITY.md`](SECURITY.md).
 
 ## Evidence and auditability
 
