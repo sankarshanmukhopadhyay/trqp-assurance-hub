@@ -18,12 +18,15 @@ It is also the **adopter front door and coordinated Stack release authority**. A
 
 | Attribute | Value |
 |---|---|
+| Portfolio tier | Flagship |
 | Primary role | Assurance aggregation, compatibility coordination, release evidence publication |
 | Portfolio contract role | `assurance-aggregator` |
 | Primary output | Combined Assurance Manifest and assurance decision |
-| Repository validation | `make validate` |
-| Combined assurance | `make assurance-check` |
+| Validation | `make validate` |
+| Assurance evidence | `make assurance-check` |
 | Stack release gate | `make stack-release-check` |
+| Evidence output | `artifacts/combined-assurance/combined-assurance-manifest.json`, `artifacts/combined-assurance/assurance-decision.json`, `artifacts/combined-assurance/traceability-report.json` |
+| Governance authority | [`GOVERNANCE.md`](GOVERNANCE.md) and [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) |
 | Current Stack record | [`stack/releases/2026.1/`](stack/releases/2026.1/) |
 | Canonical adopter workflow | [`docs/adoption/stack-quickstart.md`](docs/adoption/stack-quickstart.md) |
 | Documentation site | https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/ |
