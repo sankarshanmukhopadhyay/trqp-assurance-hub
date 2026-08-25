@@ -1,0 +1,166 @@
+name: publish-coordinated-stack-release
+
+on:
+  workflow_run:
+    workflows: ["stack-release-eligibility"]
+    types: [completed]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout validated main commit
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Locate pending coordinated release
+        id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t pending < <(find stack/releases -mindepth 2 -maxdepth 2 -name publication.json -print | sort | while read -r file; do
+            python - "$file" <<'PY'
+          import json, sys
+          p = sys.argv[1]
+          data = json.load(open(p, encoding='utf-8'))
+          if data.get('status') == 'pending-publication':
+              print(p)
+          PY
+          done)
+          if [ "${#pending[@]}" -eq 0 ]; then
+            echo "No pending coordinated release."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "${#pending[@]}" -ne 1 ]; then
+            echo "Expected exactly one pending coordinated release; found ${#pending[@]}." >&2
+            printf '%s\n' "${pending[@]}" >&2
+            exit 1
+          fi
+          file="${pending[0]}"
+          dir="$(dirname "$file")"
+          python - "$file" "$GITHUB_OUTPUT" <<'PY'
+          import json, sys
+          p, out = sys.argv[1:]
+          data = json.load(open(p, encoding='utf-8'))
+          required = ['release_id','tag','title','release_directory','recorded_eligibility_run_id','recorded_eligibility_artifact','recorded_eligibility_artifact_digest']
+          missing = [k for k in required if not data.get(k)]
+          if missing:
+              raise SystemExit(f"publication record missing: {', '.join(missing)}")
+          if data['release_directory'] != p.rsplit('/', 1)[0]:
+              raise SystemExit('publication release_directory does not match file location')
+          with open(out, 'a', encoding='utf-8') as f:
+              f.write('publish=true\n')
+              for key in required:
+                  f.write(f"{key}={data[key]}\n")
+          PY
+
+      - name: Validate immutable release record
+        if: steps.release.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="${{ steps.release.outputs.release_directory }}"
+          python - "$dir/manifest.json" "${{ steps.release.outputs.release_id }}" <<'PY'
+          import json, sys
+          manifest_path, expected = sys.argv[1:]
+          data = json.load(open(manifest_path, encoding='utf-8'))
+          if data.get('stack', {}).get('id') != expected:
+              raise SystemExit('manifest release identity mismatch')
+          if data.get('stack', {}).get('status') != 'validated':
+              raise SystemExit('manifest is not validated')
+          if data.get('eligibility_evidence', {}).get('workflow_conclusion') != 'success':
+              raise SystemExit('manifest does not record successful eligibility evidence')
+          PY
+          python tools/stack_validate.py --check-remote
+
+      - name: Verify recorded eligibility evidence
+        if: steps.release.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_id="${{ steps.release.outputs.recorded_eligibility_run_id }}"
+          artifact_name="${{ steps.release.outputs.recorded_eligibility_artifact }}"
+          expected_digest="${{ steps.release.outputs.recorded_eligibility_artifact_digest }}"
+          run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}")"
+          conclusion="$(python -c 'import json,sys; print(json.load(sys.stdin)["conclusion"])' <<<"$run_json")"
+          branch="$(python -c 'import json,sys; print(json.load(sys.stdin)["head_branch"])' <<<"$run_json")"
+          if [ "$conclusion" != "success" ] || [ "$branch" != "main" ]; then
+            echo "Recorded eligibility run is not a successful main run." >&2
+            exit 1
+          fi
+          artifacts_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/artifacts")"
+          actual_digest="$(python - "$artifact_name" <<'PY' <<<"$artifacts_json"
+          import json, sys
+          name = sys.argv[1]
+          data = json.load(sys.stdin)
+          matches = [a for a in data.get('artifacts', []) if a.get('name') == name and not a.get('expired')]
+          if len(matches) != 1:
+              raise SystemExit(f'expected one unexpired artifact named {name}, found {len(matches)}')
+          print(matches[0].get('digest', ''))
+          PY
+          )"
+          if [ "$actual_digest" != "$expected_digest" ]; then
+            echo "Eligibility artifact digest mismatch." >&2
+            echo "expected: $expected_digest" >&2
+            echo "actual:   $actual_digest" >&2
+            exit 1
+          fi
+
+      - name: Package coordinated release evidence
+        if: steps.release.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_id="${{ steps.release.outputs.recorded_eligibility_run_id }}"
+          artifact_name="${{ steps.release.outputs.recorded_eligibility_artifact }}"
+          rm -rf /tmp/trqp-stack-evidence /tmp/trqp-stack-evidence.zip
+          mkdir -p /tmp/trqp-stack-evidence
+          gh run download "$run_id" --repo "$GITHUB_REPOSITORY" --name "$artifact_name" --dir /tmp/trqp-stack-evidence
+          (cd /tmp && zip -qr trqp-stack-evidence.zip trqp-stack-evidence)
+
+      - name: Prepare release notes
+        if: steps.release.outputs.publish == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="${{ steps.release.outputs.release_directory }}"
+          awk 'BEGIN{fm=0; done=0} NR==1 && $0=="---" {fm=1; next} fm && $0=="---" {fm=0; done=1; next} done || !fm {print}' "$dir/RELEASE_NOTES.md" > /tmp/trqp-stack-release-notes.md
+          test -s /tmp/trqp-stack-release-notes.md
+
+      - name: Publish coordinated GitHub release
+        if: steps.release.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="${{ steps.release.outputs.tag }}"
+          title="${{ steps.release.outputs.title }}"
+          dir="${{ steps.release.outputs.release_directory }}"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $tag already exists; refusing to overwrite an immutable coordinated release." >&2
+            exit 1
+          fi
+          gh release create "$tag" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "${{ github.event.workflow_run.head_sha }}" \
+            --title "$title" \
+            --notes-file /tmp/trqp-stack-release-notes.md \
+            --latest=false \
+            "$dir/manifest.json#TRQP Stack release manifest" \
+            "/tmp/trqp-stack-evidence.zip#Validated coordinated-release evidence"
