@@ -46,7 +46,6 @@ jobs:
             exit 1
           fi
           file="${pending[0]}"
-          dir="$(dirname "$file")"
           python - "$file" "$GITHUB_OUTPUT" <<'PY'
           import json, sys
           p, out = sys.argv[1:]
@@ -65,8 +64,6 @@ jobs:
 
       - name: Validate immutable release record
         if: steps.release.outputs.publish == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
@@ -102,10 +99,11 @@ jobs:
             exit 1
           fi
           artifacts_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/artifacts")"
-          actual_digest="$(python - "$artifact_name" <<'PY' <<<"$artifacts_json"
-          import json, sys
+          export ARTIFACTS_JSON="$artifacts_json"
+          actual_digest="$(python - "$artifact_name" <<'PY'
+          import json, os, sys
           name = sys.argv[1]
-          data = json.load(sys.stdin)
+          data = json.loads(os.environ['ARTIFACTS_JSON'])
           matches = [a for a in data.get('artifacts', []) if a.get('name') == name and not a.get('expired')]
           if len(matches) != 1:
               raise SystemExit(f'expected one unexpired artifact named {name}, found {len(matches)}')
