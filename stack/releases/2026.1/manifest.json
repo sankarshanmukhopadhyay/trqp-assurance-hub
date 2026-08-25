@@ -36,14 +36,14 @@
   },
   "coordinator": {
     "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
-    "validated_main_commit": "045ba10ec436ea5d1e9e443894bbbf7bea27472b"
+    "validated_main_commit": "699bbb808ede7778e1496589b81ba792610f682e"
   },
   "eligibility_evidence": {
     "workflow": "stack-release-eligibility",
-    "workflow_run_id": 32802386172,
+    "workflow_run_id": 32803124966,
     "workflow_conclusion": "success",
-    "artifact_name": "trqp-stack-release-candidate-32802386172",
-    "artifact_digest": "sha256:56bc91f89add53ad1cbf78031e1d2e26d7051e5f4cfe36c95ed48226556d17a8"
+    "artifact_name": "trqp-stack-release-candidate-32803124966",
+    "artifact_digest": "sha256:4928c84a115f8697c952f2e1599648c9ff2ce2fcef2c034cbb1caec2029c545c"
   },
   "release_gates": [
     "release-tuple-resolves",
