@@ -27,6 +27,8 @@ jobs:
             --max-retries 3 --retry-wait-time 2 --timeout 20
             --max-redirects 10
             --accept 200,201,202,204,206,301,302,303,307,308,401,403,429
+            --exclude '^https://untp\.unece\.org/'
+            --exclude '^https://un\.opensource\.unicc\.org/'
             '**/*.md'
   validate:
     runs-on: ubuntu-latest
