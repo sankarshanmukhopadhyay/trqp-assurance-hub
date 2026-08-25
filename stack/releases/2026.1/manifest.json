@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "stack": {
+    "id": "trqp-stack-2026.1",
+    "name": "Coconut",
+    "scientific_name": "Cocos nucifera",
+    "status": "validated",
+    "release_date": "2026-08-25"
+  },
+  "components": {
+    "tspp": {
+      "repository": "sankarshanmukhopadhyay/TRQP-TSPP",
+      "ref": "v0.15.0",
+      "commit": "55d52bc115af2b878c16519e4c79d62c3ed8caf7"
+    },
+    "cts": {
+      "repository": "sankarshanmukhopadhyay/trqp-conformance-suite",
+      "ref": "v1.8.0",
+      "commit": "024e88dd9739e7656e49f2129ea1df8a15b7482c"
+    },
+    "assurance_hub": {
+      "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
+      "ref": "v1.11.0",
+      "commit": "cda924bae643b23d624a8eb41d8c41fae93c481b"
+    }
+  },
+  "authorities": {
+    "tsmm": {
+      "repository": "sankarshanmukhopadhyay/trust-systems-meta-model",
+      "ref": "v0.24.0"
+    },
+    "tis": {
+      "repository": "sankarshanmukhopadhyay/trust-infrastructure-schemas",
+      "ref": "v0.14.1"
+    }
+  },
+  "coordinator": {
+    "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
+    "validated_main_commit": "045ba10ec436ea5d1e9e443894bbbf7bea27472b"
+  },
+  "eligibility_evidence": {
+    "workflow": "stack-release-eligibility",
+    "workflow_run_id": 32802386172,
+    "workflow_conclusion": "success",
+    "artifact_name": "trqp-stack-release-candidate-32802386172",
+    "artifact_digest": "sha256:56bc91f89add53ad1cbf78031e1d2e26d7051e5f4cfe36c95ed48226556d17a8"
+  },
+  "release_gates": [
+    "release-tuple-resolves",
+    "tagged-commits-match",
+    "clean-bootstrap",
+    "canonical-evaluation",
+    "tspp-evidence-valid",
+    "cts-evidence-valid",
+    "cts-replay-deterministic",
+    "combined-assurance-valid",
+    "run-target-correlation",
+    "provenance-complete",
+    "artifact-integrity-valid",
+    "negative-cases-fail-closed",
+    "full-stack-replay-equivalent",
+    "walkthrough-executable"
+  ]
+}
