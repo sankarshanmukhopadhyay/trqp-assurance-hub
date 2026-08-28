@@ -2,91 +2,103 @@
 layout: default
 title: "Roadmap"
 nav_exclude: true
+owner: maintainers
+last_reviewed: 2026-08-28
 ---
 
-# Roadmap
+# TRQP Stack Roadmap
 
-This roadmap is a *directional backlog* for the TRQP Assurance Hub. It captures intent and sequencing, not calendar promises.
-Items move as upstream TRQP work evolves, implementer feedback lands, and cross-repo dependencies stabilize.
+This roadmap is the coordinated delivery view for the TRQP Operational Trust Stack. Component repositories retain independent authority and semantic versioning; the Hub coordinates compatibility, integration evidence, and Stack release eligibility.
 
-## Guiding principles
+## Current baseline
 
-- **Operational first:** every addition should reduce adopter ambiguity and audit "interpretive dance".
-- **Machine-operable by default:** prefer schemas, manifests, and CI checks over prose-only guidance.
-- **Traceable:** link roadmap items to concrete artifacts (docs, schemas, tools, examples) and control IDs where relevant.
-- **Composable:** keep the Hub focused on *assurance orchestration* and cross-repo integration, not protocol bikeshedding.
+**TRQP Stack 2026.1 — Coconut** established an immutable, reproducible coordinated tuple with clean bootstrap, deterministic CTS replay, combined assurance, provenance/integrity checks, fail-closed negative cases, semantic replay equivalence, and an executable adopter walkthrough.
 
-## Completed
+## Target: TRQP Stack 2026.2 — assurance validity under change
 
-- ✅ Operational Trust Stack Maturity Release governance added (`docs/governance/release-policy.md`, `docs/governance/change-intake.md`, `docs/release-validation.md`).
-- ✅ Hub positioned as the canonical adoption front door for the coordinated CTS + TSPP + Hub release train.
-- ✅ AL3/AL4 combined assurance walkthroughs added to `docs/guides/combined-assurance.md`
-- ✅ Evidence artifact vocabulary table with schema and example cross-links
-- ✅ `SECURITY.md` expanded with threat model references and reporting scope clarification
-- ✅ Cross-repo version references synchronized for High-Assurance Hardening release
-- ✅ Combined-assurance smoke workflow stabilized: emits signed manifest, validates against schema, supports both push and `workflow_dispatch`
-- ✅ `tools/generate-manifest.py` extended to ingest CTS and TSPP report metadata directly
-- ✅ Schema validation CI step added for `examples/` artifacts (`tools/validate_examples.py`)
-- ✅ Role-oriented docs index published at `docs/index.md` (operator / certifier / implementer / governance paths)
-- ✅ Operational Stack narrative published as a first-class architecture note (`docs/architecture/operational-stack.md`)
-- ✅ Trust Registry reference service added for local discovery and demo flows
-- ✅ Machine-readable assurance profiles for AL1–AL4 added with schema-backed validation
-- ✅ Ayra Trust Network control mapping and submission checklist (`tools/ayra-mapping.md`)
-- ✅ Compatibility matrix published at `docs/reference/compatibility-matrix.md`
+**Target publication:** 30 September 2026, subject to capability and evidence readiness.
 
-## Release readiness and adoption focus
+**Governing issue:** https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/39
 
-- Cross-repo release references are synchronized to TSPP v0.14.0 and Conformance Suite v1.6.0.
-- Compatibility matrix reflects the current supported pairing for the Runtime Assurance Contract Pack.
-- Combined-assurance manifest generation, public assurance summary generation, and validation tooling are aligned.
-- AL3/AL4 guidance remains the canonical anchor for high-reliance adoption, auditability, and consumer impact evidence.
-- Future releases are governed by the maturity release policy: small edits are batched unless they fix security, broken CI, broken links, or a validated adoption blocker.
+### Governing proposition
 
-## Workstreams
+> A previously valid TRQP assurance conclusion MUST NOT silently survive a material change to its target, evidence, authority, policy, semantic dependency, schema dependency, or component compatibility conditions.
 
-### 1) Assurance levels and evidence bundles
+Stack 2026.2 advances the coordinated contract from point-in-time reproducibility to an explicit assurance lifecycle: detect material change, determine impact, invalidate or reassess affected evidence, preserve legitimate non-material reuse, fail safe when impact is unknown, and publish immutable supersession lineage.
 
-- ✅ AL3/AL4 definitions and expectations hardened with concrete evidence walkthroughs.
-- ✅ Single evidence artifact vocabulary maintained in `docs/guides/evidence-artifacts.md`.
-- ✅ Sample evidence bundles (AL3 and AL4) published under `examples/`.
-- ✅ AL1 and AL2 minimal viable bundle templates added under `examples/al1-evidence-bundle/` and `examples/al2-evidence-bundle/` with README, version-tuple, manifest, and operator declaration.
-- ✅ `AUDIT_GUIDE.md` added to `examples/al3-evidence-bundle/` and `examples/al4-evidence-bundle/`, mapping each artifact to its verifier check and pass/fail criteria.
+## Coordinated workstreams
 
-### 2) Combined-assurance workflow (cross-repo)
+| Workstream | Repository | Tracking | Intended evidence |
+|---|---|---|---|
+| Posture evidence validity | TRQP-TSPP | [#69](https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/issues/69) | machine-readable reuse/reassessment decision |
+| Bounded conformance reassessment | TRQP Conformance Suite | [#32](https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/issues/32) | impact report, reassessment plan/result |
+| Assurance lifecycle composition | TRQP Assurance Hub | [#40](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/40) | validity state, reassessment and supersession lineage |
+| Portable lifecycle contracts | Trust Infrastructure Schemas | [Hub #41](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/41) | portable change/invalidation/reassessment contracts where needed |
+| Semantic sufficiency | Trust Systems Meta-Model | [#3](https://github.com/sankarshanmukhopadhyay/trust-systems-meta-model/issues/3) | explicit decision whether existing semantics suffice |
+| Coordinated pressure/release test | TRQP Assurance Hub | [#42](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/42) | whole-Stack falsification and eligibility evidence |
 
-- ✅ Combined-assurance smoke workflow stable, CI-backed, and `workflow_dispatch`-capable.
-- ✅ Manifest schema aligned with `generate-manifest.py` output.
-- ✅ Artifact checklist aligned with evidence matrix.
-- ✅ `generate-manifest.py --dry-run`: validates inputs and emits a preview to stdout without writing output files. CI step added to `quality.yml`.
-- ✅ `templates/combined-assurance-workflow.yml`: copy/paste GitHub Actions workflow template covering CTS run, TSPP run, manifest generation, dry-run validation, and artifact upload.
+## Candidate tuple
 
-### 3) Schemas and machine readability
+The tuple is deliberately provisional. A component is released only when a material capability change warrants it.
 
-- ✅ `tools/validate_examples.py` added; example drift from schemas now caught in CI.
-- ✅ Schema-backed machine-readable assurance profiles for AL1–AL4.
-- ✅ `schemas/CONTRACT.md`: stability tiers (Stable / Extensible / Experimental) with per-schema field table and AL contract pin upgrade policy.
-- Backlog: Add canonical JSON examples (error path) for the combined-assurance manifest schema when a consumer needs negative-path fixture coverage.
+| Layer | Candidate |
+|---|---|
+| TRQP-TSPP | `v0.16.0` if material invalidation capability lands |
+| TRQP Conformance Suite | `v1.9.0` if bounded reassessment capability lands |
+| TRQP Assurance Hub | `v1.12.0` if assurance lifecycle composition lands |
+| TSMM | retain `v0.24.0` unless new canonical semantics are demonstrably required |
+| TIS | `v0.15.0` only if new portable lifecycle contracts are required |
 
-### 4) Documentation UX and navigation
+## Delivery sequence
 
-- ✅ Role-oriented docs index (`docs/index.md`) with operator / certifier / implementer / governance paths.
-- ✅ README is the front door; deep operational content is in `docs/`.
-- ✅ `docs/guides/al-decision-tree.md`: structured decision tree (consequence → external reliance → continuous operation) with AL selection quick reference and upgrade paths.
+| Date | Milestone |
+|---|---|
+| 28 Aug–6 Sep | Canonical change/invalidation model and roadmap alignment |
+| 4–11 Sep | TSPP posture-evidence invalidation |
+| 7–14 Sep | CTS impact-aware reassessment |
+| 11–18 Sep | Hub assurance lifecycle composition |
+| 14–20 Sep | Authority/schema compatibility and drift handling |
+| 18–23 Sep | Freshness and supersession lineage |
+| 20–25 Sep | Coordinated adversarial pressure tests |
+| 22–26 Sep | Executable adopter change/reassessment walkthrough |
+| 26 Sep | Release-candidate tuple freeze |
+| 27–28 Sep | Full coordinated eligibility replay |
+| 29 Sep | Explicit human release judgment |
+| 30 Sep | Publish only if evidence supports the proposition |
 
-### 5) Interop testing and conformance alignment
+## Additional Stack 2026.2 gates
 
-- ✅ Ayra Trust Network crosswalk and submission checklist published.
-- ✅ Interop demo profile available in `trqp-conformance-suite` and `TRQP-TSPP`.
-- Backlog: Define a lightweight "interop profile" for repeatable workshop scenarios (fixed SUT, known inputs, expected verdicts).
-- ✅ `docs/reference/hub-cts-crosswalk.md`: three-way mapping table (control → CTS test → TSPP requirement) with reverse indexes and coverage gap notes.
+All Stack 2026.1 gates remain mandatory. Add:
 
-### 6) Tooling and automation
+- `change-event-valid`
+- `material-change-detected`
+- `non-material-change-bounded`
+- `stale-assurance-not-reused`
+- `authority-drift-detected`
+- `unknown-impact-fails-safe`
+- `reassessment-plan-valid`
+- `bounded-reassessment-valid`
+- `supersession-lineage-complete`
+- `post-change-assurance-recomposed`
 
-- ✅ `tools/generate-manifest.py` supports full combined-assurance manifest generation with CTS and TSPP report ingestion.
-- ✅ Schema validation CI step in place.
-- ✅ `generate-manifest.py --dry-run` CI step added to `quality.yml` — generation path is now verified on every push.
-- ✅ Documentation freshness checking is available through `scripts/check_doc_freshness.py`; release validation now requires maintainers to run it before tagging.
-- ✅ `tools/validate_examples.py` extended to validate JSON files in all AL bundle directories (`examples/al*-evidence-bundle/`) against their paired schemas.
-- ✅ TSMM/TIS runtime assurance contract support added to the Combined Assurance Manifest and generator.
+## Required pressure tests
 
-_Last updated: 2026-07-03_
+The release candidate must prove both invalidation and legitimate continuity:
+
+- old evidence reused after a material component/target change → reject;
+- provenance or integrity discontinuity → reject;
+- authority drift without applicable compatibility evidence → non-current/reassessment, not silent PASS;
+- CTS comparison-policy change → replay/reassessment required;
+- TSPP posture/target change → old posture evidence non-current;
+- documentation-only/non-material change → reuse permitted when justified;
+- semantically equivalent volatile output change → semantic conclusion may remain reusable;
+- unknown impact → broader reassessment/full rerun;
+- unsupported partial reassessment → reject.
+
+## Release judgment
+
+Before publication, the release PR must preserve what was tested, assumptions and counter-cases, falsification evidence, rejected alternatives, residual uncertainty, and the explicit human decision to accept the final tuple. A green workflow is necessary but is not itself the release judgment.
+
+## Machine-readable plan
+
+The synchronized candidate plan is published at [`stack/candidates/2026.2/roadmap.yaml`](../stack/candidates/2026.2/roadmap.yaml). It is an input to implementation and release eligibility, not an immutable release manifest.
