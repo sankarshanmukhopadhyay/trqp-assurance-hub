@@ -1,0 +1,77 @@
+schema_version: "1.0"
+stack_release: trqp-stack-2026.2
+status: planned
+target_date: 2026-09-30
+baseline: trqp-stack-2026.1
+proposition:
+  id: assurance-validity-under-change
+  statement: >-
+    A previously valid TRQP assurance conclusion MUST NOT silently survive a
+    material change to its target, evidence, authority, policy, semantic
+    dependency, schema dependency, or component compatibility conditions.
+principles:
+  release_is_capability_driven: true
+  unknown_impact_fails_toward_broader_reassessment: true
+  historical_evidence_is_immutable: true
+  component_authority_is_preserved: true
+  version_bumps_require_material_component_change: true
+workstreams:
+  tspp:
+    owner_repository: sankarshanmukhopadhyay/TRQP-TSPP
+    target_window: 2026-09-04/2026-09-11
+    required_capabilities:
+      - material-change-invalidation
+      - non-material-change-counter-case
+  cts:
+    owner_repository: sankarshanmukhopadhyay/trqp-conformance-suite
+    target_window: 2026-09-07/2026-09-14
+    required_capabilities:
+      - change-impact-evidence
+      - bounded-reassessment
+      - fail-safe-unknown-impact
+  assurance_hub:
+    owner_repository: sankarshanmukhopadhyay/trqp-assurance-hub
+    target_window: 2026-09-11/2026-09-18
+    required_capabilities:
+      - assurance-validity-lifecycle
+      - reassessment-composition
+      - supersession-lineage
+  tis:
+    owner_repository: sankarshanmukhopadhyay/trust-infrastructure-schemas
+    target_window: 2026-09-01/2026-09-20
+    required_capabilities:
+      - portable-change-invalidation-contracts-if-needed
+  tsmm:
+    owner_repository: sankarshanmukhopadhyay/trust-systems-meta-model
+    target_window: 2026-09-01/2026-09-20
+    conditional: true
+    required_capabilities:
+      - canonical-lifecycle-semantics-only-if-existing-semantics-insufficient
+candidate_versions:
+  tspp: v0.16.0
+  cts: v1.9.0
+  assurance_hub: v1.12.0
+  tis: v0.15.0-if-required
+  tsmm: v0.25.0-if-required
+release_gates:
+  inherited_from: trqp-stack-2026.1
+  additional:
+    - change-event-valid
+    - material-change-detected
+    - non-material-change-bounded
+    - stale-assurance-not-reused
+    - authority-drift-detected
+    - unknown-impact-fails-safe
+    - reassessment-plan-valid
+    - bounded-reassessment-valid
+    - supersession-lineage-complete
+    - post-change-assurance-recomposed
+milestones:
+  candidate_freeze: 2026-09-26
+  coordinated_replay_complete: 2026-09-28
+  human_release_judgment: 2026-09-29
+  target_publication: 2026-09-30
+release_decision_question: >-
+  Does TRQP Stack 2026.2 provide credible, machine-verifiable evidence that
+  assurance conclusions remain bounded to the conditions under which they
+  were established?
