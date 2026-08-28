@@ -1,0 +1,85 @@
+schema_version: "1.0"
+stack_release: trqp-stack-2026.2
+target_date: 2026-09-30
+status: planned
+coordinator:
+  repository: sankarshanmukhopadhyay/trqp-assurance-hub
+  governing_issue: https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/39
+proposition:
+  id: assurance-validity-under-change
+  statement: >-
+    A previously valid TRQP assurance conclusion MUST NOT silently survive a material
+    change to its target, evidence, authority, policy, semantic dependency, schema
+    dependency, or component compatibility conditions.
+workstreams:
+  tspp:
+    repository: sankarshanmukhopadhyay/TRQP-TSPP
+    issue: https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/issues/69
+    candidate_version: v0.16.0
+    version_condition: material-capability-required
+    required_capabilities:
+      - material-change-invalidation
+      - non-material-reuse-evidence
+      - unknown-impact-fails-safe
+  cts:
+    repository: sankarshanmukhopadhyay/trqp-conformance-suite
+    issue: https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/issues/32
+    candidate_version: v1.9.0
+    version_condition: material-capability-required
+    required_capabilities:
+      - change-impact-classification
+      - bounded-reassessment
+      - full-rerun-on-unknown-impact
+  assurance_hub:
+    repository: sankarshanmukhopadhyay/trqp-assurance-hub
+    issue: https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/40
+    candidate_version: v1.12.0
+    version_condition: material-capability-required
+    required_capabilities:
+      - assurance-validity-lifecycle
+      - reassessment-planning
+      - supersession-lineage
+  tis:
+    repository: sankarshanmukhopadhyay/trust-infrastructure-schemas
+    tracking_issue: https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/41
+    candidate_version: v0.15.0
+    version_condition: only-if-new-portable-contracts-required
+    required_decision:
+      - evaluate-existing-contract-sufficiency
+  tsmm:
+    repository: sankarshanmukhopadhyay/trust-systems-meta-model
+    issue: https://github.com/sankarshanmukhopadhyay/trust-systems-meta-model/issues/3
+    baseline_version: v0.24.0
+    version_condition: retain-unless-new-canonical-semantics-required
+    required_decision:
+      - evaluate-semantic-sufficiency
+release_gates:
+  inherited_from: trqp-stack-2026.1
+  additional:
+    - change-event-valid
+    - material-change-detected
+    - non-material-change-bounded
+    - stale-assurance-not-reused
+    - authority-drift-detected
+    - unknown-impact-fails-safe
+    - reassessment-plan-valid
+    - bounded-reassessment-valid
+    - supersession-lineage-complete
+    - post-change-assurance-recomposed
+milestones:
+  model_alignment: 2026-09-06
+  tspp_capability: 2026-09-11
+  cts_capability: 2026-09-14
+  hub_lifecycle: 2026-09-18
+  authority_drift: 2026-09-20
+  supersession: 2026-09-23
+  adversarial_suite: 2026-09-25
+  adopter_walkthrough: 2026-09-26
+  candidate_freeze: 2026-09-26
+  eligibility_replay: 2026-09-28
+  human_release_judgment: 2026-09-29
+  target_publication: 2026-09-30
+release_decision:
+  capability_driven: true
+  calendar_alone_is_sufficient: false
+  requires_visible_human_judgment: true
