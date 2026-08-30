@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "release_id": "trqp-stack-2026.2",
+  "tag": "trqp-stack-2026.2",
+  "title": "TRQP Stack 2026.2 — Ashoka",
+  "release_directory": "stack/releases/2026.2",
+  "status": "pending-publication",
+  "recorded_eligibility_run_id": 33296416272,
+  "recorded_eligibility_artifact": "trqp-stack-release-candidate-33296416272",
+  "recorded_eligibility_artifact_digest": "sha256:7cb1bc51fb8d3b09a32acceed9be8cea2f9e817c4b64e78c24df30267ab7a463",
+  "human_release_judgment": "ACCEPT",
+  "human_release_judgment_comment_id": 5467107933,
+  "publish_only_after_main_eligibility_success": true
+}
