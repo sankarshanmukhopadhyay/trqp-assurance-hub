@@ -32,9 +32,8 @@
       "evidence": ["scripts/validate_lifecycle_recomposition.py", "artifacts/lifecycle/material-recomposition.json"]
     },
     "authority-drift-detected": {
-      "status": "pending",
-      "evidence": [],
-      "reason": "No coordinated authority-drift pressure fixture has yet been executed through the Stack eligibility flow."
+      "status": "proven",
+      "evidence": ["artifacts/lifecycle/authority-drift-recomposition.json", "scripts/validate_authority_drift_and_supersession.py"]
     },
     "unknown-impact-fails-safe": {
       "status": "proven",
@@ -49,18 +48,17 @@
       "evidence": ["trqp-conformance-suite:da3d1f7b49625c774a17188e0d61f2101dcb1ba5", "artifacts/lifecycle/material-recomposition.json"]
     },
     "supersession-lineage-complete": {
-      "status": "pending",
-      "evidence": [],
-      "reason": "Completed reassessment-to-supersession lineage remains deliberately deferred after Hub #40."
+      "status": "proven",
+      "evidence": ["artifacts/lifecycle/supersession-recomposition.json", "scripts/validate_authority_drift_and_supersession.py"]
     },
     "post-change-assurance-recomposed": {
       "status": "proven",
-      "evidence": ["trqp-assurance-hub:ed501d460fe8a2b093ccfbcc931558b6888d7fe2"]
+      "evidence": ["trqp-assurance-hub:ed501d460fe8a2b093ccfbcc931558b6888d7fe2", "artifacts/lifecycle/supersession-recomposition.json"]
     }
   },
   "judgment": {
     "current": "NOT_RELEASE_ELIGIBLE",
-    "reason": "Eight lifecycle gates are evidenced, but authority-drift detection, supersession lineage, and exact tuple freeze remain incomplete.",
+    "reason": "All ten lifecycle gates are now evidenced, but exact candidate tuple freeze, adopter walkthrough, final eligibility replay, and explicit human release judgment remain incomplete.",
     "workflow_green_is_release_green": false
   }
 }
