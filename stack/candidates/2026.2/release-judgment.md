@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TRQP Stack 2026.2 release judgment"
+nav_exclude: true
+---
+
 # TRQP Stack 2026.2 release judgment
 
 Status: PENDING FINAL ELIGIBILITY REPLAY
