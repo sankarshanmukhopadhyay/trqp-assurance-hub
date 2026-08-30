@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TRQP Stack 2026.2 adopter walkthrough"
+nav_exclude: true
+---
+
 # TRQP Stack 2026.2 adopter walkthrough
 
 This walkthrough verifies the frozen Stack 2026.2 candidate from a clean bootstrap through lifecycle change, reassessment, recomposition, and supersession.
