@@ -17,6 +17,8 @@ def run_make(path: Path, target: str) -> dict:
         "returncode": proc.returncode,
         "stdout_sha256": hashlib.sha256(proc.stdout.encode()).hexdigest(),
         "stderr_sha256": hashlib.sha256(proc.stderr.encode()).hexdigest(),
+        "stdout_tail": proc.stdout.splitlines()[-20:] if proc.returncode else [],
+        "stderr_tail": proc.stderr.splitlines()[-20:] if proc.returncode else [],
     }
 
 
@@ -45,7 +47,13 @@ def main() -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
     for name, result in results.items():
-        print(f"[{'PASS' if result['returncode'] == 0 else 'FAIL'}] {name} assurance-check")
+        status = 'PASS' if result['returncode'] == 0 else 'FAIL'
+        print(f"[{status}] {name} assurance-check")
+        if result['returncode']:
+            for line in result['stdout_tail']:
+                print(f"[{name}:stdout] {line}")
+            for line in result['stderr_tail']:
+                print(f"[{name}:stderr] {line}")
     return 0 if passed else 1
 
 
