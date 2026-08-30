@@ -1,0 +1,36 @@
+{
+  "record_id": "hub-lifecycle-supersession-001",
+  "previous_assurance": {
+    "result": "PASS",
+    "validity": "SUPERSEDED",
+    "ref": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/tree/main/artifacts/combined-assurance"
+  },
+  "trigger": {
+    "lifecycle_event_ref": "https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/blob/e952641fe28dd03b8015ed0ce22da053d9160a4a/examples/lifecycle/material-change.lifecycle-event.json",
+    "impact": "material"
+  },
+  "reassessment": {
+    "plan_ref": "https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/commit/da3d1f7b49625c774a17188e0d61f2101dcb1ba5",
+    "completed": true,
+    "result": "PASS",
+    "scope_completed": ["security-posture", "affected-controls"],
+    "evidence_current": true
+  },
+  "supersession": {
+    "superseded_ref": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/tree/main/artifacts/combined-assurance",
+    "superseding_ref": "artifacts/lifecycle/supersession-recomposition.json#current_assurance",
+    "lineage_complete": true,
+    "history_rewritten": false
+  },
+  "current_assurance": {
+    "result": "PASS",
+    "validity": "CURRENT",
+    "basis": "completed attributable bounded reassessment and Hub recomposition"
+  },
+  "authority": {
+    "tspp": "upstream materiality judgment",
+    "cts": "reassessment scope and completion evidence",
+    "hub": "supersession lineage and recomposed current assurance"
+  },
+  "rationale": "The prior PASS remains immutable but is explicitly superseded. A new CURRENT assurance state is admitted only because the required reassessment is complete, attributable, current, and linked to both the triggering lifecycle event and the superseded state."
+}
