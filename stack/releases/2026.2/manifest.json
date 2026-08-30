@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "stack": {
+    "id": "trqp-stack-2026.2",
+    "name": "Ashoka",
+    "scientific_name": "Saraca asoca",
+    "status": "validated",
+    "release_date": "2026-08-30"
+  },
+  "components": {
+    "tspp": {
+      "repository": "sankarshanmukhopadhyay/TRQP-TSPP",
+      "ref": "v0.16.1",
+      "commit": "12315679dd79bcaced5f27a35bfc1d22560de52d"
+    },
+    "cts": {
+      "repository": "sankarshanmukhopadhyay/trqp-conformance-suite",
+      "ref": "v1.9.1",
+      "commit": "ea3fed33a1edc3313735405f433a23f9d154d903"
+    },
+    "assurance_hub": {
+      "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
+      "ref": "v1.12.0",
+      "commit": "7f7aae84eb41ffd8ea672dae00955c5714ffd3de"
+    }
+  },
+  "authorities": {
+    "tsmm": {
+      "repository": "sankarshanmukhopadhyay/trust-systems-meta-model",
+      "ref": "v0.24.0"
+    },
+    "tis": {
+      "repository": "sankarshanmukhopadhyay/trust-infrastructure-schemas",
+      "ref": "v0.15.0",
+      "commit": "edda0e87ced40797d22e3df542099871c57fcb59"
+    }
+  },
+  "coordinator": {
+    "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
+    "validated_main_commit": "9731811874e1f9f3e08e8745449e406950f2209e",
+    "governing_issue": 42,
+    "human_release_judgment_comment_id": 5467107933
+  },
+  "eligibility_evidence": {
+    "workflow": "stack-release-eligibility",
+    "workflow_run_id": 33296416272,
+    "workflow_conclusion": "success",
+    "artifact_name": "trqp-stack-release-candidate-33296416272",
+    "artifact_digest": "sha256:7cb1bc51fb8d3b09a32acceed9be8cea2f9e817c4b64e78c24df30267ab7a463"
+  },
+  "release_gates": [
+    "release-tuple-resolves",
+    "tagged-commits-match",
+    "clean-bootstrap",
+    "canonical-evaluation",
+    "tspp-evidence-valid",
+    "cts-evidence-valid",
+    "cts-replay-deterministic",
+    "combined-assurance-valid",
+    "run-target-correlation",
+    "provenance-complete",
+    "artifact-integrity-valid",
+    "negative-cases-fail-closed",
+    "full-stack-replay-equivalent",
+    "walkthrough-executable",
+    "change-event-valid",
+    "material-change-detected",
+    "non-material-change-bounded",
+    "stale-assurance-not-reused",
+    "authority-drift-detected",
+    "unknown-impact-fails-safe",
+    "reassessment-plan-valid",
+    "bounded-reassessment-valid",
+    "supersession-lineage-complete",
+    "post-change-assurance-recomposed"
+  ]
+}
