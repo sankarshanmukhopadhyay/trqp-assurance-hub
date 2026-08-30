@@ -1,3 +1,9 @@
+---
+layout: default
+title: "TRQP Stack 2026.2 release candidate freeze"
+nav_exclude: true
+---
+
 # TRQP Stack 2026.2 release candidate freeze
 
 This record freezes the exact Stack 2026.2 release candidate only after all ten additional lifecycle gates have executable evidence and the component releases have immutable version tags.
