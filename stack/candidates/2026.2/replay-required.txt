@@ -1,0 +1,1 @@
+Final eligibility replay required after RC refs and candidate manifest are frozen.
