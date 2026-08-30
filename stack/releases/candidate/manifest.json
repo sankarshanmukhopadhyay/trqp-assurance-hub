@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "stack": {"id": "trqp-stack-2026.2-rc1", "status": "candidate"},
   "components": {
-    "tspp": {"repository": "sankarshanmukhopadhyay/TRQP-TSPP", "ref": "v0.16.0", "commit": "2f74a01fe22c346c11d9eb8feb8101d39ef68e17"},
-    "cts": {"repository": "sankarshanmukhopadhyay/trqp-conformance-suite", "ref": "v1.9.0", "commit": "4395745d530df867329a312c58908a9d73f1c430"},
+    "tspp": {"repository": "sankarshanmukhopadhyay/TRQP-TSPP", "ref": "v0.16.1", "commit": "12315679dd79bcaced5f27a35bfc1d22560de52d"},
+    "cts": {"repository": "sankarshanmukhopadhyay/trqp-conformance-suite", "ref": "v1.9.1", "commit": "ea3fed33a1edc3313735405f433a23f9d154d903"},
     "assurance_hub": {"repository": "sankarshanmukhopadhyay/trqp-assurance-hub", "ref": "v1.12.0", "commit": "7f7aae84eb41ffd8ea672dae00955c5714ffd3de"}
   },
   "authorities": {
