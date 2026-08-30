@@ -1,0 +1,27 @@
+{
+  "record_id": "hub-lifecycle-authority-drift-001",
+  "historical_assurance": {
+    "result": "PASS",
+    "ref": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/tree/main/artifacts/combined-assurance"
+  },
+  "authority_compatibility": {
+    "expected_semantic_authority": "sankarshanmukhopadhyay/trust-systems-meta-model@v0.24.0",
+    "observed_semantic_authority": "unreviewed-authority@example.invalid@v99.0.0",
+    "tis_contract": "sankarshanmukhopadhyay/trust-infrastructure-schemas@v0.15.0",
+    "compatible": false,
+    "drift_detected": true,
+    "reason": "Observed semantic authority is outside the reviewed TSMM/TIS compatibility baseline and cannot silently inherit prior assurance."
+  },
+  "current_validity": "INDETERMINATE",
+  "reassessment": {
+    "required": true,
+    "full_rerun_required": true,
+    "scope": ["authority-compatibility", "semantic-alignment", "full-stack-recomposition"]
+  },
+  "authority": {
+    "tsmm": "canonical semantic authority",
+    "tis": "portable compatibility and serialization contract",
+    "hub": "combined assurance validity and release eligibility"
+  },
+  "rationale": "Authority drift invalidates the compatibility basis of the historical assurance. The Hub may detect incompatibility but must not redefine TSMM semantics or silently accept an unreviewed authority."
+}

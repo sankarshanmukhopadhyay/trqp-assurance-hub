@@ -7,6 +7,7 @@ on:
       - 'stack/**'
       - 'tools/stack_*.py'
       - 'scripts/validate_lifecycle_recomposition.py'
+      - 'scripts/validate_authority_drift_and_supersession.py'
       - 'artifacts/lifecycle/**'
       - 'tests/test_stack_release_readiness.py'
       - 'docs/adoption/**'
@@ -42,6 +43,7 @@ jobs:
       - name: Validate Stack 2026.2 lifecycle evidence boundaries
         run: |
           python scripts/validate_lifecycle_recomposition.py
+          python scripts/validate_authority_drift_and_supersession.py
           python tools/stack_2026_2_lifecycle_eligibility.py
 
       - name: Prove clean-room bootstrap
