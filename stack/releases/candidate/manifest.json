@@ -1,44 +1,14 @@
 {
   "schema_version": "1.0",
-  "stack": {
-    "id": "trqp-stack-candidate-2026.1",
-    "status": "candidate"
-  },
+  "stack": {"id": "trqp-stack-2026.2-rc1", "status": "candidate"},
   "components": {
-    "tspp": {
-      "repository": "sankarshanmukhopadhyay/TRQP-TSPP",
-      "ref": "v0.15.0",
-      "commit": "55d52bc115af2b878c16519e4c79d62c3ed8caf7"
-    },
-    "cts": {
-      "repository": "sankarshanmukhopadhyay/trqp-conformance-suite",
-      "ref": "v1.8.0",
-      "commit": "024e88dd9739e7656e49f2129ea1df8a15b7482c"
-    },
-    "assurance_hub": {
-      "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
-      "ref": "v1.11.0",
-      "commit": "cda924bae643b23d624a8eb41d8c41fae93c481b"
-    }
+    "tspp": {"repository": "sankarshanmukhopadhyay/TRQP-TSPP", "ref": "v0.16.1", "commit": "12315679dd79bcaced5f27a35bfc1d22560de52d"},
+    "cts": {"repository": "sankarshanmukhopadhyay/trqp-conformance-suite", "ref": "v1.9.1", "commit": "ea3fed33a1edc3313735405f433a23f9d154d903"},
+    "assurance_hub": {"repository": "sankarshanmukhopadhyay/trqp-assurance-hub", "ref": "v1.12.0", "commit": "7f7aae84eb41ffd8ea672dae00955c5714ffd3de"}
   },
   "authorities": {
     "tsmm": {"repository": "sankarshanmukhopadhyay/trust-systems-meta-model", "ref": "v0.24.0"},
-    "tis": {"repository": "sankarshanmukhopadhyay/trust-infrastructure-schemas", "ref": "v0.14.1"}
+    "tis": {"repository": "sankarshanmukhopadhyay/trust-infrastructure-schemas", "ref": "v0.15.0", "commit": "edda0e87ced40797d22e3df542099871c57fcb59"}
   },
-  "release_gates": [
-    "release-tuple-resolves",
-    "tagged-commits-match",
-    "clean-bootstrap",
-    "canonical-evaluation",
-    "tspp-evidence-valid",
-    "cts-evidence-valid",
-    "cts-replay-deterministic",
-    "combined-assurance-valid",
-    "run-target-correlation",
-    "provenance-complete",
-    "artifact-integrity-valid",
-    "negative-cases-fail-closed",
-    "full-stack-replay-equivalent",
-    "walkthrough-executable"
-  ]
+  "release_gates": ["release-tuple-resolves","tagged-commits-match","clean-bootstrap","canonical-evaluation","tspp-evidence-valid","cts-evidence-valid","cts-replay-deterministic","combined-assurance-valid","run-target-correlation","provenance-complete","artifact-integrity-valid","negative-cases-fail-closed","full-stack-replay-equivalent","walkthrough-executable","change-event-valid","material-change-detected","non-material-change-bounded","stale-assurance-not-reused","authority-drift-detected","unknown-impact-fails-safe","reassessment-plan-valid","bounded-reassessment-valid","supersession-lineage-complete","post-change-assurance-recomposed"]
 }

@@ -3,13 +3,13 @@
   "candidate": "rc1",
   "frozen": true,
   "components": {
-    "tspp": {"ref": "stack-2026.2-rc1", "commit": "e952641fe28dd03b8015ed0ce22da053d9160a4a"},
-    "cts": {"ref": "stack-2026.2-rc1", "commit": "da3d1f7b49625c774a17188e0d61f2101dcb1ba5"},
-    "assurance_hub": {"ref": "stack-2026.2-rc1", "commit": "3d60913a04263b3990ca735ecd3161ae081dc449"}
+    "tspp": {"ref": "v0.16.1", "commit": "12315679dd79bcaced5f27a35bfc1d22560de52d"},
+    "cts": {"ref": "v1.9.1", "commit": "ea3fed33a1edc3313735405f433a23f9d154d903"},
+    "assurance_hub": {"ref": "v1.12.0", "commit": "7f7aae84eb41ffd8ea672dae00955c5714ffd3de"}
   },
   "authorities": {
     "tsmm": {"ref": "v0.24.0"},
     "tis": {"ref": "v0.15.0", "commit": "edda0e87ced40797d22e3df542099871c57fcb59"}
   },
-  "invalidation_rule": "Any ref, commit, or authority-baseline drift invalidates the freeze and requires a new eligibility replay."
+  "invalidation_rule": "Any version tag, component commit, authority baseline, or release manifest drift invalidates the freeze and requires a new eligibility replay."
 }
