@@ -1,0 +1,13 @@
+{
+  "stack_release": "trqp-stack-2026.2",
+  "candidate": "rc1",
+  "walkthrough": "docs/adoption/stack-2026.2-walkthrough.md",
+  "status": "pending-execution",
+  "required": [
+    "clean-bootstrap",
+    "component-assurance",
+    "lifecycle-pressure-path",
+    "full-release-eligibility-replay"
+  ],
+  "acceptance": "All steps must execute against the frozen RC tuple without ref or authority-baseline drift."
+}
