@@ -2,9 +2,9 @@
   "schema_version": "1.0",
   "stack": {"id": "trqp-stack-2026.2-rc1", "status": "candidate"},
   "components": {
-    "tspp": {"repository": "sankarshanmukhopadhyay/TRQP-TSPP", "ref": "stack-2026.2-rc1", "commit": "e952641fe28dd03b8015ed0ce22da053d9160a4a"},
-    "cts": {"repository": "sankarshanmukhopadhyay/trqp-conformance-suite", "ref": "stack-2026.2-rc1", "commit": "da3d1f7b49625c774a17188e0d61f2101dcb1ba5"},
-    "assurance_hub": {"repository": "sankarshanmukhopadhyay/trqp-assurance-hub", "ref": "stack-2026.2-rc1", "commit": "3d60913a04263b3990ca735ecd3161ae081dc449"}
+    "tspp": {"repository": "sankarshanmukhopadhyay/TRQP-TSPP", "ref": "v0.16.0", "commit": "2f74a01fe22c346c11d9eb8feb8101d39ef68e17"},
+    "cts": {"repository": "sankarshanmukhopadhyay/trqp-conformance-suite", "ref": "v1.9.0", "commit": "4395745d530df867329a312c58908a9d73f1c430"},
+    "assurance_hub": {"repository": "sankarshanmukhopadhyay/trqp-assurance-hub", "ref": "v1.12.0", "commit": "7f7aae84eb41ffd8ea672dae00955c5714ffd3de"}
   },
   "authorities": {
     "tsmm": {"repository": "sankarshanmukhopadhyay/trust-systems-meta-model", "ref": "v0.24.0"},
