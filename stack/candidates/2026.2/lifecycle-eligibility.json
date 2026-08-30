@@ -6,8 +6,8 @@
     "frozen": true,
     "tsmm": "v0.24.0",
     "tis": {"version": "v0.15.0", "merge_sha": "edda0e87ced40797d22e3df542099871c57fcb59"},
-    "tspp": {"ref": "v0.16.0", "commit": "2f74a01fe22c346c11d9eb8feb8101d39ef68e17"},
-    "cts": {"ref": "v1.9.0", "commit": "4395745d530df867329a312c58908a9d73f1c430"},
+    "tspp": {"ref": "v0.16.1", "commit": "12315679dd79bcaced5f27a35bfc1d22560de52d"},
+    "cts": {"ref": "v1.9.1", "commit": "ea3fed33a1edc3313735405f433a23f9d154d903"},
     "assurance_hub": {"ref": "v1.12.0", "commit": "7f7aae84eb41ffd8ea672dae00955c5714ffd3de"}
   },
   "release_eligible": false,
@@ -25,7 +25,7 @@
   },
   "release_process": {
     "candidate-freeze": {"status": "proven", "evidence": ["stack/candidates/2026.2/freeze-evidence.json", "stack/releases/candidate/manifest.json", "stack/candidates/2026.2/release-candidate.md"]},
-    "adopter-walkthrough": {"status": "pending", "evidence": [], "reason": "The clean walkthrough must execute against immutable TSPP v0.16.0, CTS v1.9.0, and Hub v1.12.0."},
+    "adopter-walkthrough": {"status": "pending", "evidence": [], "reason": "The clean walkthrough must execute against immutable TSPP v0.16.1, CTS v1.9.1, and Hub v1.12.0."},
     "final-eligibility-replay": {"status": "pending", "evidence": [], "reason": "The complete eligibility workflow must replay on merged main after the immutable tuple is accepted."},
     "human-release-judgment": {"status": "pending", "evidence": [], "reason": "Human publication judgment is recorded only after walkthrough and final replay succeed."}
   },
