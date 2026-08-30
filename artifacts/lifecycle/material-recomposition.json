@@ -1,0 +1,18 @@
+{
+  "record_id": "hub-lifecycle-material-001",
+  "historical_assurance": {
+    "result": "PASS",
+    "ref": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/tree/main/artifacts/combined-assurance"
+  },
+  "lifecycle_event_ref": "https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/blob/e952641fe28dd03b8015ed0ce22da053d9160a4a/examples/lifecycle/material-change.lifecycle-event.json",
+  "cts_reassessment_ref": "https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/commit/da3d1f7b49625c774a17188e0d61f2101dcb1ba5",
+  "impact": "material",
+  "reassessment": {"required": true, "full_rerun_required": false, "scope": ["security-posture", "affected-controls"]},
+  "current_validity": "REASSESSMENT_REQUIRED",
+  "authority": {
+    "tspp": "security/privacy posture materiality and affected controls",
+    "cts": "conformance/replay reassessment consequence",
+    "hub": "combined assurance validity and recomposition"
+  },
+  "rationale": "Historical PASS remains immutable, but material upstream change makes that result non-current until the required reassessment is completed and recomposed."
+}

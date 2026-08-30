@@ -1,0 +1,18 @@
+{
+  "record_id": "hub-lifecycle-unknown-001",
+  "historical_assurance": {
+    "result": "PASS",
+    "ref": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/tree/main/artifacts/combined-assurance"
+  },
+  "lifecycle_event_ref": "https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/blob/e952641fe28dd03b8015ed0ce22da053d9160a4a/examples/lifecycle/unknown-impact.lifecycle-event.json",
+  "cts_reassessment_ref": "https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/commit/da3d1f7b49625c774a17188e0d61f2101dcb1ba5",
+  "impact": "unknown",
+  "reassessment": {"required": true, "full_rerun_required": true, "scope": ["full-conformance-replay"]},
+  "current_validity": "INDETERMINATE",
+  "authority": {
+    "tspp": "security/privacy posture materiality and affected controls",
+    "cts": "conformance/replay reassessment consequence",
+    "hub": "combined assurance validity and recomposition"
+  },
+  "rationale": "Unknown upstream impact and CTS full-rerun requirement prevent the historical PASS from being represented as current assurance."
+}
