@@ -3,62 +3,35 @@
   "stack_release": "trqp-stack-2026.2",
   "governing_issue": "https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/42",
   "candidate_tuple": {
-    "frozen": false,
+    "frozen": true,
     "tsmm": "v0.24.0",
-    "tis": {
-      "version": "v0.15.0",
-      "merge_sha": "edda0e87ced40797d22e3df542099871c57fcb59"
-    },
-    "tspp": "v0.16.0-candidate",
-    "cts": "v1.9.0-candidate",
-    "assurance_hub": "v1.12.0-candidate"
+    "tis": {"version": "v0.15.0", "merge_sha": "edda0e87ced40797d22e3df542099871c57fcb59"},
+    "tspp": {"ref": "stack-2026.2-rc1", "commit": "e952641fe28dd03b8015ed0ce22da053d9160a4a"},
+    "cts": {"ref": "stack-2026.2-rc1", "commit": "da3d1f7b49625c774a17188e0d61f2101dcb1ba5"},
+    "assurance_hub": {"ref": "stack-2026.2-rc1", "commit": "3d60913a04263b3990ca735ecd3161ae081dc449"}
   },
   "release_eligible": false,
   "gates": {
-    "change-event-valid": {
-      "status": "proven",
-      "evidence": ["TRQP-TSPP:e952641fe28dd03b8015ed0ce22da053d9160a4a"]
-    },
-    "material-change-detected": {
-      "status": "proven",
-      "evidence": ["artifacts/lifecycle/material-recomposition.json"]
-    },
-    "non-material-change-bounded": {
-      "status": "proven",
-      "evidence": ["artifacts/lifecycle/non-material-recomposition.json"]
-    },
-    "stale-assurance-not-reused": {
-      "status": "proven",
-      "evidence": ["scripts/validate_lifecycle_recomposition.py", "artifacts/lifecycle/material-recomposition.json"]
-    },
-    "authority-drift-detected": {
-      "status": "proven",
-      "evidence": ["artifacts/lifecycle/authority-drift-recomposition.json", "scripts/validate_authority_drift_and_supersession.py"]
-    },
-    "unknown-impact-fails-safe": {
-      "status": "proven",
-      "evidence": ["artifacts/lifecycle/unknown-recomposition.json"]
-    },
-    "reassessment-plan-valid": {
-      "status": "proven",
-      "evidence": ["trqp-conformance-suite:da3d1f7b49625c774a17188e0d61f2101dcb1ba5"]
-    },
-    "bounded-reassessment-valid": {
-      "status": "proven",
-      "evidence": ["trqp-conformance-suite:da3d1f7b49625c774a17188e0d61f2101dcb1ba5", "artifacts/lifecycle/material-recomposition.json"]
-    },
-    "supersession-lineage-complete": {
-      "status": "proven",
-      "evidence": ["artifacts/lifecycle/supersession-recomposition.json", "scripts/validate_authority_drift_and_supersession.py"]
-    },
-    "post-change-assurance-recomposed": {
-      "status": "proven",
-      "evidence": ["trqp-assurance-hub:ed501d460fe8a2b093ccfbcc931558b6888d7fe2", "artifacts/lifecycle/supersession-recomposition.json"]
-    }
+    "change-event-valid": {"status": "proven", "evidence": ["TRQP-TSPP:e952641fe28dd03b8015ed0ce22da053d9160a4a"]},
+    "material-change-detected": {"status": "proven", "evidence": ["artifacts/lifecycle/material-recomposition.json"]},
+    "non-material-change-bounded": {"status": "proven", "evidence": ["artifacts/lifecycle/non-material-recomposition.json"]},
+    "stale-assurance-not-reused": {"status": "proven", "evidence": ["scripts/validate_lifecycle_recomposition.py", "artifacts/lifecycle/material-recomposition.json"]},
+    "authority-drift-detected": {"status": "proven", "evidence": ["artifacts/lifecycle/authority-drift-recomposition.json", "scripts/validate_authority_drift_and_supersession.py"]},
+    "unknown-impact-fails-safe": {"status": "proven", "evidence": ["artifacts/lifecycle/unknown-recomposition.json"]},
+    "reassessment-plan-valid": {"status": "proven", "evidence": ["trqp-conformance-suite:da3d1f7b49625c774a17188e0d61f2101dcb1ba5"]},
+    "bounded-reassessment-valid": {"status": "proven", "evidence": ["trqp-conformance-suite:da3d1f7b49625c774a17188e0d61f2101dcb1ba5", "artifacts/lifecycle/material-recomposition.json"]},
+    "supersession-lineage-complete": {"status": "proven", "evidence": ["artifacts/lifecycle/supersession-recomposition.json", "scripts/validate_authority_drift_and_supersession.py"]},
+    "post-change-assurance-recomposed": {"status": "proven", "evidence": ["trqp-assurance-hub:ed501d460fe8a2b093ccfbcc931558b6888d7fe2", "artifacts/lifecycle/supersession-recomposition.json"]}
+  },
+  "release_process": {
+    "candidate-freeze": {"status": "proven", "evidence": ["stack/candidates/2026.2/freeze-evidence.json", "stack/releases/candidate/manifest.json"]},
+    "adopter-walkthrough": {"status": "pending", "evidence": [], "reason": "The walkthrough is documented and must now execute against the frozen RC1 tuple."},
+    "final-eligibility-replay": {"status": "pending", "evidence": [], "reason": "The complete eligibility workflow must replay after the frozen tuple is merged."},
+    "human-release-judgment": {"status": "pending", "evidence": [], "reason": "Human publication judgment is recorded only after walkthrough and final replay succeed."}
   },
   "judgment": {
     "current": "NOT_RELEASE_ELIGIBLE",
-    "reason": "All ten lifecycle gates are now evidenced, but exact candidate tuple freeze, adopter walkthrough, final eligibility replay, and explicit human release judgment remain incomplete.",
+    "reason": "All lifecycle gates and candidate freeze are evidenced; adopter walkthrough, final replay, and explicit human publication judgment remain pending.",
     "workflow_green_is_release_green": false
   }
 }
