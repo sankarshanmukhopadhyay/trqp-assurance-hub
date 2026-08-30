@@ -4,9 +4,11 @@
   "tag": "trqp-stack-2026.1",
   "title": "TRQP Stack 2026.1 — Coconut",
   "release_directory": "stack/releases/2026.1",
-  "status": "pending-publication",
+  "status": "published",
   "recorded_eligibility_run_id": 32803124966,
   "recorded_eligibility_artifact": "trqp-stack-release-candidate-32803124966",
   "recorded_eligibility_artifact_digest": "sha256:4928c84a115f8697c952f2e1599648c9ff2ce2fcef2c034cbb1caec2029c545c",
+  "published_release_id": 376118198,
+  "published_at": "2026-08-25T03:00:12Z",
   "publish_only_after_main_eligibility_success": true
 }
