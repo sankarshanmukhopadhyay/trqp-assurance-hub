@@ -24,14 +24,14 @@
     "post-change-assurance-recomposed": {"status": "proven", "evidence": ["trqp-assurance-hub:ed501d460fe8a2b093ccfbcc931558b6888d7fe2", "artifacts/lifecycle/supersession-recomposition.json"]}
   },
   "release_process": {
-    "candidate-freeze": {"status": "proven", "evidence": ["stack/candidates/2026.2/freeze-evidence.json", "stack/releases/candidate/manifest.json", "stack/candidates/2026.2/release-candidate.md"]},
-    "adopter-walkthrough": {"status": "pending", "evidence": [], "reason": "The clean walkthrough must execute against immutable TSPP v0.16.1, CTS v1.9.1, and Hub v1.12.0."},
+    "candidate-freeze": {"status": "proven", "evidence": ["stack/candidates/2026.2/freeze-evidence.json", "stack/releases/candidate/manifest.json"]},
+    "adopter-walkthrough": {"status": "proven", "evidence": ["docs/adoption/README.md", "workflow-run:33295881800"], "reason": "Clean-room execution completed against the immutable v0.16.1/v1.9.1/v1.12.0 tuple, including tagged component assurance, correlated evidence, deterministic replay, recomposition, and fail-closed cases."},
     "final-eligibility-replay": {"status": "pending", "evidence": [], "reason": "The complete eligibility workflow must replay on merged main after the immutable tuple is accepted."},
-    "human-release-judgment": {"status": "pending", "evidence": [], "reason": "Human publication judgment is recorded only after walkthrough and final replay succeed."}
+    "human-release-judgment": {"status": "pending", "evidence": [], "reason": "Human publication judgment is recorded only after the merged-main replay succeeds."}
   },
   "judgment": {
     "current": "NOT_RELEASE_ELIGIBLE",
-    "reason": "All lifecycle gates and immutable candidate freeze are evidenced; adopter walkthrough, final merged-baseline replay, and explicit human publication judgment remain pending.",
+    "reason": "All lifecycle gates, immutable candidate freeze, and clean adopter walkthrough are evidenced; final merged-baseline replay and explicit human publication judgment remain pending.",
     "workflow_green_is_release_green": false
   }
 }
