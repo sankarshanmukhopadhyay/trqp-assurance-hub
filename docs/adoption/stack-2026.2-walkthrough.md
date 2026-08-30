@@ -6,13 +6,13 @@ This walkthrough verifies the frozen Stack 2026.2 candidate from a clean bootstr
 
 Use `stack/releases/candidate/manifest.json`. It MUST resolve this immutable tuple:
 
-- TSPP `v0.16.0` → `2f74a01fe22c346c11d9eb8feb8101d39ef68e17`
-- CTS `v1.9.0` → `4395745d530df867329a312c58908a9d73f1c430`
+- TSPP `v0.16.1` → `12315679dd79bcaced5f27a35bfc1d22560de52d`
+- CTS `v1.9.1` → `ea3fed33a1edc3313735405f433a23f9d154d903`
 - Assurance Hub `v1.12.0` → `7f7aae84eb41ffd8ea672dae00955c5714ffd3de`
 - TSMM `v0.24.0`
 - TIS `v0.15.0` → `edda0e87ced40797d22e3df542099871c57fcb59`
 
-The release validator remotely verifies that each component version tag resolves to the declared commit before execution.
+The TSPP and CTS patch releases repair repository-status-contract defects discovered by clean-room execution; lifecycle/reassessment semantics are unchanged. The release validator remotely verifies that each component version tag resolves to the declared commit before execution.
 
 ## Clean bootstrap
 
