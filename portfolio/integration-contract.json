@@ -1,40 +1,14 @@
 {
   "contractVersion": "1.0",
   "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
-  "release": "1.11.0",
+  "release": "1.12.0",
   "role": "assurance-aggregator",
   "authority": {
-    "semanticAuthority": {
-      "repository": "sankarshanmukhopadhyay/trust-systems-meta-model",
-      "version": "0.24.0",
-      "artifacts": [
-        "bindings/trqp/tsmm-trqp-binding.json",
-        "model/semantic-concepts.json",
-        "schemas/semantic-projection.schema.json"
-      ]
-    },
-    "schemaAuthority": {
-      "repository": "sankarshanmukhopadhyay/trust-infrastructure-schemas",
-      "version": "0.14.1",
-      "artifacts": [
-        "portfolio/portfolio-relationship.schema.json",
-        "portfolio/repository-authority.schema.json",
-        "portfolio/portfolio-validation-result.schema.json"
-      ]
-    }
+    "semanticAuthority": {"repository": "sankarshanmukhopadhyay/trust-systems-meta-model", "version": "0.24.0", "artifacts": ["bindings/trqp/tsmm-trqp-binding.json","model/semantic-concepts.json","schemas/semantic-projection.schema.json"]},
+    "schemaAuthority": {"repository": "sankarshanmukhopadhyay/trust-infrastructure-schemas", "version": "0.15.0", "artifacts": ["portfolio/portfolio-relationship.schema.json","portfolio/repository-authority.schema.json","portfolio/portfolio-validation-result.schema.json","assurance/assurance-lifecycle-event.schema.json"]}
   },
-  "provides": [
-    "combined assurance decisions",
-    "cross-repository assurance manifests",
-    "assurance traceability evidence",
-    "CTS evidence reproducibility status"
-  ],
-  "consumes": [
-    "TRQP-TSPP protocol validation evidence",
-    "TRQP Conformance Suite execution evidence",
-    "TRQP Conformance Suite replay determinism evidence",
-    "TSMM semantic bindings and TIS portfolio contracts"
-  ],
+  "provides": ["combined assurance decisions","cross-repository assurance manifests","assurance traceability evidence","CTS evidence reproducibility status","current-assurance lifecycle recomposition and supersession lineage"],
+  "consumes": ["TRQP-TSPP protocol validation evidence","TRQP Conformance Suite execution evidence","TRQP Conformance Suite replay determinism evidence","TSMM semantic bindings and TIS portfolio/lifecycle contracts"],
   "evidence": [
     {"path": "artifacts/combined-assurance/assurance-decision.json", "purpose": "combined assurance outcome"},
     {"path": "artifacts/combined-assurance/combined-assurance-manifest.json", "purpose": "evidence manifest including CTS replay determinism projection"},
@@ -44,15 +18,5 @@
     {"repository": "sankarshanmukhopadhyay/TRQP-TSPP", "relation": "assures"},
     {"repository": "sankarshanmukhopadhyay/trqp-conformance-suite", "relation": "aggregates-evidence-from"}
   ],
-  "revocation": {
-    "triggers": [
-      "semantic-authority-version-incompatible",
-      "schema-authority-version-incompatible",
-      "required-evidence-missing",
-      "source-assurance-evidence-invalid",
-      "source-replay-determinism-invalid",
-      "source-replay-policy-incompatible"
-    ],
-    "effect": "integration-status-invalid"
-  }
+  "revocation": {"triggers": ["semantic-authority-version-incompatible","schema-authority-version-incompatible","required-evidence-missing","source-assurance-evidence-invalid","source-replay-determinism-invalid","source-replay-policy-incompatible"], "effect": "integration-status-invalid"}
 }
