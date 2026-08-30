@@ -6,6 +6,8 @@ on:
     paths:
       - 'stack/**'
       - 'tools/stack_*.py'
+      - 'scripts/validate_lifecycle_recomposition.py'
+      - 'artifacts/lifecycle/**'
       - 'tests/test_stack_release_readiness.py'
       - 'docs/adoption/**'
       - 'GOVERNANCE.md'
@@ -36,6 +38,11 @@ jobs:
 
       - name: Validate release contract and immutable tuple
         run: make stack-release-check
+
+      - name: Validate Stack 2026.2 lifecycle evidence boundaries
+        run: |
+          python scripts/validate_lifecycle_recomposition.py
+          python tools/stack_2026_2_lifecycle_eligibility.py
 
       - name: Prove clean-room bootstrap
         run: python tools/stack_bootstrap.py --clean
@@ -102,6 +109,8 @@ jobs:
           name: trqp-stack-release-candidate-${{ github.run_id }}
           path: |
             artifacts/stack-candidate/
+            artifacts/lifecycle/
+            stack/candidates/2026.2/lifecycle-eligibility.json
             .stack-work/bootstrap-manifest.json
             .stack-work/cts/artifacts/
             .stack-work/cts/reports/stack_fixture_replay/determinism-report.json
