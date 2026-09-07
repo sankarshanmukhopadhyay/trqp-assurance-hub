@@ -1,3 +1,10 @@
+---
+layout: default
+title: Public repository baseline
+parent: Documentation catalogue
+nav_exclude: true
+---
+
 # Public repository baseline
 
 This record captures controls reviewed under issue #53. It is repository assurance evidence, not external certification.
