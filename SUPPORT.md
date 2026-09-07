@@ -1,3 +1,9 @@
+---
+layout: default
+title: Support
+nav_exclude: true
+---
+
 # Support
 
 Use GitHub Issues for reproducible assurance-schema/tooling defects, documentation problems, combined-assurance/evidence questions, and bounded feature proposals. Include the affected version/revision, expected and observed behaviour, and the smallest useful evidence reference.
