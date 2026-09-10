@@ -1,14 +1,74 @@
 {
   "schema_version": "1.0",
-  "stack": {"id": "trqp-stack-2026.2-rc1", "status": "candidate"},
+  "stack": {
+    "id": "trqp-stack-2026.3-rc1",
+    "name": "Banyan",
+    "scientific_name": "Ficus benghalensis",
+    "status": "candidate"
+  },
   "components": {
-    "tspp": {"repository": "sankarshanmukhopadhyay/TRQP-TSPP", "ref": "v0.16.1", "commit": "12315679dd79bcaced5f27a35bfc1d22560de52d"},
-    "cts": {"repository": "sankarshanmukhopadhyay/trqp-conformance-suite", "ref": "v1.9.1", "commit": "ea3fed33a1edc3313735405f433a23f9d154d903"},
-    "assurance_hub": {"repository": "sankarshanmukhopadhyay/trqp-assurance-hub", "ref": "v1.12.0", "commit": "7f7aae84eb41ffd8ea672dae00955c5714ffd3de"}
+    "tspp": {
+      "repository": "sankarshanmukhopadhyay/TRQP-TSPP",
+      "ref": "v0.17.0",
+      "commit": "328e19c71f407ebdb2bc92828a3ae037a843f285"
+    },
+    "cts": {
+      "repository": "sankarshanmukhopadhyay/trqp-conformance-suite",
+      "ref": "v1.10.0",
+      "commit": "1e5dc2646c75390444d9ae86f3d6136d7c033463"
+    },
+    "assurance_hub": {
+      "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
+      "ref": "v1.13.0",
+      "commit": "5346b83545bf042360eb32691dfc907135d233dd"
+    }
   },
   "authorities": {
-    "tsmm": {"repository": "sankarshanmukhopadhyay/trust-systems-meta-model", "ref": "v0.24.0"},
-    "tis": {"repository": "sankarshanmukhopadhyay/trust-infrastructure-schemas", "ref": "v0.15.0", "commit": "edda0e87ced40797d22e3df542099871c57fcb59"}
+    "tsmm": {
+      "repository": "qbf-consulting/trust-systems-meta-model",
+      "version": "0.24.0",
+      "ref": "0.24.0",
+      "commit": "8ddfd52c876faf368241bc11101681fb1fe49398"
+    },
+    "tis": {
+      "repository": "qbf-consulting/trust-infrastructure-schemas",
+      "version": "0.15.0",
+      "commit": "edda0e87ced40797d22e3df542099871c57fcb59",
+      "pin_kind": "version-and-commit",
+      "note": "The transferred QBF repository exposes VERSION 0.15.0 at this commit but no v0.15.0 tag; no synchronization-only tag is inferred."
+    }
   },
-  "release_gates": ["release-tuple-resolves","tagged-commits-match","clean-bootstrap","canonical-evaluation","tspp-evidence-valid","cts-evidence-valid","cts-replay-deterministic","combined-assurance-valid","run-target-correlation","provenance-complete","artifact-integrity-valid","negative-cases-fail-closed","full-stack-replay-equivalent","walkthrough-executable","change-event-valid","material-change-detected","non-material-change-bounded","stale-assurance-not-reused","authority-drift-detected","unknown-impact-fails-safe","reassessment-plan-valid","bounded-reassessment-valid","supersession-lineage-complete","post-change-assurance-recomposed"]
+  "release_gates": [
+    "release-tuple-resolves",
+    "tagged-commits-match",
+    "authority-version-commits-resolve",
+    "clean-bootstrap",
+    "canonical-evaluation",
+    "tspp-evidence-valid",
+    "cts-evidence-valid",
+    "cts-replay-deterministic",
+    "combined-assurance-valid",
+    "run-target-correlation",
+    "provenance-complete",
+    "artifact-integrity-valid",
+    "negative-cases-fail-closed",
+    "full-stack-replay-equivalent",
+    "walkthrough-executable",
+    "change-event-valid",
+    "material-change-detected",
+    "non-material-change-bounded",
+    "stale-assurance-not-reused",
+    "authority-drift-detected",
+    "unknown-impact-fails-safe",
+    "reassessment-plan-valid",
+    "bounded-reassessment-valid",
+    "supersession-lineage-complete",
+    "post-change-assurance-recomposed",
+    "profile-contract-valid",
+    "profile-source-bound",
+    "producer-authority-preserved",
+    "producer-lifecycle-currentness-enforced",
+    "cross-source-fail-closed",
+    "ayra-profile-walkthrough-executable"
+  ]
 }
