@@ -5,8 +5,6 @@ from __future__ import annotations
 from ipaddress import ip_address
 from urllib.parse import urlparse
 
-from tools.profile_assurance_model import evaluate
-
 
 def did_method(did: str) -> str | None:
     if not isinstance(did, str) or not did.startswith("did:"):
@@ -32,6 +30,14 @@ def is_safe_https_url(value: str) -> bool:
         return True
 
 
+def _observed_boolean(value: object) -> str:
+    if value is True:
+        return "PASS"
+    if value is False:
+        return "FAIL"
+    return "INDETERMINATE"
+
+
 def assess_authority(observation: dict) -> dict:
     registry_did = observation.get("registry_did")
     method = did_method(registry_did)
@@ -41,26 +47,45 @@ def assess_authority(observation: dict) -> dict:
     expected_endpoint = observation.get("expected_trqp_endpoint")
     governance = observation.get("governance_framework")
     authority_id = observation.get("authority_id")
+    controller_proof = observation.get("controller_proof_valid")
+    stale = observation.get("discovery_stale") is True
 
     syntax_ok = method is not None
-    method_ok = syntax_ok and (not supported or method in supported)
-    resolution_result = evaluate(strength="MUST", applicability="APPLICABLE", implemented=did_resolved is not None, evidence_present=did_resolved is not None, satisfied=did_resolved)
+    method_result = "INDETERMINATE"
+    if syntax_ok:
+        method_result = "PASS" if (not supported or method in supported) else "FAIL"
 
-    endpoint_evidence = service_endpoint is not None
-    endpoint_ok = bool(endpoint_evidence and is_safe_https_url(service_endpoint) and (expected_endpoint is None or service_endpoint == expected_endpoint))
-    endpoint_result = evaluate(strength="SHOULD", applicability="APPLICABLE", implemented=endpoint_evidence, evidence_present=endpoint_evidence, satisfied=endpoint_ok if endpoint_evidence else None)
+    resolution_result = _observed_boolean(did_resolved)
 
-    governance_present = isinstance(governance, dict)
-    governance_matches = bool(governance_present and authority_id and governance.get("authority_id") == authority_id and governance.get("discoverable") is True)
-    governance_result = evaluate(strength="MUST", applicability="APPLICABLE", implemented=governance_present, evidence_present=governance_present, satisfied=governance_matches if governance_present else None)
+    if service_endpoint is None:
+        endpoint_result = "INDETERMINATE"
+    else:
+        endpoint_ok = is_safe_https_url(service_endpoint) and (
+            expected_endpoint is None or service_endpoint == expected_endpoint
+        )
+        endpoint_result = "PASS" if endpoint_ok else "FAIL"
+    if stale and endpoint_result == "PASS":
+        endpoint_result = "INDETERMINATE"
+
+    if not isinstance(governance, dict):
+        governance_result = "INDETERMINATE"
+    else:
+        governance_matches = bool(
+            authority_id
+            and governance.get("authority_id") == authority_id
+            and governance.get("discoverable") is True
+        )
+        governance_result = "PASS" if governance_matches else "FAIL"
+        if governance.get("stale") is True and governance_result == "PASS":
+            governance_result = "INDETERMINATE"
 
     return {
         "identifier_syntax": "PASS" if syntax_ok else "FAIL",
-        "did_method": "PASS" if method_ok else ("FAIL" if syntax_ok else "INDETERMINATE"),
+        "did_method": method_result,
         "resolution": resolution_result,
         "service_discovery": endpoint_result,
         "governance_discovery": governance_result,
-        "control_evidence": "INDETERMINATE",
+        "control_evidence": _observed_boolean(controller_proof),
         "governance_legitimacy": "INDETERMINATE",
         "observed_method": method,
     }
