@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "stack_release": "trqp-stack-2026.3",
+  "candidate": "rc1",
+  "walkthrough": "docs/adoption/stack-2026.3-walkthrough.md",
+  "status": "pending-execution",
+  "required": [
+    "clean-bootstrap",
+    "tagged-component-assurance",
+    "cts-deterministic-replay",
+    "cts-profile-evidence-consumption",
+    "tspp-profile-evidence-consumption",
+    "cross-source-authority-preservation",
+    "ayra-profile-assessment",
+    "fail-closed-negative-cases",
+    "whole-stack-semantic-replay"
+  ],
+  "claim_boundary": "The walkthrough demonstrates reproducible project assurance and composition behavior. It is not independent certification of an Ayra registry or any production deployment."
+}
