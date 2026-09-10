@@ -29,7 +29,7 @@ It is also the **adopter front door and coordinated Stack release authority**. A
 | Governance authority | [`GOVERNANCE.md`](GOVERNANCE.md) and [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) |
 | Current Stack record | [`stack/releases/2026.1/`](stack/releases/2026.1/) |
 | Canonical adopter workflow | [`docs/adoption/stack-quickstart.md`](docs/adoption/stack-quickstart.md) |
-| Profile-aware assurance guide | [`docs/guides/profile-aware-assurance.md`](docs/guides/profile-aware-assurance.md) |
+| Profile-aware assurance guide | [`profiles/README.md`](profiles/README.md) |
 | Documentation site | https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/ |
 
 ## Start here: TRQP Stack 2026.1 — Coconut
@@ -117,7 +117,7 @@ Profile evaluation preserves independent result dimensions and the bounded state
 
 The current Ayra projection is version-bound to Ayra `0.6.0-draft`, TRQP `2.0`, and the exact upstream revision recorded in `profiles/ayra/requirements.yaml`. The compatibility analysis against the downstream experimental candidate TRQP v3 is similarly revision-bound and does not treat candidate-v3 work as upstream authority.
 
-See [`docs/guides/profile-aware-assurance.md`](docs/guides/profile-aware-assurance.md), [`docs/ayra-v3-compatibility.md`](docs/ayra-v3-compatibility.md), and [`docs/ayra-assurance-residual-threats.md`](docs/ayra-assurance-residual-threats.md).
+See [`profiles/README.md`](profiles/README.md), [`docs/ayra-v3-compatibility.md`](docs/ayra-v3-compatibility.md), and [`docs/ayra-assurance-residual-threats.md`](docs/ayra-assurance-residual-threats.md).
 
 The first proving implementation deliberately contains some deterministic core/posture-adjacent observations so the profile architecture can be exercised end to end. Producer-contract convergence is tracked separately in TRQP Conformance Suite #40 and TRQP-TSPP #85; those follow-ups move producer-owned observations back to their proper evidence authorities without moving Ayra-specific semantics out of the Hub profile layer.
 
@@ -148,7 +148,7 @@ For TRQP Stack 2026.1 — Coconut, the decisive workflow completed successfully 
 
 - [`docs/adoption/stack-quickstart.md`](docs/adoption/stack-quickstart.md) — canonical end-to-end Stack workflow.
 - [`docs/guides/combined-assurance.md`](docs/guides/combined-assurance.md) — compose CTS and TSPP evidence.
-- [`docs/guides/profile-aware-assurance.md`](docs/guides/profile-aware-assurance.md) — evaluate version-bound ecosystem profiles without collapsing authority boundaries.
+- [`profiles/README.md`](profiles/README.md) — evaluate version-bound ecosystem profiles without collapsing authority boundaries.
 - [`docs/guides/evidence-artifacts.md`](docs/guides/evidence-artifacts.md) — evidence artifact model.
 - [`docs/guides/public-assurance-publication.md`](docs/guides/public-assurance-publication.md) — publish relying-party-facing assurance.
 - [`docs/reference/compatibility-matrix.md`](docs/reference/compatibility-matrix.md) — supported component relationships.
