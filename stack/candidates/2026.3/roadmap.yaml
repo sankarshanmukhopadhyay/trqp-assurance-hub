@@ -1,0 +1,73 @@
+schema_version: "1.0"
+stack_release: trqp-stack-2026.3
+codename:
+  common_name: Banyan
+  scientific_name: Ficus benghalensis
+status: candidate-frozen
+coordinator:
+  repository: sankarshanmukhopadhyay/trqp-assurance-hub
+  governing_issue: https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/86
+proposition:
+  id: profile-aware-compositional-assurance
+  statement: >-
+    A profile-aware TRQP assurance conclusion must preserve the independent authority,
+    provenance, lifecycle state, scope and bounded result of CTS, TSPP, ecosystem-profile,
+    semantic/schema and external-governance evidence sources. No local-positive observation
+    may override producer-owned failure, uncertainty or non-current evidence.
+components:
+  cts:
+    repository: sankarshanmukhopadhyay/trqp-conformance-suite
+    release: v1.10.0
+    commit: 1e5dc2646c75390444d9ae86f3d6136d7c033463
+    role: core-conformance-evidence-producer
+  tspp:
+    repository: sankarshanmukhopadhyay/TRQP-TSPP
+    release: v0.17.0
+    commit: 328e19c71f407ebdb2bc92828a3ae037a843f285
+    role: security-privacy-posture-evidence-producer
+  assurance_hub:
+    repository: sankarshanmukhopadhyay/trqp-assurance-hub
+    release: v1.13.0
+    commit: 5346b83545bf042360eb32691dfc907135d233dd
+    role: profile-projection-and-evidence-composition
+authorities:
+  tsmm:
+    repository: qbf-consulting/trust-systems-meta-model
+    version: 0.24.0
+    ref: 0.24.0
+    commit: 8ddfd52c876faf368241bc11101681fb1fe49398
+    disposition: unchanged
+  tis:
+    repository: qbf-consulting/trust-infrastructure-schemas
+    version: 0.15.0
+    commit: edda0e87ced40797d22e3df542099871c57fcb59
+    disposition: unchanged-version-and-commit-pin
+profile:
+  authority: Ayra Forum
+  id: ayra-trqp
+  version: 0.6.0-draft
+  profiled_protocol: TRQP 2.0
+  authority_boundary: profile-semantics-remain-upstream
+release_gates:
+  inherited:
+    - release-tuple-resolves
+    - tagged-commits-match
+    - clean-bootstrap
+    - canonical-evaluation
+    - cts-replay-deterministic
+    - combined-assurance-valid
+    - negative-cases-fail-closed
+    - full-stack-replay-equivalent
+    - walkthrough-executable
+    - assurance-validity-under-change
+  profile_specific:
+    - profile-contract-valid
+    - profile-source-bound
+    - producer-authority-preserved
+    - producer-lifecycle-currentness-enforced
+    - cross-source-fail-closed
+    - ayra-profile-walkthrough-executable
+publication:
+  eligibility: pending
+  human_release_judgment: required
+  automated_publication_after_acceptance: true
