@@ -5,11 +5,14 @@ on:
   pull_request:
     paths:
       - 'stack/**'
+      - 'data/compatibility-registry.yaml'
       - 'tools/stack_*.py'
       - 'scripts/validate_lifecycle_recomposition.py'
       - 'scripts/validate_authority_drift_and_supersession.py'
       - 'artifacts/lifecycle/**'
       - 'tests/test_stack_release_readiness.py'
+      - 'tests/test_*profile*.py'
+      - 'tests/test_ayra_*.py'
       - 'docs/adoption/**'
       - 'GOVERNANCE.md'
       - 'Makefile'
@@ -40,7 +43,7 @@ jobs:
       - name: Validate release contract and immutable tuple
         run: make stack-release-check
 
-      - name: Validate Stack 2026.2 lifecycle evidence boundaries
+      - name: Validate inherited Stack 2026.2 lifecycle evidence boundaries
         run: |
           python scripts/validate_lifecycle_recomposition.py
           python scripts/validate_authority_drift_and_supersession.py
@@ -56,6 +59,20 @@ jobs:
 
       - name: Execute declared tagged component assurance surfaces
         run: python tools/stack_evaluate.py
+
+      - name: Prove frozen Hub profile-aware consumer boundary
+        working-directory: .stack-work/assurance_hub
+        run: |
+          python -m pytest -q \
+            tests/test_profile_assurance_model.py \
+            tests/test_ayra_profile_runner.py \
+            tests/test_ayra_authority_evidence.py \
+            tests/test_ayra_adversarial.py \
+            tests/test_ayra_assurance_bundle.py \
+            tests/test_ayra_v3_compatibility.py \
+            tests/test_consume_cts_profile_evidence.py \
+            tests/test_compose_profile_producer_evidence.py \
+            tests/test_tspp_profile_evidence_consumer.py
 
       - name: Generate correlated CTS evidence
         working-directory: .stack-work/cts
@@ -94,16 +111,23 @@ jobs:
 
       - name: Compose combined assurance twice
         run: |
-          python tools/run_combined_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --release-set ots-2026-08 --out artifacts/stack-candidate/run-a
-          python tools/run_combined_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --release-set ots-2026-08 --out artifacts/stack-candidate/run-b
+          python tools/run_combined_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --release-set ots-2026-09-profile-aware --out artifacts/stack-candidate/run-a
+          python tools/run_combined_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --release-set ots-2026-09-profile-aware --out artifacts/stack-candidate/run-b
 
       - name: Prove whole-stack semantic replay equivalence
         run: |
           python tools/stack_compare.py artifacts/stack-candidate/run-a/combined-assurance-manifest.json artifacts/stack-candidate/run-b/combined-assurance-manifest.json
           python tools/stack_compare.py artifacts/stack-candidate/run-a/assurance-decision.json artifacts/stack-candidate/run-b/assurance-decision.json
 
-      - name: Verify fail-closed cross-stack cases
-        run: python -m pytest -q tests/test_cross_stack_negative_cases.py tests/test_cts_determinism.py tests/test_stack_release_readiness.py
+      - name: Verify fail-closed cross-stack and profile cases
+        run: |
+          python -m pytest -q \
+            tests/test_cross_stack_negative_cases.py \
+            tests/test_cts_determinism.py \
+            tests/test_stack_release_readiness.py \
+            tests/test_consume_cts_profile_evidence.py \
+            tests/test_compose_profile_producer_evidence.py \
+            tests/test_tspp_profile_evidence_consumer.py
 
       - name: Publish candidate eligibility evidence
         uses: actions/upload-artifact@v7
@@ -113,6 +137,8 @@ jobs:
             artifacts/stack-candidate/
             artifacts/lifecycle/
             stack/candidates/2026.2/lifecycle-eligibility.json
+            stack/candidates/2026.3/
+            stack/releases/candidate/manifest.json
             .stack-work/bootstrap-manifest.json
             .stack-work/cts/artifacts/
             .stack-work/cts/reports/stack_fixture_replay/determinism-report.json
