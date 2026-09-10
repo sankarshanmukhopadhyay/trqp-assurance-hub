@@ -43,14 +43,26 @@ def test_nonconformant_fixture_fails_without_false_negative_trust_semantics():
     assert result["dimensions"]["operational"]["result"] == "FAIL"
 
 
-def test_missing_observation_is_not_pass():
+def test_missing_mandatory_observation_does_not_pass():
     result = assess_fixture({})
     requirements = by_requirement(result)
     assert requirements["AYRA-CORE-001"]["result"] == "FAIL"
     assert requirements["AYRA-CORE-002"]["result"] == "FAIL"
     assert requirements["AYRA-ID-001"]["result"] == "FAIL"
     assert requirements["AYRA-ERR-001"]["result"] == "FAIL"
-    assert requirements["AYRA-RATE-001"]["result"] == "FAIL"
+    assert requirements["AYRA-RATE-001"]["result"] == "INDETERMINATE"
+    assert requirements["AYRA-EXT-002"]["result"] == "INDETERMINATE"
+
+
+def test_conditional_capabilities_can_be_explicitly_not_applicable():
+    fixture = load("conformant.json")
+    fixture["rate_limiting"] = False
+    fixture.pop("rate_limit_response")
+    fixture["unsupported_extension"] = False
+    fixture.pop("unsupported_extension_response")
+    requirements = by_requirement(assess_fixture(fixture))
+    assert requirements["AYRA-RATE-001"]["result"] == "NOT_APPLICABLE"
+    assert requirements["AYRA-EXT-002"]["result"] == "NOT_APPLICABLE"
 
 
 def test_adapter_emits_no_global_compliance_boolean():
