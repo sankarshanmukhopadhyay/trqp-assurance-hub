@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "release_id": "trqp-stack-2026.3",
+  "tag": "trqp-stack-2026.3",
+  "title": "TRQP Stack 2026.3 — Banyan",
+  "release_directory": "stack/releases/2026.3",
+  "status": "pending-publication",
+  "recorded_eligibility_run_id": 34504670330,
+  "recorded_eligibility_artifact": "trqp-stack-release-candidate-34504670330",
+  "recorded_eligibility_artifact_digest": "sha256:35ea47a0d3bb8c07368f58c9bd1ea6667d3a515bc6adb29b2646f0c8522513ca",
+  "human_release_judgment": "ACCEPT",
+  "human_release_judgment_comment_id": 5622360301,
+  "publish_only_after_main_eligibility_success": true
+}
