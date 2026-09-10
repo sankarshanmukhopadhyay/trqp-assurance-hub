@@ -16,12 +16,12 @@ Each profile lives under `profiles/<name>/profile.yaml` and MUST validate agains
 |---|---|---|
 | TRQP core protocol | Upstream TRQP specification | Consume/compose protocol-conformance evidence and preserve protocol version/binding provenance |
 | Ecosystem profile | Profile publisher, such as Ayra Forum | Maintain a version-bound downstream requirement projection and evaluate profile-owned propositions |
-| Protocol conformance evidence | TRQP Conformance Suite | Consume CTS evidence where available; do not redefine CTS-owned core semantics |
-| Security/privacy posture | TRQP-TSPP | Consume posture evidence where available; do not redefine TSPP control/posture semantics |
+| Protocol conformance evidence | TRQP Conformance Suite | Consume CTS evidence; do not redefine CTS-owned core semantics |
+| Security/privacy posture | TRQP-TSPP | Consume posture evidence; do not redefine TSPP control/posture semantics |
 | Profile assurance composition | TRQP Assurance Hub | Resolve profile, determine applicability, bind evidence, aggregate dimensions and publish assurance artifacts |
 | Governance legitimacy | Applicable external governance authority/evidence | Report only what evidence supports; absence of external evidence remains indeterminate |
 
-Cross-repository producer-contract follow-up is tracked in CTS issue #40 and TSPP issue #85. Until those integrations are implemented, the Ayra adapter contains deterministic proving observations for some core and posture-adjacent propositions. Those proving observations do not transfer core-conformance or posture authority to the Hub.
+CTS #40/#46 and TSPP #85/#88 now provide explicit profile-consumable producer contracts. The Hub composes those producer-owned results rather than treating profile metadata as permission to reinterpret them. Deterministic Hub-local observations remain useful for isolated fixture testing, but once applicable producer evidence is supplied it is authoritative for the producer-owned proposition and there is no silent fallback to a conflicting local PASS.
 
 ## Resolution
 
@@ -81,6 +81,19 @@ The current Ayra assurance projection is bound to:
 
 Executable assessment first verifies this binding. A different profile identity, version or source revision is not silently assessed using the pinned Ayra semantics.
 
+## Producer evidence composition
+
+For CTS-owned core propositions, the Hub can consume the CTS profile-consumable contract and map exact CTS test results into the profile proposition graph. The current Ayra mapping includes:
+
+| Ayra proposition | CTS producer observation |
+|---|---|
+| `PROP-AYRA-CORE-001` | `TC-AUTHZ-001` |
+| `PROP-AYRA-CORE-002` | `TC-RECOG-001` |
+
+A CTS `FAIL` remains `FAIL`. `REASSESS_REQUIRED`, `INVALID`, protocol/binding mismatch, or missing mapped evidence becomes `INDETERMINATE` for the Hub profile conclusion; the Hub does not revive an older local fixture result to manufacture a positive conclusion.
+
+TSPP uses the equivalent producer boundary for security/privacy posture. Profile-relevant TSPP lifecycle state remains producer-owned and cannot be weakened by Hub profile metadata.
+
 ## Evidence chain
 
 Every material conclusion should remain traceable through:
@@ -88,7 +101,7 @@ Every material conclusion should remain traceable through:
 ```text
 normative requirement
   -> assurance proposition
-  -> executable observation/test
+  -> producer/local observation
   -> captured evidence
   -> dimension result
   -> published assurance conclusion
@@ -125,7 +138,7 @@ This fixture demonstrates the evidence pipeline. It is not independent certifica
 
 ## Adversarial coverage
 
-The negative suite attempts to falsify consequential boundaries, including cross-profile or wrong-revision semantic reuse, malformed identifiers and Problem Details, operational errors masquerading as negative trust decisions, incorrect rate-limit and unsupported-extension behaviour, unsafe discovered endpoints, stale or contradictory authority evidence, missing or invalid signing evidence, and false promotion of governance legitimacy.
+The negative suite attempts to falsify consequential boundaries, including cross-profile or wrong-revision semantic reuse, malformed identifiers and Problem Details, operational errors masquerading as negative trust decisions, incorrect rate-limit and unsupported-extension behaviour, unsafe discovered endpoints, stale or contradictory authority evidence, missing or invalid signing evidence, false promotion of governance legitimacy, stale producer evidence, and producer-result override attempts.
 
 Residual threats that deterministic fixtures do not prove are recorded in [`docs/ayra-assurance-residual-threats.md`](../docs/ayra-assurance-residual-threats.md).
 
@@ -137,14 +150,9 @@ See [`docs/ayra-v3-compatibility.md`](../docs/ayra-v3-compatibility.md).
 
 Any change to either pinned source revision requires compatibility reassessment. Historical evidence remains historical; an old matrix must not continue to claim that it represents the current relationship after either source changes.
 
-## Cross-repository next steps
+## Cross-repository composition
 
-The first Hub implementation intentionally proved the profile boundary before requiring changes in every producer repository. The next integration step is to remove avoidable duplicate observations by consuming producer-owned evidence:
-
-- **CTS #40** — expose profile-consumable protocol-conformance evidence with exact test-set/run/protocol provenance;
-- **TSPP #85** — expose profile-aware security/privacy posture evidence and lifecycle/applicability metadata.
-
-This preserves the Stack boundary:
+The producer boundary is now:
 
 ```text
 CTS core conformance evidence
@@ -156,7 +164,7 @@ profile-owned constraints / authority evidence
 Assurance Hub composition
 ```
 
-The Hub should compose those independent authorities, not replace them.
+The Hub composes those independent authorities; it does not replace them.
 
 ## Authority boundary
 
