@@ -29,7 +29,7 @@ It is also the **adopter front door and coordinated Stack release authority**. A
 | Evidence output | `artifacts/combined-assurance/` plus reproducible profile-specific evidence bundles |
 | Governance authority | [`GOVERNANCE.md`](GOVERNANCE.md) and [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) |
 | Current Stack record | [`stack/releases/2026.3/`](stack/releases/2026.3/) |
-| Current Stack release | [`trqp-stack-2026.3`](../../releases/tag/trqp-stack-2026.3) |
+| Current Stack release | https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/releases/tag/trqp-stack-2026.3 |
 | Canonical adopter workflow | [`docs/adoption/stack-quickstart.md`](docs/adoption/stack-quickstart.md) |
 | Profile-aware assurance walkthrough | [`docs/adoption/stack-2026.3-walkthrough.md`](docs/adoption/stack-2026.3-walkthrough.md) |
 | Profile-aware assurance guide | [`profiles/README.md`](profiles/README.md) |
