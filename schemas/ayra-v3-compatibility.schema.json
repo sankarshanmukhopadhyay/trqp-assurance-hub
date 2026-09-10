@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/schemas/ayra-v3-compatibility.schema.json",
+  "title": "Ayra TRQP v2 / candidate-v3 compatibility matrix",
+  "type": "object",
+  "required": ["current_authority", "candidate_source", "mappings"],
+  "properties": {
+    "current_authority": {
+      "type": "object",
+      "required": ["profile_id", "profile_version", "protocol_version", "source_revision"],
+      "properties": {
+        "profile_id": {"const": "ayra-trqp"},
+        "profile_version": {"type": "string", "minLength": 1},
+        "protocol_version": {"const": "2.0"},
+        "source_revision": {"type": "string", "minLength": 7}
+      },
+      "additionalProperties": false
+    },
+    "candidate_source": {
+      "type": "object",
+      "required": ["repository", "branch", "revision", "document", "authority_status"],
+      "properties": {
+        "repository": {"type": "string", "format": "uri"},
+        "branch": {"const": "draft/next-trqp"},
+        "revision": {"type": "string", "minLength": 7},
+        "document": {"type": "string", "minLength": 1},
+        "authority_status": {"const": "downstream-experimental-candidate"}
+      },
+      "additionalProperties": false
+    },
+    "mappings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["ayra_requirement", "classification", "candidate_section", "migration_effect", "reassessment_trigger"],
+        "properties": {
+          "ayra_requirement": {"type": "string", "pattern": "^AYRA-[A-Z]+-[0-9]{3}$"},
+          "classification": {"enum": ["unchanged", "narrowed_by_profile", "extended_by_profile", "changed_in_v3_draft", "superseded_candidate", "conflict_candidate", "evidence_gap", "not_applicable"]},
+          "candidate_section": {"type": ["string", "null"]},
+          "migration_effect": {"enum": ["none", "retest", "renegotiate", "profile_update_candidate", "binding_update_candidate", "authority_decision_required"]},
+          "evidence_gap": {"type": ["string", "null"]},
+          "reassessment_trigger": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

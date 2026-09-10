@@ -1,0 +1,90 @@
+current_authority:
+  profile_id: ayra-trqp
+  profile_version: 0.6.0-draft
+  protocol_version: "2.0"
+  source_revision: ec7768572592b50ba3f4102c026c2449148b5e11
+candidate_source:
+  repository: https://github.com/sankarshanmukhopadhyay/tswg-trust-registry-protocol
+  branch: draft/next-trqp
+  revision: 539fccb624fc6328aa3bece4831b3291ee78f6be
+  document: development/next-draft/CANDIDATE-TRQP-V3.md
+  authority_status: downstream-experimental-candidate
+mappings:
+  - ayra_requirement: AYRA-CORE-001
+    classification: evidence_gap
+    candidate_section: "7 Request processing / 10 Negotiation and migration"
+    migration_effect: renegotiate
+    evidence_gap: Candidate v3 deliberately leaves exact normative member names and serialization experimental; no authoritative mapping for the v2 POST /authorization binding exists yet.
+    reassessment_trigger: Reassess when upstream defines the candidate-version binding, endpoint vocabulary, or version/profile negotiation mechanism.
+  - ayra_requirement: AYRA-CORE-002
+    classification: evidence_gap
+    candidate_section: "7 Request processing / 10 Negotiation and migration"
+    migration_effect: renegotiate
+    evidence_gap: Candidate v3 deliberately leaves exact normative member names and serialization experimental; no authoritative mapping for the v2 POST /recognition binding exists yet.
+    reassessment_trigger: Reassess when upstream defines the candidate-version binding, endpoint vocabulary, or version/profile negotiation mechanism.
+  - ayra_requirement: AYRA-ID-001
+    classification: conflict_candidate
+    candidate_section: "3.1 Proposition / 3.2 Principal and verification material"
+    migration_effect: profile_update_candidate
+    evidence_gap: Ayra requires _id values to be DID URIs while candidate v3 separates semantic principals from verification material and leaves exact wire vocabulary unresolved; DID-only identifier constraints may remain profile-specific but require explicit reconciliation.
+    reassessment_trigger: Reassess when upstream fixes principal/material wire identifiers or Ayra publishes a v3-aligned identifier model.
+  - ayra_requirement: AYRA-ERR-001
+    classification: changed_in_v3_draft
+    candidate_section: "15 Error semantics"
+    migration_effect: binding_update_candidate
+    evidence_gap: null
+    reassessment_trigger: Reassess if candidate-v3 error semantics or the referenced Problem Details RFC changes, or when upstream adopts/rejects the RFC 9457 direction.
+  - ayra_requirement: AYRA-ERR-002
+    classification: unchanged
+    candidate_section: "1 Scope / 15 Error semantics"
+    migration_effect: none
+    evidence_gap: null
+    reassessment_trigger: Reassess if upstream changes the separation between processing/transport failure and semantic negative decisions.
+  - ayra_requirement: AYRA-RATE-001
+    classification: evidence_gap
+    candidate_section: "15 Error semantics"
+    migration_effect: binding_update_candidate
+    evidence_gap: Candidate v3 states general error invariants but does not define a rate-limit-specific 429 contract or Retry-After behaviour.
+    reassessment_trigger: Reassess when a candidate-v3 HTTP binding defines rate-limiting semantics.
+  - ayra_requirement: AYRA-EXT-001
+    classification: extended_by_profile
+    candidate_section: "7 Request processing / 11 Transport and binding boundary"
+    migration_effect: profile_update_candidate
+    evidence_gap: Candidate v3 does not standardize Ayra extension endpoints; they remain profile-owned unless upstream later defines equivalent capabilities.
+    reassessment_trigger: Reassess if upstream standardizes extension/discovery endpoint semantics or Ayra revises its extension surface.
+  - ayra_requirement: AYRA-EXT-002
+    classification: extended_by_profile
+    candidate_section: "15 Error semantics"
+    migration_effect: binding_update_candidate
+    evidence_gap: Candidate v3 does not define Ayra's 501 rule for unsupported optional extension endpoints.
+    reassessment_trigger: Reassess when a candidate-v3 binding defines unsupported-capability behaviour.
+  - ayra_requirement: AYRA-TLS-001
+    classification: evidence_gap
+    candidate_section: "11 Transport and binding boundary / 16 Security considerations"
+    migration_effect: binding_update_candidate
+    evidence_gap: Candidate v3 is intentionally transport-independent and does not make TLS 1.2+ a core semantic invariant; TLS requirements belong to an eventual HTTP binding or security profile.
+    reassessment_trigger: Reassess when an authoritative candidate-v3 HTTP/security binding is defined.
+  - ayra_requirement: AYRA-SIGN-001
+    classification: evidence_gap
+    candidate_section: "9 Response processing / 16 Security considerations"
+    migration_effect: authority_decision_required
+    evidence_gap: Candidate v3 requires provenance/auditability but does not define the Ayra response-signing mechanism; Ayra itself marks the mechanism as unsettled.
+    reassessment_trigger: Reassess when Ayra or upstream TRQP defines a stable signing mechanism and normative strength.
+  - ayra_requirement: AYRA-AUTH-001
+    classification: narrowed_by_profile
+    candidate_section: "12 Endpoint and capability discovery / 13 Governance and security profiles"
+    migration_effect: profile_update_candidate
+    evidence_gap: Candidate v3 keeps discovery mechanism and profile authority/lifecycle unresolved; Ayra's authority_id discovery rule is a concrete profile narrowing, not a candidate-core rule.
+    reassessment_trigger: Reassess when NTRQP-007/NTRQP-008 receive authoritative upstream disposition or Ayra revises governance discovery.
+  - ayra_requirement: AYRA-DID-001
+    classification: conflict_candidate
+    candidate_section: "3.1 Proposition / 12 Endpoint and capability discovery"
+    migration_effect: profile_update_candidate
+    evidence_gap: Candidate v3 separates semantic registry/authority identity from endpoint and transport identity and does not require DIDs as the universal core identifier form.
+    reassessment_trigger: Reassess when upstream defines normative registry/authority identifier representation.
+  - ayra_requirement: AYRA-DID-002
+    classification: narrowed_by_profile
+    candidate_section: "12 Endpoint and capability discovery"
+    migration_effect: profile_update_candidate
+    evidence_gap: Candidate v3 explicitly leaves the discovery mechanism unresolved, including whether DID resolution is used; Ayra's DID-document service discovery is therefore profile-specific.
+    reassessment_trigger: Reassess when NTRQP-007 discovery mechanism is normatively resolved or Ayra changes its DID service-discovery rule.
