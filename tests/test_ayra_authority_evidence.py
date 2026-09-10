@@ -25,6 +25,11 @@ def test_malformed_did_fails_syntax_without_inventing_resolution():
     result = assess_authority({"registry_did": "registry-123"})
     assert result["identifier_syntax"] == "FAIL"
     assert result["did_method"] == "INDETERMINATE"
+    assert result["resolution"] == "INDETERMINATE"
+
+
+def test_explicit_failed_resolution_fails():
+    result = assess_authority({"registry_did": "did:web:registry.example.org", "did_resolved": False})
     assert result["resolution"] == "FAIL"
 
 
@@ -44,9 +49,9 @@ def test_endpoint_mismatch_fails_discovery():
     assert result["service_discovery"] == "FAIL"
 
 
-def test_missing_governance_evidence_does_not_pass():
+def test_missing_governance_evidence_is_indeterminate():
     result = assess_authority({"registry_did": "did:web:registry.example.org", "did_resolved": True})
-    assert result["governance_discovery"] == "FAIL"
+    assert result["governance_discovery"] == "INDETERMINATE"
     assert result["governance_legitimacy"] == "INDETERMINATE"
 
 
@@ -58,6 +63,34 @@ def test_contradictory_governance_data_fails_discovery():
         "governance_framework": {"authority_id": "did:web:other.example.org", "discoverable": True},
     })
     assert result["governance_discovery"] == "FAIL"
+
+
+def test_stale_discovery_does_not_remain_pass():
+    result = assess_authority({
+        "registry_did": "did:web:registry.example.org",
+        "did_resolved": True,
+        "trqp_service_endpoint": "https://registry.example.org/trqp",
+        "expected_trqp_endpoint": "https://registry.example.org/trqp",
+        "discovery_stale": True,
+        "authority_id": "did:web:authority.example.org",
+        "governance_framework": {
+            "authority_id": "did:web:authority.example.org",
+            "discoverable": True,
+            "stale": True,
+        },
+    })
+    assert result["service_discovery"] == "INDETERMINATE"
+    assert result["governance_discovery"] == "INDETERMINATE"
+
+
+def test_control_evidence_is_separate_from_legitimacy():
+    result = assess_authority({
+        "registry_did": "did:web:registry.example.org",
+        "did_resolved": True,
+        "controller_proof_valid": True,
+    })
+    assert result["control_evidence"] == "PASS"
+    assert result["governance_legitimacy"] == "INDETERMINATE"
 
 
 def test_ssrf_unsafe_urls_are_rejected():
