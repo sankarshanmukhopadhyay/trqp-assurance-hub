@@ -41,9 +41,15 @@ jobs:
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
-          pip install jsonschema PyYAML
+          pip install jsonschema PyYAML pytest
       - name: Validate examples against schemas
         run: python tools/validate_examples.py
+      - name: Validate profile requirement catalogue
+        run: python tools/validate_profile_requirements.py
+      - name: Run profile assurance tests
+        run: python -m pytest -q tests/test_profile_assurance_model.py tests/test_ayra_profile_runner.py
+      - name: Exercise Ayra conformant fixture
+        run: python -m tools.run_ayra_profile tests/fixtures/ayra/conformant.json --out /tmp/ayra-assurance.json
       - name: Regenerate operational stack demo bundle
         run: |
           rm -rf /tmp/operational-stack

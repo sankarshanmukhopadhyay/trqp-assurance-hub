@@ -1,0 +1,28 @@
+{
+  "endpoints": {
+    "authorization": {"method": "GET", "status": 200}
+  },
+  "ids": {
+    "entity_id": "entity-123",
+    "authority_id": "did:example:authority"
+  },
+  "registry_id": "registry.example.org",
+  "error_response": {
+    "status": 503,
+    "content_type": "application/json",
+    "body": {"authorized": false},
+    "interpreted_as_trust_negative": true
+  },
+  "rate_limiting": true,
+  "rate_limit_response": {
+    "status": 503,
+    "content_type": "application/json",
+    "body": {"recognized": false},
+    "interpreted_as_trust_negative": true
+  },
+  "unsupported_extension": true,
+  "unsupported_extension_response": {
+    "status": 404,
+    "content_type": "application/json"
+  }
+}
