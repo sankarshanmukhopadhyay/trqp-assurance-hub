@@ -3,102 +3,90 @@ layout: default
 title: "Roadmap"
 nav_exclude: true
 owner: maintainers
-last_reviewed: 2026-08-28
+last_reviewed: 2026-09-10
 ---
 
 # TRQP Stack Roadmap
 
 This roadmap is the coordinated delivery view for the TRQP Operational Trust Stack. Component repositories retain independent authority and semantic versioning; the Hub coordinates compatibility, integration evidence, and Stack release eligibility.
 
-## Current baseline
+## Current baseline: TRQP Stack 2026.3 — Banyan
 
-**TRQP Stack 2026.1 — Coconut** established an immutable, reproducible coordinated tuple with clean bootstrap, deterministic CTS replay, combined assurance, provenance/integrity checks, fail-closed negative cases, semantic replay equivalence, and an executable adopter walkthrough.
+**TRQP Stack 2026.3 — Banyan** is the current published coordinated release.
 
-## Target: TRQP Stack 2026.2 — assurance validity under change
+It establishes profile-aware compositional assurance on top of the lifecycle guarantees introduced by Stack 2026.2. The current frozen tuple is:
 
-**Target publication:** 30 September 2026, subject to capability and evidence readiness.
+| Layer | Release | Exact commit |
+|---|---:|---|
+| TRQP-TSPP | `v0.17.0` | `328e19c71f407ebdb2bc92828a3ae037a843f285` |
+| TRQP Conformance Suite | `v1.10.0` | `1e5dc2646c75390444d9ae86f3d6136d7c033463` |
+| TRQP Assurance Hub | `v1.13.0` | `5346b83545bf042360eb32691dfc907135d233dd` |
+| TSMM | `0.24.0` | `8ddfd52c876faf368241bc11101681fb1fe49398` |
+| TIS | `0.15.0` | `edda0e87ced40797d22e3df542099871c57fcb59` |
 
-**Governing issue:** https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/39
+The immutable release record is under [`stack/releases/2026.3/`](../stack/releases/2026.3/). The current adopter path is [`docs/adoption/stack-quickstart.md`](adoption/stack-quickstart.md), with the profile-aware walkthrough at [`docs/adoption/stack-2026.3-walkthrough.md`](adoption/stack-2026.3-walkthrough.md).
 
-### Governing proposition
+## Capability state
 
-> A previously valid TRQP assurance conclusion MUST NOT silently survive a material change to its target, evidence, authority, policy, semantic dependency, schema dependency, or component compatibility conditions.
+Stack 2026.3 proves the following coordinated properties:
 
-Stack 2026.2 advances the coordinated contract from point-in-time reproducibility to an explicit assurance lifecycle: detect material change, determine impact, invalidate or reassess affected evidence, preserve legitimate non-material reuse, fail safe when impact is unknown, and publish immutable supersession lineage.
+- immutable component and authority-pin resolution;
+- clean-room bootstrap against the frozen tuple;
+- producer-owned CTS conformance/replay evidence;
+- producer-owned TSPP security/privacy posture evidence;
+- profile-aware composition without authority transfer;
+- fail-closed handling of missing, stale, `FAIL`, `INDETERMINATE`, and otherwise non-current producer evidence;
+- deterministic CTS replay and whole-stack semantic replay equivalence;
+- provenance and artifact-integrity validation;
+- lifecycle invalidation, reassessment, authority-drift and supersession handling inherited from Stack 2026.2;
+- executable Ayra first-profile assurance; and
+- human release judgment as a mandatory publication gate.
 
-## Coordinated workstreams
+## Authority boundaries
 
-| Workstream | Repository | Tracking | Intended evidence |
-|---|---|---|---|
-| Posture evidence validity | TRQP-TSPP | [#69](https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/issues/69) | machine-readable reuse/reassessment decision |
-| Bounded conformance reassessment | TRQP Conformance Suite | [#32](https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/issues/32) | impact report, reassessment plan/result |
-| Assurance lifecycle composition | TRQP Assurance Hub | [#40](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/40) | validity state, reassessment and supersession lineage |
-| Portable lifecycle contracts | Trust Infrastructure Schemas | [Hub #41](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/41) | portable change/invalidation/reassessment contracts where needed |
-| Semantic sufficiency | Trust Systems Meta-Model | [#3](https://github.com/qbf-consulting/trust-systems-meta-model/issues/3) | explicit decision whether existing semantics suffice |
-| Coordinated pressure/release test | TRQP Assurance Hub | [#42](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/42) | whole-Stack falsification and eligibility evidence |
+The roadmap does not transfer authority between repositories:
 
-## Candidate tuple
-
-The tuple is deliberately provisional. A component is released only when a material capability change warrants it.
-
-| Layer | Candidate |
+| Authority | Owns |
 |---|---|
-| TRQP-TSPP | `v0.16.0` if material invalidation capability lands |
-| TRQP Conformance Suite | `v1.9.0` if bounded reassessment capability lands |
-| TRQP Assurance Hub | `v1.12.0` if assurance lifecycle composition lands |
-| TSMM | retain `v0.24.0` unless new canonical semantics are demonstrably required |
-| TIS | `v0.15.0` only if new portable lifecycle contracts are required |
+| TRQP upstream | Core protocol semantics |
+| TRQP Conformance Suite | Executable conformance and replay evidence semantics |
+| TRQP-TSPP | Security/privacy control and posture evidence semantics |
+| Ecosystem profile authorities | Profile normative strength and profile requirements |
+| TSMM | Canonical trust-system semantics |
+| TIS | Portable machine-readable contracts |
+| TRQP Assurance Hub | Evidence composition, compatibility coordination and coordinated release declaration |
 
-## Delivery sequence
+Governance legitimacy remains dependent on applicable external authority evidence and is not inferred from API correctness alone.
 
-| Date | Milestone |
+## Historical progression
+
+| Stack release | Capability established |
 |---|---|
-| 28 Aug–6 Sep | Canonical change/invalidation model and roadmap alignment |
-| 4–11 Sep | TSPP posture-evidence invalidation |
-| 7–14 Sep | CTS impact-aware reassessment |
-| 11–18 Sep | Hub assurance lifecycle composition |
-| 14–20 Sep | Authority/schema compatibility and drift handling |
-| 18–23 Sep | Freshness and supersession lineage |
-| 20–25 Sep | Coordinated adversarial pressure tests |
-| 22–26 Sep | Executable adopter change/reassessment walkthrough |
-| 26 Sep | Release-candidate tuple freeze |
-| 27–28 Sep | Full coordinated eligibility replay |
-| 29 Sep | Explicit human release judgment |
-| 30 Sep | Publish only if evidence supports the proposition |
+| 2026.1 — Coconut | First immutable coordinated tuple, clean bootstrap, deterministic replay, combined assurance and executable adopter walkthrough |
+| 2026.2 — Ashoka | Assurance validity under change: invalidation, reassessment, authority drift, supersession and post-change recomposition |
+| 2026.3 — Banyan | Profile-aware compositional assurance using independently authoritative producer evidence |
 
-## Additional Stack 2026.2 gates
+Historical candidate roadmaps and evidence under `stack/candidates/` are retained as audit artifacts. They describe what was proposed and tested at the time and must not be rewritten merely because a later release is now current.
 
-All Stack 2026.1 gates remain mandatory. Add:
+## Next-release rule
 
-- `change-event-valid`
-- `material-change-detected`
-- `non-material-change-bounded`
-- `stale-assurance-not-reused`
-- `authority-drift-detected`
-- `unknown-impact-fails-safe`
-- `reassessment-plan-valid`
-- `bounded-reassessment-valid`
-- `supersession-lineage-complete`
-- `post-change-assurance-recomposed`
+There is no automatically scheduled next coordinated Stack release. A new release should be proposed only when a material capability, compatibility change, authority change, or assurance requirement justifies a new frozen tuple.
 
-## Required pressure tests
+Any next release proposal must begin with an explicit governing proposition and then produce machine-verifiable evidence for:
 
-The release candidate must prove both invalidation and legitimate continuity:
+1. the exact component and authority tuple;
+2. the capability or assurance change being claimed;
+3. compatibility and invalidation consequences;
+4. negative and adversarial cases;
+5. reproducible clean-room execution;
+6. evidence provenance and integrity;
+7. residual uncertainty and bounded limitations; and
+8. the required visible human release judgment.
 
-- old evidence reused after a material component/target change → reject;
-- provenance or integrity discontinuity → reject;
-- authority drift without applicable compatibility evidence → non-current/reassessment, not silent PASS;
-- CTS comparison-policy change → replay/reassessment required;
-- TSPP posture/target change → old posture evidence non-current;
-- documentation-only/non-material change → reuse permitted when justified;
-- semantically equivalent volatile output change → semantic conclusion may remain reusable;
-- unknown impact → broader reassessment/full rerun;
-- unsupported partial reassessment → reject.
+A green workflow remains necessary but is not itself the release judgment.
 
-## Release judgment
+## Release discipline
 
-Before publication, the release PR must preserve what was tested, assumptions and counter-cases, falsification evidence, rejected alternatives, residual uncertainty, and the explicit human decision to accept the final tuple. A green workflow is necessary but is not itself the release judgment.
+Component releases continue independently. Coordinated Stack publication occurs only when a materially useful combination has accumulated and the complete tuple passes the Stack release gate.
 
-## Machine-readable plan
-
-The synchronized candidate plan is published at [`stack/candidates/2026.2/roadmap.yaml`](../stack/candidates/2026.2/roadmap.yaml). It is an input to implementation and release eligibility, not an immutable release manifest.
+The machine identity remains `trqp-stack-YYYY.N`; the tree codename is human-facing only. Historical release records are immutable evidence and are superseded by later releases rather than silently rewritten.
