@@ -1,4 +1,11 @@
 {
+  "profile_binding": {
+    "profile_id": "ayra-trqp",
+    "profile_version": "0.6.0-draft",
+    "source_revision": "ec7768572592b50ba3f4102c026c2449148b5e11"
+  },
+  "signing_applicable": true,
+  "signature_valid": true,
   "endpoints": {
     "authorization": {"method": "POST", "status": 200},
     "recognition": {"method": "POST", "status": 200}
