@@ -47,9 +47,25 @@ jobs:
       - name: Validate profile requirement catalogue
         run: python tools/validate_profile_requirements.py
       - name: Run profile assurance tests
-        run: python -m pytest -q tests/test_profile_assurance_model.py tests/test_ayra_profile_runner.py tests/test_ayra_authority_evidence.py tests/test_ayra_adversarial.py
+        run: python -m pytest -q tests/test_profile_assurance_model.py tests/test_ayra_profile_runner.py tests/test_ayra_authority_evidence.py tests/test_ayra_adversarial.py tests/test_ayra_assurance_bundle.py
       - name: Exercise Ayra conformant fixture
         run: python -m tools.run_ayra_profile tests/fixtures/ayra/conformant.json --out /tmp/ayra-assurance.json
+      - name: Build reproducible Ayra evidence bundle
+        run: |
+          rm -rf /tmp/ayra-bundle
+          python -m tools.build_ayra_assurance_bundle \
+            tests/fixtures/ayra/conformant.json \
+            tests/fixtures/ayra/authority-success.json \
+            --run-id ayra-ci-001 \
+            --observed-at 2026-09-10T15:30:00Z \
+            --out /tmp/ayra-bundle
+          test -s /tmp/ayra-bundle/assurance.json
+          test -s /tmp/ayra-bundle/assurance.md
+          test -s /tmp/ayra-bundle/requirement-results.json
+          test -s /tmp/ayra-bundle/authority-evidence.json
+          test -s /tmp/ayra-bundle/endpoint-evidence.json
+          test -s /tmp/ayra-bundle/negative-tests.json
+          test -s /tmp/ayra-bundle/provenance.json
       - name: Regenerate operational stack demo bundle
         run: |
           rm -rf /tmp/operational-stack
