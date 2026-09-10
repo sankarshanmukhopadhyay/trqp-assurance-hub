@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "stack_release": "trqp-stack-2026.3",
+  "candidate": "rc1",
+  "frozen": true,
+  "components": {
+    "tspp": {"ref": "v0.17.0", "commit": "328e19c71f407ebdb2bc92828a3ae037a843f285"},
+    "cts": {"ref": "v1.10.0", "commit": "1e5dc2646c75390444d9ae86f3d6136d7c033463"},
+    "assurance_hub": {"ref": "v1.13.0", "commit": "5346b83545bf042360eb32691dfc907135d233dd"}
+  },
+  "authorities": {
+    "tsmm": {"repository": "qbf-consulting/trust-systems-meta-model", "version": "0.24.0", "ref": "0.24.0", "commit": "8ddfd52c876faf368241bc11101681fb1fe49398"},
+    "tis": {"repository": "qbf-consulting/trust-infrastructure-schemas", "version": "0.15.0", "commit": "edda0e87ced40797d22e3df542099871c57fcb59", "pin_kind": "version-and-commit"}
+  },
+  "evidence": {
+    "component_tags_published": true,
+    "authority_versions_verified_at_commits": true,
+    "coordinated_eligibility": "pending"
+  },
+  "note": "Frozen tuple identity is evidence of selected inputs, not a coordinated assurance conclusion. Eligibility and human release judgment remain pending."
+}
