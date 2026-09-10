@@ -1,0 +1,12 @@
+{
+  "registry_did": "did:web:registry.example.org",
+  "supported_did_methods": ["web"],
+  "did_resolved": true,
+  "trqp_service_endpoint": "https://registry.example.org/trqp",
+  "expected_trqp_endpoint": "https://registry.example.org/trqp",
+  "authority_id": "did:web:authority.example.org",
+  "governance_framework": {
+    "authority_id": "did:web:authority.example.org",
+    "discoverable": true
+  }
+}
