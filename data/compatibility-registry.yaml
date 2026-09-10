@@ -1,6 +1,30 @@
 schema_version: "1.0"
 authority: trqp-assurance-hub
 release_sets:
+  - id: ots-2026-09-profile-aware
+    hub: "1.13.0"
+    conformance_suite: "1.10.0"
+    tspp: "0.17.0"
+    status: supported
+    tested:
+      workflow: .github/workflows/stack-release-eligibility.yml
+      evidence_path: artifacts/stack-candidate/
+    contracts:
+      project_status: "1.0"
+      combined_manifest: "1.1"
+      assurance_decision: "1.0"
+      profile_assurance: "1.0"
+    requires:
+      cts_replay_determinism: true
+      profile_producer_evidence: true
+      producer_lifecycle_currentness: true
+    limitations:
+      - Self-generated repository evidence is not independent assurance or certification.
+      - CTS remains authoritative for mapped core conformance and replay semantics.
+      - TSPP remains authoritative for mapped security/privacy posture semantics.
+      - Ecosystem profile authorities remain authoritative for profile normative strength.
+      - Governance legitimacy requires applicable external authority evidence and is not inferred from API correctness alone.
+
   - id: ots-2026-08
     hub: "1.11.0"
     conformance_suite: "1.8.0"
