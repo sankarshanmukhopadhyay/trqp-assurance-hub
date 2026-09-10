@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/schemas/trqp-profile-contract.schema.json",
+  "title": "TRQP Profile Assurance Contract",
+  "type": "object",
+  "required": ["profile_id", "profile_version", "protocol", "source", "requirements"],
+  "properties": {
+    "profile_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "profile_version": {"type": "string", "minLength": 1},
+    "protocol": {
+      "type": "object",
+      "required": ["id", "version"],
+      "properties": {
+        "id": {"const": "trqp"},
+        "version": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": ["repository", "revision", "authority"],
+      "properties": {
+        "repository": {"type": "string", "format": "uri"},
+        "revision": {"type": "string", "minLength": 7},
+        "authority": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "requirements": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}

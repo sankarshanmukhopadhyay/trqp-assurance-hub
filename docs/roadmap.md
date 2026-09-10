@@ -34,7 +34,7 @@ Stack 2026.2 advances the coordinated contract from point-in-time reproducibilit
 | Bounded conformance reassessment | TRQP Conformance Suite | [#32](https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/issues/32) | impact report, reassessment plan/result |
 | Assurance lifecycle composition | TRQP Assurance Hub | [#40](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/40) | validity state, reassessment and supersession lineage |
 | Portable lifecycle contracts | Trust Infrastructure Schemas | [Hub #41](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/41) | portable change/invalidation/reassessment contracts where needed |
-| Semantic sufficiency | Trust Systems Meta-Model | [#3](https://github.com/sankarshanmukhopadhyay/trust-systems-meta-model/issues/3) | explicit decision whether existing semantics suffice |
+| Semantic sufficiency | Trust Systems Meta-Model | [#3](https://github.com/qbf-consulting/trust-systems-meta-model/issues/3) | explicit decision whether existing semantics suffice |
 | Coordinated pressure/release test | TRQP Assurance Hub | [#42](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/issues/42) | whole-Stack falsification and eligibility evidence |
 
 ## Candidate tuple
