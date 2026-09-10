@@ -10,8 +10,9 @@ The TRQP Assurance Hub is the **evidence aggregation, compatibility coordination
 
 It is also the **adopter front door and coordinated Stack release authority**. A coordinated Stack release does not create a fourth implementation product; it declares which independently versioned component releases have been exercised together and preserves the evidence behind that claim.
 
-> **Current Hub component release:** v1.11.0  
-> **Current coordinated stack:** TRQP Stack 2026.1 — Coconut  
+> **Current Hub component release:** v1.13.0  
+> **Current coordinated stack:** TRQP Stack 2026.2 — Ashoka  
+> **Candidate coordinated stack:** TRQP Stack 2026.3 — Banyan  
 > **Lifecycle:** Active  
 > **Maturity:** Candidate  
 > **Operational status:** Active validation
@@ -27,26 +28,26 @@ It is also the **adopter front door and coordinated Stack release authority**. A
 | Stack release gate | `make stack-release-check` |
 | Evidence output | `artifacts/combined-assurance/` plus reproducible profile-specific evidence bundles |
 | Governance authority | [`GOVERNANCE.md`](GOVERNANCE.md) and [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) |
-| Current Stack record | [`stack/releases/2026.1/`](stack/releases/2026.1/) |
+| Current Stack record | [`stack/releases/2026.2/`](stack/releases/2026.2/) |
 | Canonical adopter workflow | [`docs/adoption/stack-quickstart.md`](docs/adoption/stack-quickstart.md) |
 | Profile-aware assurance guide | [`profiles/README.md`](profiles/README.md) |
 | Documentation site | https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/ |
 
-## Start here: TRQP Stack 2026.1 — Coconut
+## Start here: TRQP Stack 2026.2 — Ashoka
 
 If your goal is to adopt, evaluate, procure, or assess the complete TRQP assurance workflow, **start with the coordinated Stack release rather than choosing repository versions independently**.
 
-TRQP Stack 2026.1 — Coconut validates this tuple:
+TRQP Stack 2026.2 — Ashoka is the current immutable coordinated baseline. It established assurance validity under change and pins:
 
 | Layer | Release | Authority / output |
 |---|---:|---|
-| TRQP-TSPP | v0.15.0 | Security/privacy controls and posture evidence |
-| TRQP Conformance Suite | v1.8.0 | Protocol conformance and deterministic replay evidence |
-| TRQP Assurance Hub | v1.11.0 | Evidence aggregation and assurance publication |
+| TRQP-TSPP | v0.16.1 | Security/privacy controls, posture evidence and lifecycle materiality |
+| TRQP Conformance Suite | v1.9.1 | Protocol conformance, deterministic replay and impact-aware reassessment |
+| TRQP Assurance Hub | v1.12.0 | Evidence aggregation, lifecycle recomposition and supersession |
 | TSMM | v0.24.0 | Semantic authority |
-| TIS | v0.14.1 | Schema and portfolio authority |
+| TIS | v0.15.0 | Schema, lifecycle and portfolio authority |
 
-The canonical machine-readable release record is [`stack/releases/2026.1/manifest.json`](stack/releases/2026.1/manifest.json). The human-readable release explanation is [`stack/releases/2026.1/README.md`](stack/releases/2026.1/README.md).
+The candidate Stack 2026.3 — Banyan tuple is **Hub v1.13.0 / CTS v1.10.0 / TSPP v0.17.0 / TSMM v0.24.0 / TIS v0.15.0**. It is not a published coordinated release until the exact tuple passes the decisive Stack eligibility workflow and the required visible human release judgment is recorded.
 
 ### Why an adopter benefits
 
@@ -109,7 +110,7 @@ Assurance Hub aggregation + coordinated-release evidence
 
 ## Profile-aware assurance
 
-The Hub now includes a reusable profile boundary, with the **Ayra TRQP Profile** as the first proving implementation. The governing rule is:
+The Hub v1.13.0 line adds a reusable profile-assurance boundary, with the **Ayra TRQP Profile v0.6.0-draft** as the first proving implementation. The governing rule is:
 
 > **Profile assurance extends TRQP assurance; it does not redefine TRQP.**
 
@@ -119,7 +120,7 @@ The current Ayra projection is version-bound to Ayra `0.6.0-draft`, TRQP `2.0`, 
 
 See [`profiles/README.md`](profiles/README.md), [`docs/ayra-v3-compatibility.md`](docs/ayra-v3-compatibility.md), and [`docs/ayra-assurance-residual-threats.md`](docs/ayra-assurance-residual-threats.md).
 
-The first proving implementation deliberately contains some deterministic core/posture-adjacent observations so the profile architecture can be exercised end to end. Producer-contract convergence is tracked separately in TRQP Conformance Suite #40 and TRQP-TSPP #85; those follow-ups move producer-owned observations back to their proper evidence authorities without moving Ayra-specific semantics out of the Hub profile layer.
+CTS and TSPP now expose explicit profile-consumable producer contracts. The Hub consumes those producer-owned results rather than duplicating their authority: CTS owns mapped core conformance results; TSPP owns mapped security/privacy posture results; Ayra remains authoritative for Ayra normative strength; and external governance legitimacy remains dependent on independent authority evidence. Producer `FAIL` or non-current/insufficient evidence cannot be overridden by a Hub-local positive observation.
 
 ## Evidence artifacts
 
@@ -142,7 +143,7 @@ make stack-release-check
 
 The dedicated `stack-release-eligibility` GitHub Actions workflow extends this with tagged component execution, clean bootstrap, deterministic replay, full combined-assurance composition, semantic replay comparison, negative cases, and candidate evidence publication.
 
-For TRQP Stack 2026.1 — Coconut, the decisive workflow completed successfully on the merged Hub `main` baseline at commit `045ba10ec436ea5d1e9e443894bbbf7bea27472b`. The release record preserves the workflow run and evidence artifact digest.
+For coordinated publication, a successful merged-main eligibility run is necessary but not sufficient: the immutable tuple and evidence digest must be recorded and the repository's required visible human release judgment must accept publication.
 
 ## Adoption and implementation guides
 
@@ -157,7 +158,7 @@ For TRQP Stack 2026.1 — Coconut, the decisive workflow completed successfully 
 
 ## Release cadence
 
-Component repositories retain independent semantic versioning. Coordinated Stack releases are expected approximately monthly when meaningful capability has accumulated, and earlier when a capability, compatibility, security, evidence, or authority change makes a new validated tuple materially useful or necessary.
+Component repositories retain independent semantic versioning. Coordinated Stack releases are capability-driven: a new Stack release is published only when a materially useful compatibility/assurance capability has accumulated and the complete tuple passes the release gate.
 
 Each coordinated Stack release receives a randomly selected codename from the Wikipedia list of Indian state trees. The codename is human-facing identity only; the stable machine identity remains `trqp-stack-YYYY.N`.
 
