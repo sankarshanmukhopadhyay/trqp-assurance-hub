@@ -1,0 +1,43 @@
+profile_id: ayra-trqp
+profile_version: 0.6.0-draft
+propositions:
+  - proposition_id: PROP-AYRA-CORE-001
+    requirement_id: AYRA-CORE-001
+    dimension: core_profile
+    normative_strength: MUST
+    test: authorization-endpoint-conformance
+  - proposition_id: PROP-AYRA-CORE-002
+    requirement_id: AYRA-CORE-002
+    dimension: core_profile
+    normative_strength: MUST
+    test: recognition-endpoint-conformance
+  - proposition_id: PROP-AYRA-ID-001
+    requirement_id: AYRA-ID-001
+    dimension: core_profile
+    normative_strength: MUST
+    test: did-uri-field-validation
+  - proposition_id: PROP-AYRA-ERR-001
+    requirement_id: AYRA-ERR-001
+    dimension: operational
+    normative_strength: MUST
+    test: problem-details-error-conformance
+  - proposition_id: PROP-AYRA-ERR-002
+    requirement_id: AYRA-ERR-002
+    dimension: operational
+    normative_strength: MUST_NOT
+    test: operational-error-not-trust-negative
+  - proposition_id: PROP-AYRA-RATE-001
+    requirement_id: AYRA-RATE-001
+    dimension: operational
+    normative_strength: MUST
+    test: rate-limit-429-conformance
+  - proposition_id: PROP-AYRA-EXT-002
+    requirement_id: AYRA-EXT-002
+    dimension: extension
+    normative_strength: MUST
+    test: unsupported-extension-behaviour
+  - proposition_id: PROP-AYRA-DID-001
+    requirement_id: AYRA-DID-001
+    dimension: authority
+    normative_strength: MUST
+    test: registry-identifier-is-did
