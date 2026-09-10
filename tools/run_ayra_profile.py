@@ -27,17 +27,17 @@ def assess_fixture(document: dict) -> dict:
     endpoints = document.get("endpoints", {})
     propositions: list[dict] = []
 
-    def add(pid: str, rid: str, dimension: str, strength: str, *, implemented: bool | None, evidence_present: bool, satisfied: bool | None, reason: str) -> None:
+    def add(pid: str, rid: str, dimension: str, strength: str, *, applicability: str = "APPLICABLE", implemented: bool | None, evidence_present: bool, satisfied: bool | None, reason: str) -> None:
         propositions.append({
             "proposition_id": pid,
             "requirement_id": rid,
             "dimension": dimension,
             "normative_strength": strength,
-            "applicability": "APPLICABLE",
+            "applicability": applicability,
             "evidence": _evidence(reason) if evidence_present else [],
             "result": evaluate(
                 strength=strength,
-                applicability="APPLICABLE",
+                applicability=applicability,
                 implemented=implemented,
                 evidence_present=evidence_present,
                 satisfied=satisfied,
@@ -85,6 +85,13 @@ def assess_fixture(document: dict) -> dict:
         reason="fixture:error_response.interpreted_as_trust_negative",
     )
 
+    rate_applicability = document.get("rate_limiting", "UNKNOWN")
+    if rate_applicability is True:
+        rate_state = "APPLICABLE"
+    elif rate_applicability is False:
+        rate_state = "NOT_APPLICABLE"
+    else:
+        rate_state = "UNKNOWN"
     rate = document.get("rate_limit_response")
     rate_ok = bool(
         rate
@@ -96,11 +103,19 @@ def assess_fixture(document: dict) -> dict:
     )
     add(
         "PROP-AYRA-RATE-001", "AYRA-RATE-001", "operational", "MUST",
-        implemented=rate is not None, evidence_present=rate is not None,
+        applicability=rate_state, implemented=rate is not None,
+        evidence_present=rate is not None or rate_state == "NOT_APPLICABLE",
         satisfied=rate_ok if rate is not None else None,
         reason="fixture:rate_limit_response",
     )
 
+    extension_applicability = document.get("unsupported_extension", "UNKNOWN")
+    if extension_applicability is True:
+        extension_state = "APPLICABLE"
+    elif extension_applicability is False:
+        extension_state = "NOT_APPLICABLE"
+    else:
+        extension_state = "UNKNOWN"
     extension = document.get("unsupported_extension_response")
     extension_ok = bool(
         extension
@@ -109,7 +124,8 @@ def assess_fixture(document: dict) -> dict:
     )
     add(
         "PROP-AYRA-EXT-002", "AYRA-EXT-002", "extension", "MUST",
-        implemented=extension is not None, evidence_present=extension is not None,
+        applicability=extension_state, implemented=extension is not None,
+        evidence_present=extension is not None or extension_state == "NOT_APPLICABLE",
         satisfied=extension_ok if extension is not None else None,
         reason="fixture:unsupported_extension_response",
     )
