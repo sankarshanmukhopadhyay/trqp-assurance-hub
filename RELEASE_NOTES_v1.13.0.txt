@@ -1,0 +1,46 @@
+# TRQP Assurance Hub v1.13.0 — Profile-Aware Compositional Assurance
+
+v1.13.0 publishes the Hub side of the profile-aware compositional assurance capability planned for TRQP Stack 2026.3 — Banyan.
+
+## Added
+
+- Reusable TRQP ecosystem-profile assurance boundary with Ayra as the first fully exercised profile.
+- Version-bound Ayra v0.6.0-draft requirement catalogue and proposition model.
+- Bounded result states: PASS, FAIL, INDETERMINATE, NOT_APPLICABLE and NOT_IMPLEMENTED.
+- Executable Ayra endpoint, authority/DID, adversarial and reproducible evidence-bundle paths.
+- Candidate TRQP v3 compatibility/reassessment matrix.
+- Consumption of CTS profile-consumable core conformance evidence.
+- Consumption of TSPP profile-consumable posture evidence.
+- Cross-source regression proving producer FAIL/INDETERMINATE cannot be overridden by Hub-local PASS.
+
+## Authority and evidence impact
+
+CTS remains authoritative for core TRQP conformance/replay evidence. TSPP remains authoritative for security/privacy posture evidence. Ayra Forum remains authoritative for Ayra profile semantics. TSMM and TIS retain their semantic and portable-contract authority. The Hub owns evidence applicability, profile projection, composition and coordinated release declaration only.
+
+Missing or non-current producer evidence remains non-positive. Governance legitimacy is not inferred from protocol correctness, DID syntax or endpoint discovery.
+
+## Compatibility tuple
+
+Candidate coordinated tuple:
+
+- Assurance Hub `v1.13.0`;
+- CTS `v1.10.0`;
+- TSPP `v0.17.0`;
+- TSMM `v0.24.0`;
+- TIS `v0.15.0`.
+
+TRQP Stack 2026.2 — Ashoka remains the current coordinated release until the 2026.3 eligibility and explicit human release judgment gates pass.
+
+## Adoption impact
+
+Assessors and adopters can now consume independently produced CTS and TSPP evidence within a named ecosystem-profile assurance result instead of relying on a Hub-local imitation of producer observations. Evidence retains source, version, run/target, lifecycle and profile-source provenance.
+
+## Upgrade note
+
+Existing combined-assurance workflows remain available. Profile-aware consumers should use the producer-evidence composition path when CTS/TSPP artifacts are available. A profile-local observation must not override producer-owned evidence for mapped propositions.
+
+## Validation
+
+The component release requires green quality, Pages, lifecycle recomposition, portfolio integration and combined-assurance smoke checks. The coordinated release additionally requires a frozen immutable tuple, clean-room bootstrap, deterministic CTS replay, whole-stack semantic replay equivalence, negative-case evidence, adopter walkthrough, successful `stack-release-eligibility`, recorded artifact digest, and explicit human release acceptance.
+
+This release is a project assurance and compatibility capability, not independent certification or accreditation.
