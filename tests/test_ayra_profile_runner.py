@@ -17,6 +17,8 @@ def by_requirement(result: dict) -> dict:
 def test_conformant_fixture_passes_tested_dimensions():
     result = assess_fixture(load("conformant.json"))
     requirements = by_requirement(result)
+    assert result["profile_binding"] == "PASS"
+    assert result["signing"] == "PASS"
     assert requirements["AYRA-CORE-001"]["result"] == "PASS"
     assert requirements["AYRA-CORE-002"]["result"] == "PASS"
     assert requirements["AYRA-ID-001"]["result"] == "PASS"
@@ -32,6 +34,8 @@ def test_conformant_fixture_passes_tested_dimensions():
 def test_nonconformant_fixture_fails_without_false_negative_trust_semantics():
     result = assess_fixture(load("nonconformant.json"))
     requirements = by_requirement(result)
+    assert result["profile_binding"] == "PASS"
+    assert result["signing"] == "FAIL"
     assert requirements["AYRA-CORE-001"]["result"] == "FAIL"
     assert requirements["AYRA-CORE-002"]["result"] == "FAIL"
     assert requirements["AYRA-ID-001"]["result"] == "FAIL"
@@ -44,14 +48,23 @@ def test_nonconformant_fixture_fails_without_false_negative_trust_semantics():
 
 
 def test_missing_mandatory_observation_does_not_pass():
-    result = assess_fixture({})
+    fixture = load("conformant.json")
+    fixture["endpoints"] = {}
+    fixture.pop("ids")
+    fixture.pop("registry_id")
+    fixture.pop("error_response")
+    fixture.pop("rate_limit_response")
+    fixture.pop("unsupported_extension_response")
+    fixture.pop("signature_valid")
+    result = assess_fixture(fixture)
     requirements = by_requirement(result)
     assert requirements["AYRA-CORE-001"]["result"] == "FAIL"
     assert requirements["AYRA-CORE-002"]["result"] == "FAIL"
     assert requirements["AYRA-ID-001"]["result"] == "FAIL"
     assert requirements["AYRA-ERR-001"]["result"] == "FAIL"
-    assert requirements["AYRA-RATE-001"]["result"] == "INDETERMINATE"
-    assert requirements["AYRA-EXT-002"]["result"] == "INDETERMINATE"
+    assert requirements["AYRA-RATE-001"]["result"] == "FAIL"
+    assert requirements["AYRA-EXT-002"]["result"] == "FAIL"
+    assert result["signing"] == "INDETERMINATE"
 
 
 def test_conditional_capabilities_can_be_explicitly_not_applicable():
