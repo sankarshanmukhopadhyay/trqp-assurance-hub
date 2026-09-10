@@ -1,0 +1,63 @@
+name: publish-component-release
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'release-publication.json'
+      - '.github/workflows/publish-component-release.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Validate publication request
+        id: request
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          data = json.loads(Path('release-publication.json').read_text(encoding='utf-8'))
+          version = Path('VERSION').read_text(encoding='utf-8').strip()
+          required = ['release', 'tag', 'title', 'notes', 'status']
+          missing = [k for k in required if not data.get(k)]
+          if missing:
+              raise SystemExit(f'missing publication fields: {", ".join(missing)}')
+          if data['status'] != 'pending-publication':
+              raise SystemExit('publication status must be pending-publication')
+          if data['release'] != version:
+              raise SystemExit(f"publication release {data['release']} != VERSION {version}")
+          if data['tag'] != f'v{version}':
+              raise SystemExit('publication tag must equal v<VERSION>')
+          if not Path(data['notes']).is_file():
+              raise SystemExit(f"release notes not found: {data['notes']}")
+          with open(Path(os.environ['GITHUB_OUTPUT']), 'a', encoding='utf-8') as out:
+              for key in ('tag','title','notes'):
+                  out.write(f'{key}={data[key]}\n')
+          PY
+
+      - name: Publish immutable component release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag='${{ steps.request.outputs.tag }}'
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $tag already exists; preserving immutable publication."
+            exit 0
+          fi
+          gh release create "$tag" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title '${{ steps.request.outputs.title }}' \
+            --notes-file '${{ steps.request.outputs.notes }}' \
+            --latest=false
