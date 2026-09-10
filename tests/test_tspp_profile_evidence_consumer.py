@@ -71,7 +71,7 @@ def test_unbound_control_set_is_not_current():
 
 def test_cross_source_composition_preserves_independent_authorities():
     assessment = base_assessment()
-    cts = load("cts-profile-current.json")
+    cts = load("cts-profile-evidence.json")
     tspp = current_tspp()
     # A CTS failure must remain visible while TSPP remains independently positive.
     cts["results"][0]["result"] = "FAIL"
