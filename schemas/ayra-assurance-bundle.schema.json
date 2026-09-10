@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/schemas/ayra-assurance-bundle.schema.json",
+  "title": "Ayra Assurance Evidence Bundle",
+  "type": "object",
+  "required": ["bundle_version", "run", "profile", "target", "results", "artifacts", "redaction"],
+  "properties": {
+    "bundle_version": {"const": "1.0"},
+    "run": {
+      "type": "object",
+      "required": ["run_id", "observed_at"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "observed_at": {"type": "string", "format": "date-time"}
+      },
+      "additionalProperties": false
+    },
+    "profile": {
+      "type": "object",
+      "required": ["id", "version", "source_repository", "source_revision"],
+      "properties": {
+        "id": {"const": "ayra-trqp"},
+        "version": {"const": "0.6.0-draft"},
+        "source_repository": {"const": "https://github.com/ayraforum/ayra-trust-registry-resources"},
+        "source_revision": {"const": "ec7768572592b50ba3f4102c026c2449148b5e11"}
+      },
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "required": ["registry_id"],
+      "properties": {
+        "registry_id": {"type": "string", "minLength": 1},
+        "endpoint": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "results": {
+      "type": "object",
+      "required": ["profile", "authority"],
+      "properties": {
+        "profile": {"type": "object"},
+        "authority": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "media_type"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "media_type": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "redaction": {
+      "type": "object",
+      "required": ["removed_fields"],
+      "properties": {
+        "removed_fields": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
