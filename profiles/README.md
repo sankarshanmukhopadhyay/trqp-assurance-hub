@@ -1,3 +1,9 @@
+---
+layout: default
+title: TRQP assurance profiles
+nav_exclude: true
+---
+
 # TRQP assurance profiles
 
 Profiles extend TRQP assurance without redefining TRQP. The protocol specification remains authoritative for core TRQP semantics; each named profile's upstream source remains authoritative for profile semantics. This repository records version-bound derived assurance propositions and evidence.
