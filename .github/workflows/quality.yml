@@ -46,8 +46,10 @@ jobs:
         run: python tools/validate_examples.py
       - name: Validate profile requirement catalogue
         run: python tools/validate_profile_requirements.py
+      - name: Validate Ayra candidate-v3 compatibility matrix
+        run: python tools/validate_ayra_v3_compatibility.py
       - name: Run profile assurance tests
-        run: python -m pytest -q tests/test_profile_assurance_model.py tests/test_ayra_profile_runner.py tests/test_ayra_authority_evidence.py tests/test_ayra_adversarial.py tests/test_ayra_assurance_bundle.py
+        run: python -m pytest -q tests/test_profile_assurance_model.py tests/test_ayra_profile_runner.py tests/test_ayra_authority_evidence.py tests/test_ayra_adversarial.py tests/test_ayra_assurance_bundle.py tests/test_ayra_v3_compatibility.py
       - name: Exercise Ayra conformant fixture
         run: python -m tools.run_ayra_profile tests/fixtures/ayra/conformant.json --out /tmp/ayra-assurance.json
       - name: Build reproducible Ayra evidence bundle
