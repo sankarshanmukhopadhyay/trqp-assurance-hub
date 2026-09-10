@@ -1,0 +1,27 @@
+{
+  "endpoints": {
+    "authorization": {"method": "POST", "status": 200},
+    "recognition": {"method": "POST", "status": 200}
+  },
+  "ids": {
+    "entity_id": "did:example:entity",
+    "authority_id": "did:example:authority"
+  },
+  "registry_id": "did:web:registry.example.org",
+  "error_response": {
+    "status": 400,
+    "content_type": "application/problem+json",
+    "body": {"type": "about:blank", "title": "Bad Request", "status": 400},
+    "interpreted_as_trust_negative": false
+  },
+  "rate_limit_response": {
+    "status": 429,
+    "content_type": "application/problem+json",
+    "body": {"type": "about:blank", "title": "Too Many Requests", "status": 429},
+    "interpreted_as_trust_negative": false
+  },
+  "unsupported_extension_response": {
+    "status": 501,
+    "content_type": "application/problem+json"
+  }
+}
