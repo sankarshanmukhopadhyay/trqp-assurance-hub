@@ -10,6 +10,7 @@ import argparse
 import json
 from pathlib import Path
 
+from tools.ayra_assurance_guards import profile_binding_state, signing_state
 from tools.profile_assurance_model import aggregate, evaluate
 
 DID_PREFIX = "did:"
@@ -24,6 +25,15 @@ def _evidence(ref: str) -> list[dict]:
 
 
 def assess_fixture(document: dict) -> dict:
+    binding = profile_binding_state(document)
+    if binding != "PASS":
+        return {
+            "profile_binding": binding,
+            "signing": signing_state(document),
+            "propositions": [],
+            "dimensions": {},
+        }
+
     endpoints = document.get("endpoints", {})
     propositions: list[dict] = []
 
@@ -138,7 +148,12 @@ def assess_fixture(document: dict) -> dict:
         reason="fixture:registry_id",
     )
 
-    return {"propositions": propositions, **aggregate(propositions)}
+    return {
+        "profile_binding": binding,
+        "signing": signing_state(document),
+        "propositions": propositions,
+        **aggregate(propositions),
+    }
 
 
 def main() -> int:
