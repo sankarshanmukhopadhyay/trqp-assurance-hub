@@ -1,6 +1,6 @@
 ---
 owner: maintainers
-last_reviewed: 2026-07-03
+last_reviewed: 2026-09-10
 tier: 0
 ---
 
@@ -15,6 +15,7 @@ You are responsible for running a service and producing assurance evidence.
 
 - Start with: [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
 - Then: [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
+- For ecosystem profiles: [TRQP assurance profiles](../profiles/README.md)
 - Worked bundles:
   - [AL3 evidence bundle (example)](../examples/al3-evidence-bundle/README.md)
   - [AL4 evidence bundle (example)](../examples/al4-evidence-bundle/README.md)
@@ -24,17 +25,21 @@ You are responsible for running a service and producing assurance evidence.
 ### Ayra Trust Network operators
 You are preparing to join or are operating within the Ayra Trust Network.
 
+- Assurance model and evidence flow: [TRQP assurance profiles](../profiles/README.md)
+- Current v2 / candidate-v3 analysis: [Ayra compatibility matrix](ayra-v3-compatibility.md)
+- Residual assurance limits: [Ayra assurance residual threats](ayra-assurance-residual-threats.md)
 - Pre-certification crosswalk: [Ayra control mapping and submission checklists](../tools/ayra-mapping.md)
-- CTS profile: `profiles/ayra_baseline.yaml` (in `trqp-conformance-suite`)
-- TSPP profile: [TSPP Ayra baseline](https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/blob/main/docs/profiles/ayra-baseline.md) (in `TRQP-TSPP`)
 - Ayra TRQP Profile: https://ayraforum.github.io/ayra-trust-registry-resources/
 - Ayra Implementers Guide: https://ayraforum.github.io/ayra-trust-registry-resources/guides/
+
+The current profile-aware implementation is a downstream assurance projection, not an alternative Ayra or TRQP specification authority. Producer-contract convergence is tracked separately in TRQP Conformance Suite #40 and TRQP-TSPP #85.
 
 ### Certifiers / assessors
 You are evaluating evidence, validating conformance, and closing remediation.
 
 - Canonical definitions: [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
 - What to ask for: [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
+- Profile-aware evidence semantics: [TRQP assurance profiles](../profiles/README.md)
 - Example submissions:
   - [AL3 evidence bundle (example)](../examples/al3-evidence-bundle/README.md)
   - [AL4 evidence bundle (example)](../examples/al4-evidence-bundle/README.md)
@@ -45,6 +50,7 @@ You are integrating endpoints, schemas, and validation into pipelines.
 
 - Getting started: [Quickstart](../QUICKSTART.md)
 - The workflow: [Combined assurance guide](guides/combined-assurance.md)
+- Profile-aware assurance: [TRQP assurance profiles](../profiles/README.md)
 - Narrative: [Operational Stack narrative](architecture/operational-stack.md)
 - Discovery: [Trust Registry reference service](guides/trust-registry-reference-service.md)
 - Contracts: [Machine-readable assurance profiles](guides/machine-readable-assurance-profiles.md)
@@ -57,6 +63,7 @@ You are translating governance intent into implementable and auditable artifacts
 
 - Canonical model: [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
 - Evidence structure: [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
+- Profile authority boundaries: [TRQP assurance profiles](../profiles/README.md)
 - Certification baseline: [Certification baseline](certification-baseline/)
 - Roadmap: [Roadmap](roadmap.md)
 
@@ -66,10 +73,12 @@ You are translating governance intent into implementable and auditable artifacts
 - [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
 - [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
 - [Combined assurance workflow](guides/combined-assurance.md)
+- [TRQP assurance profiles](../profiles/README.md)
 - [Operational Stack narrative](architecture/operational-stack.md)
 - [Trust Registry reference service](guides/trust-registry-reference-service.md)
 - [Machine-readable assurance profiles](guides/machine-readable-assurance-profiles.md)
 - [Ayra Trust Network crosswalk](../tools/ayra-mapping.md)
+- [Ayra v2 / candidate-v3 compatibility](ayra-v3-compatibility.md)
 
 ### GRID implementers (directory operators)
 
