@@ -12,26 +12,35 @@ project:
     - evaluation
     - interoperability testing
     - pilot preparation
+    - profile-aware assurance composition
   not_asserted:
     - production certification
     - independent assurance
     - ownership of the TRQP protocol specification
+    - ownership of external ecosystem profile specifications
+    - governance legitimacy without external evidence
 authority:
   normative_scope:
     - trqp-assurance-workflows
+    - profile-assurance-composition
   implementation_scope:
     - assurance evidence ingestion and composition
     - assurance profile evaluation
+    - version-bound ecosystem profile evaluation
     - portable assurance publication
     - combined assurance decision generation
+    - compatibility and reassessment evidence
   does_not_own:
     - the TRQP protocol specification
+    - ecosystem profile specifications such as the Ayra TRQP Profile
     - raw conformance test execution
-    - TSPP control definition
+    - CTS replay-comparison semantics
+    - TSPP control definition or posture semantics
+    - external governance legitimacy
     - external certification or accreditation
   approval: Maintainers approve normative, status, and release changes through reviewed pull requests.
   delegation: Delegation is limited to the artefact scope stated in GOVERNANCE.md and may be withdrawn by maintainers.
-  revocation_or_supersession: Releases, profiles, evidence, and status claims are superseded or revoked through versioned notices and machine-readable lifecycle records.
+  revocation_or_supersession: Releases, profiles, evidence, compatibility mappings, and status claims are superseded or revoked through versioned notices and machine-readable lifecycle records.
 evidence:
   validation_commands:
     - make validate
@@ -40,13 +49,42 @@ evidence:
     - artifacts/combined-assurance/combined-assurance-manifest.json
     - artifacts/combined-assurance/assurance-decision.json
     - artifacts/combined-assurance/traceability-report.json
+    - reproducible profile-specific assurance bundles
+  profile_assurance:
+    architecture: reusable-version-bound-profile-boundary
+    first_profile: ayra-trqp
+    result_states:
+      - PASS
+      - FAIL
+      - INDETERMINATE
+      - NOT_APPLICABLE
+      - NOT_IMPLEMENTED
+    current_ayra_binding:
+      profile_version: 0.6.0-draft
+      trqp_version: "2.0"
+      source_revision: ec7768572592b50ba3f4102c026c2449148b5e11
+    producer_convergence:
+      cts_issue: https://github.com/sankarshanmukhopadhyay/trqp-conformance-suite/issues/40
+      tspp_issue: https://github.com/sankarshanmukhopadhyay/TRQP-TSPP/issues/85
   known_limitations:
     - Example and self-generated evidence is not independent assurance.
     - Supported cross-repository conclusions require a compatibility-registry release tuple.
+    - Governance legitimacy is not inferred from API correctness, DID syntax, DID resolution, service discovery, or controller evidence alone.
+    - Some proving observations remain Hub-local until CTS and TSPP profile-aware producer contracts are integrated.
+    - Candidate TRQP v3 compatibility is downstream experimental analysis and is not upstream normative authority.
 relationships:
   - type: supports
     target: TRQP operational trust stack
     constraint: Participation does not transfer protocol or external certification authority.
+  - type: consumes-evidence-from
+    target: trqp-conformance-suite
+    constraint: CTS remains authoritative for protocol-conformance and replay evidence.
+  - type: consumes-evidence-from
+    target: TRQP-TSPP
+    constraint: TSPP remains authoritative for security/privacy posture evidence.
+  - type: profiles
+    target: external ecosystem profiles
+    constraint: The Hub maintains version-bound assurance projections and does not become the profile specification authority.
 review:
-  last_review: 2026-08-20
+  last_review: 2026-09-10
   next_review: 2026-11-20
