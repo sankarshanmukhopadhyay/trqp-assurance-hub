@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "producer": "trqp-conformance-suite",
+  "suite_version": "1.9.1",
+  "test_set": {"id": "core-tests", "revision": "fixture-revision"},
+  "protocol": {"id": "trqp", "version": "2.0", "binding": "https-json"},
+  "run": {"id": "ayra-cts-fixture", "generated_at": "2026-09-10T00:00:00Z"},
+  "target": {"id": "ayra-registry-fixture"},
+  "profile_context": {
+    "id": "ayra-trqp",
+    "version": "0.6.0-draft",
+    "source_revision": "ec7768572592b50ba3f4102c026c2449148b5e11"
+  },
+  "results": [
+    {"test_case_id": "TC-AUTHZ-001", "result": "PASS", "evidence_ref": "cts-report.json#test_case_id=TC-AUTHZ-001"},
+    {"test_case_id": "TC-RECOG-001", "result": "PASS", "evidence_ref": "cts-report.json#test_case_id=TC-RECOG-001"}
+  ],
+  "reassessment": {"state": "CURRENT"}
+}
