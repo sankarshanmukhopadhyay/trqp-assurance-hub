@@ -47,9 +47,9 @@ jobs:
       - name: Validate profile requirement catalogue
         run: python tools/validate_profile_requirements.py
       - name: Run profile assurance tests
-        run: pytest -q tests/test_profile_assurance_model.py tests/test_ayra_profile_runner.py
+        run: python -m pytest -q tests/test_profile_assurance_model.py tests/test_ayra_profile_runner.py
       - name: Exercise Ayra conformant fixture
-        run: python tools/run_ayra_profile.py tests/fixtures/ayra/conformant.json --out /tmp/ayra-assurance.json
+        run: python -m tools.run_ayra_profile tests/fixtures/ayra/conformant.json --out /tmp/ayra-assurance.json
       - name: Regenerate operational stack demo bundle
         run: |
           rm -rf /tmp/operational-stack
