@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/schemas/profile-assurance-proposition.schema.json",
+  "title": "Profile Assurance Proposition",
+  "type": "object",
+  "required": ["proposition_id", "requirement_id", "dimension", "applicability", "evidence", "result"],
+  "properties": {
+    "proposition_id": {"type": "string", "pattern": "^PROP-[A-Z0-9-]+$"},
+    "requirement_id": {"type": "string", "minLength": 1},
+    "dimension": {"enum": ["core_profile", "extension", "operational", "authority", "security"]},
+    "normative_strength": {"enum": ["MUST", "MUST_NOT", "SHOULD", "SHOULD_NOT", "MAY"]},
+    "applicability": {"enum": ["APPLICABLE", "NOT_APPLICABLE", "UNKNOWN"]},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "reference"],
+        "properties": {
+          "kind": {"enum": ["test", "observation", "external", "deferred"]},
+          "reference": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "result": {"enum": ["PASS", "FAIL", "INDETERMINATE", "NOT_APPLICABLE", "NOT_IMPLEMENTED"]},
+    "reason": {"type": "string"}
+  },
+  "allOf": [
+    {"if": {"properties": {"result": {"const": "PASS"}}}, "then": {"properties": {"evidence": {"minItems": 1}}}},
+    {"if": {"properties": {"result": {"const": "NOT_APPLICABLE"}}}, "then": {"properties": {"applicability": {"const": "NOT_APPLICABLE"}}}},
+    {"if": {"properties": {"applicability": {"const": "UNKNOWN"}}}, "then": {"properties": {"result": {"const": "INDETERMINATE"}}}}
+  ],
+  "additionalProperties": false
+}
