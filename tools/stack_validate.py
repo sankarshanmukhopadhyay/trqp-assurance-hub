@@ -18,6 +18,7 @@ REQUIRED_GATES = {
     "full-stack-replay-equivalent", "walkthrough-executable"
 }
 SHA40 = re.compile(r"^[0-9a-f]{40}$")
+VERSION = re.compile(r"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
 
 
 def load(path: Path) -> dict:
@@ -35,26 +36,87 @@ def validate_structure(doc: dict) -> list[str]:
         if not component.get("repository"): errors.append(f"{name}: repository missing")
         if not str(component.get("ref", "")).startswith("v"): errors.append(f"{name}: immutable version tag required")
         if not SHA40.match(str(component.get("commit", ""))): errors.append(f"{name}: 40-character commit SHA required")
-    if not REQUIRED_AUTHORITIES.issubset(doc.get("authorities", {})): errors.append("tsmm and tis authorities are required")
+
+    authorities = doc.get("authorities", {})
+    if not REQUIRED_AUTHORITIES.issubset(authorities):
+        errors.append("tsmm and tis authorities are required")
+    else:
+        for name in sorted(REQUIRED_AUTHORITIES):
+            authority = authorities[name]
+            if not authority.get("repository"): errors.append(f"{name}: authority repository missing")
+            if not VERSION.match(str(authority.get("version", ""))): errors.append(f"{name}: semantic version required")
+            if not SHA40.match(str(authority.get("commit", ""))): errors.append(f"{name}: 40-character authority commit SHA required")
+
     gates = set(doc.get("release_gates", []))
     missing = REQUIRED_GATES - gates
     if missing: errors.append("missing release gates: " + ", ".join(sorted(missing)))
     return errors
 
 
+def _remote_tag(repository: str, ref: str) -> list[str]:
+    url = f"https://github.com/{repository}.git"
+    proc = subprocess.run(
+        ["git", "ls-remote", url, f"refs/tags/{ref}^{{}}", f"refs/tags/{ref}"],
+        capture_output=True,
+        text=True,
+    )
+    if proc.returncode != 0:
+        return []
+    return [line.split()[0] for line in proc.stdout.splitlines() if line.strip()]
+
+
+def _commit_exists(repository: str, commit: str) -> bool:
+    """Prove a public repository can fetch the exact declared authority commit."""
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        init = subprocess.run(["git", "init", "--quiet", tmp], capture_output=True, text=True)
+        if init.returncode != 0:
+            return False
+        remote = subprocess.run(
+            ["git", "-C", tmp, "remote", "add", "origin", f"https://github.com/{repository}.git"],
+            capture_output=True,
+            text=True,
+        )
+        if remote.returncode != 0:
+            return False
+        fetch = subprocess.run(
+            ["git", "-C", tmp, "fetch", "--quiet", "--depth", "1", "origin", commit],
+            capture_output=True,
+            text=True,
+        )
+        if fetch.returncode != 0:
+            return False
+        actual = subprocess.run(
+            ["git", "-C", tmp, "rev-parse", "FETCH_HEAD"],
+            capture_output=True,
+            text=True,
+        )
+        return actual.returncode == 0 and actual.stdout.strip() == commit
+
+
 def verify_remote_refs(doc: dict) -> list[str]:
     errors: list[str] = []
     for name, component in doc["components"].items():
-        url = f"https://github.com/{component['repository']}.git"
-        ref = f"refs/tags/{component['ref']}^{{}}"
-        fallback = f"refs/tags/{component['ref']}"
-        proc = subprocess.run(["git", "ls-remote", url, ref, fallback], capture_output=True, text=True)
-        if proc.returncode != 0 or not proc.stdout.strip():
+        resolved = _remote_tag(component["repository"], component["ref"])
+        if not resolved:
             errors.append(f"{name}: unable to resolve {component['ref']}")
-            continue
-        resolved = [line.split()[0] for line in proc.stdout.splitlines() if line.strip()]
-        if component["commit"] not in resolved:
+        elif component["commit"] not in resolved:
             errors.append(f"{name}: tag does not resolve to declared commit")
+
+    for name, authority in doc["authorities"].items():
+        commit = authority.get("commit")
+        if not commit:
+            continue
+        if not _commit_exists(authority["repository"], commit):
+            errors.append(f"{name}: declared authority commit is not fetchable")
+            continue
+        ref = authority.get("ref")
+        if ref:
+            resolved = _remote_tag(authority["repository"], ref)
+            if not resolved:
+                errors.append(f"{name}: unable to resolve authority ref {ref}")
+            elif commit not in resolved:
+                errors.append(f"{name}: authority ref does not resolve to declared commit")
     return errors
 
 
@@ -71,7 +133,7 @@ def main() -> int:
         for error in errors: print(f"[FAIL] {error}")
         return 1
     print("[PASS] coordinated stack manifest is structurally valid")
-    if args.check_remote: print("[PASS] tagged component commits match manifest")
+    if args.check_remote: print("[PASS] tagged components and authority version commits match manifest")
     return 0
 
 
