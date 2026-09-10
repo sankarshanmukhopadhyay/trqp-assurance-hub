@@ -1,0 +1,10 @@
+profile_id: example
+profile_version: 0.1.0
+protocol:
+  id: trqp
+  version: "2.0"
+source:
+  repository: https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub
+  revision: 0000000-fixture
+  authority: synthetic-test-fixture
+requirements: []
