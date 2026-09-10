@@ -1,0 +1,89 @@
+profile_id: ayra-trqp
+profile_version: 0.6.0-draft
+source:
+  repository: https://github.com/ayraforum/ayra-trust-registry-resources
+  revision: ec7768572592b50ba3f4102c026c2449148b5e11
+  document: spec/profile.md
+requirements:
+  - id: AYRA-CORE-001
+    strength: MUST
+    scope: core_profile
+    statement: Implement TRQP v2.0 POST /authorization.
+    source_anchor: Core TRQP Endpoints
+    testability: testable
+  - id: AYRA-CORE-002
+    strength: MUST
+    scope: core_profile
+    statement: Implement TRQP v2.0 POST /recognition.
+    source_anchor: Core TRQP Endpoints
+    testability: testable
+  - id: AYRA-ID-001
+    strength: MUST
+    scope: core_profile
+    statement: All request and response fields whose names end in _id are DID URIs.
+    source_anchor: Identifier Constraints
+    testability: testable
+  - id: AYRA-ERR-001
+    strength: MUST
+    scope: operational
+    statement: Error responses use RFC 7807 Problem Details as required by the profiled TRQP v2.0 contract.
+    source_anchor: Error Handling
+    testability: testable
+  - id: AYRA-ERR-002
+    strength: MUST_NOT
+    scope: operational
+    statement: HTTP or operational errors are not represented as negative authorization or recognition answers.
+    source_anchor: Error Handling
+    testability: testable
+  - id: AYRA-RATE-001
+    strength: MUST
+    scope: operational
+    statement: Rate limiting uses HTTP 429 behaviour consistent with the profile requirements.
+    source_anchor: Rate Limiting
+    testability: testable
+  - id: AYRA-EXT-001
+    strength: MAY
+    scope: extension
+    statement: A registry may implement Ayra extension endpoints in addition to the mandatory TRQP endpoints.
+    source_anchor: Ayra Extension Endpoints
+    applicability: Applies per extension capability advertised or implemented by the registry.
+    testability: observable
+  - id: AYRA-EXT-002
+    strength: MUST
+    scope: extension
+    statement: When an optional Ayra extension endpoint is unsupported, the profile-required unsupported-endpoint behaviour is returned rather than an invented successful result.
+    source_anchor: Ayra Extension Endpoints
+    applicability: Applies to optional extension endpoints not implemented by the registry.
+    testability: testable
+  - id: AYRA-TLS-001
+    strength: MUST
+    scope: security
+    statement: Registry endpoints use HTTPS with TLS 1.2 or later.
+    source_anchor: Transport Security
+    testability: observable
+  - id: AYRA-SIGN-001
+    strength: SHOULD
+    scope: security
+    statement: Responses should be signed where the Ayra profile specifies response signing.
+    source_anchor: Response Signing
+    applicability: Mechanism remains subject to the pinned draft profile's stated specification status.
+    testability: currently_indeterminate
+    notes: Do not promote this SHOULD to a universal MUST while the signing mechanism remains unsettled in the pinned draft.
+  - id: AYRA-AUTH-001
+    strength: MUST
+    scope: authority
+    statement: The ecosystem governance framework is discoverable through the authority_id relationship where required by the profile.
+    source_anchor: Ecosystem Governance Framework
+    testability: requires_external_evidence
+  - id: AYRA-DID-001
+    strength: MUST
+    scope: authority
+    statement: Trust Registry identifiers are DIDs.
+    source_anchor: Trust Registry Identifier
+    testability: testable
+  - id: AYRA-DID-002
+    strength: SHOULD
+    scope: authority
+    statement: The TRQP service endpoint should be discoverable through the Trust Registry DID document.
+    source_anchor: Trust Registry Identifier
+    testability: requires_external_evidence
