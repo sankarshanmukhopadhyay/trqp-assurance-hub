@@ -1,0 +1,22 @@
+name: Experimental TRQP v3 assurance
+
+on:
+  push:
+    branches:
+      - experiment/trqp-v3-candidate
+  workflow_dispatch:
+
+jobs:
+  v3-assurance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - name: Install test dependency
+        run: python -m pip install pytest
+      - name: Validate pinned reconciliation
+        run: python tools/validate_v3_experimental_assurance.py
+      - name: Run candidate assurance regression tests
+        run: python -m pytest -q tests/test_v3_experimental_assurance.py
