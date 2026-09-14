@@ -1,4 +1,4 @@
-.PHONY: validate flagship-check assurance-check evidence stack-release-check stack-bootstrap stack-evaluate
+.PHONY: validate flagship-check assurance-check evidence stack-release-check stack-bootstrap stack-evaluate v3-candidate-check
 
 validate:
 	python scripts/validate_repository.py
@@ -21,6 +21,10 @@ stack-bootstrap:
 
 stack-evaluate:
 	python tools/stack_evaluate.py
+
+v3-candidate-check:
+	python tools/validate_v3_experimental_assurance.py
+	python -m pytest -q tests/test_v3_experimental_assurance.py
 
 flagship-check:
 	python scripts/validate_repository.py
