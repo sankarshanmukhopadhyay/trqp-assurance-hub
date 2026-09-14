@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "authority_status": "DOWNSTREAM_EXPERIMENTAL_NOT_ADOPTED",
+  "repository": "sankarshanmukhopadhyay/tswg-trust-registry-protocol",
+  "branch": "draft/next-trqp",
+  "commit": "532a570ed8b7b468b7a317030077577b9859c14f",
+  "normative_artifact": "specification/v3/TRQP-V3.md",
+  "requirements_artifact": "specification/v3/conformance/REQUIREMENTS.md",
+  "requirements_blob_sha": "cbda95a479d77b32f5331bce7fdfb2b8c5197ee4",
+  "pinned_at": "2026-09-14"
+}
