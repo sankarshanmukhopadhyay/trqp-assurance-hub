@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "candidate_commit": "532a570ed8b7b468b7a317030077577b9859c14f",
+  "authority_status": "DOWNSTREAM_EXPERIMENTAL_NOT_ADOPTED",
+  "producers": [
+    {
+      "name": "cts",
+      "repository": "sankarshanmukhopadhyay/trqp-conformance-suite",
+      "branch": "experiment/trqp-v3-candidate",
+      "commit": "33465ca0edb27a11fb801baaad348cf6ec159c87",
+      "artifact": "experimental/trqp-v3/evidence.json",
+      "artifact_blob_sha": "dd5c7286feb0b823a70a5872de2b4861b54ef70f",
+      "claim_scope": "candidate semantic oracle/vector coverage; not production SUT conformance"
+    },
+    {
+      "name": "tspp",
+      "repository": "sankarshanmukhopadhyay/TRQP-TSPP",
+      "branch": "experiment/trqp-v3-candidate",
+      "commit": "fc7f15fb81f2bcaaa4d79fd4ac1df09d25572c89",
+      "artifact": "experimental/trqp-v3/profile-contract.json",
+      "artifact_blob_sha": "9146b2404ee42fcb893f321c5db0e330fc30ab45",
+      "claim_scope": "protocol/profile realizability and independent pressure testing; not upstream adoption"
+    }
+  ],
+  "invalidation_rule": "Any candidate or producer pin change makes affected assurance evidence stale until explicit reconciliation and rerun."
+}
