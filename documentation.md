@@ -18,8 +18,10 @@ Every public Markdown document in the repository is rendered by Jekyll and index
 - [Quickstart]({{ '/QUICKSTART/' | relative_url }})  `/QUICKSTART.md`
 - [TRQP Assurance Hub]({{ '/README/' | relative_url }})  `/README.md`
 - [TRQP Assurance Hub v1.6.1 Release Notes]({{ '/RELEASE_NOTES_v1.6.1/' | relative_url }})  `/RELEASE_NOTES_v1.6.1.md`
+- [TRQP Assurance Hub v1.10.0]({{ '/RELEASE_NOTES_v1.10.0/' | relative_url }})  `/RELEASE_NOTES_v1.10.0.md`
 - [Roadmap]({{ '/ROADMAP/' | relative_url }})  `/ROADMAP.md`
 - [Security Policy]({{ '/SECURITY/' | relative_url }})  `/SECURITY.md`
+- [Support]({{ '/SUPPORT/' | relative_url }})  `/SUPPORT.md`
 
 ## artifacts
 
@@ -28,6 +30,8 @@ Every public Markdown document in the repository is rendered by Jekyll and index
 ## docs
 
 - [Adoption Kit]({{ '/docs/adoption/README/' | relative_url }})  `/docs/adoption/README.md`
+- [TRQP Stack 2026.3 — Profile-Aware Assurance Walkthrough]({{ '/docs/adoption/stack-2026.3-walkthrough/' | relative_url }})  `/docs/adoption/stack-2026.3-walkthrough.md`
+- [TRQP Stack quickstart]({{ '/docs/adoption/stack-quickstart/' | relative_url }})  `/docs/adoption/stack-quickstart.md`
 - [Assessor Checklist]({{ '/docs/adoption/assessor-checklist/' | relative_url }})  `/docs/adoption/assessor-checklist.md`
 - [Ecosystem Operator Checklist]({{ '/docs/adoption/ecosystem-operator-checklist/' | relative_url }})  `/docs/adoption/ecosystem-operator-checklist.md`
 - [Evidence Acceptance Criteria]({{ '/docs/adoption/evidence-acceptance-criteria/' | relative_url }})  `/docs/adoption/evidence-acceptance-criteria.md`
@@ -36,6 +40,8 @@ Every public Markdown document in the repository is rendered by Jekyll and index
 - [RFP Language]({{ '/docs/adoption/rfp-language/' | relative_url }})  `/docs/adoption/rfp-language.md`
 - [Combined assurance composition and publication]({{ '/docs/architecture/documentation-and-assurance-flow/' | relative_url }})  `/docs/architecture/documentation-and-assurance-flow.md`
 - [Architecture]({{ '/docs/architecture/' | relative_url }})  `/docs/architecture/index.md`
+- [Ayra assurance residual threats]({{ '/docs/ayra-assurance-residual-threats/' | relative_url }})  `/docs/ayra-assurance-residual-threats.md`
+- [Ayra TRQP v2 and candidate-v3 compatibility]({{ '/docs/ayra-v3-compatibility/' | relative_url }})  `/docs/ayra-v3-compatibility.md`
 - [Operational Stack Narrative]({{ '/docs/architecture/operational-stack/' | relative_url }})  `/docs/architecture/operational-stack.md`
 - [Candidate Trust Registry Assurance & Certification Baseline]({{ '/docs/certification-baseline/README/' | relative_url }})  `/docs/certification-baseline/README.md`
 - [Assurance tier model]({{ '/docs/certification-baseline/assurance-tier-model/' | relative_url }})  `/docs/certification-baseline/assurance-tier-model.md`
@@ -75,6 +81,8 @@ Every public Markdown document in the repository is rendered by Jekyll and index
 - [Trust Registry Reference Service]({{ '/docs/guides/trust-registry-reference-service/' | relative_url }})  `/docs/guides/trust-registry-reference-service.md`
 - [How to verify a GRID listing (verifier-first)]({{ '/docs/how-to-verify-grid/' | relative_url }})  `/docs/how-to-verify-grid.md`
 - [Documentation Index]({{ '/docs/' | relative_url }})  `/docs/index.md`
+- [Portfolio Integration]({{ '/docs/portfolio-integration/' | relative_url }})  `/docs/portfolio-integration.md`
+- [Public repository baseline]({{ '/docs/public-repository-baseline/' | relative_url }})  `/docs/public-repository-baseline.md`
 - [Compatibility Policy]({{ '/docs/policies/compatibility/' | relative_url }})  `/docs/policies/compatibility.md`
 - [Issue Routing Policy]({{ '/docs/policies/issue-routing/' | relative_url }})  `/docs/policies/issue-routing.md`
 - [Compatibility Matrix]({{ '/docs/reference/compatibility-matrix/' | relative_url }})  `/docs/reference/compatibility-matrix.md`
@@ -89,7 +97,7 @@ Every public Markdown document in the repository is rendered by Jekyll and index
 - [Authoritative directories and meta-assurance]({{ '/docs/strategy/authoritative-directories/' | relative_url }})  `/docs/strategy/authoritative-directories.md`
 - [TRQP Adoption Path]({{ '/docs/trqp-adoption-path/' | relative_url }})  `/docs/trqp-adoption-path.md`
 - [Upstream TRQP RFE alignment]({{ '/docs/trqp-alignment/' | relative_url }})  `/docs/trqp-alignment.md`
-- [Trust Systems Assurance Method (TSAM)]({{ '/docs/tsam/README/' | relative_url }})  `/docs/tsam/README.md`
+- [Trust Systems Assurance Method (TSAM)]({{ '/tsam/' | relative_url }})  `/docs/tsam/README.md`
 - [TSAM Conceptual Architecture]({{ '/docs/tsam/architecture/' | relative_url }})  `/docs/tsam/architecture.md`
 - [TSAM Layers]({{ '/docs/tsam/layers/' | relative_url }})  `/docs/tsam/layers.md`
 - [TSAM Mapping — Repository Components]({{ '/docs/tsam/mapping-repo/' | relative_url }})  `/docs/tsam/mapping-repo.md`
@@ -124,6 +132,7 @@ Every public Markdown document in the repository is rendered by Jekyll and index
 
 ## profiles
 
+- [TRQP assurance profiles]({{ '/profiles/README/' | relative_url }})  `/profiles/README.md`
 - [DeDi Experimental Profile (Decentralized Directory Protocol)]({{ '/profiles/dedi-experimental-profile/' | relative_url }})  `/profiles/dedi-experimental-profile.md`
 - [GRID Profile (Global Registrar Information Directory)]({{ '/profiles/grid-profile/' | relative_url }})  `/profiles/grid-profile.md`
 - [SAD-1 Profile (Sovereign Authoritative Directory)]({{ '/profiles/sad-1-profile/' | relative_url }})  `/profiles/sad-1-profile.md`
@@ -148,6 +157,15 @@ Every public Markdown document in the repository is rendered by Jekyll and index
 - [v1.6.0 — Operational Trust Stack: Public Assurance and Adoption Readiness]({{ '/releases/v1.6.0/' | relative_url }})  `/releases/v1.6.0.md`
 - [TRQP Assurance Hub v1.8.0 Release Notes]({{ '/releases/v1.8.0/' | relative_url }})  `/releases/v1.8.0.md`
 - [TRQP Assurance Hub v1.9.0 — End-to-End Assurance Evidence Chain]({{ '/releases/v1.9.0/' | relative_url }})  `/releases/v1.9.0.md`
+- [TRQP Assurance Hub v1.13.0 — Profile-Aware Compositional Assurance]({{ '/releases/v1.13.0/' | relative_url }})  `/releases/v1.13.0.md`
+
+## stack
+
+- [Canonical TRQP stack adopter case]({{ '/stack/examples/canonical-adopter/README/' | relative_url }})  `/stack/examples/canonical-adopter/README.md`
+- [TRQP Stack 2026.1 — Coconut]({{ '/stack/releases/2026.1/README/' | relative_url }})  `/stack/releases/2026.1/README.md`
+- [TRQP Stack 2026.1 — Coconut release notes]({{ '/stack/releases/2026.1/RELEASE_NOTES/' | relative_url }})  `/stack/releases/2026.1/RELEASE_NOTES.md`
+- [TRQP Stack 2026.2 — Ashoka release notes]({{ '/stack/releases/2026.2/RELEASE_NOTES/' | relative_url }})  `/stack/releases/2026.2/RELEASE_NOTES.md`
+- [TRQP Stack 2026.3 — Banyan]({{ '/stack/releases/2026.3/RELEASE_NOTES/' | relative_url }})  `/stack/releases/2026.3/RELEASE_NOTES.md`
 
 ## schemas
 

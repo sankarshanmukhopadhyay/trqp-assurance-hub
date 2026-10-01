@@ -28,7 +28,7 @@ It is also the **adopter front door and coordinated Stack release authority**. A
 | Stack release gate | `make stack-release-check` |
 | Evidence output | `artifacts/combined-assurance/` plus reproducible profile-specific evidence bundles |
 | Governance authority | [`GOVERNANCE.md`](GOVERNANCE.md) and [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) |
-| Current Stack record | [`stack/releases/2026.3/`](stack/releases/2026.3/) |
+| Current Stack record | [`stack/releases/2026.3/`](stack/releases/2026.3/RELEASE_NOTES.md) |
 | Current Stack release | https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/releases/tag/trqp-stack-2026.3 |
 | Canonical adopter workflow | [`docs/adoption/stack-quickstart.md`](docs/adoption/stack-quickstart.md) |
 | Profile-aware assurance walkthrough | [`docs/adoption/stack-2026.3-walkthrough.md`](docs/adoption/stack-2026.3-walkthrough.md) |
@@ -51,7 +51,7 @@ The published tuple is:
 | TSMM | 0.24.0 | `8ddfd52c876faf368241bc11101681fb1fe49398` | Canonical trust-system semantic authority |
 | TIS | 0.15.0 | `edda0e87ced40797d22e3df542099871c57fcb59` | Portable schema and contract authority |
 
-The coordinated release was published after the required human release judgment accepted the frozen tuple and the post-acceptance merged-main `stack-release-eligibility` run succeeded. The release record and retained evidence are under [`stack/releases/2026.3/`](stack/releases/2026.3/).
+The coordinated release was published after the required human release judgment accepted the frozen tuple and the post-acceptance merged-main `stack-release-eligibility` run succeeded. The release record and retained evidence are under [`stack/releases/2026.3/`](stack/releases/2026.3/RELEASE_NOTES.md).
 
 ### Why an adopter benefits
 
