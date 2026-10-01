@@ -149,6 +149,10 @@ The dedicated `stack-release-eligibility` GitHub Actions workflow extends this w
 
 For coordinated publication, a successful merged-main eligibility run is necessary but not sufficient: the immutable tuple and evidence digest must be recorded and the repository's required visible human release judgment must accept publication. Stack 2026.3 completed that governance path and is now the current published release.
 
+## TSAM method
+
+The Hub is a concrete TSAM-aligned implementation environment, but TSAM is broader than TRQP. For the self-contained method, implementation model, assurance lifecycle, business value, and boundaries, see **[TSAM — Trust Systems Assurance Method](docs/tsam/README.md)**.
+
 ## Adoption and implementation guides
 
 - [`docs/adoption/stack-quickstart.md`](docs/adoption/stack-quickstart.md) — canonical end-to-end Stack workflow.

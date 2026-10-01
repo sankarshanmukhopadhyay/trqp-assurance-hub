@@ -7,6 +7,13 @@ nav_exclude: true
 # TRACE and TSAM
 ## Governance Lens and Assurance Spine
 
+Reader-facing canonical introductions:
+
+- TRACE: https://github.com/sankarshanmukhopadhyay/dpi-ai-governance-lab/blob/main/docs/trace/README.md
+- TSAM: [Trust Systems Assurance Method](../tsam/README.md)
+
+These introductions synthesize existing method and implementation material for adoption. This document remains the canonical architectural definition of the TRACE ↔ TSAM relationship.
+
 ## 1. Status and Normative Language
 
 This document defines the architectural relationship between TRACE and TSAM.

@@ -68,7 +68,7 @@ You are translating governance intent into implementable and auditable artifacts
 - Roadmap: [Roadmap](roadmap.md)
 
 ## Canonical references
-- [TSAM (Trust Systems Assurance Method)](tsam/README.md)
+- [TSAM — canonical method overview](tsam/README.md) — what TSAM is, how to implement it, lifecycle assurance, business value and boundaries
 - [TRACE ↔ TSAM relationship](strategy/TRACE-TSAM-relationship.md)
 - [Assurance levels (AL1–AL4)](guides/assurance-levels.md)
 - [Evidence & artifact expectations matrix](guides/evidence-artifacts.md)
