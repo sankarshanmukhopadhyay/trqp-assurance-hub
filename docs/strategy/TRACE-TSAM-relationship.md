@@ -7,6 +7,13 @@ nav_exclude: true
 # TRACE and TSAM
 ## Governance Lens and Assurance Spine
 
+Reader-facing canonical introductions:
+
+- TRACE: https://sankarshanmukhopadhyay.github.io/dpi-ai-governance-lab/trace/
+- TSAM: https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/tsam/
+
+These introductions synthesize existing method and implementation material for adoption. This document remains the canonical architectural definition of the TRACE ↔ TSAM relationship.
+
 ## 1. Status and Normative Language
 
 This document defines the architectural relationship between TRACE and TSAM.
