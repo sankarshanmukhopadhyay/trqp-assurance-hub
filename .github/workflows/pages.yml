@@ -9,6 +9,8 @@ on:
       - "Gemfile"
       - "_includes/**"
       - "assets/**"
+      - "scripts/validate_docs_site.py"
+      - "scripts/validate_built_site.py"
       - ".github/workflows/pages.yml"
   pull_request:
     branches: ["main"]
@@ -18,6 +20,8 @@ on:
       - "Gemfile"
       - "_includes/**"
       - "assets/**"
+      - "scripts/validate_docs_site.py"
+      - "scripts/validate_built_site.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -54,6 +58,9 @@ jobs:
         env:
           JEKYLL_ENV: production
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+
+      - name: Validate rendered site links
+        run: python3 scripts/validate_built_site.py
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
