@@ -24,7 +24,7 @@ It establishes profile-aware compositional assurance on top of the lifecycle gua
 | TSMM | `0.24.0` | `8ddfd52c876faf368241bc11101681fb1fe49398` |
 | TIS | `0.15.0` | `edda0e87ced40797d22e3df542099871c57fcb59` |
 
-The immutable release record is under [`stack/releases/2026.3/`](../stack/releases/2026.3/). The current adopter path is [`docs/adoption/stack-quickstart.md`](adoption/stack-quickstart.md), with the profile-aware walkthrough at [`docs/adoption/stack-2026.3-walkthrough.md`](adoption/stack-2026.3-walkthrough.md).
+The immutable release record is under [`stack/releases/2026.3/`](../stack/releases/2026.3/RELEASE_NOTES.md). The current adopter path is [`docs/adoption/stack-quickstart.md`](adoption/stack-quickstart.md), with the profile-aware walkthrough at [`docs/adoption/stack-2026.3-walkthrough.md`](adoption/stack-2026.3-walkthrough.md).
 
 ## Capability state
 
