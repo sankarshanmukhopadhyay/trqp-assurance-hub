@@ -9,8 +9,8 @@ nav_exclude: true
 
 Reader-facing canonical introductions:
 
-- TRACE: https://sankarshanmukhopadhyay.github.io/dpi-ai-governance-lab/trace/
-- TSAM: https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/tsam/
+- TRACE: https://github.com/sankarshanmukhopadhyay/dpi-ai-governance-lab/blob/main/docs/trace/README.md
+- TSAM: [Trust Systems Assurance Method](../tsam/README.md)
 
 These introductions synthesize existing method and implementation material for adoption. This document remains the canonical architectural definition of the TRACE ↔ TSAM relationship.
 
