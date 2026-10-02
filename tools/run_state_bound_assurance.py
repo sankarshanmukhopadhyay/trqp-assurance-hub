@@ -57,6 +57,11 @@ def report_version(report: dict, producer: str) -> str | None:
     return report.get("tool_version")
 
 
+def require_state_pair(cts: dict, tspp: dict) -> dict:
+    cts_state = require_state_pair(cts, tspp)
+    return cts_state
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--cts-report", required=True)
