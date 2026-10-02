@@ -54,7 +54,7 @@ The Conformance Suite answers the question:
 
 > Does the target service behave according to the selected TRQP profile?
 
-Operationally, CTS produces machine-readable reports with a shared `run_id`, `target_id`, profile identifier, summary, and test results.
+Operationally, CTS produces machine-readable reports with a shared `run_id`, `target_id`, verified SHA-256 `target_state`, profile identifier, summary, and test results.
 
 ### 2. TRQP-TSPP
 
@@ -62,7 +62,7 @@ TRQP-TSPP answers the question:
 
 > Does the target deployment exhibit the posture required for the declared assurance level?
 
-Operationally, TSPP produces a machine-readable report with the declared `assurance_level`, shared `run_id`, `target_id`, control-level evidence, and a summary.
+Operationally, TSPP produces a machine-readable report with the declared `assurance_level`, shared `run_id`, `target_id`, independently derived SHA-256 `target_state`, control-level evidence, and a summary. A state change drives reassessment rather than silent reuse.
 
 ### 3. Assurance Hub
 
@@ -121,7 +121,7 @@ The intended operator path is:
 
 1. run CTS against the target service,
 2. run TSPP against the same target,
-3. generate a combined manifest,
+3. verify both producer reports bind to the same deployed-state digest and generate a combined manifest,
 4. validate the chosen machine-readable assurance profile,
 5. publish the outputs through a trust registry service.
 
