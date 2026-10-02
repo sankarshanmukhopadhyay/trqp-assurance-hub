@@ -119,6 +119,28 @@ jobs:
           python tools/stack_compare.py artifacts/stack-candidate/run-a/state-bound-assurance-manifest.json artifacts/stack-candidate/run-b/state-bound-assurance-manifest.json
           python tools/stack_compare.py artifacts/stack-candidate/run-a/assurance-decision.json artifacts/stack-candidate/run-b/assurance-decision.json
 
+      - name: Assert negative reference-target outcome
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          manifest = json.loads(Path("artifacts/stack-candidate/run-a/state-bound-assurance-manifest.json").read_text())
+          decision = json.loads(Path("artifacts/stack-candidate/run-a/assurance-decision.json").read_text())
+
+          expected = {"cts": "fail", "tspp": "pass", "cts_replay_determinism": "pass"}
+          if manifest.get("producer_results") != expected:
+              raise SystemExit(f"unexpected producer results: {manifest.get('producer_results')!r}")
+          if decision.get("outcome") != "fail":
+              raise SystemExit(f"negative reference target must fail assurance, got {decision.get('outcome')!r}")
+          state = manifest.get("target_state", {})
+          if state.get("status") != "verified" or state.get("algorithm") != "sha256":
+              raise SystemExit("negative reference target is not bound to verified SHA-256 state")
+          if decision.get("target_state") != state.get("identity"):
+              raise SystemExit("decision target-state identity does not match manifest")
+          print("Expected negative release fixture outcome verified.")
+          PY
+
       - name: Verify fail-closed cross-stack and profile cases
         run: |
           python -m pytest -q \
