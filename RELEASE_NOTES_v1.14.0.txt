@@ -1,0 +1,21 @@
+TRQP Assurance Hub v1.14.0 — State-Bound Compositional Assurance
+
+Summary
+-------
+Adds deployment-state continuity to cross-producer assurance composition without changing TRQP protocol semantics.
+
+Capabilities
+------------
+- Correlates CTS and TSPP evidence to the same verified SHA-256 target-state identity.
+- Fails closed on missing, unverifiable, partial, or mismatched state evidence in the state-bound component path.
+- Preserves the historical combined-assurance path for previously supported tuples.
+- Adds a dedicated state-bound component runner and end-to-end integration workflow.
+- Retains target-state identity in assurance decisions, traceability evidence, and operational-stack evidence.
+- Exercises CTS replay determinism against the same target state.
+- Records the development component tuple CTS v1.11.1 / TSPP v0.18.1 / Hub v1.14.0 separately from coordinated Stack releases.
+
+Authority boundary
+------------------
+CTS remains authoritative for conformance and replay evidence. TSPP remains authoritative for security/privacy posture and reassessment semantics. The Hub owns cross-producer state correlation and composition.
+
+This component release does not itself constitute a new coordinated TRQP Stack release. TRQP Stack 2026.3 remains current unless a separate release judgment accepts an exact new immutable tuple.
