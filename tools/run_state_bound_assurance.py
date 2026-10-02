@@ -58,7 +58,12 @@ def report_version(report: dict, producer: str) -> str | None:
 
 
 def require_state_pair(cts: dict, tspp: dict) -> dict:
-    cts_state = require_state_pair(cts, tspp)
+    cts_state = require_verified_state(cts, "CTS")
+    tspp_state = require_verified_state(tspp, "TSPP")
+    if cts_state["digest"] != tspp_state["digest"]:
+        raise SystemExit(
+            f"fail-closed: target_state.digest mismatch: {cts_state['digest']!r} != {tspp_state['digest']!r}"
+        )
     return cts_state
 
 
