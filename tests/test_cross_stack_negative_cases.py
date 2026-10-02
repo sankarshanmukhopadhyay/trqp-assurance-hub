@@ -24,3 +24,11 @@ def test_missing_target_state_fails_closed(tmp_path):
  t={'run_id':'r','target_id':'a','target_state':_state('a'),'summary':{'PASS':1,'FAIL':0}}
  with pytest.raises(SystemExit, match='CTS target_state missing'):
   require_state_pair(c,t)
+
+
+def test_state_bound_positive_pair_is_accepted():
+ c={'run_id':'r','target_id':'a','target_state':_state('a'),'summary':{'PASS':1,'FAIL':0}}
+ t={'run_id':'r','target_id':'a','target_state':_state('a'),'summary':{'PASS':1,'FAIL':0}}
+ state=require_state_pair(c,t)
+ assert state['status']=='verified'
+ assert state['identity']=='sha256:'+'a'*64
