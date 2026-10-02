@@ -12,7 +12,8 @@
     "limitations",
     "findings",
     "issued_at",
-    "revoked"
+    "revoked",
+    "target_state"
   ],
   "properties": {
     "schema_version": {
@@ -40,6 +41,10 @@
     },
     "findings": {
       "type": "array"
+    },
+    "target_state": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
     }
   }
 }
