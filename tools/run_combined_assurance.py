@@ -39,9 +39,12 @@ for producer, report in [('CTS', c), ('TSPP', t)]:
 if c['target_state']['digest'] != t['target_state']['digest']:
     raise SystemExit(f"fail-closed: target_state.digest mismatch: {c['target_state']['digest']!r} != {t['target_state']['digest']!r}")
 reg = yaml.safe_load((r / 'data/compatibility-registry.yaml').read_text())
-rel = next((x for x in reg['release_sets'] if x['id'] == a.release_set and x['status'] == 'supported'), None)
+dev_reg = yaml.safe_load((r / 'data/component-compatibility.yaml').read_text())
+supported = [x for x in reg['release_sets'] if x.get('status') == 'supported']
+supported += [x for x in dev_reg.get('component_tuples', []) if x.get('status') == 'supported-development']
+rel = next((x for x in supported if x['id'] == a.release_set), None)
 if not rel:
-    raise SystemExit('fail-closed: unsupported release tuple')
+    raise SystemExit('fail-closed: unsupported release or component tuple')
 
 # CTS v1.8+ release tuples require independently auditable replay-determinism evidence.
 cts_determinism = None
