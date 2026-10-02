@@ -32,6 +32,12 @@ def status(d):
 
 eq('run_id')
 eq('target_id')
+for producer, report in [('CTS', c), ('TSPP', t)]:
+    state = report.get('target_state')
+    if not isinstance(state, dict) or state.get('status') != 'verified' or state.get('algorithm') != 'sha256' or not state.get('digest'):
+        raise SystemExit(f'fail-closed: {producer} target_state missing or unverifiable')
+if c['target_state']['digest'] != t['target_state']['digest']:
+    raise SystemExit(f"fail-closed: target_state.digest mismatch: {c['target_state']['digest']!r} != {t['target_state']['digest']!r}")
 reg = yaml.safe_load((r / 'data/compatibility-registry.yaml').read_text())
 rel = next((x for x in reg['release_sets'] if x['id'] == a.release_set and x['status'] == 'supported'), None)
 if not rel:
@@ -71,6 +77,7 @@ manifest = {
     'release_set': rel,
     'run_id': c['run_id'],
     'target_id': c['target_id'],
+    'target_state': c['target_state'],
     'artifacts': arts,
     'producer_results': producer_results,
 }
@@ -83,6 +90,7 @@ dec = {
     'outcome': outcome,
     'scope': 'TRQP conformance, CTS evidence reproducibility, and TSPP posture evidence composition',
     'target': c['target_id'],
+    'target_state': c['target_state']['identity'],
     'evidence_considered': arts,
     'conditions': [],
     'limitations': ['This conclusion evaluates supplied evidence and is not external certification.'],
@@ -104,13 +112,14 @@ Draft202012Validator(json.loads((r / 'schemas/assurance-decision.schema.json').r
 (out / 'traceability-report.json').write_text(json.dumps({
     'run_id': c['run_id'],
     'target_id': c['target_id'],
+    'target_state': c['target_state'],
     'chain': [
         'TRQP requirement',
         'CTS test',
-        'CTS evidence',
+        'CTS evidence bound to target state',
         'CTS replay determinism policy and report',
         'TSPP control',
-        'TSPP evidence',
+        'TSPP evidence bound to target state',
         'Hub assurance decision',
     ],
     'remediation_targets': {
