@@ -1,0 +1,124 @@
+name: state-bound-component-assurance
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  TRQP_RUN_ID: state-bound-integration
+  TRQP_TARGET_ID: trqp-reference-fixture
+
+jobs:
+  state-bound:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Hub
+        uses: actions/checkout@v7
+
+      - name: Checkout CTS
+        uses: actions/checkout@v7
+        with:
+          repository: sankarshanmukhopadhyay/trqp-conformance-suite
+          ref: v1.11.1
+          path: external/trqp-conformance-suite
+
+      - name: Checkout TSPP
+        uses: actions/checkout@v7
+        with:
+          repository: sankarshanmukhopadhyay/TRQP-TSPP
+          ref: v0.18.1
+          path: external/TRQP-TSPP
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r external/trqp-conformance-suite/cts/requirements.txt
+          python -m pip install -r external/TRQP-TSPP/harness/requirements.txt
+          python -m pip install jsonschema pyyaml pynacl pytest
+
+      - name: Generate CTS evidence
+        working-directory: external/trqp-conformance-suite
+        run: make assurance-check
+
+      - name: Generate CTS replay evidence
+        working-directory: external/trqp-conformance-suite
+        run: |
+          cp examples/sut.local.yaml.example examples/sut.local.yaml
+          python - <<'PY'
+          from pathlib import Path
+          from nacl.signing import SigningKey
+          from nacl.encoding import Base64Encoder
+          p = Path("examples/sut.local.yaml")
+          key = SigningKey.generate().encode(Base64Encoder).decode()
+          p.write_text(
+              p.read_text(encoding="utf-8").replace(
+                  "REPLACE_WITH_BASE64_ED25519_PRIVATE_KEY", key
+              ),
+              encoding="utf-8",
+          )
+          PY
+          python cts/run.py \
+            --profile profiles/baseline.yaml \
+            --sut examples/sut.local.yaml \
+            --fixture-set fixtures/baseline.fixture-set.json \
+            --generated-at "2026-10-02T00:00:00Z" \
+            --run-id "state-bound-replay" \
+            --target-id "trqp-reference-fixture" \
+            --target-state-file examples/state-snapshot.json \
+            --out reports/state_bound_fixture
+          set +e
+          python cts/run.py \
+            --profile profiles/baseline.yaml \
+            --sut examples/sut.local.yaml \
+            --replay reports/state_bound_fixture \
+            --generated-at "2026-10-02T00:00:00Z" \
+            --target-state-file examples/state-snapshot.json \
+            --out reports/state_bound_fixture_replay
+          replay_exit=$?
+          set -e
+          test -f reports/state_bound_fixture_replay/replay-report.json || exit "${replay_exit:-1}"
+          python scripts/build_replay_determinism_report.py \
+            --source reports/state_bound_fixture \
+            --replay-report reports/state_bound_fixture_replay/replay-report.json \
+            --policy policies/replay-determinism.v1.json \
+            --out reports/state_bound_fixture_replay/determinism-report.json
+          python scripts/verify_replay_determinism.py \
+            reports/state_bound_fixture_replay/determinism-report.json
+
+      - name: Generate TSPP evidence
+        working-directory: external/TRQP-TSPP
+        run: make assurance-check
+
+      - name: Compose state-bound assurance
+        run: |
+          python tools/run_state_bound_assurance.py \
+            --cts-report external/trqp-conformance-suite/artifacts/validation/cts-report.json \
+            --cts-determinism-report external/trqp-conformance-suite/reports/state_bound_fixture_replay/determinism-report.json \
+            --tspp-report external/TRQP-TSPP/artifacts/validation/tspp-report.json \
+            --component-tuple state-bound-2026-10 \
+            --out artifacts/state-bound-assurance
+          python -m pytest -q \
+            tests/test_cross_stack_negative_cases.py \
+            tests/test_state_bound_manifest.py \
+            tests/test_cts_determinism.py
+
+      - name: Upload evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: state-bound-component-assurance
+          path: |
+            artifacts/state-bound-assurance/
+            external/trqp-conformance-suite/artifacts/
+            external/trqp-conformance-suite/reports/state_bound_fixture_replay/determinism-report.json
+            external/TRQP-TSPP/artifacts/
+          if-no-files-found: error

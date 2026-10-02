@@ -60,12 +60,21 @@ def main(argv: list[str] | None = None) -> int:
     build = manifest.get("build", {})
     require_equal("CTS vs TSPP run_id", cts.get("run_id"), tspp.get("run_id"))
     require_equal("CTS vs TSPP target_id", cts.get("target_id"), tspp.get("target_id"))
+    cts_state = cts.get("target_state")
+    tspp_state = tspp.get("target_state")
+    if not isinstance(cts_state, dict) or cts_state.get("status") != "verified":
+        raise RuntimeError("CTS target_state missing or unverifiable")
+    if not isinstance(tspp_state, dict) or tspp_state.get("status") != "verified":
+        raise RuntimeError("TSPP target_state missing or unverifiable")
+    require_equal("CTS vs TSPP target_state.digest", cts_state.get("digest"), tspp_state.get("digest"))
+    require_equal("manifest target_state.digest vs CTS report", build.get("target_state", {}).get("digest"), cts_state.get("digest"))
     require_equal("manifest build.run_id vs CTS report", build.get("run_id"), cts.get("run_id"))
     require_equal("manifest build.run_id vs TSPP report", build.get("run_id"), tspp.get("run_id"))
     require_equal("manifest build.target_id vs CTS report", build.get("target_id"), cts.get("target_id"))
     require_equal("manifest build.target_id vs TSPP report", build.get("target_id"), tspp.get("target_id"))
     require_equal("metadata run_id vs manifest", metadata.get("run_id"), build.get("run_id"))
     require_equal("metadata target_id vs manifest", metadata.get("target_id"), build.get("target_id"))
+    require_equal("metadata target_state.digest vs manifest", metadata.get("target_state", {}).get("digest"), build.get("target_state", {}).get("digest"))
     require_equal("metadata build_id vs manifest", metadata.get("build_id"), build.get("build_id"))
     require_equal("metadata target vs manifest", metadata.get("target"), build.get("target"))
 

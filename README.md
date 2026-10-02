@@ -1,6 +1,6 @@
 ---
 owner: maintainers
-last_reviewed: 2026-09-10
+last_reviewed: 2026-10-02
 tier: 0
 ---
 
@@ -111,6 +111,14 @@ profile authority + external authority evidence where applicable
         ↓
 Assurance Hub aggregation + coordinated-release evidence
 ```
+
+## State-bound assurance development line
+
+The current Hub development line strengthens the existing TRQP Stack component model without changing TRQP protocol semantics and without depending on downstream candidate protocol work.
+
+CTS v1.11.1 and TSPP v0.18.1 independently bind their evidence to a verified SHA-256 target-state identity. The Hub composes those producer results only when `run_id`, `target_id`, and `target_state.digest` agree. Missing or mismatched state identity fails closed.
+
+The tuple is recorded in `data/component-compatibility.yaml` as a supported development component tuple. It is **not** a coordinated Stack release. **TRQP Stack 2026.3 — Banyan remains the current coordinated Stack baseline.**
 
 ## Profile-aware assurance
 

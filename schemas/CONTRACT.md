@@ -25,7 +25,7 @@ pins in downstream repositories.
 | Field | Tier | Notes |
 |---|---|---|
 | `manifest_version` | Stable | Currently `"0.2.0"`. Version bump signals breaking change. |
-| `build.build_id`, `build.target`, `build.run_id`, `build.target_id` | Stable | Required fields; never removed. |
+| `build.build_id`, `build.target`, `build.run_id`, `build.target_id`, `build.target_state` | Stable | Required fields; `target_state` binds the combined assurance claim to a verified SHA-256 deployment-state identity. |
 | `build.commit`, `build.ci_run_url` | Extensible | Optional; may be enriched. |
 | `tools.trqp_conformance_suite.*`, `tools.trqp_tspp.*` | Stable | Required sub-fields frozen. |
 | `artifacts[*].kind`, `artifacts[*].path` | Stable | Required per-artifact fields. |
@@ -100,4 +100,4 @@ All schemas in `schemas/` are the authoritative definitions.
 Alias `$ref` wrappers exist in `schemas/` root for backwards compatibility — always
 read the canonical schema at the declared `$id` URI.
 
-_Last updated: 2026-03-19_
+_Last updated: 2026-10-02_

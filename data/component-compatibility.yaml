@@ -1,0 +1,20 @@
+schema_version: "1.0"
+authority: trqp-assurance-hub
+component_tuples:
+  - id: state-bound-2026-10
+    hub: "1.14.0"
+    conformance_suite: "1.11.1"
+    tspp: "0.18.1"
+    status: supported-development
+    coordinated_stack_release: false
+    contracts:
+      combined_manifest: "1.1"
+      assurance_decision: "1.0"
+      producer_contract: "1.2"
+    requires:
+      cts_replay_determinism: true
+      producer_lifecycle_currentness: true
+      target_state_identity: true
+    limitations:
+      - TRQP Stack 2026.3 remains the current coordinated Stack baseline.
+      - This tuple is for component integration and does not constitute a coordinated Stack release.

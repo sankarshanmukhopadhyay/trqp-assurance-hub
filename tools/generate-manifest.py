@@ -119,6 +119,17 @@ def _require_equal(label: str, left: Any, right: Any) -> None:
         raise SystemExit(f"{label} mismatch: {left!r} != {right!r}")
 
 
+def _require_verified_target_state(report: Dict[str, Any], producer: str) -> Dict[str, Any]:
+    state = report.get("target_state")
+    if not isinstance(state, dict):
+        raise SystemExit(f"{producer} target_state missing")
+    if state.get("status") != "verified":
+        raise SystemExit(f"{producer} target_state is not verified")
+    if state.get("algorithm") != "sha256" or not state.get("digest"):
+        raise SystemExit(f"{producer} target_state digest is invalid")
+    return state
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     p = argparse.ArgumentParser(description="Generate a Combined Assurance Manifest (JSON).")
     p.add_argument("--manifest-version", default="0.2.0")
@@ -197,6 +208,15 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     _require_equal("CTS vs TSPP run_id", cts_report.get("run_id"), tspp_report.get("run_id"))
     _require_equal("CTS vs TSPP target_id", cts_report.get("target_id"), tspp_report.get("target_id"))
+    report_backed = bool(args.cts_report or args.tspp_report)
+    cts_target_state: Dict[str, Any] = {}
+    tspp_target_state: Dict[str, Any] = {}
+    if report_backed:
+        if not args.cts_report or not args.tspp_report:
+            raise SystemExit("CTS and TSPP reports must both be supplied for report-backed manifest generation")
+        cts_target_state = _require_verified_target_state(cts_report, "CTS")
+        tspp_target_state = _require_verified_target_state(tspp_report, "TSPP")
+        _require_equal("CTS vs TSPP target_state.digest", cts_target_state.get("digest"), tspp_target_state.get("digest"))
     _require_equal("manifest build.run_id vs CTS report", run_id, cts_report.get("run_id"))
     _require_equal("manifest build.run_id vs TSPP report", run_id, tspp_report.get("run_id"))
     _require_equal("manifest build.target_id vs CTS report", target_id, cts_report.get("target_id"))
@@ -208,6 +228,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         "run_id": run_id,
         "target_id": target_id,
     }
+    if cts_target_state:
+        build["target_state"] = dict(cts_target_state)
     if args.hub_commit:
         build["commit"] = args.hub_commit
     if args.ci_run_url:

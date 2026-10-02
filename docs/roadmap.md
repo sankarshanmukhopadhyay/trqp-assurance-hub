@@ -3,7 +3,7 @@ layout: default
 title: "Roadmap"
 nav_exclude: true
 owner: maintainers
-last_reviewed: 2026-09-10
+last_reviewed: 2026-10-02
 ---
 
 # TRQP Stack Roadmap
@@ -67,6 +67,24 @@ Governance legitimacy remains dependent on applicable external authority evidenc
 | 2026.3 — Banyan | Profile-aware compositional assurance using independently authoritative producer evidence |
 
 Historical candidate roadmaps and evidence under `stack/candidates/` are retained as audit artifacts. They describe what was proposed and tested at the time and must not be rewritten merely because a later release is now current.
+
+## Active capability tranche: state-bound assurance
+
+The current development tranche strengthens the existing TRQP Stack line without depending on downstream candidate protocol work or any proposed TRQP v3 semantics.
+
+The governing proposition is:
+
+> A combined assurance conclusion must not compose CTS and TSPP evidence merely because both name the same logical target. Both producers must bind their evidence to the same verified deployed-state identity, or the composition must fail closed.
+
+The tranche is implementing:
+
+- CTS-owned SHA-256 target-state identity for conformance and replay evidence;
+- TSPP-owned target-state binding with reassessment on state change or unverifiable state;
+- Hub-owned cross-producer target-state correlation and fail-closed composition;
+- adversarial evidence for logical-target equality with deployment-state mismatch;
+- preservation of producer authority boundaries.
+
+This work is **not** itself a declaration of a future coordinated Stack release. Component releases and any coordinated release judgment remain capability- and evidence-driven under the rules below.
 
 ## Next-release rule
 

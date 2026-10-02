@@ -26,7 +26,7 @@ In most procurement/audit contexts you need both—behavior and posture—becaus
 
 ## Evidence normalization
 
-The key to a combined story is a shared execution identity. For the Operational Stack baseline, CTS and TSPP MUST share the same `run_id` and `target_id`, and the Combined Assurance Manifest MUST carry those same values in `build.run_id` and `build.target_id`.
+The key to a combined story is shared execution and state identity. CTS and TSPP MUST share the same `run_id`, `target_id`, and verified `target_state.digest`, and the Combined Assurance Manifest MUST carry the same values. Matching a logical service name is insufficient when the producers evaluated different deployments.
 
 ### Minimum metadata to capture
 
@@ -37,6 +37,7 @@ Record this in both runs:
 - Tool + version
 - Profile name + version
 - Timestamp
+- Target-state snapshot source and SHA-256 digest
 
 ## Bundle merge strategy
 
@@ -70,7 +71,7 @@ Your combined manifest should be dead simple:
 - High-level summary fields (counts, pass/fail totals)
 - Lifecycle and revocation publication status, where the evaluated target exposes a status feed
 
-This repository now ships the Combined Assurance Manifest schema at `schemas/combined-assurance-manifest.schema.json`, a manifest generator at `tools/generate-manifest.py`, and an Operational Stack bundle validator at `tools/validate_operational_stack.py`. Mismatched CTS/TSPP identity values are rejected as a validation error.
+This repository now ships the Combined Assurance Manifest schema at `schemas/combined-assurance-manifest.schema.json`, a manifest generator at `tools/generate-manifest.py`, and an Operational Stack bundle validator at `tools/validate_operational_stack.py`. Mismatched CTS/TSPP identity values or target-state digests are rejected as validation errors. Missing or unverifiable target-state evidence fails closed.
 
 The optional `lifecycle` block is the bridge from point-in-time evidence to safe relying-party use. It records the target state, the status feed URI, revocation support, and the status publication SLA. A passing conformance run should not be treated as operationally complete when suspension or revocation cannot be discovered after publication.
 
@@ -127,7 +128,7 @@ python tools/run_operational_stack.py \
 python tools/validate_operational_stack.py --bundle-dir artifacts/operational-stack
 ```
 
-A failed identity check is an evidence defect, not a documentation warning.
+A failed run, target, or target-state identity check is an evidence defect, not a documentation warning.
 
 ## AL3 combined assurance walkthrough
 
