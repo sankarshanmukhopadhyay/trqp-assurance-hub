@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "stack": {
+    "id": "trqp-stack-2026.4",
+    "name": "Lotus",
+    "scientific_name": "Nelumbo nucifera",
+    "status": "validated",
+    "release_date": "2026-10-02"
+  },
+  "components": {
+    "tspp": {
+      "repository": "sankarshanmukhopadhyay/TRQP-TSPP",
+      "ref": "v0.18.1",
+      "commit": "c1735099cf4bca98c3b4e4f67c151e5508687851"
+    },
+    "cts": {
+      "repository": "sankarshanmukhopadhyay/trqp-conformance-suite",
+      "ref": "v1.11.1",
+      "commit": "0738c3cf86fddb99d761ed21d63d870eefdc5f76"
+    },
+    "assurance_hub": {
+      "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
+      "ref": "v1.14.0",
+      "commit": "fd2296226dacbe3d5009179803fde23eead1cc6f"
+    }
+  },
+  "authorities": {
+    "tsmm": {
+      "repository": "qbf-consulting/trust-systems-meta-model",
+      "version": "0.24.0",
+      "ref": "0.24.0",
+      "commit": "8ddfd52c876faf368241bc11101681fb1fe49398"
+    },
+    "tis": {
+      "repository": "qbf-consulting/trust-infrastructure-schemas",
+      "version": "0.15.0",
+      "commit": "edda0e87ced40797d22e3df542099871c57fcb59",
+      "pin_kind": "version-and-commit",
+      "note": "The transferred QBF repository exposes VERSION 0.15.0 at this commit but no v0.15.0 tag; no synchronization-only tag is inferred."
+    }
+  },
+  "coordinator": {
+    "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
+    "validated_main_commit": "0e0037aefa2f51594e95fdddfb25b8047c5e19ac",
+    "governing_issue": 104,
+    "human_release_judgment_comment_id": 5944065290
+  },
+  "eligibility_evidence": {
+    "workflow": "stack-release-eligibility",
+    "workflow_run_id": 36952543474,
+    "workflow_conclusion": "success",
+    "artifact_name": "trqp-stack-release-candidate-36952543474",
+    "artifact_digest": "sha256:66e368934bf8cf8cb622d7090a07f582cb6d7cb3e756c6b24f5130e1742c42e0"
+  },
+  "release_gates": [
+    "release-tuple-resolves",
+    "tagged-commits-match",
+    "authority-version-commits-resolve",
+    "clean-bootstrap",
+    "canonical-evaluation",
+    "tspp-evidence-valid",
+    "cts-evidence-valid",
+    "cts-replay-deterministic",
+    "combined-assurance-valid",
+    "run-target-correlation",
+    "provenance-complete",
+    "artifact-integrity-valid",
+    "negative-cases-fail-closed",
+    "full-stack-replay-equivalent",
+    "walkthrough-executable",
+    "change-event-valid",
+    "material-change-detected",
+    "non-material-change-bounded",
+    "stale-assurance-not-reused",
+    "authority-drift-detected",
+    "unknown-impact-fails-safe",
+    "reassessment-plan-valid",
+    "bounded-reassessment-valid",
+    "supersession-lineage-complete",
+    "post-change-assurance-recomposed",
+    "profile-contract-valid",
+    "profile-source-bound",
+    "producer-authority-preserved",
+    "producer-lifecycle-currentness-enforced",
+    "cross-source-fail-closed",
+    "ayra-profile-walkthrough-executable",
+    "target-state-identity-verified",
+    "cross-producer-state-correlated",
+    "state-mismatch-fails-closed",
+    "replay-state-continuity-verified",
+    "negative-reference-target-outcome-asserted",
+    "positive-state-pair-accepted"
+  ]
+}
