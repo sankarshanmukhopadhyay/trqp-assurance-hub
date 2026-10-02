@@ -1,5 +1,5 @@
 {
-  "contractVersion": "1.1",
+  "contractVersion": "1.0",
   "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
   "release": "1.13.0",
   "role": "assurance-aggregator",
