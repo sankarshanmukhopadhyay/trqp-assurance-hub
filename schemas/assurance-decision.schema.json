@@ -12,8 +12,7 @@
     "limitations",
     "findings",
     "issued_at",
-    "revoked",
-    "target_state"
+    "revoked"
   ],
   "properties": {
     "schema_version": {
