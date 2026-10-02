@@ -48,6 +48,13 @@ def main(argv: list[str] | None = None) -> int:
 
     require_equal("CTS vs TSPP run_id", cts_report.get("run_id"), tspp_report.get("run_id"))
     require_equal("CTS vs TSPP target_id", cts_report.get("target_id"), tspp_report.get("target_id"))
+    cts_state = cts_report.get("target_state")
+    tspp_state = tspp_report.get("target_state")
+    if not isinstance(cts_state, dict) or cts_state.get("status") != "verified":
+        raise SystemExit("CTS target_state missing or unverifiable")
+    if not isinstance(tspp_state, dict) or tspp_state.get("status") != "verified":
+        raise SystemExit("TSPP target_state missing or unverifiable")
+    require_equal("CTS vs TSPP target_state.digest", cts_state.get("digest"), tspp_state.get("digest"))
     require_equal("provided run_id vs CTS report", args.run_id, cts_report.get("run_id"))
     require_equal("provided run_id vs TSPP report", args.run_id, tspp_report.get("run_id"))
     require_equal("provided target_id vs CTS report", args.target_id, cts_report.get("target_id"))
@@ -64,6 +71,7 @@ def main(argv: list[str] | None = None) -> int:
     metadata = {
         "run_id": args.run_id,
         "target_id": args.target_id,
+        "target_state": cts_state,
         "target": args.target,
         "build_id": args.build_id,
         "generated_at": generated_at,
