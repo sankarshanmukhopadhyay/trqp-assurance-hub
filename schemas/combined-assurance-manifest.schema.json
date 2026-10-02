@@ -24,7 +24,8 @@
         "build_id",
         "target",
         "run_id",
-        "target_id"
+        "target_id",
+        "target_state"
       ],
       "properties": {
         "build_id": {
@@ -44,6 +45,37 @@
         },
         "ci_run_url": {
           "type": "string"
+        },
+        "target_state": {
+          "type": "object",
+          "required": [
+            "algorithm",
+            "digest",
+            "identity",
+            "source",
+            "status"
+          ],
+          "properties": {
+            "algorithm": {
+              "const": "sha256"
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "identity": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            },
+            "source": {
+              "type": "string",
+              "minLength": 1
+            },
+            "status": {
+              "const": "verified"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
