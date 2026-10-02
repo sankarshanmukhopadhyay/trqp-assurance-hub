@@ -93,9 +93,9 @@ jobs:
           key = SigningKey.generate().encode(Base64Encoder).decode()
           p.write_text(p.read_text(encoding='utf-8').replace('REPLACE_WITH_BASE64_ED25519_PRIVATE_KEY', key), encoding='utf-8')
           PY
-          python cts/run.py --profile profiles/baseline.yaml --sut examples/sut.local.yaml --fixture-set fixtures/baseline.fixture-set.json --generated-at '2026-01-15T00:00:00Z' --run-id 'stack-fixture-baseline' --out reports/stack_fixture
+          python cts/run.py --profile profiles/baseline.yaml --sut examples/sut.local.yaml --fixture-set fixtures/baseline.fixture-set.json --generated-at '2026-01-15T00:00:00Z' --run-id 'stack-fixture-baseline' --target-id 'trqp-reference-adopter' --target-state-file examples/state-snapshot.json --out reports/stack_fixture
           set +e
-          python cts/run.py --profile profiles/baseline.yaml --sut examples/sut.local.yaml --replay reports/stack_fixture --generated-at '2026-01-15T00:00:00Z' --out reports/stack_fixture_replay
+          python cts/run.py --profile profiles/baseline.yaml --sut examples/sut.local.yaml --replay reports/stack_fixture --generated-at '2026-01-15T00:00:00Z' --target-state-file examples/state-snapshot.json --out reports/stack_fixture_replay
           replay_exit=$?
           set -e
           test -f reports/stack_fixture_replay/replay-report.json || exit "${replay_exit:-1}"
@@ -109,14 +109,14 @@ jobs:
           TRQP_TARGET_ID: trqp-reference-adopter
         run: make assurance-check
 
-      - name: Compose combined assurance twice
+      - name: Compose state-bound assurance twice
         run: |
-          python tools/run_combined_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --release-set ots-2026-09-profile-aware --out artifacts/stack-candidate/run-a
-          python tools/run_combined_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --release-set ots-2026-09-profile-aware --out artifacts/stack-candidate/run-b
+          python .stack-work/assurance_hub/tools/run_state_bound_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --component-tuple state-bound-2026-10 --out artifacts/stack-candidate/run-a
+          python .stack-work/assurance_hub/tools/run_state_bound_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --component-tuple state-bound-2026-10 --out artifacts/stack-candidate/run-b
 
       - name: Prove whole-stack semantic replay equivalence
         run: |
-          python tools/stack_compare.py artifacts/stack-candidate/run-a/combined-assurance-manifest.json artifacts/stack-candidate/run-b/combined-assurance-manifest.json
+          python tools/stack_compare.py artifacts/stack-candidate/run-a/state-bound-assurance-manifest.json artifacts/stack-candidate/run-b/state-bound-assurance-manifest.json
           python tools/stack_compare.py artifacts/stack-candidate/run-a/assurance-decision.json artifacts/stack-candidate/run-b/assurance-decision.json
 
       - name: Verify fail-closed cross-stack and profile cases
@@ -125,6 +125,7 @@ jobs:
             tests/test_cross_stack_negative_cases.py \
             tests/test_cts_determinism.py \
             tests/test_stack_release_readiness.py \
+            tests/test_state_bound_manifest.py \
             tests/test_consume_cts_profile_evidence.py \
             tests/test_compose_profile_producer_evidence.py \
             tests/test_tspp_profile_evidence_consumer.py
