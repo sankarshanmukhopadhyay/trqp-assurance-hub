@@ -34,5 +34,12 @@
       "result": "PASS",
       "elapsed_ms": 9
     }
-  ]
+  ],
+  "target_state": {
+    "algorithm": "sha256",
+    "digest": "b08df601c3bee38e5906de49e1fac43845f17186f7056e6778a3a0fe9b8fadad",
+    "identity": "sha256:b08df601c3bee38e5906de49e1fac43845f17186f7056e6778a3a0fe9b8fadad",
+    "source": "metadata/state-snapshot.json",
+    "status": "verified"
+  }
 }
