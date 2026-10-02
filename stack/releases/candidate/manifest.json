@@ -1,26 +1,26 @@
 {
   "schema_version": "1.0",
   "stack": {
-    "id": "trqp-stack-2026.3-rc1",
-    "name": "Banyan",
-    "scientific_name": "Ficus benghalensis",
+    "id": "trqp-stack-2026.4-rc1",
+    "name": "TBD",
+    "scientific_name": "TBD",
     "status": "candidate"
   },
   "components": {
     "tspp": {
       "repository": "sankarshanmukhopadhyay/TRQP-TSPP",
-      "ref": "v0.17.0",
-      "commit": "328e19c71f407ebdb2bc92828a3ae037a843f285"
+      "ref": "v0.18.1",
+      "commit": "c1735099cf4bca98c3b4e4f67c151e5508687851"
     },
     "cts": {
       "repository": "sankarshanmukhopadhyay/trqp-conformance-suite",
-      "ref": "v1.10.0",
-      "commit": "1e5dc2646c75390444d9ae86f3d6136d7c033463"
+      "ref": "v1.11.1",
+      "commit": "0738c3cf86fddb99d761ed21d63d870eefdc5f76"
     },
     "assurance_hub": {
       "repository": "sankarshanmukhopadhyay/trqp-assurance-hub",
-      "ref": "v1.13.0",
-      "commit": "5346b83545bf042360eb32691dfc907135d233dd"
+      "ref": "v1.14.0",
+      "commit": "fd2296226dacbe3d5009179803fde23eead1cc6f"
     }
   },
   "authorities": {
@@ -69,6 +69,10 @@
     "producer-authority-preserved",
     "producer-lifecycle-currentness-enforced",
     "cross-source-fail-closed",
-    "ayra-profile-walkthrough-executable"
+    "ayra-profile-walkthrough-executable",
+    "target-state-identity-verified",
+    "cross-producer-state-correlated",
+    "state-mismatch-fails-closed",
+    "replay-state-continuity-verified"
   ]
 }
