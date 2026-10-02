@@ -24,8 +24,7 @@
         "build_id",
         "target",
         "run_id",
-        "target_id",
-        "target_state"
+        "target_id"
       ],
       "properties": {
         "build_id": {
