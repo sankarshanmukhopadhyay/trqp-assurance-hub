@@ -166,6 +166,7 @@ Every public Markdown document in the repository is rendered by Jekyll and index
 - [TRQP Stack 2026.1 — Coconut release notes]({{ '/stack/releases/2026.1/RELEASE_NOTES/' | relative_url }})  `/stack/releases/2026.1/RELEASE_NOTES.md`
 - [TRQP Stack 2026.2 — Ashoka release notes]({{ '/stack/releases/2026.2/RELEASE_NOTES/' | relative_url }})  `/stack/releases/2026.2/RELEASE_NOTES.md`
 - [TRQP Stack 2026.3 — Banyan]({{ '/stack/releases/2026.3/RELEASE_NOTES/' | relative_url }})  `/stack/releases/2026.3/RELEASE_NOTES.md`
+- [TRQP Stack 2026.4 — Lotus]({{ '/stack/releases/2026.4/RELEASE_NOTES/' | relative_url }})  `/stack/releases/2026.4/RELEASE_NOTES.md`
 
 ## schemas
 
