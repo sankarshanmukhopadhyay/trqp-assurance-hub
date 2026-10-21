@@ -1,7 +1,7 @@
 name: Weekly merged-branch housekeeping
 on:
   schedule:
-    - cron: '0 23 * * 5'
+    - cron: '17 23 * * 5'
       timezone: Asia/Kolkata
   workflow_dispatch:
 permissions:
@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   housekeeping:
-    uses: qbf-consulting/.github/.github/workflows/branch-housekeeping-reusable.yml@b4bfac1af4f9e2c23a69ec9d6f787d91c117c703
+    uses: qbf-consulting/.github/.github/workflows/branch-housekeeping-reusable.yml@ca0eab0f38b07f2dfdfc3429d81910233d07a8fc
     with:
       dry_run: true
       preserve_patterns: 'gh-pages,release/**,research/**,draft/**,convergence/**'
