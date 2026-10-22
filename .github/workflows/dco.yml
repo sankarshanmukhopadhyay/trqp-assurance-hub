@@ -1,0 +1,14 @@
+name: DCO
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  dco:
+    name: DCO
+    uses: qbf-consulting/.github/.github/workflows/dco-reusable.yml@cfdaeb038ef2b6e3770c75a9c5bf72fe4bcc0eb6
