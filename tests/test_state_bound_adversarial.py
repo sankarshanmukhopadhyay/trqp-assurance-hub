@@ -75,15 +75,25 @@ def test_state_bound_cli_does_not_publish_pass_for_mixed_operational_evidence(tm
     cp.write_text(json.dumps(cts), encoding="utf-8")
     tp.write_text(json.dumps(tspp), encoding="utf-8")
     dp.write_text("{}", encoding="utf-8")
+    source_file = tmp_path / "source-run.json"
+    source_file.write_text(json.dumps({"test_run_id": "fixture-source",
+                                       "target_id": "service-1", "target_state": snapshot}))
+    policy_file = tmp_path / "policy.json"
+    policy_file.write_text(json.dumps({"policy_id": "cts-policy", "policy_version": "1.0.0"}))
+    import hashlib
     monkeypatch.setattr(state_bound, "load_and_validate", lambda path: {
         "source": {"run_id": "fixture-source", "target_state": snapshot},
-        "replay": {"run_id": "fixture-replay", "target_state": snapshot}
+        "replay": {"run_id": "fixture-replay", "target_state": snapshot},
+        "policy": {"id": "cts-policy", "version": "1.0.0",
+                   "sha256": hashlib.sha256(policy_file.read_bytes()).hexdigest()}
     })
     monkeypatch.setattr(state_bound, "assurance_projection", lambda raw: {"verified": True})
     out = tmp_path / "out"
     monkeypatch.setattr(sys, "argv", [
         "run_state_bound_assurance.py", "--cts-report", str(cp),
         "--tspp-report", str(tp), "--cts-determinism-report", str(dp),
+        "--cts-replay-source-run", str(source_file),
+        "--cts-replay-policy-file", str(policy_file),
         "--target-state-file", str(snapshot_file),
         "--out", str(out),
     ])
@@ -162,3 +172,34 @@ def test_snapshot_source_label_is_not_mistaken_for_file_path(tmp_path):
     state = _state(hashlib.sha256(sample.read_bytes()).hexdigest())
     state["source"] = "operator-deployment-snapshot-reference"
     assert verify_supplied_snapshot(state, state, sample) == state["digest"]
+
+
+
+def test_foreign_replay_source_execution_is_rejected(tmp_path):
+    import hashlib
+    import json
+    from tools.run_state_bound_assurance import verify_replay_source_and_policy
+    snapshot = _state("a" * 64)
+    source = tmp_path / "source.json"
+    source.write_text(json.dumps({"test_run_id": "expected-run", "target_id": "service-1",
+                                  "target_state": snapshot}))
+    policy = tmp_path / "policy.json"
+    policy.write_text(json.dumps({"policy_id": "cts-p", "policy_version": "1.0"}))
+    doc = {"source": {"run_id": "foreign-run"}, "policy": {
+        "id": "cts-p", "version": "1.0", "sha256": hashlib.sha256(policy.read_bytes()).hexdigest()}}
+    with pytest.raises(SystemExit, match="source run"):
+        verify_replay_source_and_policy({"target_id": "service-1"}, snapshot, doc, source, policy)
+
+
+def test_policy_digest_tampering_is_rejected(tmp_path):
+    import json
+    from tools.run_state_bound_assurance import verify_replay_source_and_policy
+    snapshot = _state("a" * 64)
+    source, policy = tmp_path / "run.json", tmp_path / "policy.json"
+    source.write_text(json.dumps({"test_run_id": "fixture", "target_id": "service-1",
+                                  "target_state": snapshot}))
+    policy.write_text(json.dumps({"policy_id": "cts-p", "policy_version": "1.0"}))
+    doc = {"source": {"run_id": "fixture"}, "policy": {
+        "id": "cts-p", "version": "1.0", "sha256": "b"*64}}
+    with pytest.raises(SystemExit, match="policy digest mismatch"):
+        verify_replay_source_and_policy({"target_id": "service-1"}, snapshot, doc, source, policy)
