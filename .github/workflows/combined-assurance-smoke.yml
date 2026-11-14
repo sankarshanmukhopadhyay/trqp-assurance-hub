@@ -14,24 +14,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout hub
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Checkout conformance suite
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: sankarshanmukhopadhyay/trqp-conformance-suite
           ref: v1.8.0
           path: external/trqp-conformance-suite
 
       - name: Checkout TSPP
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: sankarshanmukhopadhyay/TRQP-TSPP
           ref: v0.15.0
           path: external/TRQP-TSPP
 
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
         with:
           python-version: '3.11'
           cache: pip
@@ -107,7 +107,7 @@ jobs:
           python -m pytest -q tests/test_cross_stack_negative_cases.py tests/test_cts_determinism.py
 
       - name: Upload immutable evidence chain
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: trqp-combined-assurance-${{ github.run_id }}
           path: |
