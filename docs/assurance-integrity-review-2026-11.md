@@ -50,3 +50,7 @@ This tranche corrects maintained behavior and publication metadata on `main`. It
 The maintained development line now requires state-bound CTS/TSPP report detail and summary reconciliation. Unknown or unsupported operational outcomes remain indeterminate, never positive. The CTS replay consumer independently rejects contradictory source/replay semantic hashes, invalid difference counts, missing run identifiers and reused source/replay execution identity under the producer comparison policy. The common state snapshot is still supplied evidence, not external proof of deployed-state authenticity. Historical Lotus artifacts are unchanged.
 
 The legacy combined-assurance consumer retains its older envelope for compatibility; its continued use is distinguishable from the stricter state-bound evaluation. A future consumer-facing release must declare this tightening as a semantic acceptance change.
+
+## Red-team gate traceability follow-up
+
+The maintained manifest validator enforces the machine-readable release schema, including historical 2026.1–2026.4 shapes, and independently registered gate minimums. All declared gates must map to a named eligibility workflow step and evidence origin. The register is not itself proof that an individual step succeeded: publication must verify the recorded GitHub run and step conclusions against the immutable release tuple. Authority version pins are checked against the `VERSION` contents of their exact source commits where version claims exist. Historical Lotus evidence is preserved, not reconstructed.

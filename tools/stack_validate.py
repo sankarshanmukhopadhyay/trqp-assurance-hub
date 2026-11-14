@@ -8,6 +8,15 @@ import re
 import subprocess
 from pathlib import Path
 
+from jsonschema import Draft202012Validator
+
+ROOT = Path(__file__).resolve().parents[1]
+MANIFEST_SCHEMA = ROOT / "stack/schema/release-manifest.schema.json"
+GATE_REGISTRY = ROOT / "stack/schema/release-gates.json"
+
+def _gate_registry() -> dict:
+    return json.loads(GATE_REGISTRY.read_text(encoding="utf-8"))
+
 REQUIRED_COMPONENTS = {"tspp", "cts", "assurance_hub"}
 REQUIRED_AUTHORITIES = {"tsmm", "tis"}
 REQUIRED_GATES = {
@@ -44,12 +53,33 @@ def validate_structure(doc: dict) -> list[str]:
         for name in sorted(REQUIRED_AUTHORITIES):
             authority = authorities[name]
             if not authority.get("repository"): errors.append(f"{name}: authority repository missing")
-            if not VERSION.match(str(authority.get("version", ""))): errors.append(f"{name}: semantic version required")
-            if not SHA40.match(str(authority.get("commit", ""))): errors.append(f"{name}: 40-character authority commit SHA required")
+            historical_without_strict_pins = stack.get("id") in {
+                "trqp-stack-2026.1", "trqp-stack-2026.2"
+            }
+            if not historical_without_strict_pins or authority.get("version"):
+                if not VERSION.match(str(authority.get("version", ""))):
+                    errors.append(f"{name}: semantic version required")
+            if not historical_without_strict_pins or authority.get("commit"):
+                if not SHA40.match(str(authority.get("commit", ""))):
+                    errors.append(f"{name}: 40-character authority commit SHA required")
 
+    for issue in Draft202012Validator(load(MANIFEST_SCHEMA)).iter_errors(doc):
+        errors.append("release manifest schema: " + issue.message)
+    registry = _gate_registry()
     gates = set(doc.get("release_gates", []))
-    missing = REQUIRED_GATES - gates
+    required = REQUIRED_GATES.copy()
+    if stack.get("status") == "validated":
+        required = set(registry["release_minimums"].get(stack.get("id"), []))
+        if not required:
+            errors.append("validated release has no independently registered gate baseline")
+    missing = required - gates
     if missing: errors.append("missing release gates: " + ", ".join(sorted(missing)))
+    unknown = gates - set(registry["gates"])
+    if unknown: errors.append("unmapped release gates: " + ", ".join(sorted(unknown)))
+    for gate in gates & set(registry["gates"]):
+        entry = registry["gates"][gate]
+        if not entry.get("check_step") or not entry.get("evidence_source"):
+            errors.append(f"gate {gate} lacks executable/evidence mapping")
     return errors
 
 
@@ -117,6 +147,18 @@ def verify_remote_refs(doc: dict) -> list[str]:
                 errors.append(f"{name}: unable to resolve authority ref {ref}")
             elif commit not in resolved:
                 errors.append(f"{name}: authority ref does not resolve to declared commit")
+        version = authority.get("version")
+        if version:
+            import urllib.request
+            raw = f"https://raw.githubusercontent.com/{authority['repository']}/{commit}/VERSION"
+            try:
+                with urllib.request.urlopen(raw, timeout=15) as response:
+                    observed = response.read(256).decode("utf-8").strip()
+            except Exception:
+                errors.append(f"{name}: declared VERSION at authority commit is unavailable")
+            else:
+                if observed != version:
+                    errors.append(f"{name}: declared VERSION {version!r} differs from pinned source {observed!r}")
     return errors
 
 
