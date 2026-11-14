@@ -100,8 +100,6 @@ def verify_supplied_snapshot(cts_state: dict, tspp_state: dict, snapshot_file: P
     for label, state in (("CTS", cts_state), ("TSPP", tspp_state)):
         if snapshot_digest != state["digest"]:
             raise SystemExit(f"fail-closed: {label} snapshot bytes do not match asserted digest")
-        if Path(state["source"]).name != snapshot_file.name:
-            raise SystemExit(f"fail-closed: {label} state source name disagrees with supplied snapshot")
     return snapshot_digest
 
 

@@ -154,12 +154,11 @@ def test_snapshot_correlation_rejects_cooperating_false_digest(tmp_path):
         verify_supplied_snapshot(forged, forged, sample)
 
 
-def test_snapshot_source_mismatch_rejected(tmp_path):
+def test_snapshot_source_label_is_not_mistaken_for_file_path(tmp_path):
     import hashlib
     from tools.run_state_bound_assurance import verify_supplied_snapshot
     sample = tmp_path / "snapshot.json"
     sample.write_bytes(b"fixed snapshot")
     state = _state(hashlib.sha256(sample.read_bytes()).hexdigest())
-    state["source"] = "other.json"
-    with pytest.raises(SystemExit, match="source name"):
-        verify_supplied_snapshot(state, state, sample)
+    state["source"] = "operator-deployment-snapshot-reference"
+    assert verify_supplied_snapshot(state, state, sample) == state["digest"]
