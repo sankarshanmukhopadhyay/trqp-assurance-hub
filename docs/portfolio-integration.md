@@ -11,7 +11,7 @@ The TRQP Assurance Hub participates in the coordinated TRQP repository set throu
 
 ## Repository responsibilities
 
-The Assurance Hub aggregates evidence and produces combined assurance decisions. Shared semantic definitions are referenced from `trust-systems-meta-model` v0.24.0, while shared portfolio and repository schemas are referenced from `trust-infrastructure-schemas` v0.14.1.
+The Assurance Hub aggregates evidence and produces combined assurance decisions. Shared semantic definitions are referenced from `trust-systems-meta-model` v0.24.0, while shared portfolio and repository schemas are referenced from `trust-infrastructure-schemas` v0.15.0.
 
 TRQP-TSPP supplies security/privacy posture evidence. The TRQP Conformance Suite supplies execution, conformance and replay evidence. For state-bound composition, both producers additionally supply independently derived `target_state.digest` evidence. The Assurance Hub compares those producer-owned state identities and combines the inputs without redefining their upstream semantics.
 

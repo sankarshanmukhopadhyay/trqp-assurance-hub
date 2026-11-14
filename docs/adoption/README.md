@@ -14,9 +14,15 @@ For an end-to-end adopter path across TRQP-TSPP, the TRQP Conformance Suite and 
 
 The coordinated Stack path verifies immutable tags and commits, bootstraps a clean workspace, executes the declared component assurance surfaces, and retains the evidence required before a coordinated release may be published. Component repositories retain their own authority over TSPP posture judgments, CTS conformance/replay consequences, and Hub recomposition.
 
-## TRQP Stack 2026.3 — Banyan current release
+## TRQP Stack 2026.4 — Lotus current release
 
-TRQP Stack 2026.3 — Banyan is the current published coordinated release. It adds **profile-aware compositional assurance** to the Stack and proves that profile conclusions can consume independently produced CTS core-conformance evidence and TSPP posture evidence without transferring producer authority or allowing profile-local success to override producer failure, uncertainty, stale evidence, missing evidence, or other non-current evidence.
+Lotus is the current published coordinated baseline, with CTS v1.11.1, TSPP v0.18.1 and Hub v1.14.0. Its [immutable release record](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/releases/tag/trqp-stack-2026.4) and `stack/releases/2026.4/manifest.json` bind the source commits, run `36952543474`, artifact digest and human publication judgment. The state-bound path requires identical verified SHA-256 snapshot identities across CTS, CTS replay and TSPP. A matching digest cannot by itself authenticate the live deployment.
+
+For current adoption use the [Stack quickstart](stack-quickstart.md) and the published Lotus tuple. The candidate-oriented bootstrap command must not be mistaken for a command that automatically selects the latest published release. Security/privacy posture, protocol conformance, external governance authority and independent certification remain separate propositions.
+
+## TRQP Stack 2026.3 — Banyan historical release
+
+TRQP Stack 2026.3 — Banyan was the preceding coordinated release. It adds **profile-aware compositional assurance** to the Stack and proves that profile conclusions can consume independently produced CTS core-conformance evidence and TSPP posture evidence without transferring producer authority or allowing profile-local success to override producer failure, uncertainty, stale evidence, missing evidence, or other non-current evidence.
 
 Published tuple:
 
@@ -32,7 +38,7 @@ Publication completed only after the frozen tuple passed the decisive Stack elig
 
 ## TRQP Stack 2026.2 — Ashoka historical baseline
 
-Stack 2026.2 — Ashoka is the immediately preceding coordinated release. Its frozen tuple is:
+Stack 2026.2 — Ashoka is an earlier historical coordinated release. Its frozen tuple is:
 
 - TSPP `v0.16.1` → `12315679dd79bcaced5f27a35bfc1d22560de52d`;
 - CTS `v1.9.1` → `ea3fed33a1edc3313735405f433a23f9d154d903`;
@@ -42,6 +48,6 @@ Stack 2026.2 — Ashoka is the immediately preceding coordinated release. Its fr
 
 The TSPP and CTS patch releases in that historical tuple repaired repository-status-contract defects discovered by clean-room Stack execution; they did not alter the lifecycle/reassessment semantics established in v0.16.0/v1.9.0.
 
-Those lifecycle guarantees remain inherited by 2026.3: invalidation, reassessment, authority drift, supersession, and post-change recomposition continue to be part of the current release gate.
+Those lifecycle guarantees remain inherited by 2026.3 and 2026.4: invalidation, reassessment, authority drift, supersession, and post-change recomposition continue to be part of the current release gate.
 
 Use the component repositories directly when you need to customize TSPP posture controls, CTS conformance/replay behavior, or Hub assurance composition. The coordinated stack does not transfer those repository-local authorities.

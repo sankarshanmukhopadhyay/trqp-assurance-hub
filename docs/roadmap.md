@@ -69,7 +69,7 @@ Historical candidate roadmaps and evidence under `stack/candidates/` are retaine
 
 ## Completed capability tranche: state-bound assurance
 
-The current development tranche strengthens the existing TRQP Stack line without depending on downstream candidate protocol work or any proposed TRQP v3 semantics.
+The completed state-bound tranche strengthened the existing TRQP Stack line without depending on downstream candidate protocol work or any proposed TRQP v3 semantics.
 
 The governing proposition is:
 
