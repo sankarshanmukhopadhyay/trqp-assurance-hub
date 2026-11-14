@@ -1,6 +1,6 @@
 ---
 owner: maintainers
-last_reviewed: 2026-10-02
+last_reviewed: 2026-11-14
 tier: 0
 ---
 
@@ -10,9 +10,9 @@ The TRQP Assurance Hub is the **evidence aggregation, compatibility coordination
 
 It is also the **adopter front door and coordinated Stack release authority**. A coordinated Stack release does not create a fourth implementation product; it declares which independently versioned component releases have been exercised together and preserves the evidence behind that claim.
 
-> **Current Hub component release:** v1.13.0  
-> **Current coordinated stack:** TRQP Stack 2026.3 — Banyan  
-> **Previous coordinated stack:** TRQP Stack 2026.2 — Ashoka  
+> **Current Hub component release:** v1.14.0  
+> **Current coordinated stack:** TRQP Stack 2026.4 — Lotus  
+> **Previous coordinated stack:** TRQP Stack 2026.3 — Banyan  
 > **Lifecycle:** Active  
 > **Maturity:** Active / release-backed  
 > **Operational status:** Published and under continuous validation
@@ -28,36 +28,34 @@ It is also the **adopter front door and coordinated Stack release authority**. A
 | Stack release gate | `make stack-release-check` |
 | Evidence output | `artifacts/combined-assurance/` plus reproducible profile-specific evidence bundles |
 | Governance authority | [`GOVERNANCE.md`](GOVERNANCE.md) and [`PROJECT-STATUS.yaml`](PROJECT-STATUS.yaml) |
-| Current Stack record | [`stack/releases/2026.3/`](stack/releases/2026.3/RELEASE_NOTES.md) |
-| Current Stack release | https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/releases/tag/trqp-stack-2026.3 |
+| Current Stack record | [`stack/releases/2026.4/`](stack/releases/2026.4/RELEASE_NOTES.md) |
+| Current Stack release | https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/releases/tag/trqp-stack-2026.4 |
 | Canonical adopter workflow | [`docs/adoption/stack-quickstart.md`](docs/adoption/stack-quickstart.md) |
 | Profile-aware assurance walkthrough | [`docs/adoption/stack-2026.3-walkthrough.md`](docs/adoption/stack-2026.3-walkthrough.md) |
 | Profile-aware assurance guide | [`profiles/README.md`](profiles/README.md) |
 | Documentation site | https://sankarshanmukhopadhyay.github.io/trqp-assurance-hub/ |
 
-## Start here: TRQP Stack 2026.3 — Banyan
+## Start here: TRQP Stack 2026.4 — Lotus
 
-If your goal is to adopt, evaluate, procure, or assess the complete TRQP assurance workflow, **start with the coordinated Stack release rather than choosing repository versions independently**.
+For evaluation, procurement, or adoption of the complete TRQP assurance workflow, start with the [published coordinated release](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/releases/tag/trqp-stack-2026.4) rather than selecting independently versioned components.
 
-TRQP Stack 2026.3 — Banyan is the current published coordinated baseline. It adds **profile-aware compositional assurance** while preserving the lifecycle, invalidation, reassessment, authority-drift and supersession guarantees established in Stack 2026.2.
-
-The published tuple is:
+Lotus adds **state-bound compositional assurance** to Banyan's profile-aware and lifecycle safeguards. The published immutable tuple is:
 
 | Layer | Release | Exact commit | Authority / output |
 |---|---:|---|---|
-| TRQP-TSPP | v0.17.0 | `328e19c71f407ebdb2bc92828a3ae037a843f285` | Security/privacy controls and profile-consumable posture evidence |
-| TRQP Conformance Suite | v1.10.0 | `1e5dc2646c75390444d9ae86f3d6136d7c033463` | Protocol conformance, deterministic replay and profile-consumable core evidence |
-| TRQP Assurance Hub | v1.13.0 | `5346b83545bf042360eb32691dfc907135d233dd` | Profile-aware composition, Ayra first-profile assurance and coordinated publication |
+| TRQP-TSPP | v0.18.1 | `c1735099cf4bca98c3b4e4f67c151e5508687851` | Security/privacy controls and state-bound posture evidence |
+| TRQP Conformance Suite | v1.11.1 | `0738c3cf86fddb99d761ed21d63d870eefdc5f76` | Protocol conformance, deterministic replay and state-bound evidence |
+| TRQP Assurance Hub | v1.14.0 | `fd2296226dacbe3d5009179803fde23eead1cc6f` | State-bound composition and coordinated publication |
 | TSMM | 0.24.0 | `8ddfd52c876faf368241bc11101681fb1fe49398` | Canonical trust-system semantic authority |
 | TIS | 0.15.0 | `edda0e87ced40797d22e3df542099871c57fcb59` | Portable schema and contract authority |
 
-The coordinated release was published after the required human release judgment accepted the frozen tuple and the post-acceptance merged-main `stack-release-eligibility` run succeeded. The release record and retained evidence are under [`stack/releases/2026.3/`](stack/releases/2026.3/RELEASE_NOTES.md).
+The required human release judgment accepted the frozen tuple after successful merged-main eligibility run `36952543474`. Publication is recorded in [the Lotus release record](stack/releases/2026.4/RELEASE_NOTES.md). The release establishes tested cross-producer correlation, not independent proof that the supplied snapshot describes the live deployment.
 
 ### Why an adopter benefits
 
 A coordinated Stack release answers the compatibility question before deployment: **which exact versions are known to work together under the declared assurance model?**
 
-For Stack 2026.3 the release gate verifies immutable component resolution, clean-room bootstrap, component evidence generation, deterministic CTS replay, profile-aware producer/consumer boundaries, cross-source composition, provenance and artifact integrity, fail-closed negative cases, whole-stack semantic replay equivalence, and the executable adopter walkthrough.
+For Stack 2026.4 the release gate verifies immutable component resolution, clean-room bootstrap, component evidence generation, deterministic CTS replay, profile-aware producer/consumer boundaries, cross-source composition, provenance and artifact integrity, fail-closed negative cases, whole-stack semantic replay equivalence, and the executable adopter walkthrough.
 
 This means an adopter can select one validated tuple, reproduce it, inspect every underlying authority boundary, and obtain a portable evidence chain without reverse-engineering compatibility across three repositories.
 
@@ -112,17 +110,15 @@ profile authority + external authority evidence where applicable
 Assurance Hub aggregation + coordinated-release evidence
 ```
 
-## State-bound assurance development line
+## State-bound assurance release boundary
 
-The current Hub development line strengthens the existing TRQP Stack component model without changing TRQP protocol semantics and without depending on downstream candidate protocol work.
+Lotus pins CTS v1.11.1, TSPP v0.18.1, and Hub v1.14.0 as one coordinated release. Producers independently hash their supplied target-state snapshots; the Hub requires matching `run_id`, `target_id`, and verified SHA-256 state identity before state-bound composition. Mismatches or absent identities fail closed.
 
-CTS v1.11.1 and TSPP v0.18.1 independently bind their evidence to a verified SHA-256 target-state identity. The Hub composes those producer results only when `run_id`, `target_id`, and `target_state.digest` agree. Missing or mismatched state identity fails closed.
-
-The tuple is recorded in `data/component-compatibility.yaml` as a supported development component tuple. It is **not** a coordinated Stack release. **TRQP Stack 2026.3 — Banyan remains the current coordinated Stack baseline.**
+The historical `data/component-compatibility.yaml` development tuple records the pre-publication integration line. It is not the authority for current coordinated-release adoption. Use `stack/releases/2026.4/manifest.json` and the published release for that purpose. A matching digest proves agreement about the supplied snapshot, **not independent authenticity of the running deployment**.
 
 ## Profile-aware assurance
 
-The Hub v1.13.0 line adds a reusable profile-assurance boundary, with the **Ayra TRQP Profile v0.6.0-draft** as the first proving implementation. The governing rule is:
+The Hub v1.13.0 line introduced a reusable profile-assurance boundary, with the **Ayra TRQP Profile v0.6.0-draft** as the first proving implementation. The governing rule is:
 
 > **Profile assurance extends TRQP assurance; it does not redefine TRQP.**
 
@@ -155,7 +151,7 @@ make stack-release-check
 
 The dedicated `stack-release-eligibility` GitHub Actions workflow extends this with tagged component execution, clean bootstrap, deterministic replay, full combined-assurance composition, semantic replay comparison, negative cases, and candidate evidence publication.
 
-For coordinated publication, a successful merged-main eligibility run is necessary but not sufficient: the immutable tuple and evidence digest must be recorded and the repository's required visible human release judgment must accept publication. Stack 2026.3 completed that governance path and is now the current published release.
+For coordinated publication, a successful merged-main eligibility run is necessary but not sufficient: the immutable tuple and evidence digest must be recorded and the repository's required visible human release judgment must accept publication. Stack 2026.4 completed that governance path and is the current published release.
 
 ## TSAM method
 
@@ -171,10 +167,12 @@ The Hub is a concrete TSAM-aligned implementation environment, but TSAM is broad
 - [`docs/guides/public-assurance-publication.md`](docs/guides/public-assurance-publication.md) — publish relying-party-facing assurance.
 - [`docs/reference/compatibility-matrix.md`](docs/reference/compatibility-matrix.md) — supported component relationships.
 - [`docs/portfolio-integration.md`](docs/portfolio-integration.md) — synchronized portfolio integration.
+- [`docs/assurance-integrity-review-2026-11.md`](docs/assurance-integrity-review-2026-11.md) — adversarial evidence review and residual reliance boundaries.
 - [`docs/governance/release-policy.md`](docs/governance/release-policy.md) — component and coordinated Stack release governance.
 
 ## Historical coordinated releases
 
+- **TRQP Stack 2026.3 — Banyan** established profile-aware compositional assurance.
 - **TRQP Stack 2026.2 — Ashoka** established assurance validity under change, including invalidation, reassessment, authority drift, supersession and post-change recomposition.
 - **TRQP Stack 2026.1 — Coconut** established the first coordinated release baseline.
 

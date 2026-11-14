@@ -10,6 +10,9 @@ This matrix identifies coordinated release sets for the TRQP Operational Trust S
 
 | Stack release | Assurance Hub | Conformance Suite | TRQP-TSPP | Status | Notes |
 |---|---:|---:|---:|---|---|
+| **TRQP Stack 2026.4 — Lotus** | **v1.14.0** | **v1.11.1** | **v0.18.1** | **validated/current** | State-bound composition; matching producer snapshot digests; positive and negative outcome assertions; verified release manifest and human publication judgment. |
+| TRQP Stack 2026.3 — Banyan | v1.13.0 | v1.10.0 | v0.17.0 | validated/historical | Profile-aware compositional assurance preserving producer authority and lifecycle state. |
+| TRQP Stack 2026.2 — Ashoka | v1.12.0 | v1.9.1 | v0.16.1 | validated/historical | Material-change invalidation, reassessment, authority drift, supersession and recomposition. |
 | **TRQP Stack 2026.1 — Coconut** | **v1.11.0** | **v1.8.0** | **v0.15.0** | **validated** | First formal adopter-facing coordinated release. Passed immutable tuple resolution, clean bootstrap, component evidence generation, deterministic CTS replay, combined assurance, fail-closed cases, full-stack semantic replay equivalence, provenance/integrity checks, and executable walkthrough. TSMM v0.24.0; TIS v0.14.1. |
 | pre-Stack coordinated set | v1.9.0 | v1.6.0 | v0.14.0 | supported | End-to-End Assurance Execution and Evidence Chain with authentic producer evidence, canonical compatibility, traceability, and fail-closed identity validation. |
 | pre-Stack coordinated set | v1.8.0 | v1.5.0 | v0.13.0 | supported | Operational Trust Stack Maturity Release with release governance, validation evidence, adoption packaging, and Runtime Assurance Contract Pack. |
@@ -23,6 +26,6 @@ This matrix identifies coordinated release sets for the TRQP Operational Trust S
 
 ## Compatibility rule
 
-A Combined Assurance Manifest SHOULD declare the exact release tuple used to produce it. A formal `TRQP Stack YYYY.N` identity means the tuple has additionally passed the coordinated Stack eligibility gate and has an immutable machine-readable release record under `stack/releases/`.
+A Combined Assurance Manifest SHOULD declare the exact release tuple used to produce it. The current authoritative coordinated release is Lotus 2026.4; historical release rows remain valid only for their own frozen assessment contexts. A formal `TRQP Stack YYYY.N` identity means the tuple has additionally passed the coordinated Stack eligibility gate and has an immutable machine-readable release record under `stack/releases/`.
 
 TRQP Stack 2026.1 requires CTS replay-determinism evidence and records the comparison-policy identity, semantic hashes, reproducibility status, exact component tags/commits, authority pins, decisive workflow run, and eligibility artifact digest. The Hub does not redefine CTS policy or TSPP control semantics; incompatible or failed producer evidence invalidates the integration state.

@@ -11,7 +11,7 @@ The TRQP Assurance Hub participates in the coordinated TRQP repository set throu
 
 ## Repository responsibilities
 
-The Assurance Hub aggregates evidence and produces combined assurance decisions. Shared semantic definitions are referenced from `trust-systems-meta-model` v0.24.0, while shared portfolio and repository schemas are referenced from `trust-infrastructure-schemas` v0.14.1.
+The Assurance Hub aggregates evidence and produces combined assurance decisions. Shared semantic definitions are referenced from `trust-systems-meta-model` v0.24.0, while shared portfolio and repository schemas are referenced from `trust-infrastructure-schemas` v0.15.0.
 
 TRQP-TSPP supplies security/privacy posture evidence. The TRQP Conformance Suite supplies execution, conformance and replay evidence. For state-bound composition, both producers additionally supply independently derived `target_state.digest` evidence. The Assurance Hub compares those producer-owned state identities and combines the inputs without redefining their upstream semantics.
 
@@ -30,4 +30,4 @@ The current state-bound development tuple is recorded separately in `data/compon
 - TSPP v0.18.1;
 - Hub v1.14.0 development line.
 
-This record is deliberately separate from `data/compatibility-registry.yaml`, which retains coordinated/historical compatibility records. A supported development tuple is not a coordinated Stack release. Stack 2026.3 — Banyan remains the current published Stack baseline until a future complete tuple independently satisfies the coordinated release policy.
+This record is deliberately separate from `data/compatibility-registry.yaml`, which retains coordinated/historical compatibility records. A supported development tuple is not a coordinated Stack release. Stack 2026.4 — Lotus is now the current published coordinated baseline, with the immutable tuple and publication evidence under `stack/releases/2026.4/`. The development tuple remains a historical integration record; it does not override the published release manifest.

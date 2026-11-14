@@ -29,6 +29,7 @@ Every public Markdown document in the repository is rendered by Jekyll and index
 
 ## docs
 
+- [Assurance integrity adversarial assessment (November 2026)]({{ '/docs/assurance-integrity-review-2026-11/' | relative_url }})  `/docs/assurance-integrity-review-2026-11.md`
 - [Adoption Kit]({{ '/docs/adoption/README/' | relative_url }})  `/docs/adoption/README.md`
 - [TRQP Stack 2026.3 — Profile-Aware Assurance Walkthrough]({{ '/docs/adoption/stack-2026.3-walkthrough/' | relative_url }})  `/docs/adoption/stack-2026.3-walkthrough.md`
 - [TRQP Stack quickstart]({{ '/docs/adoption/stack-quickstart/' | relative_url }})  `/docs/adoption/stack-quickstart.md`
