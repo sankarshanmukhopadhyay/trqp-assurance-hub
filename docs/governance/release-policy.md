@@ -86,3 +86,9 @@ Release workflows have narrowly scoped write permission; dependency updates affe
 ### Publication validator reproducibility
 
 The privileged publication job installs an explicit, pinned release-validator dependency set after checking out the validated merged-main commit. It produces attestation subjects from files in the workflow workspace and verifies the release manifest, executed eligibility steps, and human judgment before release creation. The human judgment may bind the immutable machine tag or the equivalent explicitly named coordinated release identity; the recorded workflow ID, commit, evidence digest, and acceptance statement are always mandatory. A successful PR test of the verifier does not replace a production exercise of the attestation/publication workflow; that evidence is required before the next coordinated release is declared complete.
+
+## Independent verification for a future coordinated publication
+
+Download the manifest, evidence zip and `SHA256SUMS` from the *same* published release tag and run `sha256sum -c SHA256SUMS` in that directory. Verify the GitHub build-provenance attestation against the expected source repository/workflow identity and those final asset digests using `gh attestation verify` with an appropriate identity policy. Compare the immutable manifest to its recorded eligibility run ID, verified merged-main SHA, successful mapped decisive-test steps and authorized human judgment. If any source, signature, revocation/currentness or release asset is unavailable, that part of the assurance conclusion remains unverified.
+
+The October Lotus artifacts predate the attestation workflow and are not retroactively signed. Successful CI tests verify the code's expected behavior, **not** successful live publication of a new signed release. The first release to use the strengthened publication workflow must retain its live attestation and consumer-verification results as release evidence.

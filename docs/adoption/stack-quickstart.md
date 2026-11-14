@@ -89,3 +89,9 @@ A Stack release therefore records **tested interoperability and assurance eviden
 ## Release cadence
 
 Coordinated Stack releases are capability-driven and are published when meaningful capability has accumulated and the complete tuple passes the release gate. Component releases continue independently and do not automatically trigger a Stack release.
+
+## Lotus tag versus maintained red-team corrections
+
+Lotus uses the immutable October CTS v1.11.1, TSPP v0.18.1 and Hub v1.14.0 tags. Later fixes to current `main` do not alter those releases. The maintained state-bound Hub requires `--target-state-file`, `--cts-replay-source-run` and `--cts-replay-policy-file` to independently verify supplied bytes and replay provenance. The frozen Hub executable predates those options. The maintained integration workflow separately exercises those controls without claiming they were part of the original Lotus eligibility run.
+
+See [the adversarial disposition](../assurance-integrity-review-2026-11.md) for findings, remediation paths and external assurance limits. A successor release requires its own frozen tuple, tests, evidence, and human decision.

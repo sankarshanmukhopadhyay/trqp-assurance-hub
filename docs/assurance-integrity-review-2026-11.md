@@ -58,3 +58,26 @@ The maintained manifest validator enforces the machine-readable release schema, 
 ## Red-team follow-up: replay execution binding and second producer run
 
 The maintained state-bound implementation now binds CTS determinism evidence to the original fixture `run.json` (source run ID, target and state) and exact policy bytes, and captures both resulting file digests in the evidence manifest. A foreign replay source or modified policy fails closed. The development Stack eligibility path separately repeats CTS and TSPP producer execution and compares derived assurance semantics while retaining different raw artifact identities. Historical Lotus candidate equivalence is not relabelled as independently repeated producer execution. Combined assurance issuance now uses actual evaluation time instead of a fixed historical timestamp.
+
+## Complete Lotus red-team disposition, 14 November 2026
+
+The red-team evaluated immutable Lotus tag `trqp-stack-2026.4`, not these later merged main-branch changes. The following dispositions record exactly what the maintained code establishes. All referenced implementation PRs are in `sankarshanmukhopadhyay` CTS/TSPP/Hub repositories. No historic tag, acceptance judgment or release asset was rewritten.
+
+| Finding | Implementation PRs | Verified correction or bounded residual |
+|---|---|---|
+| H1 | Hub #122 | Supplied snapshot bytes now recomputed; deployment-to-SUT authenticity remains an external authority proposition, not PASS. |
+| H2 | Hub #119, TSPP #124 | Producer detail and summary counts reconciled; unsupported and incomplete outcomes cannot produce PASS. |
+| H3 | CTS #64, Hub #119 and #123 | Replay semantic hashes/counts, producer run IDs, source run/target/state and original policy bytes verified. |
+| H4 | Hub #120 and #121 | Versioned release-gate registry and manifest schema enforced; publication checks successful decisive-test steps for every declared mapped gate. |
+| H5 | Hub #121 and #124 | Future publication checks run SHA/path, judge and evidence digest; stages final SHA256SUMS and provenance attestations. Historical Lotus was not retroactively signed. |
+| M6 | Hub #119 and #125, CTS #65, TSPP #125 | Terminal published component records reconciled; new assessment issuance no longer hardcoded. No arbitrary expiry imposed. |
+| M7 | Hub #121 and #124 | Hub Actions SHA-pinned; privileged Dependabot auto-merge removed; publication validator dependencies pinned. Full transitive dependency hash locking remains unproven. |
+| M8 | Hub #120 | Pinned TSMM/TIS VERSION contents independently verified; no claim that all referenced semantic authority was executed. |
+| M9 | Hub #123 | Maintained Hub independently regenerates CTS/TSPP producer evidence and compares bounded semantics; original Lotus replay preserved. |
+| L10 | Hub #119 and #122 | Invalid digest notation, unsupported statuses, missing details, and conflicting snapshot bytes rejected by maintained state-bound path. |
+
+### Acceptance and reliance boundaries
+
+Matching supplied snapshot digests is not independent evidence that a snapshot represents the currently running service. A passing signature is not proof of continuing principal authority, delegation or valid revocation state. End-to-end external deployment authentication and independent certification have **not** been established by this internal remediation. Those claims remain external evidence requirements, not silently satisfied gates.
+
+The new publication pipeline has test evidence for its rejection rules. Because Lotus publication is already terminal, future attestation generation, released checksum verification and independent consumer verification must be exercised on an actual new candidate before publication can be accepted. No successor component or coordinated Stack release is implied by these main-only commits. Any future candidate must pin the remediated components, run exact eligibility checks, preserve hashes and provenance attestations, and obtain the required human ACCEPT for that specific tuple. Do not relabel the frozen Lotus release as containing the remediations.
