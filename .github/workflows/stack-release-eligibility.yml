@@ -114,6 +114,10 @@ jobs:
           python .stack-work/assurance_hub/tools/run_state_bound_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --component-tuple state-bound-2026-10 --out artifacts/stack-candidate/run-a
           python .stack-work/assurance_hub/tools/run_state_bound_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --component-tuple state-bound-2026-10 --out artifacts/stack-candidate/run-b
 
+      - name: Prove maintained Hub independently checks supplied snapshot bytes
+        run: |
+          python tools/run_state_bound_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --component-tuple state-bound-2026-10 --target-state-file .stack-work/cts/examples/state-snapshot.json --out artifacts/stack-candidate/maintained-hub-snapshot-check
+
       - name: Prove whole-stack semantic replay equivalence
         run: |
           python tools/stack_compare.py artifacts/stack-candidate/run-a/state-bound-assurance-manifest.json artifacts/stack-candidate/run-b/state-bound-assurance-manifest.json

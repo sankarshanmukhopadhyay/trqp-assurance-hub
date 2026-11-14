@@ -195,3 +195,7 @@ Example or self-generated evidence does not constitute independent assurance, ce
 ## License
 
 See [`LICENSE`](LICENSE).
+
+## Current development assurance boundary
+
+The maintained state-bound CLI requires the actual supplied snapshot file and recomputes its digest instead of accepting only coincident producer assertions. This guards against forged correlation of different snapshot bytes. It is not deployment attestation and does not establish authority, freshness, or runtime correspondence for the live SUT. The historical Lotus release remains immutable; newly generated assurance evidence must disclose the difference.

@@ -1,6 +1,6 @@
 ---
 owner: maintainers
-last_reviewed: 2026-07-03
+last_reviewed: 2026-11-14
 tier: 0
 ---
 
@@ -235,3 +235,9 @@ Both AL3 and AL4 share the same core evidence kinds. The following table maps AL
 - AL4 evidence bundle walkthrough: `examples/al4-evidence-bundle/README.md`
 - Assurance levels canonical definitions: `docs/guides/assurance-levels.md`
 - Evidence artifacts expectations matrix: `docs/guides/evidence-artifacts.md`
+
+## State-bound snapshot verification, red-team correction
+
+The state-bound Hub command now requires `--target-state-file` and independently hashes the exact supplied bytes. Both producer digest assertions and source identities must agree with those bytes; a fabricated digest or missing input fails closed. This is a **snapshot-integrity** check. It does **not** verify that the snapshot corresponds to the runtime service under test, that deployment authority attested the revision, or that live authorization remains effective. Those propositions require separate deployment/operator or relying-party evidence, and must not be represented as passing by digest agreement alone.
+
+For example, pass `--target-state-file external/trqp-conformance-suite/examples/state-snapshot.json` when consuming the corresponding CTS/TSPP fixture reports. Use the canonical release manifest for component pinning; this development CLI does not independently publish coordinated Stack releases.
