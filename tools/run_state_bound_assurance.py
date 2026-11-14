@@ -87,6 +87,24 @@ def require_verified_state(report: dict, producer: str) -> dict:
     return state
 
 
+def verify_supplied_snapshot(cts_state: dict, tspp_state: dict, snapshot_file: Path) -> str:
+    """Recompute the supplied bytes independently of both producer assertions.
+
+    The snapshot must already be linked to the live deployment by external evidence.
+    This verifier does not establish that external proposition.
+    """
+    try:
+        snapshot_digest = hashlib.sha256(snapshot_file.read_bytes()).hexdigest()
+    except (OSError, ValueError) as exc:
+        raise SystemExit("fail-closed: supplied target-state snapshot unreadable") from exc
+    for label, state in (("CTS", cts_state), ("TSPP", tspp_state)):
+        if snapshot_digest != state["digest"]:
+            raise SystemExit(f"fail-closed: {label} snapshot bytes do not match asserted digest")
+        if Path(state["source"]).name != snapshot_file.name:
+            raise SystemExit(f"fail-closed: {label} state source name disagrees with supplied snapshot")
+    return snapshot_digest
+
+
 def report_version(report: dict, producer: str) -> str | None:
     if producer == "cts":
         tool = report.get("tool")
@@ -112,6 +130,8 @@ def main() -> int:
     ap.add_argument("--cts-determinism-report", required=True)
     ap.add_argument("--tspp-report", required=True)
     ap.add_argument("--component-tuple", default="state-bound-2026-10")
+    ap.add_argument("--target-state-file", required=True,
+                    help="Exact snapshot bytes independently hashed by the Hub; not live deployment attestation")
     ap.add_argument("--out", default="artifacts/state-bound-assurance")
     args = ap.parse_args()
 
@@ -158,6 +178,9 @@ def main() -> int:
         raise SystemExit(
             f"fail-closed: target_state.digest mismatch: {cts_state['digest']!r} != {tspp_state['digest']!r}"
         )
+    verified_snapshot_digest = verify_supplied_snapshot(
+        cts_state, tspp_state, Path(args.target_state_file)
+    )
 
     try:
         det_raw = load_and_validate(args.cts_determinism_report)
@@ -200,6 +223,11 @@ def main() -> int:
         "run_id": cts["run_id"],
         "target_id": cts["target_id"],
         "target_state": cts_state,
+        "supplied_snapshot_verification": {
+            "digest": verified_snapshot_digest, "algorithm": "sha256",
+            "source": str(args.target_state_file), "status": "bytes-verified",
+            "deployment_authenticity": "not-established",
+        },
         "producer_results": {"cts": cs, "tspp": ts, "cts_replay_determinism": "pass"},
         "cts_replay_determinism": det,
         "artifacts": artifacts,
@@ -213,7 +241,10 @@ def main() -> int:
         "target": cts["target_id"],
         "target_state": cts_state["identity"],
         "evidence_considered": artifacts,
-        "conditions": ["CTS and TSPP evidence are bound to the same verified SHA-256 target state."],
+        "conditions": [
+            "CTS/TSPP evidence agrees with the independently recomputed supplied snapshot digest.",
+            "Correspondence between the supplied snapshot and the live deployment requires separate evidence.",
+        ],
         "limitations": [
             "This evaluation uses a supported development component tuple; the published Lotus release has a separate immutable release record.",
             "Matching snapshot digests do not attest correspondence to a running deployment.",
@@ -235,6 +266,7 @@ def main() -> int:
         "run_id": cts["run_id"],
         "target_id": cts["target_id"],
         "target_state": cts_state,
+        "supplied_snapshot_digest": verified_snapshot_digest,
         "chain": [
             "CTS conformance evidence",
             "CTS target-state identity",

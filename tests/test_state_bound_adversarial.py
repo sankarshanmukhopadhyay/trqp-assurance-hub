@@ -55,7 +55,10 @@ def test_state_bound_cli_does_not_publish_pass_for_mixed_operational_evidence(tm
     import sys
     from tools import run_state_bound_assurance as state_bound
 
-    snapshot = _state("a" * 64)
+    import hashlib
+    snapshot_file = tmp_path / "snapshot.json"
+    snapshot_file.write_bytes(b"fixture state")
+    snapshot = _state(hashlib.sha256(snapshot_file.read_bytes()).hexdigest())
     cts = {
         "run_id": "adversarial-1", "target_id": "service-1",
         "target_state": snapshot, "suite_version": "1.11.1",
@@ -81,6 +84,7 @@ def test_state_bound_cli_does_not_publish_pass_for_mixed_operational_evidence(tm
     monkeypatch.setattr(sys, "argv", [
         "run_state_bound_assurance.py", "--cts-report", str(cp),
         "--tspp-report", str(tp), "--cts-determinism-report", str(dp),
+        "--target-state-file", str(snapshot_file),
         "--out", str(out),
     ])
 
@@ -138,3 +142,24 @@ def test_missing_state_source_is_not_verified():
     state.pop("source")
     with pytest.raises(SystemExit, match="source missing"):
         require_verified_state({"target_state": state}, "TSPP")
+
+
+
+def test_snapshot_correlation_rejects_cooperating_false_digest(tmp_path):
+    from tools.run_state_bound_assurance import verify_supplied_snapshot
+    sample = tmp_path / "snapshot.json"
+    sample.write_bytes(b"running deployment state")
+    forged = _state("a" * 64)
+    with pytest.raises(SystemExit, match="snapshot bytes do not match"):
+        verify_supplied_snapshot(forged, forged, sample)
+
+
+def test_snapshot_source_mismatch_rejected(tmp_path):
+    import hashlib
+    from tools.run_state_bound_assurance import verify_supplied_snapshot
+    sample = tmp_path / "snapshot.json"
+    sample.write_bytes(b"fixed snapshot")
+    state = _state(hashlib.sha256(sample.read_bytes()).hexdigest())
+    state["source"] = "other.json"
+    with pytest.raises(SystemExit, match="source name"):
+        verify_supplied_snapshot(state, state, sample)

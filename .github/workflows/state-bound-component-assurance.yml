@@ -106,6 +106,7 @@ jobs:
             --cts-determinism-report external/trqp-conformance-suite/reports/state_bound_fixture_replay/determinism-report.json \
             --tspp-report external/TRQP-TSPP/artifacts/validation/tspp-report.json \
             --component-tuple state-bound-2026-10 \
+            --target-state-file external/trqp-conformance-suite/examples/state-snapshot.json \
             --out artifacts/state-bound-assurance
           python -m pytest -q \
             tests/test_cross_stack_negative_cases.py \
