@@ -241,3 +241,9 @@ Both AL3 and AL4 share the same core evidence kinds. The following table maps AL
 The state-bound Hub command now requires `--target-state-file` and independently hashes the exact supplied bytes. Both producer digest assertions and source identities must agree with those bytes; a fabricated digest or missing input fails closed. This is a **snapshot-integrity** check. It does **not** verify that the snapshot corresponds to the runtime service under test, that deployment authority attested the revision, or that live authorization remains effective. Those propositions require separate deployment/operator or relying-party evidence, and must not be represented as passing by digest agreement alone.
 
 For example, pass `--target-state-file external/trqp-conformance-suite/examples/state-snapshot.json` when consuming the corresponding CTS/TSPP fixture reports. Use the canonical release manifest for component pinning; this development CLI does not independently publish coordinated Stack releases.
+
+## CTS replay provenance and independent producer reexecution
+
+State-bound composition additionally requires `--cts-replay-source-run` and `--cts-replay-policy-file`. The Hub independently hashes the supplied policy bytes, checks its identity/version against the CTS-owned report, and binds replay source run/target/state to the original CTS fixture execution. It does not reimplement the CTS comparison algorithm. Forged foreign replay reports or altered comparison policies fail closed.
+
+A dedicated maintained-Hub eligibility path independently regenerates CTS and TSPP producer evidence before a second composition. Its semantic comparison excludes execution timestamps, run IDs and evidence-file hashes while retaining producer verdicts, target identity and policy semantics. This provides stronger evidence than recomposing identical files twice, but remains separate from historical Lotus release validation and is not a claim of runtime deployment authenticity.

@@ -54,3 +54,7 @@ The legacy combined-assurance consumer retains its older envelope for compatibil
 ## Red-team gate traceability follow-up
 
 The maintained manifest validator enforces the machine-readable release schema, including historical 2026.1–2026.4 shapes, and independently registered gate minimums. All declared gates must map to a named eligibility workflow step and evidence origin. The register is not itself proof that an individual step succeeded: publication must verify the recorded GitHub run and step conclusions against the immutable release tuple. Authority version pins are checked against the `VERSION` contents of their exact source commits where version claims exist. Historical Lotus evidence is preserved, not reconstructed.
+
+## Red-team follow-up: replay execution binding and second producer run
+
+The maintained state-bound implementation now binds CTS determinism evidence to the original fixture `run.json` (source run ID, target and state) and exact policy bytes, and captures both resulting file digests in the evidence manifest. A foreign replay source or modified policy fails closed. The development Stack eligibility path separately repeats CTS and TSPP producer execution and compares derived assurance semantics while retaining different raw artifact identities. Historical Lotus candidate equivalence is not relabelled as independently repeated producer execution. Combined assurance issuance now uses actual evaluation time instead of a fixed historical timestamp.

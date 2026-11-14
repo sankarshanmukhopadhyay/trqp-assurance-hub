@@ -116,7 +116,18 @@ jobs:
 
       - name: Prove maintained Hub independently checks supplied snapshot bytes
         run: |
-          python tools/run_state_bound_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --component-tuple state-bound-2026-10 --target-state-file .stack-work/cts/examples/state-snapshot.json --out artifacts/stack-candidate/maintained-hub-snapshot-check
+          python tools/run_state_bound_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --cts-replay-source-run .stack-work/cts/reports/stack_fixture/run.json --cts-replay-policy-file .stack-work/cts/policies/replay-determinism.v1.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --component-tuple state-bound-2026-10 --target-state-file .stack-work/cts/examples/state-snapshot.json --out artifacts/stack-candidate/maintained-reexecution/run-a
+
+      - name: Independently regenerate CTS and TSPP producer evidence
+        run: |
+          (cd .stack-work/cts && TRQP_RUN_ID="stack-${{ github.run_id }}-rerun" TRQP_TARGET_ID=trqp-reference-adopter make assurance-check)
+          (cd .stack-work/tspp && TRQP_RUN_ID="stack-${{ github.run_id }}-rerun" TRQP_TARGET_ID=trqp-reference-adopter make assurance-check)
+
+      - name: Compare independently regenerated evidence conclusions
+        run: |
+          python tools/run_state_bound_assurance.py --cts-report .stack-work/cts/artifacts/validation/cts-report.json --cts-determinism-report .stack-work/cts/reports/stack_fixture_replay/determinism-report.json --cts-replay-source-run .stack-work/cts/reports/stack_fixture/run.json --cts-replay-policy-file .stack-work/cts/policies/replay-determinism.v1.json --tspp-report .stack-work/tspp/artifacts/validation/tspp-report.json --component-tuple state-bound-2026-10 --target-state-file .stack-work/cts/examples/state-snapshot.json --out artifacts/stack-candidate/maintained-reexecution/run-b
+          python tools/stack_compare.py --producer-reexecution artifacts/stack-candidate/maintained-reexecution/run-a/state-bound-assurance-manifest.json artifacts/stack-candidate/maintained-reexecution/run-b/state-bound-assurance-manifest.json
+          python tools/stack_compare.py --producer-reexecution artifacts/stack-candidate/maintained-reexecution/run-a/assurance-decision.json artifacts/stack-candidate/maintained-reexecution/run-b/assurance-decision.json
 
       - name: Prove whole-stack semantic replay equivalence
         run: |

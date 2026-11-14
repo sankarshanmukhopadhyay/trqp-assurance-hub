@@ -103,6 +103,31 @@ def verify_supplied_snapshot(cts_state: dict, tspp_state: dict, snapshot_file: P
     return snapshot_digest
 
 
+def verify_replay_source_and_policy(cts: dict, cts_state: dict, det: dict,
+                                    source_run_path: Path, policy_path: Path) -> tuple[str, str]:
+    """Bind replay to original CTS fixture run and the authoritative policy bytes."""
+    try:
+        source_bytes = source_run_path.read_bytes()
+        policy_bytes = policy_path.read_bytes()
+        source_run = json.loads(source_bytes)
+        policy = json.loads(policy_bytes)
+    except (OSError, ValueError, TypeError) as exc:
+        raise SystemExit("fail-closed: replay source run or comparison policy unavailable") from exc
+    source = det.get("source") or {}
+    expected_run = source_run.get("test_run_id")
+    if not expected_run or source.get("run_id") != expected_run:
+        raise SystemExit("fail-closed: CTS replay source run does not match original execution")
+    if source_run.get("target_id") != cts.get("target_id"):
+        raise SystemExit("fail-closed: CTS replay source target does not match CTS report")
+    if source_run.get("target_state") != cts_state:
+        raise SystemExit("fail-closed: CTS replay original execution target state mismatch")
+    if det.get("policy", {}).get("sha256") != hashlib.sha256(policy_bytes).hexdigest():
+        raise SystemExit("fail-closed: CTS replay comparison policy digest mismatch")
+    if det["policy"].get("id") != policy.get("policy_id") or det["policy"].get("version") != policy.get("policy_version"):
+        raise SystemExit("fail-closed: CTS replay comparison policy identity mismatch")
+    return hashlib.sha256(source_bytes).hexdigest(), hashlib.sha256(policy_bytes).hexdigest()
+
+
 def report_version(report: dict, producer: str) -> str | None:
     if producer == "cts":
         tool = report.get("tool")
@@ -126,6 +151,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--cts-report", required=True)
     ap.add_argument("--cts-determinism-report", required=True)
+    ap.add_argument("--cts-replay-source-run", required=True)
+    ap.add_argument("--cts-replay-policy-file", required=True)
     ap.add_argument("--tspp-report", required=True)
     ap.add_argument("--component-tuple", default="state-bound-2026-10")
     ap.add_argument("--target-state-file", required=True,
@@ -184,6 +211,10 @@ def main() -> int:
         det_raw = load_and_validate(args.cts_determinism_report)
     except DeterminismEvidenceError as exc:
         raise SystemExit(f"fail-closed: {exc}") from exc
+    source_run_digest, policy_digest = verify_replay_source_and_policy(
+        cts, cts_state, det_raw, Path(args.cts_replay_source_run),
+        Path(args.cts_replay_policy_file)
+    )
     det = assurance_projection(det_raw)
     if not det_raw.get("source", {}).get("run_id") or not det_raw.get("replay", {}).get("run_id"):
         raise SystemExit("fail-closed: CTS replay run provenance missing")
@@ -213,6 +244,8 @@ def main() -> int:
         {"role": "cts", "path": str(cts_path), "sha256": file_sha256(cts_path)},
         {"role": "tspp", "path": str(tspp_path), "sha256": file_sha256(tspp_path)},
         {"role": "cts_replay_determinism", "path": str(det_path), "sha256": file_sha256(det_path)},
+        {"role": "cts_replay_source_run", "path": args.cts_replay_source_run, "sha256": source_run_digest},
+        {"role": "cts_replay_comparison_policy", "path": args.cts_replay_policy_file, "sha256": policy_digest},
     ]
 
     manifest = {

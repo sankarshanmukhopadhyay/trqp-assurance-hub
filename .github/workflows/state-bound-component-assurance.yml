@@ -104,6 +104,8 @@ jobs:
           python tools/run_state_bound_assurance.py \
             --cts-report external/trqp-conformance-suite/artifacts/validation/cts-report.json \
             --cts-determinism-report external/trqp-conformance-suite/reports/state_bound_fixture_replay/determinism-report.json \
+            --cts-replay-source-run external/trqp-conformance-suite/reports/state_bound_fixture/run.json \
+            --cts-replay-policy-file external/trqp-conformance-suite/policies/replay-determinism.v1.json \
             --tspp-report external/TRQP-TSPP/artifacts/validation/tspp-report.json \
             --component-tuple state-bound-2026-10 \
             --target-state-file external/trqp-conformance-suite/examples/state-snapshot.json \
