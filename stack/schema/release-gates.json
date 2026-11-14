@@ -1,0 +1,308 @@
+{
+  "schema_version": "1.0",
+  "authority": "trqp-assurance-hub",
+  "workflow": ".github/workflows/stack-release-eligibility.yml",
+  "gates": {
+    "release-tuple-resolves": {
+      "check_step": "Validate release contract and immutable tuple",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "tagged-commits-match": {
+      "check_step": "Validate release contract and immutable tuple",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "authority-version-commits-resolve": {
+      "check_step": "Validate release contract and immutable tuple",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "provenance-complete": {
+      "check_step": "Validate release contract and immutable tuple",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "artifact-integrity-valid": {
+      "check_step": "Validate release contract and immutable tuple",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "clean-bootstrap": {
+      "check_step": "Prove clean-room bootstrap",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "walkthrough-executable": {
+      "check_step": "Prove clean-room bootstrap",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "canonical-evaluation": {
+      "check_step": "Execute declared tagged component assurance surfaces",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "tspp-evidence-valid": {
+      "check_step": "Execute declared tagged component assurance surfaces",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "cts-evidence-valid": {
+      "check_step": "Execute declared tagged component assurance surfaces",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "run-target-correlation": {
+      "check_step": "Execute declared tagged component assurance surfaces",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "cts-replay-deterministic": {
+      "check_step": "Generate deterministic CTS replay evidence",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "replay-state-continuity-verified": {
+      "check_step": "Generate deterministic CTS replay evidence",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "combined-assurance-valid": {
+      "check_step": "Compose state-bound assurance twice",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "cross-producer-state-correlated": {
+      "check_step": "Compose state-bound assurance twice",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "target-state-identity-verified": {
+      "check_step": "Compose state-bound assurance twice",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "full-stack-replay-equivalent": {
+      "check_step": "Prove whole-stack semantic replay equivalence",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "negative-cases-fail-closed": {
+      "check_step": "Verify fail-closed cross-stack and profile cases",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "state-mismatch-fails-closed": {
+      "check_step": "Verify fail-closed cross-stack and profile cases",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "positive-state-pair-accepted": {
+      "check_step": "Verify fail-closed cross-stack and profile cases",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "cross-source-fail-closed": {
+      "check_step": "Verify fail-closed cross-stack and profile cases",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "negative-reference-target-outcome-asserted": {
+      "check_step": "Assert negative reference-target outcome",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "change-event-valid": {
+      "check_step": "Validate inherited Stack 2026.2 lifecycle evidence boundaries",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "material-change-detected": {
+      "check_step": "Validate inherited Stack 2026.2 lifecycle evidence boundaries",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "non-material-change-bounded": {
+      "check_step": "Validate inherited Stack 2026.2 lifecycle evidence boundaries",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "stale-assurance-not-reused": {
+      "check_step": "Validate inherited Stack 2026.2 lifecycle evidence boundaries",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "authority-drift-detected": {
+      "check_step": "Validate inherited Stack 2026.2 lifecycle evidence boundaries",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "unknown-impact-fails-safe": {
+      "check_step": "Validate inherited Stack 2026.2 lifecycle evidence boundaries",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "reassessment-plan-valid": {
+      "check_step": "Validate inherited Stack 2026.2 lifecycle evidence boundaries",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "bounded-reassessment-valid": {
+      "check_step": "Validate inherited Stack 2026.2 lifecycle evidence boundaries",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "supersession-lineage-complete": {
+      "check_step": "Validate inherited Stack 2026.2 lifecycle evidence boundaries",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "post-change-assurance-recomposed": {
+      "check_step": "Validate inherited Stack 2026.2 lifecycle evidence boundaries",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "profile-contract-valid": {
+      "check_step": "Prove frozen Hub profile-aware consumer boundary",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "profile-source-bound": {
+      "check_step": "Prove frozen Hub profile-aware consumer boundary",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "producer-authority-preserved": {
+      "check_step": "Prove frozen Hub profile-aware consumer boundary",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "producer-lifecycle-currentness-enforced": {
+      "check_step": "Prove frozen Hub profile-aware consumer boundary",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    },
+    "ayra-profile-walkthrough-executable": {
+      "check_step": "Prove frozen Hub profile-aware consumer boundary",
+      "evidence_source": "stack-release-eligibility-job-steps",
+      "evidence_release": "recorded_eligibility_run_id"
+    }
+  },
+  "release_minimums": {
+    "trqp-stack-2026.1": [
+      "release-tuple-resolves",
+      "tagged-commits-match",
+      "clean-bootstrap",
+      "canonical-evaluation",
+      "tspp-evidence-valid",
+      "cts-evidence-valid",
+      "cts-replay-deterministic",
+      "combined-assurance-valid",
+      "run-target-correlation",
+      "provenance-complete",
+      "artifact-integrity-valid",
+      "negative-cases-fail-closed",
+      "full-stack-replay-equivalent",
+      "walkthrough-executable"
+    ],
+    "trqp-stack-2026.2": [
+      "release-tuple-resolves",
+      "tagged-commits-match",
+      "clean-bootstrap",
+      "canonical-evaluation",
+      "tspp-evidence-valid",
+      "cts-evidence-valid",
+      "cts-replay-deterministic",
+      "combined-assurance-valid",
+      "run-target-correlation",
+      "provenance-complete",
+      "artifact-integrity-valid",
+      "negative-cases-fail-closed",
+      "full-stack-replay-equivalent",
+      "walkthrough-executable",
+      "change-event-valid",
+      "material-change-detected",
+      "non-material-change-bounded",
+      "stale-assurance-not-reused",
+      "authority-drift-detected",
+      "unknown-impact-fails-safe",
+      "reassessment-plan-valid",
+      "bounded-reassessment-valid",
+      "supersession-lineage-complete",
+      "post-change-assurance-recomposed"
+    ],
+    "trqp-stack-2026.3": [
+      "release-tuple-resolves",
+      "tagged-commits-match",
+      "authority-version-commits-resolve",
+      "clean-bootstrap",
+      "canonical-evaluation",
+      "tspp-evidence-valid",
+      "cts-evidence-valid",
+      "cts-replay-deterministic",
+      "combined-assurance-valid",
+      "run-target-correlation",
+      "provenance-complete",
+      "artifact-integrity-valid",
+      "negative-cases-fail-closed",
+      "full-stack-replay-equivalent",
+      "walkthrough-executable",
+      "change-event-valid",
+      "material-change-detected",
+      "non-material-change-bounded",
+      "stale-assurance-not-reused",
+      "authority-drift-detected",
+      "unknown-impact-fails-safe",
+      "reassessment-plan-valid",
+      "bounded-reassessment-valid",
+      "supersession-lineage-complete",
+      "post-change-assurance-recomposed",
+      "profile-contract-valid",
+      "profile-source-bound",
+      "producer-authority-preserved",
+      "producer-lifecycle-currentness-enforced",
+      "cross-source-fail-closed",
+      "ayra-profile-walkthrough-executable"
+    ],
+    "trqp-stack-2026.4": [
+      "release-tuple-resolves",
+      "tagged-commits-match",
+      "authority-version-commits-resolve",
+      "clean-bootstrap",
+      "canonical-evaluation",
+      "tspp-evidence-valid",
+      "cts-evidence-valid",
+      "cts-replay-deterministic",
+      "combined-assurance-valid",
+      "run-target-correlation",
+      "provenance-complete",
+      "artifact-integrity-valid",
+      "negative-cases-fail-closed",
+      "full-stack-replay-equivalent",
+      "walkthrough-executable",
+      "change-event-valid",
+      "material-change-detected",
+      "non-material-change-bounded",
+      "stale-assurance-not-reused",
+      "authority-drift-detected",
+      "unknown-impact-fails-safe",
+      "reassessment-plan-valid",
+      "bounded-reassessment-valid",
+      "supersession-lineage-complete",
+      "post-change-assurance-recomposed",
+      "profile-contract-valid",
+      "profile-source-bound",
+      "producer-authority-preserved",
+      "producer-lifecycle-currentness-enforced",
+      "cross-source-fail-closed",
+      "ayra-profile-walkthrough-executable",
+      "target-state-identity-verified",
+      "cross-producer-state-correlated",
+      "state-mismatch-fails-closed",
+      "replay-state-continuity-verified",
+      "negative-reference-target-outcome-asserted",
+      "positive-state-pair-accepted"
+    ]
+  }
+}
