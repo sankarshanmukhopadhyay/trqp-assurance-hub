@@ -85,3 +85,27 @@ def test_state_bound_cli_does_not_publish_pass_for_mixed_operational_evidence(tm
     assert decision["outcome"] == "indeterminate"
     assert manifest["producer_results"]["cts"] == "indeterminate"
     assert manifest["producer_results"]["tspp"] == "pass"
+
+
+def test_nonzero_producer_exit_never_becomes_pass():
+    assert producer_status({"summary": {"PASS": 1, "FAIL": 0, "exit_status": 2}}) == "indeterminate"
+
+
+def test_report_backed_manifest_does_not_upgrade_operational_uncertainty():
+    import importlib.util
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    spec = importlib.util.spec_from_file_location("manifest_generator", root / "tools/generate-manifest.py")
+    generator = importlib.util.module_from_spec(spec)
+    assert spec and spec.loader
+    spec.loader.exec_module(generator)
+
+    assert generator._infer_status({"summary": {"PASS": 1, "ERROR": 1}}) == "partial"
+    assert generator._infer_status({"summary": {"PASS": 1, "NOT_TESTED": 1}}) == "partial"
+    assert generator._infer_status({"summary": {"PASS": 1, "exit_status": 2}}) == "partial"
+    assert generator._infer_status({"summary": {"PASS": 1, "FAIL": 0}}) == "pass"
+    with pytest.raises(SystemExit, match="cannot override"):
+        generator._assert_no_positive_override("pass", "partial", "overall_status")
+    with pytest.raises(SystemExit, match="cannot override"):
+        generator._assert_no_positive_override("pass", "fail", "conformance_status")
