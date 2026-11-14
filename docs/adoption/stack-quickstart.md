@@ -10,15 +10,15 @@ Use this page when you want the validated TRQP components to behave as one adopt
 
 ## Current validated release
 
-**TRQP Stack 2026.3 — Banyan** is the current coordinated release. Its immutable release record is under `stack/releases/2026.3/`, and its profile-aware execution walkthrough is [`stack-2026.3-walkthrough.md`](stack-2026.3-walkthrough.md).
+**TRQP Stack 2026.4 — Lotus** is the current published coordinated release. Its immutable record is under `stack/releases/2026.4/`. The [Banyan walkthrough](stack-2026.3-walkthrough.md) remains useful as a historical profile-aware example.
 
 The validated tuple is:
 
 | Layer | Release | Exact commit |
 |---|---:|---|
-| TRQP-TSPP | v0.17.0 | `328e19c71f407ebdb2bc92828a3ae037a843f285` |
-| TRQP Conformance Suite | v1.10.0 | `1e5dc2646c75390444d9ae86f3d6136d7c033463` |
-| TRQP Assurance Hub | v1.13.0 | `5346b83545bf042360eb32691dfc907135d233dd` |
+| TRQP-TSPP | v0.18.1 | `c1735099cf4bca98c3b4e4f67c151e5508687851` |
+| TRQP Conformance Suite | v1.11.1 | `0738c3cf86fddb99d761ed21d63d870eefdc5f76` |
+| TRQP Assurance Hub | v1.14.0 | `fd2296226dacbe3d5009179803fde23eead1cc6f` |
 | TSMM | 0.24.0 | `8ddfd52c876faf368241bc11101681fb1fe49398` |
 | TIS | 0.15.0 | `edda0e87ced40797d22e3df542099871c57fcb59` |
 
@@ -38,7 +38,7 @@ python tools/stack_validate.py --check-remote
 
 This fails if the candidate manifest is incomplete, a component ref is mutable, or a declared tag does not resolve to the pinned commit.
 
-For adoption of Stack 2026.3, inspect `stack/releases/2026.3/manifest.json` and `stack/releases/2026.3/publication.json` for the immutable component tags, commits, authority versions, decisive workflow run, human release judgment, evidence artifact digest, and publication metadata.
+For adoption of Stack 2026.4, inspect `stack/releases/2026.4/manifest.json` and `stack/releases/2026.4/publication.json` for the immutable component tags, commits, authority versions, decisive workflow run, human release judgment, evidence artifact digest, and publication metadata.
 
 ## 3. Bootstrap a clean workspace
 
@@ -48,7 +48,7 @@ python tools/stack_bootstrap.py --clean
 
 The bootstrap command clones only the tagged component versions declared by the release engineering manifest and verifies their commits. No adopter-side compatibility choice is required.
 
-The same clean-room property was a mandatory eligibility condition for Stack 2026.3.
+The same clean-room property was a mandatory eligibility condition for Stack 2026.4. **Note:** The commands shown above run the candidate release-engineering manifest by default; use the immutable 2026.4 release manifest and attached release evidence when evaluating the published tuple.
 
 ## 4. Execute the declared components
 
@@ -58,7 +58,7 @@ python tools/stack_evaluate.py
 
 This invokes each component's `assurance-check` surface and writes a run record to `artifacts/stack-candidate/run-manifest.json` during release engineering.
 
-The coordinated Stack workflow correlates TSPP and CTS evidence using the same run and target identity before the Hub produces combined assurance. In Stack 2026.3, profile-aware composition additionally consumes producer-owned CTS and TSPP evidence while preserving their authority boundaries.
+The coordinated Stack workflow correlates TSPP and CTS evidence using the same run and target identity before the Hub produces combined assurance. In Stack 2026.4, state-bound composition additionally requires shared verified snapshot identity; Banyan's profile-aware composition consumes producer-owned CTS and TSPP evidence while preserving their authority boundaries.
 
 ## 5. Verify release eligibility
 
@@ -68,7 +68,11 @@ make stack-release-check
 
 The local gate validates the Hub, candidate tuple, remote tag provenance, and fail-closed release-readiness tests. The `stack-release-eligibility` GitHub Actions workflow additionally performs clean bootstrap, tagged component execution, CTS deterministic replay, profile-aware producer/consumer validation, combined assurance composition, whole-stack semantic replay comparison, negative cases, and candidate evidence publication.
 
-Stack 2026.3 passed the decisive eligibility workflow on merged `main`, received the required visible human `ACCEPT` judgment, and then passed a fresh post-acceptance merged-main eligibility run before automated publication.
+Stack 2026.4 passed the decisive eligibility workflow on merged `main`, received the required visible human `ACCEPT` judgment, and then passed a fresh post-acceptance merged-main eligibility run before automated publication.
+
+## Scope of target-state evidence
+
+Matching producer digests proves correlation of the supplied snapshot, not that the snapshot accurately describes the live deployment. A relying party must establish deployment provenance, freshness, authority, and post-publication status through applicable independent evidence. The current release does not assert certification.
 
 ## Evidence a coordinated release provides
 

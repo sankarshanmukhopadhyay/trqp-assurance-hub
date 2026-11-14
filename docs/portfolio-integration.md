@@ -30,4 +30,4 @@ The current state-bound development tuple is recorded separately in `data/compon
 - TSPP v0.18.1;
 - Hub v1.14.0 development line.
 
-This record is deliberately separate from `data/compatibility-registry.yaml`, which retains coordinated/historical compatibility records. A supported development tuple is not a coordinated Stack release. Stack 2026.3 — Banyan remains the current published Stack baseline until a future complete tuple independently satisfies the coordinated release policy.
+This record is deliberately separate from `data/compatibility-registry.yaml`, which retains coordinated/historical compatibility records. A supported development tuple is not a coordinated Stack release. Stack 2026.4 — Lotus is now the current published coordinated baseline, with the immutable tuple and publication evidence under `stack/releases/2026.4/`. The development tuple remains a historical integration record; it does not override the published release manifest.

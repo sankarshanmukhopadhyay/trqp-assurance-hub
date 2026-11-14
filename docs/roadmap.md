@@ -3,32 +3,30 @@ layout: default
 title: "Roadmap"
 nav_exclude: true
 owner: maintainers
-last_reviewed: 2026-10-02
+last_reviewed: 2026-11-14
 ---
 
 # TRQP Stack Roadmap
 
 This roadmap is the coordinated delivery view for the TRQP Operational Trust Stack. Component repositories retain independent authority and semantic versioning; the Hub coordinates compatibility, integration evidence, and Stack release eligibility.
 
-## Current baseline: TRQP Stack 2026.3 — Banyan
+## Current baseline: TRQP Stack 2026.4 — Lotus
 
-**TRQP Stack 2026.3 — Banyan** is the current published coordinated release.
-
-It establishes profile-aware compositional assurance on top of the lifecycle guarantees introduced by Stack 2026.2. The current frozen tuple is:
+**TRQP Stack 2026.4 — Lotus** is the current published coordinated release. Its state-bound assurance capability extends Banyan's profile-aware evidence composition.
 
 | Layer | Release | Exact commit |
 |---|---:|---|
-| TRQP-TSPP | `v0.17.0` | `328e19c71f407ebdb2bc92828a3ae037a843f285` |
-| TRQP Conformance Suite | `v1.10.0` | `1e5dc2646c75390444d9ae86f3d6136d7c033463` |
-| TRQP Assurance Hub | `v1.13.0` | `5346b83545bf042360eb32691dfc907135d233dd` |
+| TRQP-TSPP | `v0.18.1` | `c1735099cf4bca98c3b4e4f67c151e5508687851` |
+| TRQP Conformance Suite | `v1.11.1` | `0738c3cf86fddb99d761ed21d63d870eefdc5f76` |
+| TRQP Assurance Hub | `v1.14.0` | `fd2296226dacbe3d5009179803fde23eead1cc6f` |
 | TSMM | `0.24.0` | `8ddfd52c876faf368241bc11101681fb1fe49398` |
 | TIS | `0.15.0` | `edda0e87ced40797d22e3df542099871c57fcb59` |
 
-The immutable release record is under [`stack/releases/2026.3/`](../stack/releases/2026.3/RELEASE_NOTES.md). The current adopter path is [`docs/adoption/stack-quickstart.md`](adoption/stack-quickstart.md), with the profile-aware walkthrough at [`docs/adoption/stack-2026.3-walkthrough.md`](adoption/stack-2026.3-walkthrough.md).
+The canonical release record is [Lotus](../stack/releases/2026.4/RELEASE_NOTES.md). The [adopter quickstart](adoption/stack-quickstart.md) distinguishes the current frozen release from candidate-oriented CLI defaults. The historical Banyan profile walkthrough remains available unchanged.
 
 ## Capability state
 
-Stack 2026.3 proves the following coordinated properties:
+The coordinated Stack proves the following capabilities across Banyan and Lotus:
 
 - immutable component and authority-pin resolution;
 - clean-room bootstrap against the frozen tuple;
@@ -65,10 +63,11 @@ Governance legitimacy remains dependent on applicable external authority evidenc
 | 2026.1 — Coconut | First immutable coordinated tuple, clean bootstrap, deterministic replay, combined assurance and executable adopter walkthrough |
 | 2026.2 — Ashoka | Assurance validity under change: invalidation, reassessment, authority drift, supersession and post-change recomposition |
 | 2026.3 — Banyan | Profile-aware compositional assurance using independently authoritative producer evidence |
+| 2026.4 — Lotus | State-bound CTS/TSPP evidence correlation and explicit positive/negative outcome assertions |
 
 Historical candidate roadmaps and evidence under `stack/candidates/` are retained as audit artifacts. They describe what was proposed and tested at the time and must not be rewritten merely because a later release is now current.
 
-## Active capability tranche: state-bound assurance
+## Completed capability tranche: state-bound assurance
 
 The current development tranche strengthens the existing TRQP Stack line without depending on downstream candidate protocol work or any proposed TRQP v3 semantics.
 

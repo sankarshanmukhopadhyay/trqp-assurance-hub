@@ -15,6 +15,7 @@ import argparse
 import datetime as _dt
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -125,7 +126,9 @@ def _require_verified_target_state(report: Dict[str, Any], producer: str) -> Dic
         raise SystemExit(f"{producer} target_state missing")
     if state.get("status") != "verified":
         raise SystemExit(f"{producer} target_state is not verified")
-    if state.get("algorithm") != "sha256" or not state.get("digest"):
+    if (state.get("algorithm") != "sha256" or not isinstance(state.get("digest"), str)
+            or re.fullmatch(r"[a-f0-9]{64}", state["digest"]) is None
+            or state.get("identity") != f"sha256:{state['digest']}"):
         raise SystemExit(f"{producer} target_state digest is invalid")
     return state
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 
 import yaml
@@ -21,15 +22,27 @@ def file_sha256(path: Path) -> str:
 
 
 def producer_status(report: dict) -> str:
-    summary = report.get("summary", {})
-    fails = int(summary.get("FAIL", 0) or 0)
-    passes = int(summary.get("PASS", 0) or 0)
-    if fails > 0:
-        return "fail"
-    if passes > 0:
-        return "pass"
-    return "indeterminate"
+    """Reduce producer verdict counts without promoting incomplete evidence to PASS.
 
+    FAIL is an observed negative result. Operational uncertainty is not a
+    negative verdict, but prevents a positive composite conclusion.
+    """
+    summary = report.get("summary")
+    if not isinstance(summary, dict):
+        return "indeterminate"
+    known = ("PASS", "FAIL", "ERROR", "SKIP", "XFAIL", "NOT_TESTED", "INDETERMINATE",
+             "NOT_IMPLEMENTED", "UNKNOWN", "UNAVAILABLE", "REASSESS_REQUIRED", "INVALID")
+    try:
+        counts = {key: int(summary.get(key, 0)) for key in known}
+    except (ValueError, TypeError, OverflowError):
+        return "indeterminate"
+    if any(value < 0 for value in counts.values()):
+        return "indeterminate"
+    if counts["FAIL"] > 0:
+        return "fail"
+    if any(counts[key] > 0 for key in known if key not in ("PASS", "FAIL")):
+        return "indeterminate"
+    return "pass" if counts["PASS"] > 0 else "indeterminate"
 
 def require_verified_state(report: dict, producer: str) -> dict:
     state = report.get("target_state")
@@ -41,7 +54,7 @@ def require_verified_state(report: dict, producer: str) -> dict:
         raise SystemExit(f"fail-closed: {producer} target_state algorithm unsupported")
     digest = state.get("digest")
     identity = state.get("identity")
-    if not isinstance(digest, str) or len(digest) != 64:
+    if not isinstance(digest, str) or re.fullmatch(r"[a-f0-9]{64}", digest) is None:
         raise SystemExit(f"fail-closed: {producer} target_state digest invalid")
     if identity != f"sha256:{digest}":
         raise SystemExit(f"fail-closed: {producer} target_state identity inconsistent")

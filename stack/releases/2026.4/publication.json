@@ -4,11 +4,14 @@
   "tag": "trqp-stack-2026.4",
   "title": "TRQP Stack 2026.4 — Lotus",
   "release_directory": "stack/releases/2026.4",
-  "status": "pending-publication",
+  "status": "published",
   "recorded_eligibility_run_id": 36952543474,
   "recorded_eligibility_artifact": "trqp-stack-release-candidate-36952543474",
   "recorded_eligibility_artifact_digest": "sha256:66e368934bf8cf8cb622d7090a07f582cb6d7cb3e756c6b24f5130e1742c42e0",
   "human_release_judgment": "ACCEPT",
   "human_release_judgment_comment_id": 5944065290,
-  "publish_only_after_main_eligibility_success": true
+  "publish_only_after_main_eligibility_success": true,
+  "published_release_id": 401483096,
+  "published_at": "2026-10-02T01:49:56Z",
+  "published_target_commit": "3ce4888dcf1fefb2be18a12136459c21a95814e8"
 }

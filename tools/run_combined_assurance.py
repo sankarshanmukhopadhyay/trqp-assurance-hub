@@ -4,6 +4,7 @@ import argparse, json, hashlib, yaml
 from jsonschema import Draft202012Validator
 
 from cts_determinism import DeterminismEvidenceError, assurance_projection, load_and_validate
+from run_state_bound_assurance import producer_status
 
 p = argparse.ArgumentParser()
 p.add_argument('--cts-report', required=True)
@@ -26,8 +27,7 @@ def eq(k):
 
 
 def status(d):
-    s = d.get('summary', {})
-    return 'fail' if int(s.get('FAIL', 0) or 0) > 0 else ('pass' if int(s.get('PASS', 0) or 0) > 0 else 'indeterminate')
+    return producer_status(d)
 
 
 eq('run_id')
