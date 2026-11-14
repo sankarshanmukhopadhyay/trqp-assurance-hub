@@ -1,0 +1,27 @@
+# Exact dependency versions observed in the 2026-11-14 successful main eligibility run.
+# This is a version constraint set, NOT a hash-locked multi-platform wheel lock.
+# Revalidate on every intentional upgrade, review and retain pip freeze as evidence.
+attrs==26.1.0
+cffi==2.1.1
+iniconfig==2.3.1
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+packaging==26.3
+pluggy==1.7.0
+pycparser==3.12
+pygments==2.21.0
+pynacl==1.6.2
+pytest==9.2.0
+PyYAML==6.0.3
+referencing==0.37.0
+rpds-py==2026.9.1
+typing-extensions==4.16.0
+certifi==2026.10.23
+charset-normalizer==3.5.2
+idna==3.20
+requests==2.34.2
+urllib3==2.8.0
+cryptography==50.0.2
+jwcrypto==1.6.1
+python-dateutil==4.0.0
+tzdata==2026.6
