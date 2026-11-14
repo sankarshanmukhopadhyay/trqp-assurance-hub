@@ -50,7 +50,8 @@ if rel.get('requires', {}).get('cts_replay_determinism'):
 
 cs, ts = status(c), status(t)
 outcome = 'fail' if 'fail' in (cs, ts) else ('pass' if cs == ts == 'pass' else 'indeterminate')
-now = '2026-08-22T00:00:00Z'
+from datetime import datetime, timezone
+now = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
 arts = []
 for role, path in [('cts', Path(a.cts_report)), ('tspp', Path(a.tspp_report))]:
     arts.append({'role': role, 'path': str(path), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
