@@ -92,16 +92,32 @@ def _validate(schema_path: Path, doc: Dict[str, Any]) -> None:
 
 
 def _infer_status(report: Dict[str, Any], fail_key: str = "FAIL", pass_key: str = "PASS") -> Optional[str]:
-    summary = report.get("summary", {}) if isinstance(report, dict) else {}
-    if not summary:
+    """Classify producer evidence; unresolved test outcomes cannot yield PASS."""
+    summary = report.get("summary") if isinstance(report, dict) else None
+    if not isinstance(summary, dict) or not summary:
         return None
-    fails = int(summary.get(fail_key, 0) or 0)
-    passes = int(summary.get(pass_key, 0) or 0)
-    if fails > 0:
+    unresolved = ("ERROR", "SKIP", "XFAIL", "NOT_TESTED", "INDETERMINATE",
+                  "NOT_IMPLEMENTED", "UNKNOWN", "UNAVAILABLE", "REASSESS_REQUIRED", "INVALID")
+    try:
+        counts = {key: int(summary.get(key, 0)) for key in (fail_key, pass_key, *unresolved)}
+    except (ValueError, TypeError, OverflowError):
+        return "partial"
+    if any(value < 0 for value in counts.values()):
+        return "partial"
+    if counts[fail_key] > 0:
         return "fail"
-    if passes > 0:
+    if any(counts[key] > 0 for key in unresolved):
+        return "partial"
+    if counts[pass_key] > 0 and int(summary.get("exit_status", 0) or 0) == 0:
         return "pass"
     return "partial"
+
+
+def _assert_no_positive_override(reported: Optional[str], inferred: Optional[str], label: str) -> None:
+    """A manually supplied status may narrow, but not upgrade, report-backed evidence."""
+    rank = {"fail": 0, "partial": 1, "pass": 2}
+    if reported and (inferred is None or rank[reported] > rank[inferred]):
+        raise SystemExit(f"{label} cannot override incomplete or negative producer evidence")
 
 
 def _summary_number(report: Dict[str, Any], key: str) -> Optional[float]:
@@ -373,17 +389,25 @@ def main(argv: Optional[List[str]] = None) -> int:
         artifacts.append(a)
     doc["artifacts"] = artifacts
 
-    conformance_status = args.conformance_status or _infer_status(cts_report)
-    tspp_status = args.tspp_status or _infer_status(tspp_report)
-    overall_status = args.overall_status
-    if not overall_status:
-        statuses = [s for s in [conformance_status, tspp_status] if s]
-        if "fail" in statuses:
-            overall_status = "fail"
-        elif statuses and all(s == "pass" for s in statuses):
-            overall_status = "pass"
-        elif statuses:
-            overall_status = "partial"
+    inferred_cts = _infer_status(cts_report)
+    inferred_tspp = _infer_status(tspp_report)
+    if report_backed:
+        _assert_no_positive_override(args.conformance_status, inferred_cts, "conformance_status")
+        _assert_no_positive_override(args.tspp_status, inferred_tspp, "tspp_status")
+    conformance_status = args.conformance_status or inferred_cts
+    tspp_status = args.tspp_status or inferred_tspp
+    statuses = [s for s in [conformance_status, tspp_status] if s]
+    if "fail" in statuses:
+        inferred_overall = "fail"
+    elif statuses and all(s == "pass" for s in statuses):
+        inferred_overall = "pass"
+    elif statuses:
+        inferred_overall = "partial"
+    else:
+        inferred_overall = None
+    if report_backed:
+        _assert_no_positive_override(args.overall_status, inferred_overall, "overall_status")
+    overall_status = args.overall_status or inferred_overall
 
     posture_score = _summary_number(tspp_report, "posture_score")
     coverage_index = _summary_number(cts_report, "coverage_index")
