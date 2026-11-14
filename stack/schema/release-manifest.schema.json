@@ -99,9 +99,7 @@
       "type": "object",
       "required": [
         "repository",
-        "validated_main_commit",
-        "governing_issue",
-        "human_release_judgment_comment_id"
+        "validated_main_commit"
       ],
       "properties": {
         "repository": {
