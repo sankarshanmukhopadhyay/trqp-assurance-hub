@@ -53,8 +53,15 @@ def validate_structure(doc: dict) -> list[str]:
         for name in sorted(REQUIRED_AUTHORITIES):
             authority = authorities[name]
             if not authority.get("repository"): errors.append(f"{name}: authority repository missing")
-            if not VERSION.match(str(authority.get("version", ""))): errors.append(f"{name}: semantic version required")
-            if not SHA40.match(str(authority.get("commit", ""))): errors.append(f"{name}: 40-character authority commit SHA required")
+            historical_without_strict_pins = stack.get("id") in {
+                "trqp-stack-2026.1", "trqp-stack-2026.2"
+            }
+            if not historical_without_strict_pins or authority.get("version"):
+                if not VERSION.match(str(authority.get("version", ""))):
+                    errors.append(f"{name}: semantic version required")
+            if not historical_without_strict_pins or authority.get("commit"):
+                if not SHA40.match(str(authority.get("commit", ""))):
+                    errors.append(f"{name}: 40-character authority commit SHA required")
 
     for issue in Draft202012Validator(load(MANIFEST_SCHEMA)).iter_errors(doc):
         errors.append("release manifest schema: " + issue.message)
