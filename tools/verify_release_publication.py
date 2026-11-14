@@ -39,11 +39,14 @@ def verify(manifest: dict, run: dict, jobs: dict, comment: dict, registry: dict)
     if not comment.get("created_at") or comment.get("updated_at") != comment.get("created_at"):
         errors.append("human judgment has no immutable captured version or was edited")
     body = comment.get("body") or ""
+    release_id = str(manifest.get("stack", {}).get("id", ""))
+    readable_release = release_id.replace("trqp-stack-", "TRQP Stack ", 1)
     for required in ("Human release judgment: ACCEPT", str(expected_run),
-                     str(expected_commit), str(evidence.get("artifact_digest")),
-                     str(manifest.get("stack", {}).get("id"))):
+                     str(expected_commit), str(evidence.get("artifact_digest"))):
         if required not in body:
             errors.append("human judgment does not bind accepted release evidence: " + required)
+    if release_id not in body and readable_release not in body:
+        errors.append("human judgment does not bind the coordinated release identity")
 
     decisive = [job for job in jobs.get("jobs", [])
                 if job.get("name") == "decisive-test" and job.get("conclusion") == "success"]

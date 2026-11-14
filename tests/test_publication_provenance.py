@@ -62,3 +62,16 @@ def test_missing_artifact_digest_in_acceptance_rejected():
     m, r, j, c, g = fixture()
     c["body"] = "Human release judgment: ACCEPT"
     assert any("does not bind" in e for e in verify(m, r, j, c, g))
+
+
+
+def test_original_lotus_human_judgment_spelling_is_accepted():
+    m, r, j, c, g = fixture()
+    c["body"] = c["body"].replace("trqp-stack-2026.4", "TRQP Stack 2026.4")
+    assert verify(m, r, j, c, g) == []
+
+
+def test_foreign_release_identity_is_rejected():
+    m, r, j, c, g = fixture()
+    c["body"] = c["body"].replace("trqp-stack-2026.4", "TRQP Stack 2026.5")
+    assert any("release identity" in e for e in verify(m, r, j, c, g))
