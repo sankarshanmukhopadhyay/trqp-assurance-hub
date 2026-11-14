@@ -36,11 +36,31 @@ def load_and_validate(path: str | Path) -> Dict[str, Any]:
 
     source = report.get("source") or {}
     replay = report.get("replay") or {}
-    if not source.get("semantic_sha256") or not replay.get("semantic_sha256"):
-        raise DeterminismEvidenceError("CTS determinism report must carry source and replay semantic hashes")
+    import re
+    for label, entry in (("source", source), ("replay", replay)):
+        if not entry.get("run_id"):
+            raise DeterminismEvidenceError(f"CTS replay {label} run_id missing")
+        if not re.fullmatch(r"[0-9a-f]{64}", str(entry.get("semantic_sha256", ""))):
+            raise DeterminismEvidenceError(f"CTS replay {label} semantic hash invalid")
+    if source["run_id"] == replay["run_id"]:
+        raise DeterminismEvidenceError("CTS replay must identify two distinct executions")
 
     summary = report.get("summary") or {}
     prohibited = int(summary.get("prohibited_difference_count", 0) or 0)
+    differences = report.get("differences")
+    if not isinstance(differences, list):
+        raise DeterminismEvidenceError("CTS replay differences must be an array")
+    permitted = sum(1 for item in differences if isinstance(item, dict) and item.get("permitted") is True)
+    observed_prohibited = len(differences) - permitted
+    try:
+        count = int(summary.get("difference_count", 0))
+        permitted_count = int(summary.get("permitted_difference_count", 0))
+    except (ValueError, TypeError):
+        raise DeterminismEvidenceError("CTS replay difference counts invalid")
+    if count != len(differences) or prohibited != observed_prohibited or permitted_count != permitted:
+        raise DeterminismEvidenceError("CTS replay summary disagrees with comparison differences")
+    if source["semantic_sha256"] != replay["semantic_sha256"] and prohibited == 0:
+        raise DeterminismEvidenceError("CTS replay semantic hashes differ without prohibited differences")
     if report.get("deterministic") is not True:
         raise DeterminismEvidenceError("CTS replay determinism failed")
     if prohibited != 0:

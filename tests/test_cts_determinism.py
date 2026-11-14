@@ -25,7 +25,10 @@ def _report(deterministic=True, prohibited=0):
             "permitted_difference_count": 0,
             "prohibited_difference_count": prohibited,
         },
-        "differences": [],
+        "differences": [
+            {"pointer": "/cases/TC-1/result", "original": "PASS", "replay": "FAIL",
+             "permitted": False, "classification": "semantic"}
+        ] if prohibited else [],
     }
 
 
