@@ -4,5 +4,8 @@
   "tag": "v1.14.0",
   "title": "TRQP Assurance Hub v1.14.0 — State-Bound Compositional Assurance",
   "notes": "RELEASE_NOTES_v1.14.0.txt",
-  "status": "pending-publication"
+  "status": "published",
+  "published_release_id": 401478244,
+  "published_at": "2026-10-02T01:38:21Z",
+  "published_target_commit": "fd2296226dacbe3d5009179803fde23eead1cc6f"
 }

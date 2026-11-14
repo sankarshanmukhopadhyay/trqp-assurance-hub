@@ -31,3 +31,7 @@ The current state-bound development tuple is recorded separately in `data/compon
 - Hub v1.14.0 development line.
 
 This record is deliberately separate from `data/compatibility-registry.yaml`, which retains coordinated/historical compatibility records. A supported development tuple is not a coordinated Stack release. Stack 2026.4 — Lotus is now the current published coordinated baseline, with the immutable tuple and publication evidence under `stack/releases/2026.4/`. The development tuple remains a historical integration record; it does not override the published release manifest.
+
+## Published Hub component provenance
+
+The independently published [Hub v1.14.0](https://github.com/sankarshanmukhopadhyay/trqp-assurance-hub/releases/tag/v1.14.0) dates to 2026-10-02 and resolves to immutable source commit `fd2296226dacbe3d5009179803fde23eead1cc6f`. The maintained `release-publication.json` is now terminal, preventing duplicate publication. Main-branch red-team remediations are not retroactively included in the tagged component or Lotus coordinated release.
