@@ -45,3 +45,43 @@ def test_valid_state_pair_does_not_establish_live_deployment_authenticity():
     tspp = {"target_state": _state("a" * 64)}
     assert require_state_pair(cts, tspp)["digest"] == "a" * 64
     # Live deployment provenance is an external assurance proposition, not asserted here.
+
+
+def test_state_bound_cli_does_not_publish_pass_for_mixed_operational_evidence(tmp_path, monkeypatch):
+    """Exercise the consumer-facing composition entry point, not only the reducer."""
+    import json
+    import sys
+    from tools import run_state_bound_assurance as state_bound
+
+    snapshot = _state("a" * 64)
+    cts = {
+        "run_id": "adversarial-1", "target_id": "service-1",
+        "target_state": snapshot, "suite_version": "1.11.1",
+        "summary": {"PASS": 2, "FAIL": 0, "ERROR": 1},
+    }
+    tspp = {
+        "run_id": "adversarial-1", "target_id": "service-1",
+        "target_state": snapshot, "tool_version": "0.18.1",
+        "summary": {"PASS": 2, "FAIL": 0, "NOT_TESTED": 0},
+    }
+    cp, tp, dp = [tmp_path / name for name in ("cts.json", "tspp.json", "determinism.json")]
+    cp.write_text(json.dumps(cts), encoding="utf-8")
+    tp.write_text(json.dumps(tspp), encoding="utf-8")
+    dp.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(state_bound, "load_and_validate", lambda path: {
+        "source": {"target_state": snapshot}, "replay": {"target_state": snapshot}
+    })
+    monkeypatch.setattr(state_bound, "assurance_projection", lambda raw: {"verified": True})
+    out = tmp_path / "out"
+    monkeypatch.setattr(sys, "argv", [
+        "run_state_bound_assurance.py", "--cts-report", str(cp),
+        "--tspp-report", str(tp), "--cts-determinism-report", str(dp),
+        "--out", str(out),
+    ])
+
+    assert state_bound.main() == 0
+    decision = json.loads((out / "assurance-decision.json").read_text(encoding="utf-8"))
+    manifest = json.loads((out / "state-bound-assurance-manifest.json").read_text(encoding="utf-8"))
+    assert decision["outcome"] == "indeterminate"
+    assert manifest["producer_results"]["cts"] == "indeterminate"
+    assert manifest["producer_results"]["tspp"] == "pass"
