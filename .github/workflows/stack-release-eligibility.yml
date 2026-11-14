@@ -37,8 +37,8 @@ jobs:
 
       - name: Install validation dependencies
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install jsonschema pyyaml pytest pynacl
+          python -m pip install --disable-pip-version-check --constraint requirements/stack-eligibility-constraints.txt jsonschema pyyaml pytest pynacl
+          python -m pip check
 
       - name: Validate release contract and immutable tuple
         run: make stack-release-check
@@ -54,8 +54,12 @@ jobs:
 
       - name: Install coordinated component dependencies
         run: |
-          python -m pip install -r .stack-work/cts/cts/requirements.txt
-          python -m pip install -r .stack-work/tspp/harness/requirements.txt
+          python -m pip install --disable-pip-version-check --constraint requirements/stack-eligibility-constraints.txt -r .stack-work/cts/cts/requirements.txt
+          python -m pip install --disable-pip-version-check --constraint requirements/stack-eligibility-constraints.txt -r .stack-work/tspp/harness/requirements.txt
+          python -m pip check
+          mkdir -p artifacts/stack-candidate
+          python -m pip freeze --all > artifacts/stack-candidate/eligibility-python-dependencies.txt
+          test -s artifacts/stack-candidate/eligibility-python-dependencies.txt
 
       - name: Execute declared tagged component assurance surfaces
         run: python tools/stack_evaluate.py
