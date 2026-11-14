@@ -43,3 +43,10 @@ The assessed snapshot is a claim about the target state. To support operational 
 ## Release impact
 
 This tranche corrects maintained behavior and publication metadata on `main`. It does **not** rewrite Lotus artifacts, create another coordinated release, upgrade TRQP v3, or claim production certification. A future release decision requires evidence of a materially consumable new baseline and repository-approved publication.
+
+
+## Red-team follow-up: H2/H3 evidence semantics (2026-11-14)
+
+The maintained development line now requires state-bound CTS/TSPP report detail and summary reconciliation. Unknown or unsupported operational outcomes remain indeterminate, never positive. The CTS replay consumer independently rejects contradictory source/replay semantic hashes, invalid difference counts, missing run identifiers and reused source/replay execution identity under the producer comparison policy. The common state snapshot is still supplied evidence, not external proof of deployed-state authenticity. Historical Lotus artifacts are unchanged.
+
+The legacy combined-assurance consumer retains its older envelope for compatibility; its continued use is distinguishable from the stricter state-bound evaluation. A future consumer-facing release must declare this tightening as a semantic acceptance change.

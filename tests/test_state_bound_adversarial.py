@@ -21,7 +21,9 @@ def test_explicit_negative_result_is_preserved():
 
 
 def test_complete_positive_result_is_accepted():
-    assert producer_status({"summary": {"PASS": 2, "FAIL": 0, "NOT_APPLICABLE": 1}}) == "pass"
+    assert producer_status({"summary": {"PASS": 2, "FAIL": 0, "NOT_APPLICABLE": 1},
+                            "results": [{"result": "PASS"}, {"result": "PASS"},
+                                        {"result": "NOT_APPLICABLE"}]}, require_details=True) == "pass"
 
 
 def test_empty_summary_is_not_success():
@@ -58,18 +60,21 @@ def test_state_bound_cli_does_not_publish_pass_for_mixed_operational_evidence(tm
         "run_id": "adversarial-1", "target_id": "service-1",
         "target_state": snapshot, "suite_version": "1.11.1",
         "summary": {"PASS": 2, "FAIL": 0, "ERROR": 1},
+        "results": [{"result": "PASS"}, {"result": "PASS"}, {"result": "ERROR"}],
     }
     tspp = {
         "run_id": "adversarial-1", "target_id": "service-1",
         "target_state": snapshot, "tool_version": "0.18.1",
         "summary": {"PASS": 2, "FAIL": 0, "NOT_TESTED": 0},
+        "results": [{"outcome": "PASS"}, {"outcome": "PASS"}],
     }
     cp, tp, dp = [tmp_path / name for name in ("cts.json", "tspp.json", "determinism.json")]
     cp.write_text(json.dumps(cts), encoding="utf-8")
     tp.write_text(json.dumps(tspp), encoding="utf-8")
     dp.write_text("{}", encoding="utf-8")
     monkeypatch.setattr(state_bound, "load_and_validate", lambda path: {
-        "source": {"target_state": snapshot}, "replay": {"target_state": snapshot}
+        "source": {"run_id": "fixture-source", "target_state": snapshot},
+        "replay": {"run_id": "fixture-replay", "target_state": snapshot}
     })
     monkeypatch.setattr(state_bound, "assurance_projection", lambda raw: {"verified": True})
     out = tmp_path / "out"
@@ -109,3 +114,27 @@ def test_report_backed_manifest_does_not_upgrade_operational_uncertainty():
         generator._assert_no_positive_override("pass", "partial", "overall_status")
     with pytest.raises(SystemExit, match="cannot override"):
         generator._assert_no_positive_override("pass", "fail", "conformance_status")
+
+
+
+def test_contradictory_summary_and_detail_never_passes():
+    report = {"summary": {"PASS": 2, "FAIL": 0},
+              "results": [{"result": "PASS"}, {"result": "FAIL"}]}
+    assert producer_status(report, require_details=True) == "indeterminate"
+
+
+def test_unknown_operational_category_fails_closed():
+    report = {"summary": {"PASS": 1, "WARN": 1},
+              "results": [{"result": "PASS"}, {"result": "WARN"}]}
+    assert producer_status(report, require_details=True) == "indeterminate"
+
+
+def test_missing_results_cannot_produce_state_bound_pass():
+    assert producer_status({"summary": {"PASS": 2}}, require_details=True) == "indeterminate"
+
+
+def test_missing_state_source_is_not_verified():
+    state = _state("a" * 64)
+    state.pop("source")
+    with pytest.raises(SystemExit, match="source missing"):
+        require_verified_state({"target_state": state}, "TSPP")

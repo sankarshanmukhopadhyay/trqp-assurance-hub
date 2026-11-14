@@ -21,7 +21,7 @@ def file_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def producer_status(report: dict) -> str:
+def producer_status(report: dict, *, require_details: bool = False) -> str:
     """Reduce producer verdict counts without promoting incomplete evidence to PASS.
 
     FAIL is an observed negative result. Operational uncertainty is not a
@@ -30,17 +30,36 @@ def producer_status(report: dict) -> str:
     summary = report.get("summary")
     if not isinstance(summary, dict):
         return "indeterminate"
-    known = ("PASS", "FAIL", "ERROR", "SKIP", "XFAIL", "NOT_TESTED", "INDETERMINATE",
-             "NOT_IMPLEMENTED", "UNKNOWN", "UNAVAILABLE", "REASSESS_REQUIRED", "INVALID")
+    known = ("PASS", "FAIL", "ERROR", "SKIP", "XFAIL", "NOT_APPLICABLE", "NOT_TESTED",
+             "INDETERMINATE", "NOT_IMPLEMENTED", "UNKNOWN", "UNAVAILABLE",
+             "REASSESS_REQUIRED", "INVALID", "TIMEOUT", "WARN")
     try:
         counts = {key: int(summary.get(key, 0)) for key in known}
     except (ValueError, TypeError, OverflowError):
         return "indeterminate"
     if any(value < 0 for value in counts.values()):
         return "indeterminate"
+    metrics = {"exit_status", "coverage_index", "evidence_completeness",
+               "posture_score", "control_satisfaction"}
+    if any(key not in {*known, *metrics} for key in summary):
+        return "indeterminate"
+    details = report.get("results")
+    if require_details and (not isinstance(details, list) or not details):
+        return "indeterminate"
+    if isinstance(details, list) and details:
+        observed = {key: 0 for key in known}
+        for item in details:
+            if not isinstance(item, dict):
+                return "indeterminate"
+            status = item.get("result", item.get("outcome", item.get("status")))
+            if status not in observed:
+                return "indeterminate"
+            observed[status] += 1
+        if any(observed[key] != counts[key] for key in known):
+            return "indeterminate"
     if counts["FAIL"] > 0:
         return "fail"
-    if any(counts[key] > 0 for key in known if key not in ("PASS", "FAIL")):
+    if any(counts[key] > 0 for key in known if key not in ("PASS", "FAIL", "NOT_APPLICABLE")):
         return "indeterminate"
     try:
         if int(summary.get("exit_status", 0) or 0) != 0:
@@ -61,6 +80,8 @@ def require_verified_state(report: dict, producer: str) -> dict:
     identity = state.get("identity")
     if not isinstance(digest, str) or re.fullmatch(r"[a-f0-9]{64}", digest) is None:
         raise SystemExit(f"fail-closed: {producer} target_state digest invalid")
+    if not isinstance(state.get("source"), str) or not state["source"].strip():
+        raise SystemExit(f"fail-closed: {producer} target_state source missing")
     if identity != f"sha256:{digest}":
         raise SystemExit(f"fail-closed: {producer} target_state identity inconsistent")
     return state
@@ -143,18 +164,28 @@ def main() -> int:
     except DeterminismEvidenceError as exc:
         raise SystemExit(f"fail-closed: {exc}") from exc
     det = assurance_projection(det_raw)
+    if not det_raw.get("source", {}).get("run_id") or not det_raw.get("replay", {}).get("run_id"):
+        raise SystemExit("fail-closed: CTS replay run provenance missing")
 
     source_state = det_raw.get("source", {}).get("target_state")
     replay_state = det_raw.get("replay", {}).get("target_state")
     if not isinstance(source_state, dict) or not isinstance(replay_state, dict):
         raise SystemExit("fail-closed: CTS replay determinism target-state evidence missing")
+    if source_state != cts_state or replay_state != cts_state:
+        raise SystemExit("fail-closed: CTS replay target state metadata differs")
+    if det_raw.get("source", {}).get("run_id") == det_raw.get("replay", {}).get("run_id"):
+        raise SystemExit("fail-closed: CTS source and replay executions are not distinct")
     if source_state.get("digest") != cts_state["digest"] or replay_state.get("digest") != cts_state["digest"]:
         raise SystemExit("fail-closed: CTS replay target state does not match conformance target state")
 
-    cs = producer_status(cts)
-    ts = producer_status(tspp)
+    cs = producer_status(cts, require_details=True)
+    ts = producer_status(tspp, require_details=True)
     outcome = "fail" if "fail" in (cs, ts) else ("pass" if cs == ts == "pass" else "indeterminate")
 
+    # Generated decisions are evaluations of supplied producer evidence, not independent
+    # certification or attestation of a live deployment.
+    from datetime import datetime, timezone
+    issued_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     artifacts = [
@@ -184,11 +215,12 @@ def main() -> int:
         "evidence_considered": artifacts,
         "conditions": ["CTS and TSPP evidence are bound to the same verified SHA-256 target state."],
         "limitations": [
-            "This is a supported component-development tuple, not a coordinated TRQP Stack release.",
+            "This evaluation uses a supported development component tuple; the published Lotus release has a separate immutable release record.",
+            "Matching snapshot digests do not attest correspondence to a running deployment.",
             "Self-generated repository evidence is not external certification.",
         ],
         "findings": [],
-        "issued_at": "2026-10-02T00:00:00Z",
+        "issued_at": issued_at,
         "expires_at": None,
         "supersedes": None,
         "revoked": False,
