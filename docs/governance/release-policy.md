@@ -76,3 +76,9 @@ A release must not be cut when:
 The Hub may declare that a particular component tuple has passed coordinated integration and assurance gates. This does not transfer TSPP control authority, CTS conformance/replay authority, TSMM semantic authority, TIS schema/portfolio authority, or upstream TRQP specification authority to the Hub.
 
 A coordinated release is immutable historical evidence. When compatibility or assurance conditions change, publish a new Stack release or explicitly supersede the prior release; do not rewrite the historical tuple.
+
+## Red-team release provenance and publication integrity
+
+A coordinated release must verify the exact eligibility workflow ID/path, successful execution on the declared merged-main commit, required mapped gate-step conclusions, and an unedited human acceptance comment authored by the declared decision authority. The workflow must preserve a cryptographic content digest for each published release asset and attach an artifact provenance attestation. Repackaging the Actions eligibility artifact produces different bytes and a different digest; the publication `SHA256SUMS` binds the final assets, while the eligibility manifest retains its own distinct source-artifact digest. Historic Lotus artifacts are not retroactively signed.
+
+Release workflows have narrowly scoped write permission; dependency updates affecting release controls require manual review rather than privileged `pull_request_target` auto-merge. A passing stack gate demonstrates release-pipeline eligibility, not positive conformance of its intentionally failing reference target, and is not independent deployment certification.
