@@ -31,6 +31,14 @@ jobs:
           missing = [k for k in required if not data.get(k)]
           if missing:
               raise SystemExit(f'missing publication fields: {", ".join(missing)}')
+          if data['status'] == 'published':
+              for field in ('published_release_id', 'published_at', 'published_target_commit'):
+                  if not data.get(field):
+                      raise SystemExit(f'published component record missing {field}')
+              with open(Path(os.environ['GITHUB_OUTPUT']), 'a', encoding='utf-8') as out:
+                  out.write('publish=false\\n'.replace('\\n', '\n'))
+              print('Existing component release is terminal; publication skipped.')
+              raise SystemExit(0)
           if data['status'] != 'pending-publication':
               raise SystemExit('publication status must be pending-publication')
           if data['release'] != version:
@@ -40,11 +48,13 @@ jobs:
           if not Path(data['notes']).is_file():
               raise SystemExit(f"release notes not found: {data['notes']}")
           with open(Path(os.environ['GITHUB_OUTPUT']), 'a', encoding='utf-8') as out:
+              out.write('publish=true\\n'.replace('\\n', '\n'))
               for key in ('tag','title','notes'):
                   out.write(f'{key}={data[key]}\n')
           PY
 
       - name: Publish immutable component release
+        if: steps.request.outputs.publish == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
