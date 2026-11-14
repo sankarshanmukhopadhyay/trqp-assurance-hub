@@ -42,6 +42,11 @@ def producer_status(report: dict) -> str:
         return "fail"
     if any(counts[key] > 0 for key in known if key not in ("PASS", "FAIL")):
         return "indeterminate"
+    try:
+        if int(summary.get("exit_status", 0) or 0) != 0:
+            return "indeterminate"
+    except (ValueError, TypeError, OverflowError):
+        return "indeterminate"
     return "pass" if counts["PASS"] > 0 else "indeterminate"
 
 def require_verified_state(report: dict, producer: str) -> dict:
