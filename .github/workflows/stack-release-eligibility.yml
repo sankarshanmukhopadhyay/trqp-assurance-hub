@@ -147,6 +147,7 @@ jobs:
             tests/test_cross_stack_negative_cases.py \
             tests/test_cts_determinism.py \
             tests/test_stack_release_readiness.py \
+            tests/test_publication_provenance.py \
             tests/test_state_bound_manifest.py \
             tests/test_consume_cts_profile_evidence.py \
             tests/test_compose_profile_producer_evidence.py \

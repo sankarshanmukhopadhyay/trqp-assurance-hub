@@ -8,6 +8,8 @@ on:
 permissions:
   contents: write
   actions: read
+  id-token: write
+  attestations: write
 
 jobs:
   publish:
@@ -81,6 +83,29 @@ jobs:
           PY
           python tools/stack_validate.py --check-remote
 
+      - name: Verify executed gates and authorized human judgment
+        if: steps.release.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_id="${{ steps.release.outputs.recorded_eligibility_run_id }}"
+          dir="${{ steps.release.outputs.release_directory }}"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}" > /tmp/trqp-release-run.json
+          gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/jobs?per_page=100" > /tmp/trqp-release-jobs.json
+          comment_id="$(python - "$dir/manifest.json" <<'PY'
+          import json, sys
+          print(json.load(open(sys.argv[1], encoding='utf-8'))['coordinator']['human_release_judgment_comment_id'])
+          PY
+          )"
+          gh api "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" > /tmp/trqp-release-comment.json
+          python tools/verify_release_publication.py \
+            --manifest "$dir/manifest.json" \
+            --run /tmp/trqp-release-run.json \
+            --jobs /tmp/trqp-release-jobs.json \
+            --comment /tmp/trqp-release-comment.json
+
       - name: Verify recorded eligibility evidence
         if: steps.release.outputs.publish == 'true'
         env:
@@ -140,6 +165,25 @@ jobs:
           awk 'BEGIN{fm=0; done=0} NR==1 && $0=="---" {fm=1; next} fm && $0=="---" {fm=0; done=1; next} done || !fm {print}' "$dir/RELEASE_NOTES.md" > /tmp/trqp-stack-release-notes.md
           test -s /tmp/trqp-stack-release-notes.md
 
+      - name: Record content digests of published release assets
+        if: steps.release.outputs.publish == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="${{ steps.release.outputs.release_directory }}"
+          sha256sum "$dir/manifest.json" | awk '{print $1 "  manifest.json"}' > /tmp/SHA256SUMS
+          sha256sum /tmp/trqp-stack-evidence.zip | awk '{print $1 "  trqp-stack-evidence.zip"}' >> /tmp/SHA256SUMS
+          test "$(wc -l < /tmp/SHA256SUMS)" -eq 2
+
+      - name: Attest release evidence and manifest provenance
+        if: steps.release.outputs.publish == 'true'
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3
+        with:
+          subject-path: |
+            ${{ steps.release.outputs.release_directory }}/manifest.json
+            /tmp/trqp-stack-evidence.zip
+            /tmp/SHA256SUMS
+
       - name: Publish coordinated GitHub release
         if: steps.release.outputs.publish == 'true'
         env:
@@ -161,4 +205,5 @@ jobs:
             --notes-file /tmp/trqp-stack-release-notes.md \
             --latest=false \
             "$dir/manifest.json#TRQP Stack release manifest" \
-            "/tmp/trqp-stack-evidence.zip#Validated coordinated-release evidence"
+            "/tmp/trqp-stack-evidence.zip#Validated coordinated-release evidence" \
+            "/tmp/SHA256SUMS#Published asset SHA-256 checksums"
